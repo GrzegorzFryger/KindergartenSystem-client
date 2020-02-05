@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# Called by "git commit".  
+# The hook should exit with non-zero status after issuing an appropriate message, if it wants to stop the commit.
+# The hook is allowed to edit the commit message file.
+NC='\033[0m'    # NO COLOR
+LR='\033[1;31m' # LIGHT RED
+LY='\033[1;33m' # LIGHT YELLOW
+
+# Get first not commented line
+# First sed - get all lines, which does't start with '#' (ignore comments)
+# Second sed - get only one first line
+firstLine=$(sed -n '/^#/!p' $1 | sed -n 1p)
+
+# Check if first letter is capitalized
+if [[ "${firstLine:0:1}" =~ [[:lower:]] ]]; then
+	printf "${LR}[ERROR] Commit name must start from capital letter.${NC}\n"
+	printf "Aborting commit due to preconditions being not satisfied.\n"
+	exit 1
+fi
+
+# Index of last letter in subject
+i=$((${#firstLine}-1))
+
+# Check if last letter is dot
+if [[ "${firstLine:$i:1}" == "." ]]; then
+	printf "${LR}[ERROR] Commit name must not end with dot.${NC}\n"
+	printf "Aborting commit due to preconditions being not satisfied.\n"
+	exit 1
+fi
+
+# Print warning if subject is too long.
+# If commit is not related to merge - abort commit with error
+if [[ "${#firstLine}" -gt 50 ]]; then
+	printf "${LY}[WARNING] Subject is too long (expected max length: 50, actual: ${#firstLine}).${NC}\n"
+	if [[ "${firstLine:0:5}" == "Merge" ]]; then
+	  printf "${LY}[INFO] Based on subject name script found out that it is merge commit. Above warning can be ignored.${NC}\n"
+	else
+	  printf "${LR}[ERROR] Subject is too long. (Must be 50 characters at most)${NC}\n"
+	  printf "Aborting commit due to preconditions being not satisfied.\n"
+	  exit 1
+	fi
+fi
+
+# Count all uncommented lines with length > 72
+# First sed - get all uncommented lines
+# Second sed - get all lines with length > 72
+# wc - count lines
+amountOfTooLongLines=$(sed -n '/^#/!p' $1 | sed -ne '/.\{72\}/p' | wc -l)
+
+# Igonore first line. This is due to fact, that merge commits may have very long subjects depending on branch names
+if [[ "${#firstLine}" -gt 72 ]]; then
+	amountOfTooLongLines=$((amountOfTooLongLines-1))
+fi
+
+if [[ "$amountOfTooLongLines" -gt 0 ]]; then
+	printf "${LR}[ERROR] There are $amountOfTooLongLines uncommented lines with length > 72 characters.${NC}\n"
+	printf "Aborting commit due to preconditions being not satisfied.\n"
+	exit 1
+fi
