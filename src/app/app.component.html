@@ -1,9 +1,6 @@
-<div class="app-container" gdColumns="1"  gdRows="3" >
-  <div class="header"  >
-    <app-header></app-header>
-    <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-  </div>
-  <div  class="content">
-    <router-outlet></router-outlet>
-  </div>
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
 </div>
+
+<router-outlet></router-outlet>
+
