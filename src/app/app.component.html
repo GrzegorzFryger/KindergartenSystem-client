@@ -1,6 +1,12 @@
-<div fxLayout="row" fxLayoutAlign="center center" >
-  <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<div fxLayout="row">
+  <div fxFlex="100">
+    <app-header></app-header>
+  </div>
+</div>
+<div fxLayout="row">
+  <div fxFlex="100">
+  <router-outlet></router-outlet>
+  </div>
 </div>
 
-<router-outlet></router-outlet>
 
