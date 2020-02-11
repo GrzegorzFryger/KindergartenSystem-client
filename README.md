@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
 
+## Getting started:
+* Node.js  
+You can download it from here: https://nodejs.org/en/  
+* Angular CLI  
+You can install it via Node.js using following command:  
+`npm install -g @angular/cli`  
+Above command will install it globally
+* Angular Devkit
+You can install it via Node.js using following command:  
+`npm install --save-dev @angular-devkit/build-angular`  
+Above command will install it as dev dependency (so you should run it from repo directory)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
