@@ -1,1 +1,20 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="wrapper">
+      <div class="left">
+        <h1>KindergartenSystem</h1>
+        <div class="menu_content">
+          <button mat-button routerLink="/meals">Posiłki</button>
+        </div>
+      </div>
+      <div class="right">
+        <mat-icon aria-hidden="false" [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </div>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
