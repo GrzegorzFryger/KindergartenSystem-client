@@ -9,6 +9,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {SharedModule} from './shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
