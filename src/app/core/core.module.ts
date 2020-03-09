@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
-import { SignInComponent } from './sign-in/sign-in.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 @NgModule({
-  declarations: [SignInComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+
+
   ]
 })
 export class CoreModule { }
