@@ -7,14 +7,15 @@ import {FooterComponent} from './layout/footer/footer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
 import {SharedModule} from './shared/shared.module';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +24,8 @@ import {SharedModule} from './shared/shared.module';
     // angular-material
     BrowserAnimationsModule,
     MatSliderModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
