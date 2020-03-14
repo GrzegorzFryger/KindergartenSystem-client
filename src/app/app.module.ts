@@ -9,18 +9,25 @@ import {MatSliderModule} from '@angular/material/slider';
 import {SharedModule} from './shared/shared.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {HttpClientModule} from '@angular/common/http';
+import {CoreModule} from './core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    HttpClientModule,
+
+    CoreModule,
+    SharedModule,
+
     // angular-material
     BrowserAnimationsModule,
     MatSliderModule,

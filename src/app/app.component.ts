@@ -14,6 +14,6 @@ export class AppComponent {
   }
 
   public isPublicPage(): boolean {
-      return this.regex.test(this.router.url);
+    return this.regex.test(this.router.url);
   }
 }
