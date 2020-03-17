@@ -9,10 +9,11 @@ import {MatCardModule} from '@angular/material/card';
 import { TestComponent } from './page/test/test.component';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from '../../shared/shared.module';
+import { MealComponent } from './page/meal/meal.component';
 
 
 @NgModule({
-  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, TestComponent],
+  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, TestComponent, MealComponent],
   imports: [
     CommonModule,
     GuardianRoutingModule,
