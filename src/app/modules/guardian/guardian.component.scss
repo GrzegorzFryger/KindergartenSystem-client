@@ -1,0 +1,94 @@
+//.cont {
+//  display: flex;
+//  flex-direction: column;
+//  flex-wrap: nowrap;
+//  justify-items: center;
+//  align-items: center;
+//
+//  .main {
+//    flex-grow: 1;
+//    flex-basis: auto;
+//    height: 100%;
+//    width: 100%;
+//  }
+//}
+//
+//.mat-card {
+//  height: 90%;
+//  width: 90%;
+//}
+
+
+
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  .card-app {
+    flex-basis: 95%;
+    height: 95%;
+    border-radius: 50px;
+
+    .con {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+
+      .top {
+        flex-basis: 8%;
+        //background-color: green;
+        height: 100px;
+        width: 100%;
+      }
+
+      .bottom {
+        flex-basis: 92%;
+        //background-color: #606FEE;
+        height: 100px;
+        width: 100%;
+
+        .app-context {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          height: 100%;
+          width: 100%;
+
+          .nav {
+            flex-grow: 0;
+            flex-basis: 10%;
+            //background-color: wheat;
+            height: 100%;
+
+            .mat-button {
+              width: 100%;
+            }
+          }
+
+          .main {
+            flex-grow: 1;
+            flex-basis: 75%;
+            //background-color: #ff5792;
+            height: 100%;
+          }
+
+          .activity {
+            flex-basis: 15%;
+            //background-color: black;
+            height: 100%;
+          }
+        }
+
+      }
+    }
+
+
+
+  }
+}

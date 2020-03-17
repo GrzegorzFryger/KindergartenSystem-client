@@ -13,9 +13,9 @@ const routes: Routes = [
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
-    canActivate: [AuthenticationGuard]
+    path: 'parent',
+    loadChildren: () => import('./modules/guardian/guardian.module').then(m => m.GuardianModule)
+    // canActivate: [AuthenticationGuard]
   }
 
 ];
