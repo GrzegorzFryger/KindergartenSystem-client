@@ -12,10 +12,11 @@ import {SharedModule} from '../../shared/shared.module';
 import { MealComponent } from './page/meal/meal.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { ReceiablesComponent } from './page/receiables/receiables.component';
 
 
 @NgModule({
-  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, TestComponent, MealComponent],
+  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, TestComponent, MealComponent, ReceiablesComponent],
   imports: [
     CommonModule,
     GuardianRoutingModule,
