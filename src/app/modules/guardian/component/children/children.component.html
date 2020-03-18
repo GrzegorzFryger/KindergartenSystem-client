@@ -1,28 +1,87 @@
 <div class="children-container">
   <mat-card>
-    <div class="child-info-container">
+    <div class="con">
 
-      <div class="child-avatar">
-        <img src="girl.png" alt="">
-        <p>Janek</p>
+      <div class="item">
+        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+          <defs>
+            <style>.a {
+              fill: #bec9f4;
+            }
+
+            .b {
+              fill: #ee502d;
+            }
+
+            .c {
+              fill: #ebcac1;
+            }
+
+            .d {
+              fill: #be6c22;
+            }
+
+            .e {
+              fill: #322d3a;
+            }
+
+            .f {
+              fill: none;
+              stroke: #322d3a;
+              stroke-miterlimit: 10;
+            }</style>
+          </defs>
+          <path class="a" d="M69,35A34,34,0,1,1,35,1,34,34,0,0,1,69,35Z"/>
+          <path class="b"
+                d="M35,35C54,35,63.22,53.9,63.22,53.9A31.28,31.28,0,0,1,35,69.09c-20-.5-28-15-28-15S16.47,35,35,35Z"/>
+          <ellipse class="c" cx="35.75" cy="30.28" rx="10.27" ry="11.18"/>
+          <path class="d" d="M26.49,25.52,45,25s-2-7-9-7C28.49,18,26.49,25.52,26.49,25.52Z"/>
+          <circle class="e" cx="33.09" cy="28.02" r="0.59"/>
+          <circle class="e" cx="38.42" cy="28.02" r="0.59"/>
+          <path class="f" d="M31.49,34.53a4.33,4.33,0,0,0,4,2.51,4.34,4.34,0,0,0,4-2"/>
+        </svg>
       </div>
 
-      <div class="info">
+      <div class="item2">
         <p>Grupa: Grupa 1</p>
         <p>Wychowawca: Joana Nowak</p>
         <p>Rok: 2018-2020</p>
       </div>
 
-      <mat-form-field class="child-form-field">
-        <mat-label>Wybierz Dziecko</mat-label>
-        <mat-select [(value)]="selected" panelClass="current-children">
-          <mat-option value="option1">Grzegorz</mat-option>
-          <mat-option value="option2">Krzysztof</mat-option>
-          <mat-option value="option3">Janek</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="item3">
+        <mat-form-field class="child-form-field">
+          <mat-label>Wybierz Dziecko</mat-label>
+          <mat-select [(value)]="selected" panelClass="current-children">
+            <mat-option value="option1">Grzegorz</mat-option>
+            <mat-option value="option2">Krzysztof</mat-option>
+            <mat-option value="option3">Janek</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
+
   </mat-card>
 </div>
 
 
+
+
+<!--<div class="child-avatar">-->
+<!--  <img src="girl.png" alt="">-->
+<!--  <p>Janek</p>-->
+<!--</div>-->
+
+<!--<div class="info">-->
+<!--  <p>Grupa: Grupa 1</p>-->
+<!--  <p>Wychowawca: Joana Nowak</p>-->
+<!--  <p>Rok: 2018-2020</p>-->
+<!--</div>-->
+
+<!--<mat-form-field class="child-form-field">-->
+<!--  <mat-label>Wybierz Dziecko</mat-label>-->
+<!--  <mat-select [(value)]="selected" panelClass="current-children">-->
+<!--    <mat-option value="option1">Grzegorz</mat-option>-->
+<!--    <mat-option value="option2">Krzysztof</mat-option>-->
+<!--    <mat-option value="option3">Janek</mat-option>-->
+<!--  </mat-select>-->
+<!--</mat-form-field>-->
