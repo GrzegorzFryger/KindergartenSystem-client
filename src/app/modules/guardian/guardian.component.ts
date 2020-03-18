@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./guardian.component.scss']
 })
 export class GuardianComponent implements OnInit {
+  logoSrc = '../../../../../assets/images/skarwek.png';
 
   constructor() { }
 

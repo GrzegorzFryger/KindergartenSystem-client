@@ -10,6 +10,8 @@ import { TestComponent } from './page/test/test.component';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from '../../shared/shared.module';
 import { MealComponent } from './page/meal/meal.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { MealComponent } from './page/meal/meal.component';
     MatCardModule,
     MatButtonModule,
     SharedModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ]
 })
 export class GuardianModule { }

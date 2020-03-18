@@ -1,24 +1,28 @@
-<div class="row">
-  <div class="col">
-    <i class="material-icons">
-      account_circle
-    </i>
-    <i class="material-icons">
-      account_circle
-    </i>
-    <i class="material-icons">
-      account_circle
-    </i>
-    <i class="material-icons">
-      account_circle
-    </i>
-    <i class="material-icons">
-      account_circle
-    </i>
-    <i class="material-icons">
-      account_circle
-    </i>
-  </div>
+<div class="children-container">
+  <mat-card>
+    <div class="child-info-container">
+
+      <div class="child-avatar">
+        <img src="girl.png" alt="">
+        <p>Janek</p>
+      </div>
+
+      <div class="info">
+        <p>Grupa: Grupa 1</p>
+        <p>Wychowawca: Joana Nowak</p>
+        <p>Rok: 2018-2020</p>
+      </div>
+
+      <mat-form-field class="child-form-field">
+        <mat-label>Wybierz Dziecko</mat-label>
+        <mat-select [(value)]="selected" panelClass="current-children">
+          <mat-option value="option1">Grzegorz</mat-option>
+          <mat-option value="option2">Krzysztof</mat-option>
+          <mat-option value="option3">Janek</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card>
 </div>
 
 
