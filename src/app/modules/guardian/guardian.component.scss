@@ -1,0 +1,97 @@
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  .card {
+    flex-basis: 95%;
+    height: 95%;
+    border-radius: 50px;
+    padding: 0;
+
+    .context-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      height: 100%;
+      width: 100%;
+
+      .context-left {
+        flex-grow: 0;
+        flex-basis: 10%;
+        //background-color: wheat;
+        height: 100%;
+
+        .context-left-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          width: 100%;
+
+          .logo {
+            flex-grow: 0;
+            flex-basis: 10%;
+            padding: 10%;
+            //background-color: yellow;
+
+            .img {
+              display: flex;
+              height: 100%;
+              width: 100%;
+              background-image: url('../../../assets/images/skarwek.png');
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+          }
+
+          .navigation {
+            flex-grow: 1;
+            flex-basis: 90%;
+            //background-color: yellowgreen;
+          }
+        }
+      }
+
+      .context-main {
+        flex-grow: 1;
+        flex-basis: 75%;
+        //background-color: #ff5792;
+        height: 100%;
+        padding: 1%;
+        background-color: #F9F9FB;
+
+
+        .context-main-container {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          height: 100%;
+          width: 100%;
+
+          .children {
+            flex-grow: 0;
+            flex-basis: 10%;
+            width: 100%;
+          }
+
+          .components {
+            flex-basis: 90%;
+            flex-grow: 1;
+            width: 100%;
+          }
+        }
+      }
+
+      .context-right {
+        flex-basis: 15%;
+        //background-color: black;
+        height: 100%;
+      }
+    }
+  }
+}
+
