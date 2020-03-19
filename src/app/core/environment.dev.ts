@@ -25,15 +25,15 @@ export const environment = {
 
       // CashPayment Controller
       getAllCashPayments: receivablesUrl + 'cash-payments',
-      getCashPayment: receivablesUrl + 'cash-payments',
-      deleteCashPayment: receivablesUrl + 'cash-payments',
+      getCashPayment: receivablesUrl + 'cash-payments/',
+      deleteCashPayment: receivablesUrl + 'cash-payments/',
       createCashPayment: receivablesUrl + 'cash-payments',
       updateCashPayment: receivablesUrl + 'cash-payments',
 
       // Transactions Controller
       getAllTransactions: receivablesUrl + 'transactions',
-      getTransaction: receivablesUrl + 'transactions',
-      deleteTransaction: receivablesUrl + 'transactions',
+      getTransaction: receivablesUrl + 'transactions/',
+      deleteTransaction: receivablesUrl + 'transactions/',
       createTransaction: receivablesUrl + 'transactions',
       updateTransaction: receivablesUrl + 'transactions'
     },
