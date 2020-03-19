@@ -1,0 +1,51 @@
+.children-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  .mat-card {
+    flex-grow: 0;
+    flex-basis: 100%;
+    border-radius: 10px;
+
+    .con {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      height: 100%;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        flex-grow: 0;
+        flex-basis: 20%;
+        margin-right: 2%;
+
+        background-image: url('src/assets/images/girl.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .item2 {
+        flex-grow: 0;
+        flex-basis: 60%;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      .item3 {
+        flex-grow: 0;
+        flex-basis: 20%;
+      }
+    }
+
+
+  }
+}
+

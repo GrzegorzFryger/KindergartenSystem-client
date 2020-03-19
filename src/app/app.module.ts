@@ -2,8 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSliderModule} from '@angular/material/slider';
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -14,26 +12,33 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-<<<<<<< Updated upstream
 import { MealsComponent } from './modules/meals/meals.component';
-=======
->>>>>>> Stashed changes
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSliderModule} from '@angular/material/slider';
+import {SharedModule} from './shared/shared.module';
+import {HttpClientModule} from '@angular/common/http';
+import {CoreModule} from './core/core.module';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-<<<<<<< Updated upstream
     FooterComponent,
-    MealsComponent,
-=======
-    FooterComponent
->>>>>>> Stashed changes
+    MealsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
+    HttpClientModule,
+
+    CoreModule,
+    SharedModule,
+    // angular-material
+    BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
     MatButtonModule,
@@ -46,6 +51,8 @@ import { MealsComponent } from './modules/meals/meals.component';
     MatMenuModule
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
