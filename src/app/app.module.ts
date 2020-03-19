@@ -4,22 +4,17 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import {MatButton, MatButtonModule} from '@angular/material/button';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import { MealsComponent } from './modules/meals/meals.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSliderModule} from '@angular/material/slider';
 import {SharedModule} from './shared/shared.module';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './core/core.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @NgModule({
@@ -27,7 +22,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MealsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,18 +31,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
     CoreModule,
     SharedModule,
+
     // angular-material
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    LayoutModule,
-    MatSidenavModule,
     MatIconModule,
-    MatListModule,
-    MatMenuModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [],
   exports: [
