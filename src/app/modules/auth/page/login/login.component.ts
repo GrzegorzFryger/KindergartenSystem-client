@@ -40,4 +40,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  klikam() {
+    console.log('asd');
+  }
+
 }
