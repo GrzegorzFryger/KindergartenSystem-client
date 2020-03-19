@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< Updated upstream
     "@angular/animations": "~9.0.0",
     "@angular/cdk": "^9.0.0",
     "@angular/common": "~9.0.0",
@@ -22,6 +23,22 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
+=======
+    "@angular/animations": "^9.0.5",
+    "@angular/cdk": "^9.1.1",
+    "@angular/common": "^9.0.5",
+    "@angular/compiler": "^9.0.5",
+    "@angular/core": "^9.0.5",
+    "@angular/flex-layout": "^9.0.0-beta.29",
+    "@angular/forms": "^9.0.5",
+    "@angular/material": "^9.1.1",
+    "@angular/platform-browser": "^9.0.5",
+    "@angular/platform-browser-dynamic": "^9.0.5",
+    "@angular/router": "^9.0.5",
+    "bootstrap": "^4.4.1",
+    "flex-layout": "^1.0.1",
+    "jwt-decode": "^2.2.0",
+>>>>>>> Stashed changes
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

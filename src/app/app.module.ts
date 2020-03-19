@@ -14,15 +14,22 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+<<<<<<< Updated upstream
 import { MealsComponent } from './modules/meals/meals.component';
+=======
+>>>>>>> Stashed changes
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+<<<<<<< Updated upstream
     FooterComponent,
     MealsComponent,
+=======
+    FooterComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,
