@@ -5,6 +5,7 @@ const routes: Routes = [
   {
     // example
     path: '',
+
     loadChildren: () => import('./core/core.module').then(m => m.CoreModule)
   },
   {
