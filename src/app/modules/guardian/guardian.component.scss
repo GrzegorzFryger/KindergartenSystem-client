@@ -75,13 +75,18 @@
           .children {
             flex-grow: 0;
             flex-basis: 10%;
-            width: 100%;
+            width: 50%;
+            height: 100%;
+            float:right;
+            margin-left: auto;
+            order: 1;
           }
 
           .components {
             flex-basis: 90%;
             flex-grow: 1;
             width: 100%;
+            order: 2;
           }
         }
       }
