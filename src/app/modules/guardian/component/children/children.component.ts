@@ -1,4 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {GuardianService} from '../../../../data/service/guardian.service';
+import {Observable} from 'rxjs';
+import {Child} from '../../../../data/model/child';
 
 @Component({
   selector: 'app-children',
@@ -8,8 +11,12 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class ChildrenComponent implements OnInit {
   selected: any;
+  children: Observable<Array<Child>>;
 
-  constructor() { }
+
+  constructor(private guardianService: GuardianService) {
+    this.children = this.guardianService.children;
+  }
 
   ngOnInit(): void {
   }

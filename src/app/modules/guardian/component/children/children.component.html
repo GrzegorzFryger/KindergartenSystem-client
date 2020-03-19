@@ -52,9 +52,7 @@
         <mat-form-field class="child-form-field">
           <mat-label>Wybierz Dziecko</mat-label>
           <mat-select [(value)]="selected" panelClass="current-children">
-            <mat-option value="option1">Grzegorz</mat-option>
-            <mat-option value="option2">Krzysztof</mat-option>
-            <mat-option value="option3">Janek</mat-option>
+            <mat-option *ngFor="let child of children | async" value="{{child.name}}">{{child.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

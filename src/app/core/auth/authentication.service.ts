@@ -47,15 +47,15 @@ export class AuthenticationService {
   }
 
   private removeCredentials() {
-    localStorage.removeItem(environment.nameLocalStorageVariable);
+    localStorage.removeItem(environment.nameLocalStorageVariableAuth);
     this.currentUserCredSubject.next(null);
   }
 
   private get userCredentialsFromLocalStore(): UserCredentials {
-    return JSON.parse(localStorage.getItem(environment.nameLocalStorageVariable));
+    return JSON.parse(localStorage.getItem(environment.nameLocalStorageVariableAuth));
   }
 
   private set userCredentialsToLocalStore(userCredentials: UserCredentials) {
-    localStorage.setItem(environment.nameLocalStorageVariable, JSON.stringify(userCredentials));
+    localStorage.setItem(environment.nameLocalStorageVariableAuth, JSON.stringify(userCredentials));
   }
 }
