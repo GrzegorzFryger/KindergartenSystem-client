@@ -1,3 +1,4 @@
+import { ReceiablesComponent } from './page/receiables/receiables.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {GuardianComponent} from './guardian.component';
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+      },
+      {
+        path: 'receivables',
+        component: ReceiablesComponent,
       }
     ]
   }

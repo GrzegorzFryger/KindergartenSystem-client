@@ -1,4 +1,5 @@
 const apiUrl = 'http://localhost:8080';
+const receivablesUrl = apiUrl + '/api/receivables/';
 
 export const environment = {
   production: false,
@@ -12,7 +13,10 @@ export const environment = {
     apiUrl,
     authorization: apiUrl + '/api/authenticate',
     user: apiUrl + '/api/account/user',
-    guardian: apiUrl + '/api/account/guardians/'
+    guardian: apiUrl + '/api/account/guardians/',
+    receivables: {
+      getAllIncomingPaymentsForChild: receivablesUrl + 'payments/child/'
+    }
   }
 };
 
