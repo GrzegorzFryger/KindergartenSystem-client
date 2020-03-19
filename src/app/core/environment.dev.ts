@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:8080';
+const apiUrl = 'https://localhost:8080';
 const receivablesUrl = apiUrl + '/api/receivables/';
 
 export const environment = {
