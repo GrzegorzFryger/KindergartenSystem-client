@@ -1,13 +1,37 @@
 .background-image {
   height: 100%;
   width: 100%;
-  background-image: url('../../../../../assets/images/login.png');
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url('../../../../../assets/images/login.png') no-repeat  fixed ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
 }
 
 .mat-card {
-  min-width: 300px;
+  min-width: 400px;
 
+}
+
+.mat-card-title {
+  color: #662A01;
+}
+
+.loginFormHeader {
+  background-color: #BEC9F4;
+  padding: 20px;
+  margin-top: -20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.loginForm {
+  float:right;
+  margin: 0 30px;
+  padding: 30px;
+}
+
+.loginFormDecorator {
+  float:left;
+  padding: 20px;
+  border-right: 1px solid #bdc3c7;
 }
