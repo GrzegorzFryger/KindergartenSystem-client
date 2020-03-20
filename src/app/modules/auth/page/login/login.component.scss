@@ -14,11 +14,11 @@
 }
 
 .mat-card-title {
-  color: #662A01;
+  color: #606FEE;
 }
 
 .loginFormHeader {
-  background-color: #BEC9F4;
+  background-color: #EDEEF4;
   padding: 20px;
   margin-top: -20px;
   border-radius: 10px 10px 0 0;
@@ -28,6 +28,12 @@
   float:right;
   margin: 0 30px;
   padding: 30px;
+
+  .mat-raised-button.mat-primary {
+    background-color: #EDEEF4;
+    color: #606FEE;
+  }
+
 }
 
 .loginFormDecorator {
