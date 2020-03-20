@@ -11,7 +11,7 @@ import {UserService} from './user.service';
 export class GuardianService {
   private childrenSub: Subject<Array<Child>>;
   public children: Observable<Array<Child>>;
-  private userId: string;
+  public userId: string;
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.childrenSub = new Subject<Array<Child>>();
@@ -20,6 +20,7 @@ export class GuardianService {
     this.userService.currentUser.subscribe(user => {
       console.log('inicjalzie user seriwce in guardian');
       this.findAllChildren(user.id).subscribe(children => {
+          this.userId = user.id;
           this.childrenSub.next(children);
         });
     });

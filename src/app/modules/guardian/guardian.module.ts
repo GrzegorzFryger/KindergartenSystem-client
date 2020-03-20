@@ -12,6 +12,7 @@ import {MealComponent} from './page/meal/meal.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ReceiablesComponent } from './page/receiables/receiables.component';
     SharedModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatTableModule,
   ]
 })
 export class GuardianModule {
