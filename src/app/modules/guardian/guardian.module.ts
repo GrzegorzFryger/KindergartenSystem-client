@@ -12,10 +12,11 @@ import {MealComponent} from './page/meal/meal.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
+import { FinancesComponent } from './page/finances/finances/finances.component';
 
 
 @NgModule({
-  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, MealComponent, ReceiablesComponent],
+  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, MealComponent, ReceiablesComponent, FinancesComponent],
   imports: [
     CommonModule,
     GuardianRoutingModule,

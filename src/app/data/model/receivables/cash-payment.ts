@@ -1,5 +1,4 @@
-export class IncomingPayment {
-  paymentType: string;
+export class CashPayment {
   transactionDate: Date;
   contractorDetails: string;
   title: string;
