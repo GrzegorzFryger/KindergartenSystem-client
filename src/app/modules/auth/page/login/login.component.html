@@ -2,40 +2,47 @@
 <div class="row justify-content-center align-items-center background-image mx-0">
   <div class="col-auto">
     <mat-card class="mat-elevation-z16">
-      <div class="row justify-content-center align-items-center">
+      <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
         <mat-card-title>Zaloguj się do aplikacji</mat-card-title>
       </div>
       <mat-card-content>
         <div class="row justify-content-center align-items-center">
-          <form [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
-            <p>
-              <mat-form-field appearance="standard">
-                <mat-label>Email</mat-label>
-                <label>
-                  <input matInput placeholder="email" formControlName="email">
-                </label>
-                <mat-error *ngIf="hasError('email', 'required')">Email jest wymagany</mat-error>
-                <mat-error *ngIf="hasError('email', 'email')">Wpisz popawny email</mat-error>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field appearance="standard">
-                <mat-label>Hasło</mat-label>
-                <label>
-                  <input matInput placeholder="password" formControlName="password">
-                </label>
-                <mat-error *ngIf="hasError('password', 'required')">Hasło jest wymagane</mat-error>
-              </mat-form-field>
-            </p>
-            <div class="row justify-content-center align-items-center button">
-              <button mat-raised-button color="primary">Zaloguj się</button>
-            </div>
-          </form>
+
+          <div class="loginFormDecorator">
+            <img src="../../../../../assets/images/teacher.png" height="139" width="139"/>
+          </div>
+
+
+          <div class="loginForm">
+            <form [formGroup]="loginFrom" (ngSubmit)="onSubmit()">
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Email</mat-label>
+                  <label>
+                    <input matInput placeholder="email" formControlName="email">
+                  </label>
+                  <mat-error *ngIf="hasError('email', 'required')">Email jest wymagany</mat-error>
+                  <mat-error *ngIf="hasError('email', 'email')">Wpisz popawny email</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Hasło</mat-label>
+                  <label>
+                    <input matInput placeholder="password" formControlName="password">
+                  </label>
+                  <mat-error *ngIf="hasError('password', 'required')">Hasło jest wymagane</mat-error>
+                </mat-form-field>
+              </p>
+              <div class="row justify-content-center align-items-center button">
+                <button mat-raised-button color="primary">Zaloguj się</button>
+              </div>
+            </form>
+          </div>
         </div>
       </mat-card-content>
     </mat-card>
 
-    <button (click)="klikam()">A klikne se </button>
 
   </div>
 </div>
