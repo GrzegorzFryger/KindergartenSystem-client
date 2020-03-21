@@ -1,4 +1,4 @@
-import { FinancesComponent } from './page/dashboard/finances/finances.component';
+import { FinancesComponent } from './page/finances/finances.component';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
