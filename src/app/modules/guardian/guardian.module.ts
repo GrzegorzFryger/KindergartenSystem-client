@@ -20,7 +20,15 @@ import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
-  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, MealComponent, ReceiablesComponent, FinancesComponent],
+  declarations: [
+    ChildrenComponent,
+    DashboardComponent,
+    GuardianComponent,
+    MealComponent,
+    ReceiablesComponent,
+    FinancesComponent,
+    DialogOverviewExampleDialog
+  ],
 
   imports: [
     CommonModule,
