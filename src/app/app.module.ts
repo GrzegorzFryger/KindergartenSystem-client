@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -22,26 +23,22 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     FooterComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    SharedModule,
-    HttpClientModule,
-
-    CoreModule,
-    SharedModule,
-
-    // angular-material
+    BrowserModule,
     BrowserAnimationsModule,
+    CoreModule,
+    HttpClientModule,
+    SharedModule,
+    SharedModule,
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [],
-  exports: [
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -3,6 +3,7 @@
   padding: 0;
   margin-top: 20px;
   border-radius: 10px 10px 10px 10px;
+  width: 100%;
 
   .mat-card-content {
     padding: 16px;
@@ -20,15 +21,29 @@
   }
 }
 
-.cardContent {
-  width: 1000px;
 
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
 }
 
 .mat-table {
-  width: 100%;
-  box-shadow: none;
+  overflow: auto;
+  max-height: 200px;
 }
+
 
 
 .mealCardHeader {
