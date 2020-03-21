@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {environment} from '../../core/environment.dev';
-import {User} from '../model/user';
+import {environment} from '../../../core/environment.dev';
+import {User} from '../../model/users/user';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {AuthenticationService} from '../../core/auth/authentication.service';
+import {AuthenticationService} from '../../../core/auth/authentication.service';
 
 
 @Injectable({

@@ -1,4 +1,3 @@
-
 .app {
   display: flex;
   justify-content: center;
@@ -22,7 +21,6 @@
       .context-left {
         flex-grow: 0;
         flex-basis: 10%;
-        //background-color: wheat;
         height: 100%;
 
         .context-left-container {
@@ -35,7 +33,6 @@
             flex-grow: 0;
             flex-basis: 10%;
             padding: 10%;
-            //background-color: yellow;
 
             .img {
               display: flex;
@@ -51,7 +48,6 @@
           .navigation {
             flex-grow: 1;
             flex-basis: 90%;
-            //background-color: yellowgreen;
           }
         }
       }
@@ -59,7 +55,6 @@
       .context-main {
         flex-grow: 1;
         flex-basis: 75%;
-        //background-color: #ff5792;
         height: 100%;
         padding: 1%;
         background-color: #F9F9FB;
@@ -90,10 +85,8 @@
           }
         }
       }
-
       .context-right {
         flex-basis: 15%;
-        //background-color: black;
         height: 100%;
       }
     }
