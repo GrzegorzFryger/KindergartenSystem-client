@@ -12,9 +12,11 @@ export const environment = {
   },
   apiUrls: {
     apiUrl,
+
     authorization: apiUrl + '/api/authenticate',
     user: apiUrl + '/api/account/user',
     guardian: apiUrl + '/api/account/guardians/',
+
     receivables: {
       // Receivables Controller
       getAllIncomingPaymentsForChild: receivablesUrl + 'payments/child/',

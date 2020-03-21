@@ -11,10 +11,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ActivateAccountComponent} from './page/activate-account/activate-account.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ActivateAccountComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
