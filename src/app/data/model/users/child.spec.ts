@@ -1,4 +1,4 @@
-import { Child } from './child';
+import {Child} from './child';
 
 describe('Child', () => {
   it('should create an instance', () => {

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {GuardianService} from '../../../../data/service/guardian.service';
+import {GuardianService} from '../../../../data/service/users/guardian.service';
 import {Observable} from 'rxjs';
-import {Child} from '../../../../data/model/child';
+import {Child} from '../../../../data/model/users/child';
 
 @Component({
   selector: 'app-children',
