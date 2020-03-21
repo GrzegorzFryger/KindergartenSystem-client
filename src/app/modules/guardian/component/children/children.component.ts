@@ -10,7 +10,7 @@ import {Child} from '../../../../data/model/users/child';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildrenComponent implements OnInit {
-  selected: Child;
+  selected: string;
   children: Observable<Array<Child>>;
 
   constructor(private guardianService: GuardianService) {

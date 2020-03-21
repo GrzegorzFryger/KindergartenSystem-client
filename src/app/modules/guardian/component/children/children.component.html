@@ -1,30 +1,26 @@
 <div class="children-container">
-
   <mat-card>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-3 align-self-center">
-          <img src="../../../../../assets/images/teacher.png" height="80" width="80" class="img-fluid" alt="image-cover"/>
+    <div class="context-container">
+
+        <div *ngIf="selected === ''" class="item">
+          <img src="../../../../../assets/images/teacher.png" height="80" width="80" class="img-fluid"
+               alt="image-cover"/>
         </div>
 
-        <div class="col-3 align-self-center">
+        <div *ngIf="selected === ''" class="item">
           <div class="child-information">
-            <p>Grupa: A </p>
+            <p>Grupa: A</p>
           </div>
         </div>
 
-        <div class="col-6 align-self-center">
+        <div class="item">
           <mat-form-field class="child-form-field">
             <mat-label>Wybierz Dziecko</mat-label>
-            <mat-select [(value)]="selected" panelClass="current-children">
+            <mat-select [(value)]="selected" panelClass="item">
               <mat-option *ngFor="let child of children | async" value="{{child.name}}">{{child.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
       </div>
-    </div>
   </mat-card>
-
 </div>
-
-

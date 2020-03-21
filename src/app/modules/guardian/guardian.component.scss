@@ -68,12 +68,8 @@
           width: 100%;
 
           .children {
-            flex-grow: 0;
-            flex-basis: 10%;
-            width: 50%;
-            height: 100%;
-            float: right;
-            margin-left: auto;
+            flex-grow: 1;
+            flex-shrink: 1;
             order: 1;
           }
 

@@ -2,16 +2,28 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  float: right;
 
   .mat-card {
     flex-grow: 0;
-    flex-basis: 90%;
+    flex-shrink: 1;
     border-radius: 10px;
 
-    .child-information {
+    .context-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
 
-      p {
-        margin-bottom: 0;
+      .item {
+        flex-grow: 1;
+        flex-shrink: 1;
+        padding-right: 5%;
+        padding-left: 5%;
+        align-self: center;
+
+        p {
+          white-space: nowrap
+        }
       }
 
     }
