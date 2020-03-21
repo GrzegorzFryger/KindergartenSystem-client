@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {GuardianRoutingModule} from './guardian-routing.module';
 import {ChildrenComponent} from './component/children/children.component';
 import {DashboardComponent} from './page/dashboard/dashboard.component';
@@ -12,21 +11,17 @@ import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.compo
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
-import {MatTableModule} from '@angular/material/table';
+import {FinancesComponent} from './page/finances/finances/finances.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 
 
+
 @NgModule({
-  declarations: [
-    ChildrenComponent,
-    DashboardComponent,
-    GuardianComponent,
-    MealComponent,
-    ReceiablesComponent,
-    DialogOverviewExampleDialog
-  ],
+  declarations: [ChildrenComponent, DashboardComponent, GuardianComponent, MealComponent, ReceiablesComponent, FinancesComponent],
+
   imports: [
     CommonModule,
     FormsModule,

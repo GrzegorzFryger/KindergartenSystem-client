@@ -1,3 +1,4 @@
+import { FinancesComponent } from './page/finances/finances/finances.component';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -17,6 +18,11 @@ const routes: Routes = [
       {
         path: 'receivables',
         component: ReceiablesComponent,
+      }
+      ,
+      {
+        path: 'finances',
+        component: FinancesComponent,
       }
     ]
   }

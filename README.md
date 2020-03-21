@@ -37,3 +37,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+# Workarounds for issues
+## Certificate
+You can turn off certificate validation for localhost only using this solution:  
+https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate
+
+> For localhost only:
+Simply paste this in your chrome:
+chrome://flags/#allow-insecure-localhost
+
+As an alternative you may try to add this certificate to trusted for Google Chrome
