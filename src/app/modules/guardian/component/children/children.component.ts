@@ -10,15 +10,15 @@ import {Child} from '../../../../data/model/users/child';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildrenComponent implements OnInit {
-  selected: any;
+  selected: Child;
   children: Observable<Array<Child>>;
-
 
   constructor(private guardianService: GuardianService) {
     this.children = this.guardianService.children;
   }
 
   ngOnInit(): void {
+
   }
 
 }
