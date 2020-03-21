@@ -20,7 +20,7 @@
 
       .context-left {
         flex-grow: 0;
-        flex-basis: 10%;
+        flex-basis: 12%;
         height: 100%;
 
         .context-left-container {
@@ -54,7 +54,7 @@
 
       .context-main {
         flex-grow: 1;
-        flex-basis: 75%;
+        flex-basis: 73%;
         height: 100%;
         padding: 1%;
         background-color: #F9F9FB;
@@ -72,7 +72,7 @@
             flex-basis: 10%;
             width: 50%;
             height: 100%;
-            float:right;
+            float: right;
             margin-left: auto;
             order: 1;
           }
@@ -85,6 +85,7 @@
           }
         }
       }
+
       .context-right {
         flex-basis: 15%;
         height: 100%;
