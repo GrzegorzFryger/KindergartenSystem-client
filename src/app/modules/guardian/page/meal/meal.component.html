@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-
     <mat-card class="allMealsCard">
       <mat-card-header class="mealCardHeader">
         <mat-card-title>Wszystkie zamówione posiłki</mat-card-title>
@@ -51,9 +50,6 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
-
-
-
         </div>
       </mat-card-content>
 
@@ -61,7 +57,10 @@
         <button mat-button (click)="openDialog()" color="primary">Dodaj kolejny</button>
       </mat-card-actions>
     </mat-card>
+  </div>
 
+  <div class="row">
 
   </div>
+
 </div>

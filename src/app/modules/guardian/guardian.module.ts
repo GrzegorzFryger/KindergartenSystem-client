@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
 
 
 
@@ -27,7 +28,8 @@ import {MatInputModule} from '@angular/material/input';
     MealComponent,
     ReceiablesComponent,
     FinancesComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    MealPriceComponent
   ],
 
   imports: [
