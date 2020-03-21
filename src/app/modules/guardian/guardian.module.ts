@@ -14,7 +14,6 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 
