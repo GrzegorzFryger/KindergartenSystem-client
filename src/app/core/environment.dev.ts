@@ -41,7 +41,8 @@ export const environment = {
     },
     finances: {
       // Finances Controller
-      getBalance: financesUrl + 'balance'
+      getBalance: financesUrl + 'balance/',
+      getBalanceForAllChildren: financesUrl + 'balance/guardian/'
     }
   }
 };
