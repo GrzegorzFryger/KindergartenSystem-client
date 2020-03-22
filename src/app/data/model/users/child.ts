@@ -6,4 +6,5 @@ export class Child {
   city: string;
   streetNumber: number;
   pesel: string;
+  group: string;
 }

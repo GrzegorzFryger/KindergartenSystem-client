@@ -12,16 +12,13 @@ import {map} from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildrenComponent implements OnInit {
-  private childSubject: Subject<Child>;
   private childrenList: Array<Child>;
 
   selected: boolean;
   children: Observable<Array<Child>>;
-  child: Observable<Child>;
+  child: Child;
 
   constructor(private guardianService: GuardianService) {
-    this.childSubject = new Subject<Child>();
-    this.child = this.childSubject.asObservable();
     this.children = this.guardianService.children;
   }
 
@@ -33,9 +30,7 @@ export class ChildrenComponent implements OnInit {
   }
 
   onSelectChange($event: MatSelectChange) {
-    console.log(this.childrenList);
     this.selected = true;
-    console.log('dsa');
-    this.childSubject.next(this.childrenList[$event.value]);
+    this.child = this.childrenList[$event.value];
   }
 }
