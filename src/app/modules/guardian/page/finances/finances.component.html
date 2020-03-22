@@ -30,8 +30,12 @@
     <div class="row">
       <div class="col">
         <p>Tytuły przelewów do automatycznego mapowania:</p>
-        <p>20200314645723</p>
-        <p>20200314645723</p>
+        <ul>
+          <!-- TODO change it into name of child -->
+          <li *ngFor="let mapping of transactionMappings | async">
+            {{ mapping.title }} - Dziecko nr {{ mapping.childId }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
