@@ -1,0 +1,54 @@
+.mat-card {
+  padding: 0;
+  margin-top: 20px;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+
+  .mat-card-content {
+    padding: 16px;
+    width: 100%;
+  }
+
+  .mat-card-actions {
+    padding: 0 21px 20px 16px;
+    float:right;
+
+    .mat-button {
+      background-color: #EDEEF4;
+      color: #606FEE;
+    }
+  }
+}
+
+.mat-card-header {
+  background-color: #EDEEF4;
+  padding: -10px;
+  border-radius: 10px 10px 0 0;
+
+
+  .mat-card-title {
+    color: #606FEE;
+    padding: 16px;
+  }
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 200px;
+}

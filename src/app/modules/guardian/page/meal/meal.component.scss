@@ -1,4 +1,3 @@
-
 .mat-card {
   padding: 0;
   margin-top: 20px;
@@ -45,7 +44,6 @@
 }
 
 
-
 .mealCardHeader {
   background-color: #EDEEF4;
   padding: -10px;
@@ -56,4 +54,18 @@
     color: #606FEE;
     padding: 16px;
   }
+}
+
+.mealPriceCard {
+  float: left;
+  width: 50%;
+}
+
+.mealDictionaryCard {
+  float:right;
+  width: 50%;
+}
+
+.mealAdminRow {
+  margin-top: 20px;
 }
