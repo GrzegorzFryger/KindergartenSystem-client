@@ -1,1 +1,27 @@
 <p>receiables works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <table>
+        <tr>
+          <th>ID dziecka</th>
+          <th>ID rodzica</th>
+          <th>Wpłacający</th>
+          <th>Typ płatności</th>
+          <th>Tytuł</th>
+          <th>Kwota</th>
+          <th>Data</th>
+        </tr>
+        <tr *ngFor="let incomingPayment of incomingPaymentsForAllChildren | async">
+            <td>{{ incomingPayment.childId }}</td>
+            <td>{{ incomingPayment.guardianId }}</td>
+            <td>{{ incomingPayment.contractorDetails }}</td>
+            <td>{{ incomingPayment.paymentType }}</td>
+            <td>{{ incomingPayment.title }}</td>
+            <td>{{ incomingPayment.transactionAmount }} {{ incomingPayment.transactionCurrency }}</td>
+            <td>{{ incomingPayment.transactionDate }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
