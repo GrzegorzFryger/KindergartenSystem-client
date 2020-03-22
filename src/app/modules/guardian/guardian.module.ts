@@ -11,6 +11,9 @@ import {SharedModule} from '../../shared/shared.module';
 import {MealComponent} from './page/meal/meal.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
 import { FinancesComponent } from './page/finances/finances.component';
 
@@ -25,6 +28,9 @@ import { FinancesComponent } from './page/finances/finances.component';
     SharedModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class GuardianModule {
