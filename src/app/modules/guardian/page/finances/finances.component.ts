@@ -13,6 +13,7 @@ import { BalanceService } from 'src/app/data/service/finances/balance.service';
 })
 export class FinancesComponent implements OnInit {
   public balanceForAllChildren: Observable<Balance>;
+  public isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
@@ -29,6 +30,7 @@ export class FinancesComponent implements OnInit {
       }),
       map(response => {
         console.log(response);
+        this.isBalancePositive = response.balance >= 0;
         return response;
       })
     );
