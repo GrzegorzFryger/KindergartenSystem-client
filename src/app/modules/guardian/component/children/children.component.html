@@ -2,22 +2,22 @@
   <mat-card>
     <div class="context-container">
 
-        <div *ngIf="selected === ''" class="item">
+        <div *ngIf="selected === true" class="item">
           <img src="../../../../../assets/images/teacher.png" height="80" width="80" class="img-fluid"
                alt="image-cover"/>
         </div>
 
-        <div *ngIf="selected === ''" class="item">
+        <div *ngIf="selected === true" class="item">
           <div class="child-information">
-            <p>Grupa: A</p>
+            <p>Grupa:{{(child | async)?.name}}</p>
           </div>
         </div>
 
         <div class="item">
           <mat-form-field class="child-form-field">
             <mat-label>Wybierz Dziecko</mat-label>
-            <mat-select [(value)]="selected" panelClass="item">
-              <mat-option *ngFor="let child of children | async" value="{{child.name}}">{{child.name}}</mat-option>
+            <mat-select  (selectionChange)="onSelectChange($event)" panelClass="item">
+              <mat-option *ngFor="let child of children | async; let i = index" value="{{i}}">{{child.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

@@ -54,11 +54,10 @@
 
       .context-main {
         flex-grow: 1;
-        flex-basis: 73%;
+        flex-basis: 68%;
         height: 100%;
         padding: 1%;
         background-color: #F9F9FB;
-
 
         .context-main-container {
           display: flex;
@@ -83,8 +82,9 @@
       }
 
       .context-right {
-        flex-basis: 15%;
+        flex-basis: 20%;
         height: 100%;
+
       }
     }
   }
