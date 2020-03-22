@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
+import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
 
 
 
@@ -29,7 +30,8 @@ import { MealPriceComponent } from './page/meal/meal-price/meal-price.component'
     ReceiablesComponent,
     FinancesComponent,
     DialogOverviewExampleDialog,
-    MealPriceComponent
+    MealPriceComponent,
+    MealDictionaryComponent
   ],
 
   imports: [
