@@ -1,0 +1,16 @@
+.user-container {
+  padding: 10%;
+
+  .user-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+   .person-data {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding-top: 10%;
+   }
+}
