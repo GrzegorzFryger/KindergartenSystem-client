@@ -57,6 +57,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
+    MatSortModule
   ],
 
   exports: [
