@@ -18,6 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
 import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
+import {MatTreeModule} from '@angular/material/tree';
 
 
 
@@ -47,6 +48,7 @@ import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictio
     ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
+    MatTreeModule,
   ],
 
   exports: [

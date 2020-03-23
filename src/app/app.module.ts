@@ -13,7 +13,6 @@ import {CoreModule} from './core/core.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import {MatInputModule} from '@angular/material/input';
 
 
@@ -36,7 +35,7 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

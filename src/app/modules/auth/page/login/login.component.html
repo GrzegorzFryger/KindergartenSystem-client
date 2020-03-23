@@ -29,7 +29,7 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Hasło</mat-label>
                   <label>
-                    <input matInput placeholder="password" formControlName="password">
+                    <input matInput type="password" placeholder="password" formControlName="password">
                   </label>
                   <mat-error *ngIf="hasError('password', 'required')">Hasło jest wymagane</mat-error>
                 </mat-form-field>
