@@ -1,5 +1,5 @@
-import { TransactionsComponent } from './receivables/transactions/transactions.component';
-import { CashPaymentsComponent } from './receivables/cash-payments/cash-payments.component';
+import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
+import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
 import { AdministratorComponent } from './administrator.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';

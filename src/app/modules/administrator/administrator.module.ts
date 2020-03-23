@@ -4,8 +4,8 @@ import {CommonModule} from '@angular/common';
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
 import {MatCardModule} from '@angular/material/card';
-import { CashPaymentsComponent } from './receivables/cash-payments/cash-payments.component';
-import { TransactionsComponent } from './receivables/transactions/transactions.component';
+import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
+import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
 
 
 @NgModule({
