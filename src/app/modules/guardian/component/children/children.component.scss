@@ -9,17 +9,22 @@
     flex-shrink: 1;
     border-radius: 10px;
 
+
     .context-container {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
 
+      .mat-form-field-flex {
+        background-color: #ffffff;
+      }
       .item {
         flex-grow: 1;
         flex-shrink: 1;
         padding-right: 5%;
         padding-left: 5%;
         align-self: center;
+
 
         p {
           white-space: nowrap
