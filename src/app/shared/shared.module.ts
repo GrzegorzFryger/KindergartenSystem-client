@@ -9,10 +9,11 @@ import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [NavbarComponent, UserComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        RouterModule
+    ],
   exports: [NavbarComponent, UserComponent]
 })
 export class SharedModule {
