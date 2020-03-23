@@ -13,14 +13,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-
     CoreModule,
-    SharedModule,
-
+    SharedModule
   ],
   providers: [],
   exports: [],

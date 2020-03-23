@@ -20,31 +20,7 @@
   }
 }
 
-
-/* Structure */
-.example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-}
-
-.example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-.mat-table {
-  overflow: auto;
-  max-height: 200px;
-}
-
-
-.mealCardHeader {
+.mat-card-header {
   background-color: #EDEEF4;
   padding: -10px;
   border-radius: 10px 10px 0 0;
@@ -56,16 +32,4 @@
   }
 }
 
-.mealPriceCard {
-  float: left;
-  width: 50%;
-}
 
-.mealDictionaryCard {
-  float:right;
-  width: 50%;
-}
-
-.mealAdminRow {
-  margin-top: 20px;
-}

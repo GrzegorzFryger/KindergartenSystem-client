@@ -20,8 +20,18 @@
   }
 }
 
+.mat-card-header {
+  background-color: #EDEEF4;
+  padding: -10px;
+  border-radius: 10px 10px 0 0;
 
-/* Structure */
+
+  .mat-card-title {
+    color: #606FEE;
+    padding: 16px;
+  }
+}
+
 .example-container {
   display: flex;
   flex-direction: column;
@@ -43,29 +53,6 @@
   max-height: 200px;
 }
 
-
-.mealCardHeader {
-  background-color: #EDEEF4;
-  padding: -10px;
-  border-radius: 10px 10px 0 0;
-
-
-  .mat-card-title {
-    color: #606FEE;
-    padding: 16px;
-  }
-}
-
-.mealPriceCard {
-  float: left;
-  width: 50%;
-}
-
-.mealDictionaryCard {
-  float:right;
-  width: 50%;
-}
-
-.mealAdminRow {
-  margin-top: 20px;
+.mealPriceContainer {
+  padding-right: 10px;
 }
