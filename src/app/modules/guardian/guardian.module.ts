@@ -21,6 +21,9 @@ import { MealPriceComponent } from './page/meal/meal-price/meal-price.component'
 import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { FinancesComponent } from './page/finances/finances.component';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -51,6 +54,9 @@ import { FinancesComponent } from './page/finances/finances.component';
     MatInputModule,
     MatTreeModule,
     MatPaginatorModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
 
   exports: [
