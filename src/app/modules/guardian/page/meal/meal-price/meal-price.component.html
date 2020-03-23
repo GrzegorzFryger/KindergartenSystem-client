@@ -10,21 +10,21 @@
         <mat-table #table [dataSource]="dataSource">
 
           <!-- Position Column -->
-          <ng-container matColumnDef="position">
+          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          <ng-container matColumnDef="mealType">
+            <mat-header-cell *matHeaderCellDef> Meal Type</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+          <ng-container matColumnDef="mealPrice">
+            <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.mealPrice}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -3,6 +3,7 @@ const receivablesUrl = apiUrl + '/api/receivables/';
 const financesUrl = apiUrl + '/api/finances/';
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
+const mealPriceUrl = apiUrl + '/api/meal/price';
 
 export const environment = {
   production: false,
@@ -51,7 +52,8 @@ export const environment = {
     },
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
-      getDietType: mealDictionaryUrl + 'dietType'
+      getDietType: mealDictionaryUrl + 'dietType',
+      getMealPrice: mealPriceUrl,
     }
   }
 };

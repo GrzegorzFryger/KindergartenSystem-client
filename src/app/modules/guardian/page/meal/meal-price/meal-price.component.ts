@@ -1,22 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079},
-  {position: 2, name: 'Helium', weight: 4.0026},
-  {position: 3, name: 'Lithium', weight: 6.941},
-  {position: 1, name: 'Hydrogen', weight: 1.0079},
-  {position: 2, name: 'Helium', weight: 4.0026},
-  {position: 3, name: 'Lithium', weight: 6.941},
-  {position: 1, name: 'Hydrogen', weight: 1.0079},
-  {position: 2, name: 'Helium', weight: 4.0026},
-  {position: 3, name: 'Lithium', weight: 6.941},
-];
+import {Component, OnInit} from '@angular/core';
+import {MealPrice} from '../../../../../data/model/meal/meal-price';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../../core/environment.dev';
 
 
 @Component({
@@ -26,12 +11,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class MealPriceComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'mealType', 'mealPrice'];
+  dataSource: Array<MealPrice>;
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
+
+    this.dataSource = [{id: 1, mealType: 'DINER', mealPrice: 56.44}, {id: 2, mealType: 'BREAKFAST', mealPrice: 15.50}];
+
+    this.http.get<Array<MealPrice>>(environment.apiUrls.meals.getMealPrice).subscribe(resp => {
+      this.dataSource = resp;
+    });
   }
 
 }
