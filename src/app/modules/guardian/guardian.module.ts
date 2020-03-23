@@ -63,7 +63,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
   ],
   entryComponents: [MealComponent, DialogOverviewExampleDialog],
-  bootstrap: [MealComponent],
+  bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     MatPaginatorModule,
