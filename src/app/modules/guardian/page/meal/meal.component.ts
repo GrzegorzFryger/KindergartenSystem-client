@@ -1,11 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Child} from '../../../../data/model/child';
+
 import {HttpClient} from '@angular/common/http';
-import {UserService} from '../../../../data/service/user.service';
-import {GuardianService} from '../../../../data/service/guardian.service';
-import {Meal} from '../../../../data/model/meal';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Child} from '../../../../data/model/users/child';
+import {GuardianService} from '../../../../data/service/users/guardian.service';
 
 export interface PeriodicElement {
   name: string;

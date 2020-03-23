@@ -50,6 +50,7 @@ import { FinancesComponent } from './page/finances/finances.component';
     MatDialogModule,
     MatInputModule,
     MatTreeModule,
+    MatPaginatorModule,
   ],
 
   exports: [
