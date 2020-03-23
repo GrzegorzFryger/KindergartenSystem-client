@@ -2,6 +2,7 @@ import { environment } from '../../../core/environment.dev';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IncomingPayment } from '../../model/receivables/incoming-payment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,26 @@ export class IncomingPaymentsService {
 
   }
 
-  getAllIncomingPaymentsForChild(childId: string) {
-    return this.http.get<IncomingPayment>(
+  getAllIncomingPaymentsForChild(childId: string): Observable<Array<IncomingPayment>> {
+    return this.http.get<Array<IncomingPayment>>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForChild + `${childId}`
     );
   }
 
-  getAllIncomingPaymentsForChildFromDateToDate(childId: string, from: Date, to: Date) {
-    return this.http.get<IncomingPayment>(
+  getAllIncomingPaymentsForChildFromDateToDate(childId: string, from: Date, to: Date): Observable<Array<IncomingPayment>> {
+    return this.http.get<Array<IncomingPayment>>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForChildFromDateToDate + `${childId}` + '/' + `${from}` + '/' + `${to}`
     );
   }
 
-  getAllIncomingPaymentsForGuardian(guardianId: string) {
-    return this.http.get<IncomingPayment>(
+  getAllIncomingPaymentsForGuardian(guardianId: string): Observable<Array<IncomingPayment>> {
+    return this.http.get<Array<IncomingPayment>>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForGuardian + `${guardianId}`
     );
   }
 
-  getAllIncomingPaymentsForGuardianFromDateToDate(guardianId: string, from: Date, to: Date) {
-    return this.http.get<IncomingPayment>(
+  getAllIncomingPaymentsForGuardianFromDateToDate(guardianId: string, from: Date, to: Date): Observable<Array<IncomingPayment>> {
+    return this.http.get<Array<IncomingPayment>>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForGuardianFromDateToDate + `${guardianId}` + '/' + `${from}` + '/' + `${to}`
     );
   }

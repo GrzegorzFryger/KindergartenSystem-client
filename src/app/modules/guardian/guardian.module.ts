@@ -10,8 +10,9 @@ import {SharedModule} from '../../shared/shared.module';
 import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 import { ReceiablesComponent } from './page/receiables/receiables.component';
-import {FinancesComponent} from './page/finances/finances/finances.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -19,7 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
 import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatTreeModule} from '@angular/material/tree';
-
+import { FinancesComponent } from './page/finances/finances.component';
 
 
 @NgModule({
@@ -58,6 +59,8 @@ import {MatTreeModule} from '@angular/material/tree';
   bootstrap: [MealComponent],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class GuardianModule {

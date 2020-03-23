@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { CashPayment } from './../../model/receivables/cash-payment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -12,13 +13,13 @@ export class CashPaymentsService {
 
   }
 
-  getAllCashPayments() {
-    return this.http.get<CashPayment>(
+  getAllCashPayments(): Observable<Array<CashPayment>> {
+    return this.http.get<Array<CashPayment>>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForChild
     );
   }
 
-  getCashPayment(id: number) {
+  getCashPayment(id: number): Observable<CashPayment> {
     return this.http.get<CashPayment>(
       environment.apiUrls.receivables.getAllIncomingPaymentsForChild + `${id}`
     );

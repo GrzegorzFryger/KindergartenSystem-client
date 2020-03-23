@@ -12,15 +12,18 @@ export const environment = {
   },
   apiUrls: {
     apiUrl,
+
     authorization: apiUrl + '/api/authenticate',
     user: apiUrl + '/api/account/user',
     guardian: apiUrl + '/api/account/guardians/',
+
     receivables: {
       // Receivables Controller
       getAllIncomingPaymentsForChild: receivablesUrl + 'payments/child/',
       getAllIncomingPaymentsForChildFromDateToDate: receivablesUrl + 'payments/child/',
       getAllIncomingPaymentsForGuardian: receivablesUrl + 'payments/guardian/',
       getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardian/',
+      getAllPaymentMappingsForGuardian: receivablesUrl + 'payments/mappings/',
       importTransactions: receivablesUrl + 'transactions/import',
 
       // CashPayment Controller
@@ -39,7 +42,8 @@ export const environment = {
     },
     finances: {
       // Finances Controller
-      getBalance: financesUrl + 'balance'
+      getBalance: financesUrl + 'balance/',
+      getBalanceForAllChildren: financesUrl + 'balance/guardian/'
     }
   }
 };
