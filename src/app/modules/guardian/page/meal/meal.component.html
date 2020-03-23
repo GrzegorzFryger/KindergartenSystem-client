@@ -53,7 +53,7 @@
     </mat-card>
   </div>
 
-  <div class="row mealAdminRow">
+  <div class="row mealAdminRow" *ngIf="userCredentials.roles[0] == 'ADMINISTRATOR' ">
     <div class="mealPriceCard">
       <app-meal-price></app-meal-price>
     </div>

@@ -24,6 +24,8 @@ import { FinancesComponent } from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -57,6 +59,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
+    MatSortModule,
+    MatExpansionModule,
+    MatDividerModule,
   ],
 
   exports: [

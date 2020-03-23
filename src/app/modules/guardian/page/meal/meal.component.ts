@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Child} from '../../../../data/model/users/child';
 import {GuardianService} from '../../../../data/service/users/guardian.service';
+import {UserService} from '../../../../data/service/users/user.service';
+import {UserCredentials} from '../../../../data/model/users/user-credentials';
 
 export interface PeriodicElement {
   name: string;
@@ -51,15 +53,21 @@ export class MealComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   animal: string;
   name: string;
+  userCredentials: UserCredentials;
 
   public children: Observable<Array<Child>>;
 
-  constructor(private http: HttpClient, private guardianService: GuardianService, public dialog: MatDialog) {
+  constructor(private http: HttpClient,
+              private guardianService: GuardianService,
+              public dialog: MatDialog,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.children = this.guardianService.findAllChildren(this.guardianService.userId);
     console.log(this.children);
+
+    this.userCredentials = this.userService.getUserCredentials();
   }
 
 
@@ -85,7 +93,8 @@ export class DialogOverviewExampleDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

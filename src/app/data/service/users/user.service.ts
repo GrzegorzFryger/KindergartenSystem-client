@@ -5,6 +5,7 @@ import {User} from '../../model/users/user';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
+import {UserCredentials} from '../../model/users/user-credentials';
 
 
 @Injectable({
@@ -30,6 +31,10 @@ export class UserService {
       console.log(resp);
       return resp;
     }));
+  }
+
+  getUserCredentials(): UserCredentials {
+    return JSON.parse(localStorage.getItem('userCredentials'));
   }
 
 }
