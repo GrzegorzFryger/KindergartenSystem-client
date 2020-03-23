@@ -11,7 +11,7 @@ import {environment} from '../../../../../core/environment.dev';
 })
 export class MealPriceComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'mealType', 'mealPrice'];
+  displayedColumns: string[] = ['id', 'mealType', 'mealPrice', 'action'];
   dataSource: Array<MealPrice>;
 
   constructor(private http: HttpClient) {
