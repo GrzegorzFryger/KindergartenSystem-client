@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {UserCredentials} from '../../data/model/users/user-credentials';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environment.dev';
 import {JwtDecodeService} from './jwt-decode.service';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {SnackErrorHandlingService} from '../snack-error-handling/snack-error-handling.service';
 
+
+const UNAUTHORIZED_MESSAGE = 'Błedne dane logowania';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,10 @@ export class AuthenticationService {
   private currentUserCredSubject: BehaviorSubject<UserCredentials>;
   public currentUserCred: Observable<UserCredentials>;
 
-  constructor(private http: HttpClient, private jwtDecodeService: JwtDecodeService) {
+  constructor(private http: HttpClient,
+              private jwtDecodeService: JwtDecodeService,
+              private snackErrorHandlingService: SnackErrorHandlingService) {
+
     this.currentUserCredSubject = new BehaviorSubject<UserCredentials>(this.userCredentialsFromLocalStore);
     this.currentUserCred = this.currentUserCredSubject.asObservable();
   }
@@ -24,9 +30,13 @@ export class AuthenticationService {
       map(resp => {
         const userCredentials = this.jwtDecodeService.decode(resp.token);
         this.setCredentials(userCredentials);
-        console.log('asd');
         return userCredentials;
-      }));
+      }),
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar(UNAUTHORIZED_MESSAGE);
+        return throwError(err);
+      })
+    );
   }
 
   logout() {

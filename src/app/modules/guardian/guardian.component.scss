@@ -54,7 +54,8 @@
 
       .context-main {
         flex-grow: 1;
-        flex-basis: 68%;
+        flex-shrink: 1;
+        flex-basis: 73%;
         height: 100%;
         padding: 1%;
         background-color: #F9F9FB;
@@ -70,6 +71,7 @@
             flex-grow: 1;
             flex-shrink: 1;
             order: 1;
+            margin-bottom: 2%;
           }
 
           .components {
@@ -77,12 +79,14 @@
             flex-grow: 1;
             width: 100%;
             order: 2;
+            overflow: auto;
+
           }
         }
       }
 
       .context-right {
-        flex-basis: 20%;
+        flex-basis: 15%;
         height: 100%;
 
       }
@@ -90,3 +94,6 @@
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
