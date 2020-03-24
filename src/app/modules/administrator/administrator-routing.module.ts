@@ -1,8 +1,9 @@
-import { TransactionsComponent } from './receivables/transactions/transactions.component';
-import { CashPaymentsComponent } from './receivables/cash-payments/cash-payments.component';
-import { AdministratorComponent } from './administrator.component';
+import {AdministratorComponent} from './administrator.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {CashPaymentsComponent} from './receivables/cash-payments/cash-payments.component';
+import {TransactionsComponent} from './receivables/transactions/transactions.component';
+import {ReceivablesComponent} from './receivables/receivables.component';
 
 
 const routes: Routes = [
@@ -11,12 +12,18 @@ const routes: Routes = [
     component: AdministratorComponent,
     children: [
       {
-        path: 'cashPayments',
-        component: CashPaymentsComponent,
-      },
-      {
-        path: 'transactions',
-        component: TransactionsComponent,
+        path: 'receivables',
+        component: ReceivablesComponent,
+        children: [
+          {
+            path: 'cash-payments',
+            component: CashPaymentsComponent,
+          },
+          {
+            path: 'transactions',
+            component: TransactionsComponent,
+          }
+        ]
       }
     ]
   }
@@ -26,4 +33,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdministratorRoutingModule { }
+export class AdministratorRoutingModule {
+}
