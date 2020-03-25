@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
+
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../core/environment.dev';
+import {MealDictionary} from '../../../../data/model/meal/meal-dictionary';
+import {environment} from '../../../../core/environment.dev';
+
 
 
 @Component({

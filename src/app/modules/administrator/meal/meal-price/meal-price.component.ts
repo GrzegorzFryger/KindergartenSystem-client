@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MealPrice} from '../../../../../data/model/meal/meal-price';
+
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../core/environment.dev';
+import {environment} from '../../../../core/environment.dev';
+import {MealPrice} from '../../../../data/model/meal/meal-price';
+
 
 
 @Component({

@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CashPaymentsComponent} from './receivables/cash-payments/cash-payments.component';
 import {TransactionsComponent} from './receivables/transactions/transactions.component';
 import {ReceivablesComponent} from './receivables/receivables.component';
+import {MealComponent} from './meal/meal.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,11 @@ const routes: Routes = [
             component: TransactionsComponent,
           }
         ]
-      }
+      },
+      {
+        path: 'meal',
+        component: MealComponent,
+      },
     ]
   }
 ];

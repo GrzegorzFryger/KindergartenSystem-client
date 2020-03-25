@@ -1,0 +1,142 @@
+.mat-card {
+  padding: 0;
+  margin-top: 20px;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+
+  .mat-card-content {
+    padding: 16px;
+    width: 100%;
+
+    .cardContent {
+
+      .mat-icon {
+        font-size: 22px;
+        padding-left: 3px;
+        color: #606FEE;
+        cursor: pointer;
+      }
+    }
+  }
+
+
+  .mat-card-actions {
+    padding: 0 21px 20px 16px;
+    float: right;
+
+    .mat-button {
+      background-color: #EDEEF4;
+      color: #606FEE;
+    }
+  }
+}
+
+.childDetailsCard {
+  width: 70%;
+  margin-left: 15%;
+
+  .childDetailsCardContent {
+
+    .childImage {
+      float: left;
+      text-align: center;
+    }
+
+    .tabContent {
+      margin-top:20px;
+
+      span {
+        font-weight: 400;
+      }
+
+      .mat-divider {
+        width: 50%;
+        margin-left: 20px;
+        margin-top: 10px;
+
+      }
+    }
+
+    .mat-expansion-panel-header {
+      border: 1px solid #e8e8e8;
+    }
+
+    .mat-icon {
+      margin-right: 10px;
+    }
+
+    .childImage img {
+      width: 90%;
+      height: auto;
+      vertical-align: middle;
+      max-width: 100px;
+    }
+
+    .childDetails {
+      border-left: 1px solid #bdc3c7;
+
+      .childDetailsHeader {
+        margin-bottom: 10px;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      .mat-expansion-panel:not([class*='mat-elevation-z']) {
+        box-shadow: none;
+      }
+
+    }
+  }
+}
+
+
+.mealCardHeader {
+  background-color: #EDEEF4;
+  padding: -10px;
+  border-radius: 10px 10px 0 0;
+
+
+  .mat-card-title {
+    color: #606FEE;
+    padding: 16px;
+  }
+}
+
+.mealPriceCard {
+  float: left;
+  width: 50%;
+}
+
+.mealDictionaryCard {
+  float: right;
+  width: 50%;
+}
+
+.mealAdminRow {
+  margin-top: 20px;
+}
+
+
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 200px;
+}

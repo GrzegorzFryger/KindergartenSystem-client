@@ -17,8 +17,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
-import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
-import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { FinancesComponent } from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
@@ -33,12 +31,10 @@ import {MatDividerModule} from '@angular/material/divider';
     ChildrenComponent,
     DashboardComponent,
     GuardianComponent,
-    MealComponent,
     ReceiablesComponent,
     FinancesComponent,
+    MealComponent,
     DialogOverviewExampleDialog,
-    MealPriceComponent,
-    MealDictionaryComponent
   ],
 
   imports: [
