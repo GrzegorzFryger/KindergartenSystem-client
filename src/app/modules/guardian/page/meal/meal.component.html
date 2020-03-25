@@ -19,7 +19,7 @@
 
             <ng-container matColumnDef="meaPrice">
               <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł</mat-cell>
             </ng-container>
 
 
@@ -79,16 +79,60 @@
         <mat-card-content>
           <div class="cardContent">
 
+            <div class="container">
+              <div class="row">
+                <div class="col col-3">
+                  <div class="childImage">
 
-            <div class="childImage">
+                    <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
+                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png"/>
 
-              <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png" height="137" width="137"/>
-              <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png" height="139" width="139"/>
+                  </div>
+                </div>
+                <div class="col col-9 childDetails">
+                  <div class="childDetailsHeader">
+                    <span>{{childDetails.name}} {{childDetails.name}}</span>
+                  </div>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Personal data
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Type your name and age
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <mat-form-field>
+                        <mat-label>First name</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <mat-label>Age</mat-label>
+                        <input matInput type="number" min="1">
+                      </mat-form-field>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+
+
+              </div>
 
             </div>
-            <div class="childDetails">
-              asdasd
-            </div>
+
 
           </div>
         </mat-card-content>

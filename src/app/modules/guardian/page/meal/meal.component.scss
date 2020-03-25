@@ -33,17 +33,25 @@
 
   .cardContent {
 
-
     .childImage {
-      float: left;
-      width: 25%;
-      padding: 16px 0 16px 16px;
-      margin-bottom: 14px;
-      border-right: 1px solid #bdc3c7;
+      float:left;
+    }
+
+    .childImage img {
+      width: 90%;
+      height: auto;
     }
 
     .childDetails {
-      padding: 16px ;
+      border-left: 1px solid #bdc3c7;
+
+      .childDetailsHeader {
+        margin-bottom: 10px;
+        span {
+          font-weight: 500;
+        }
+      }
+
 
     }
   }
