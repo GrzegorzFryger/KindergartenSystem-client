@@ -12,48 +12,48 @@
 
 
             <ng-container matColumnDef="id">
-              <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="meaPrice">
-              <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealPrice}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="mealFromDate">
-              <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Data początku</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.mealFromDate}} </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="mealToDate">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Data końca</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.mealToDate}} </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="mealStatus">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.mealStatus}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="mealType">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dietType">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.dietType}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="childID">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef> Dziecko</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <mat-icon>child_care</mat-icon>
+                <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
               </mat-cell>
             </ng-container>
 
@@ -67,6 +67,24 @@
         <button mat-button (click)="openDialog()" color="primary">Dodaj kolejny</button>
       </mat-card-actions>
     </mat-card>
+  </div>
+
+
+  <div class="childDetailsCard" *ngIf="openChildDetailsTable">
+    <div class="row">
+      <mat-card class="childDetailsCardContent">
+        <mat-card-header class="mealCardHeader">
+          <mat-card-title>Szczegóły dziecka</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="cardContent">
+
+
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
   </div>
 
   <div class="row mealAdminRow" *ngIf="userCredentials.roles[0] == 'ADMINISTRATOR' ">

@@ -38,6 +38,7 @@ export class MealComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   dataSource: Array<Meal>;
+  openChildDetailsTable = false;
   animal: string;
   name: string;
   userCredentials: UserCredentials;
@@ -73,6 +74,10 @@ export class MealComponent implements OnInit {
       console.log('The dialog was closed');
       this.animal = result;
     });
+  }
+
+  openChildDetails(childID: string): void {
+    this.openChildDetailsTable = !this.openChildDetailsTable;
   }
 }
 
