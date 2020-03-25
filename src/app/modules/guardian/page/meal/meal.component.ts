@@ -66,6 +66,8 @@ export class MealComponent implements OnInit {
       this.dataSource = resp;
       console.log(resp);
     });
+
+    this.openChildDetails('bf96c15d-1e5b-4915-ad9e-2c09810c2ca6');
   }
 
 

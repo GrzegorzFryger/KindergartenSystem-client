@@ -70,7 +70,7 @@
   </div>
 
 
-  <div class="childDetailsCard" *ngIf="!openChildDetailsTable">
+  <div class="childDetailsCard" *ngIf="openChildDetailsTable">
     <div class="row">
       <mat-card class="childDetailsCardContent">
         <mat-card-header class="mealCardHeader">
@@ -97,33 +97,41 @@
                     <mat-expansion-panel>
                       <mat-expansion-panel-header>
                         <mat-panel-title>
-                          Personal data
+                          <mat-icon>account_circle</mat-icon>
+
                         </mat-panel-title>
                         <mat-panel-description>
-                          Type your name and age
+                          Dane osobowe
                         </mat-panel-description>
                       </mat-expansion-panel-header>
 
-                      <mat-form-field>
-                        <mat-label>First name</mat-label>
-                        <input matInput>
-                      </mat-form-field>
+                      <div class="tabContent">
 
-                      <mat-form-field>
-                        <mat-label>Age</mat-label>
-                        <input matInput type="number" min="1">
-                      </mat-form-field>
+                        <h4>Pesel : <span> {{childDetails.pesel}}</span></h4>
+                        <h4>Data urodzenia : <span> {{childDetails.dateOfBirth}}</span></h4>
+                        <mat-divider></mat-divider>
+                        <h4>Data rozpoczęcia : <span> {{childDetails.startDate}}</span></h4>
+                        <h4>Data zakończenia : <span> {{childDetails.endDate}}</span></h4>
+                      </div>
+
                     </mat-expansion-panel>
                     <mat-expansion-panel>
                       <mat-expansion-panel-header>
                         <mat-panel-title>
-                          Self aware panel
+                          <mat-icon>home</mat-icon>
                         </mat-panel-title>
                         <mat-panel-description>
-
+                          Dane adresowe
                         </mat-panel-description>
                       </mat-expansion-panel-header>
-                      <p>I'm visible because I am open</p>
+
+                      <div class="tabContent">
+
+                        <h4>Kod pocztowy : <span> {{childDetails.postalCode}}</span></h4>
+                        <h4>Miasto : <span> {{childDetails.city}}</span></h4>
+                        <h4>Ulica : <span> {{childDetails.streetNumber}}</span></h4>
+                      </div>
+
                     </mat-expansion-panel>
                   </mat-accordion>
                 </div>
