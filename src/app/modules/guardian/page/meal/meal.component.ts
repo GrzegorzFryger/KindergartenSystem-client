@@ -9,6 +9,7 @@ import {UserService} from '../../../../data/service/users/user.service';
 import {UserCredentials} from '../../../../data/model/users/user-credentials';
 import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
+import {AccountService} from '../../../../data/service/account/account.service';
 
 export interface PeriodicElement {
   name: string;
@@ -39,9 +40,12 @@ export class MealComponent implements OnInit {
   displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   dataSource: Array<Meal>;
   openChildDetailsTable = false;
+  userCredentials: UserCredentials;
+  childDetails: Child = new Child();
+
+
   animal: string;
   name: string;
-  userCredentials: UserCredentials;
 
   public children: Observable<Array<Child>>;
 
@@ -49,7 +53,8 @@ export class MealComponent implements OnInit {
               private guardianService: GuardianService,
               public dialog: MatDialog,
               private userService: UserService,
-              private mealService: MealService) {
+              private mealService: MealService,
+              private accountService: AccountService) {
   }
 
   ngOnInit(): void {
@@ -78,6 +83,9 @@ export class MealComponent implements OnInit {
 
   openChildDetails(childID: string): void {
     this.openChildDetailsTable = !this.openChildDetailsTable;
+    this.accountService.getChildById(childID).subscribe(resp => {
+      this.childDetails = resp;
+    });
   }
 }
 
