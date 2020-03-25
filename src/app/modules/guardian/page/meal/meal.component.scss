@@ -7,6 +7,13 @@
   .mat-card-content {
     padding: 16px;
     width: 100%;
+
+    .mat-icon {
+      font-size: 22px;
+      padding-left: 3px;
+      color: #606FEE;
+      cursor: pointer;
+    }
   }
 
   .mat-card-actions {

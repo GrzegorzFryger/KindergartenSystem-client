@@ -7,6 +7,8 @@ import {Child} from '../../../../data/model/users/child';
 import {GuardianService} from '../../../../data/service/users/guardian.service';
 import {UserService} from '../../../../data/service/users/user.service';
 import {UserCredentials} from '../../../../data/model/users/user-credentials';
+import {Meal} from '../../../../data/model/meal/meal';
+import {MealService} from '../../../../data/service/meal/meal.service';
 
 export interface PeriodicElement {
   name: string;
@@ -21,25 +23,10 @@ export interface DialogData {
   name: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', symbol1: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He', symbol1: 'H'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', symbol1: 'H'},
+const ELEMENT_DATA: Meal[] = [
+  {id: 1, mealPrice: 15.5, mealFromDate: '2020-01-27T12:00:00', mealToDate: '2020-08-27T00:00:00', mealStatus: 'ACTIVE',
+    mealType: 'BREAKFAST', dietType: 'VEGETARIAN', childID: '0560d77d-e0db-4914-ae4a-4f39690ecb2d'
+  },
 ];
 
 @Component({
@@ -49,8 +36,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class MealComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'symbol1'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
+  dataSource: Array<Meal>;
   animal: string;
   name: string;
   userCredentials: UserCredentials;
@@ -60,14 +47,19 @@ export class MealComponent implements OnInit {
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
               public dialog: MatDialog,
-              private userService: UserService) {
+              private userService: UserService,
+              private mealService: MealService) {
   }
 
   ngOnInit(): void {
     this.children = this.guardianService.findAllChildren(this.guardianService.userId);
     console.log(this.children);
-
     this.userCredentials = this.userService.getUserCredentials();
+
+    this.mealService.getAllMeals().subscribe(resp => {
+      this.dataSource = resp;
+      console.log(resp);
+    });
   }
 
 

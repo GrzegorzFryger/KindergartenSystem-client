@@ -54,6 +54,7 @@ export const environment = {
       getMealType: mealDictionaryUrl + 'mealType',
       getDietType: mealDictionaryUrl + 'dietType',
       getMealPrice: mealPriceUrl,
+      getAllMeals: mealUrl,
     }
   }
 };
