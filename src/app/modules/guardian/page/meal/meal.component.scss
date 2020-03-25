@@ -18,7 +18,7 @@
 
   .mat-card-actions {
     padding: 0 21px 20px 16px;
-    float:right;
+    float: right;
 
     .mat-button {
       background-color: #EDEEF4;
@@ -30,6 +30,23 @@
 .childDetailsCard {
   width: 70%;
   margin-left: 15%;
+
+  .cardContent {
+
+
+    .childImage {
+      float: left;
+      width: 25%;
+      padding: 16px 0 16px 16px;
+      margin-bottom: 14px;
+      border-right: 1px solid #bdc3c7;
+    }
+
+    .childDetails {
+      padding: 16px ;
+
+    }
+  }
 }
 
 
@@ -51,14 +68,13 @@
 }
 
 .mealDictionaryCard {
-  float:right;
+  float: right;
   width: 50%;
 }
 
 .mealAdminRow {
   margin-top: 20px;
 }
-
 
 
 /* Structure */

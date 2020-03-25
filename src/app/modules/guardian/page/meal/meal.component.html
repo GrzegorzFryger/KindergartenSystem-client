@@ -70,7 +70,7 @@
   </div>
 
 
-  <div class="childDetailsCard" *ngIf="openChildDetailsTable">
+  <div class="childDetailsCard" *ngIf="!openChildDetailsTable">
     <div class="row">
       <mat-card class="childDetailsCardContent">
         <mat-card-header class="mealCardHeader">
@@ -79,7 +79,16 @@
         <mat-card-content>
           <div class="cardContent">
 
-            {{childDetails.id}}
+
+            <div class="childImage">
+
+              <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png" height="137" width="137"/>
+              <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png" height="139" width="139"/>
+
+            </div>
+            <div class="childDetails">
+              asdasd
+            </div>
 
           </div>
         </mat-card-content>
