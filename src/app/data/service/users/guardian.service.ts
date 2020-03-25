@@ -7,6 +7,8 @@ import {UserService} from './user.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
 
+const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,24 +17,25 @@ export class GuardianService {
   public children: Observable<Array<Child>>;
   public userId: string;
 
-  constructor(private http: HttpClient, private userService: UserService, private errorhadlinh: SnackErrorHandlingService) {
+  constructor(private http: HttpClient, private userService: UserService, private errorHandlingService: SnackErrorHandlingService) {
     this.childrenSub = new Subject<Array<Child>>();
     this.children = this.childrenSub.asObservable();
 
     this.userService.currentUser.subscribe(user => {
       this.findAllChildren(user.id).subscribe(children => {
-          this.userId = user.id;
-          this.childrenSub.next(children);
-        });
+        this.userId = user.id;
+        this.childrenSub.next(children);
+      });
     });
   }
 
   public findAllChildren(userId: string): Observable<Array<Child>> {
-
-    return this.http.get<Array<Child>>(environment.apiUrls.guardian + `${userId}` + '/children').pipe(catchError(err => {
-      this.errorhadlinh.openSnackBar();
-      return throwError(err);
-    }));
+    return this.http.get<Array<Child>>(environment.apiUrls.guardian + `${userId}` + '/children')
+      .pipe(
+        catchError(err => {
+          this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
+          return throwError(err);
+        }));
   }
 
 

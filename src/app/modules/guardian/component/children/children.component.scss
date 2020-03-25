@@ -5,7 +5,7 @@
   float: right;
 
   .mat-card {
-    flex-grow: 0;
+    flex-grow: 1;
     flex-shrink: 1;
     border-radius: 10px;
 
@@ -21,13 +21,21 @@
       .item {
         flex-grow: 1;
         flex-shrink: 1;
-        padding-right: 5%;
-        padding-left: 5%;
         align-self: center;
+        margin: 0 10px 0 10px;
+
+        .mat-form-field-wrapper {
+          padding-bottom: 0;
+        }
+
+        .mat-form-field-underline {
+          display: none;
+        }
 
 
         p {
-          white-space: nowrap
+          white-space: nowrap;
+          margin-bottom: 0;
         }
       }
 
