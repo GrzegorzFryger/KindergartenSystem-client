@@ -4,6 +4,7 @@ const financesUrl = apiUrl + '/api/finances/';
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
+const accountUrl = apiUrl + '/api/account/';
 
 export const environment = {
   production: false,
@@ -55,6 +56,9 @@ export const environment = {
       getDietType: mealDictionaryUrl + 'dietType',
       getMealPrice: mealPriceUrl,
       getAllMeals: mealUrl,
+    },
+    account: {
+      getChildById: accountUrl + 'child/'
     }
   }
 };
