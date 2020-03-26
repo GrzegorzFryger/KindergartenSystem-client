@@ -24,8 +24,6 @@ export class UserService {
 
   getByEmail(email: string): Observable<User> {
     const params = new HttpParams().set('email', email);
-    this.http.get(environment.apiUrls + `${email}`);
-
     return this.http.get<User>(environment.apiUrls.user, {params}).pipe(map(resp => {
       console.log(resp);
       return resp;
