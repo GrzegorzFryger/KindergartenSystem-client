@@ -7,6 +7,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { UserService } from 'src/app/data/service/users/user.service';
+import { User } from 'src/app/data/model/users/user';
 
 const ERROR_MESSAGE = 'error';
 
@@ -24,11 +26,24 @@ export class ReceiablesComponent implements OnInit, AfterViewInit {
   public incomingPaymentsForAllChildren: Observable<Array<IncomingPayment>>;
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
+              private userService: UserService,
               private snackErrorHandlingService: SnackErrorHandlingService) { }
 
   ngOnInit(): void {
+    this.userService.currentUser.subscribe(u => {
+      this.getIncomingPayments(u);
+    });
+    this.initializeDataSorting();
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeData();
+    this.initializePaginator();
+  }
+
+  private getIncomingPayments(u: User) {
     this.incomingPaymentsForAllChildren = this.incomingPaymentsService
-    .getAllIncomingPaymentsForGuardian('c4029244-e8ff-4328-8658-28964dda3c4e')
+    .getAllIncomingPaymentsForGuardian(u.id)
     .pipe(
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
@@ -39,16 +54,21 @@ export class ReceiablesComponent implements OnInit, AfterViewInit {
         return response;
       })
     );
+  }
 
+  private initializeDataSorting(): void {
     this.dataSource.sort = this.sort;
   }
 
-  ngAfterViewInit() {
+  private initializeData(): void {
     this.incomingPaymentsForAllChildren.subscribe(
       payments => {
         this.dataSource.data = payments;
       }
     );
+  }
+
+  private initializePaginator(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
   }

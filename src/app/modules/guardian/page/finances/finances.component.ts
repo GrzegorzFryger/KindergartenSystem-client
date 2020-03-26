@@ -8,6 +8,7 @@ import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
+import { User } from 'src/app/data/model/users/user';
 
 const ERROR_MESSAGE = 'error';
 
@@ -26,39 +27,43 @@ export class FinancesComponent implements OnInit {
               private transactionMappingService: TransactionMappingService,
               private userService: UserService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
-
   }
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(u => {
-
-      this.balanceForAllChildren = this.balanceService
-        .getBalanceForAllChildren(u.id)
-        .pipe(
-          catchError(err => {
-            this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-            return throwError(err);
-          }),
-          map(response => {
-            console.log(response);
-            this.isBalancePositive = response.balance >= 0;
-            return response;
-          })
-        );
-
-      this.transactionMappings = this.transactionMappingService
-        .getAllPaymentMappingsForGuardian(u.id)
-        .pipe(
-          catchError(err => {
-            this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-            return throwError(err);
-          }),
-          map(response => {
-            console.log(response);
-            return response;
-          })
-        );
+      this.initializeBalance(u);
+      this.initializeTransactionMappings(u);
     });
   }
 
+  private initializeBalance(u: User): void {
+    this.balanceForAllChildren = this.balanceService
+    .getBalanceForAllChildren(u.id)
+    .pipe(
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        return throwError(err);
+      }),
+      map(response => {
+        console.log(response);
+        this.isBalancePositive = response.balance >= 0;
+        return response;
+      })
+    );
+  }
+
+  private initializeTransactionMappings(u: User): void {
+    this.transactionMappings = this.transactionMappingService
+    .getAllPaymentMappingsForGuardian(u.id)
+    .pipe(
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        return throwError(err);
+      }),
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    );
+  }
 }
