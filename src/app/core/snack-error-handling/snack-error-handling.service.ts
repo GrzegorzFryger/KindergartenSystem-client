@@ -10,9 +10,9 @@ export class SnackErrorHandlingService {
 
   constructor(private snackBar: MatSnackBar) {}
 
-  openSnackBar() {
+  openSnackBar(errorMessage: string) {
     this.snackBar.openFromComponent(SnackErrorHandlingComponent, {
-      duration: this.durationInSeconds * 1000,
+      duration: this.durationInSeconds * 1000, data: errorMessage
     });
   }
 }

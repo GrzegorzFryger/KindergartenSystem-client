@@ -8,6 +8,8 @@ import { catchError, map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
+const ERROR_MESSAGE = 'error';
+
 @Component({
   selector: 'app-receiables',
   templateUrl: './receiables.component.html',
@@ -29,7 +31,7 @@ export class ReceiablesComponent implements OnInit, AfterViewInit {
     .getAllIncomingPaymentsForGuardian('c4029244-e8ff-4328-8658-28964dda3c4e')
     .pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar();
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {

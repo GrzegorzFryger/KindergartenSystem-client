@@ -8,6 +8,8 @@ import { Balance } from 'src/app/data/model/finances/balance';
 import { BalanceService } from 'src/app/data/service/finances/balance.service';
 import { TransactionMapping } from 'src/app/data/model/receivables/transaction-mapping';
 
+const ERROR_MESSAGE = 'error';
+
 @Component({
   selector: 'app-finances',
   templateUrl: './finances.component.html',
@@ -29,7 +31,7 @@ export class FinancesComponent implements OnInit {
     .getBalanceForAllChildren('c4029244-e8ff-4328-8658-28964dda3c4e')
     .pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar();
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {
@@ -43,7 +45,7 @@ export class FinancesComponent implements OnInit {
     .getAllPaymentMappingsForGuardian('c4029244-e8ff-4328-8658-28964dda3c4e')
     .pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar();
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {
