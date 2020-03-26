@@ -3,6 +3,7 @@ const receivablesUrl = apiUrl + '/api/receivables/';
 const financesUrl = apiUrl + '/api/finances/';
 const calendarUrl = apiUrl + '/api/calendar/';
 
+
 export const environment = {
   production: false,
   nameLocalStorageVariableAuth: 'userCredentials',
@@ -46,14 +47,23 @@ export const environment = {
       getBalanceForAllChildren: financesUrl + 'balance/guardian/'
     },
     calendar: {
+      // Absence
       findAbsence: calendarUrl + 'absence/',
       createAbsence: calendarUrl + 'absence',
       updateAbsence: calendarUrl + 'absence',
       deleteAbsence: calendarUrl + 'absence/',
       getAllAbsencesByChildId: calendarUrl + 'absences/child/',
       getAllAbsencesByDate: calendarUrl + 'absences/',
-      getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/child'
-    }
+      getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/child',
+
+      // Day off
+      findDayOffWork: calendarUrl + 'dayoff/',
+      findAllDaysOffWork: calendarUrl + 'daysoff/',
+      createDayOffWork: calendarUrl + 'dayoff',
+      updateDayOffWork: calendarUrl + 'dayoff',
+      deleteDayOffWork: calendarUrl + 'dayoff/',
+    },
+
   }
 };
 
