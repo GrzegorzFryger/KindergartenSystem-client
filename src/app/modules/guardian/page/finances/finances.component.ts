@@ -1,13 +1,13 @@
-import { UserService } from './../../../../data/service/users/user.service';
-import { TransactionMappingService } from './../../../../data/service/receivables/transaction-mapping.service';
+import {UserService} from './../../../../data/service/users/user.service';
+import {TransactionMappingService} from './../../../../data/service/receivables/transaction-mapping.service';
 
-import { Component, OnInit } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { SnackErrorHandlingService } from 'src/app/core/snack-error-handling/snack-error-handling.service';
-import { Balance } from 'src/app/data/model/finances/balance';
-import { BalanceService } from 'src/app/data/service/finances/balance.service';
-import { TransactionMapping } from 'src/app/data/model/receivables/transaction-mapping';
+import {Component, OnInit} from '@angular/core';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {Balance} from 'src/app/data/model/finances/balance';
+import {BalanceService} from 'src/app/data/service/finances/balance.service';
+import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
 
 const ERROR_MESSAGE = 'error';
 
@@ -30,35 +30,35 @@ export class FinancesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(u => this.currentUserId = u.id);
-    console.log('Loading finances for user: ' + this.currentUserId);
+    this.userService.currentUser.subscribe(u => {
 
-    this.balanceForAllChildren = this.balanceService
-    .getBalanceForAllChildren(this.currentUserId)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        this.isBalancePositive = response.balance >= 0;
-        return response;
-      })
-    );
+      this.balanceForAllChildren = this.balanceService
+        .getBalanceForAllChildren(u.id)
+        .pipe(
+          catchError(err => {
+            this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+            return throwError(err);
+          }),
+          map(response => {
+            console.log(response);
+            this.isBalancePositive = response.balance >= 0;
+            return response;
+          })
+        );
 
-    this.transactionMappings = this.transactionMappingService
-    .getAllPaymentMappingsForGuardian(this.currentUserId)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
+      this.transactionMappings = this.transactionMappingService
+        .getAllPaymentMappingsForGuardian(u.id)
+        .pipe(
+          catchError(err => {
+            this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+            return throwError(err);
+          }),
+          map(response => {
+            console.log(response);
+            return response;
+          })
+        );
+    });
   }
 
 }
