@@ -1,3 +1,4 @@
+import { UserService } from './../../../../data/service/users/user.service';
 import { TransactionMappingService } from './../../../../data/service/receivables/transaction-mapping.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -16,19 +17,24 @@ const ERROR_MESSAGE = 'error';
   styleUrls: ['./finances.component.scss']
 })
 export class FinancesComponent implements OnInit {
+  public currentUserId: string;
   public balanceForAllChildren: Observable<Balance>;
   public transactionMappings: Observable<Array<TransactionMapping>>;
   public isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
+              private userService: UserService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
 
   }
 
   ngOnInit(): void {
+    this.userService.currentUser.subscribe(u => this.currentUserId = u.id);
+    console.log('Loading finances for user: ' + this.currentUserId);
+
     this.balanceForAllChildren = this.balanceService
-    .getBalanceForAllChildren('c4029244-e8ff-4328-8658-28964dda3c4e')
+    .getBalanceForAllChildren(this.currentUserId)
     .pipe(
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
@@ -42,7 +48,7 @@ export class FinancesComponent implements OnInit {
     );
 
     this.transactionMappings = this.transactionMappingService
-    .getAllPaymentMappingsForGuardian('c4029244-e8ff-4328-8658-28964dda3c4e')
+    .getAllPaymentMappingsForGuardian(this.currentUserId)
     .pipe(
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
