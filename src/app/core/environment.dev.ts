@@ -6,6 +6,7 @@ const calendarUrl = apiUrl + '/api/calendar/';
 
 export const environment = {
   production: false,
+  locale: 'pl-PL',
   nameLocalStorageVariableAuth: 'userCredentials',
   nameLocalStorageVariableUser: 'currentUser',
   routes: {
@@ -64,6 +65,7 @@ export const environment = {
       deleteDayOffWork: calendarUrl + 'dayoff/',
     },
 
-  }
+  },
+
 };
 

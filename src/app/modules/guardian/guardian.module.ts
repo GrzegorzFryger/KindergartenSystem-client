@@ -11,19 +11,22 @@ import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.compo
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import { ReceiablesComponent } from './page/receiables/receiables.component';
+import {ReceiablesComponent} from './page/receiables/receiables.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
-import { MealPriceComponent } from './page/meal/meal-price/meal-price.component';
-import { MealDictionaryComponent } from './page/meal/meal-dictionary/meal-dictionary.component';
+import {MealPriceComponent} from './page/meal/meal-price/meal-price.component';
+import {MealDictionaryComponent} from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatTreeModule} from '@angular/material/tree';
-import { FinancesComponent } from './page/finances/finances.component';
+import {FinancesComponent} from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {AbsenceComponent} from './page/absence/absence.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {environment} from '../../core/environment.dev';
 
 
 @NgModule({
@@ -36,7 +39,8 @@ import {MatIconModule} from '@angular/material/icon';
     FinancesComponent,
     DialogOverviewExampleDialog,
     MealPriceComponent,
-    MealDictionaryComponent
+    MealDictionaryComponent,
+    AbsenceComponent
   ],
 
   imports: [
@@ -57,17 +61,17 @@ import {MatIconModule} from '@angular/material/icon';
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
 
   exports: [
     MatInputModule,
   ],
-  entryComponents: [MealComponent, DialogOverviewExampleDialog],
-  bootstrap: [],
+  bootstrap: [GuardianComponent],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
-    MatPaginatorModule,
-    MatSortModule
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    {provide: MAT_DATE_LOCALE, useValue: environment.locale}
   ]
 })
 export class GuardianModule {
