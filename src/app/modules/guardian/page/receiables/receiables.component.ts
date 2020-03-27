@@ -9,14 +9,12 @@ import {MatSort} from '@angular/material/sort';
 import {UserService} from 'src/app/data/service/users/user.service';
 import {catchError} from 'rxjs/operators';
 
-const ERROR_MESSAGE = 'error';
-
 @Component({
   selector: 'app-receiables',
   templateUrl: './receiables.component.html',
   styleUrls: ['./receiables.component.scss']
 })
-export class ReceiablesComponent implements OnInit, AfterViewInit {
+export class ReceiablesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -34,14 +32,12 @@ export class ReceiablesComponent implements OnInit, AfterViewInit {
     this.userService.currentUser.subscribe(user => {
       this.incomingPaymentsService.getAllIncomingPaymentsForGuardian(user.id).subscribe(resp => {
         this.setUpDataTable(resp);
-      }, catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('can not find..');
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to find user');
         return throwError(err);
       }));
     });
-  }
-
-  ngAfterViewInit(): void {
   }
 
   private setUpDataTable(incomingPayment: Array<IncomingPayment>): void {
@@ -50,6 +46,4 @@ export class ReceiablesComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
   }
-
-
 }

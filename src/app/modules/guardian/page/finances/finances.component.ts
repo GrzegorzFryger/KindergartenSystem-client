@@ -10,7 +10,7 @@ import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
 import { User } from 'src/app/data/model/users/user';
 
-const ERROR_MESSAGE = 'error';
+const ERROR_MESSAGE = 'Finances component failed to perform operation';
 
 @Component({
   selector: 'app-finances',
