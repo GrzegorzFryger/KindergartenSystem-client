@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Meal} from '../../model/meal/meal';
 import {environment} from '../../../core/environment.dev';
+import {MealDictionary} from '../../model/meal/meal-dictionary';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,12 @@ export class MealService {
 
   getAllMeals(): Observable<Array<Meal>> {
     return this.http.get<Array<Meal>>(environment.apiUrls.meals.getAllMeals);
+  }
+
+  getDietType(): Observable<Array<MealDictionary>> {
+    return this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getDietType);
+  }
+  getMealType(): Observable<Array<MealDictionary>> {
+    return this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getMealType);
   }
 }

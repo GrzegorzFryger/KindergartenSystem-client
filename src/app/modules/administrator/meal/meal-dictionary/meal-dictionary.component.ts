@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MealDictionary} from '../../../../data/model/meal/meal-dictionary';
 import {environment} from '../../../../core/environment.dev';
+import {MealService} from '../../../../data/service/meal/meal.service';
 
 
 
@@ -16,14 +17,15 @@ export class MealDictionaryComponent implements OnInit {
   mealTypes: Array<MealDictionary>;
   dietTypes: Array<MealDictionary>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private mealService: MealService) { }
 
   ngOnInit(): void {
-    this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getDietType).subscribe( resp => {
+    this.mealService.getDietType().subscribe( resp => {
       this.dietTypes = resp;
     });
 
-    this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getMealType).subscribe( resp => {
+    this.mealService.getMealType().subscribe( resp => {
       this.mealTypes = resp;
     });
 
