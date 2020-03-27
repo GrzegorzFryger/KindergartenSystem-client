@@ -10,6 +10,7 @@ import {UserCredentials} from '../../../../data/model/users/user-credentials';
 import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
 import {AccountService} from '../../../../data/service/account/account.service';
+import {AuthenticationService} from '../../../../core/auth/authentication.service';
 
 export interface PeriodicElement {
   name: string;
@@ -52,7 +53,7 @@ export class MealComponent implements OnInit {
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
               public dialog: MatDialog,
-              private userService: UserService,
+              private authenticationService: AuthenticationService,
               private mealService: MealService,
               private accountService: AccountService) {
   }
@@ -60,7 +61,7 @@ export class MealComponent implements OnInit {
   ngOnInit(): void {
     this.children = this.guardianService.findAllChildren(this.guardianService.userId);
     console.log(this.children);
-    this.userCredentials = this.userService.getUserCredentials();
+    this.userCredentials = this.authenticationService.userCredentials;
 
     this.mealService.getAllMeals().subscribe(resp => {
       this.dataSource = resp;

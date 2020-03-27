@@ -33,8 +33,5 @@ export class UserService {
     }));
   }
 
-  getUserCredentials(): UserCredentials {
-    return JSON.parse(localStorage.getItem('userCredentials'));
-  }
 
 }
