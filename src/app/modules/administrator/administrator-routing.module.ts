@@ -3,7 +3,7 @@ import { TransactionsComponent } from './page/receivables/transactions/transacti
 import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ReceivablesComponent} from './receivables/receivables.component';
+import {ReceivablesComponent} from './page/receivables/receivables.component';
 
 
 const routes: Routes = [
