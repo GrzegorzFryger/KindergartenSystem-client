@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../core/environment.dev';
 import {Absence} from '../../model/absence/absence';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

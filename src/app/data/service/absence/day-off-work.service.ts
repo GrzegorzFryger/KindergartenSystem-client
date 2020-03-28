@@ -28,6 +28,7 @@ export class DayOffWorkService {
   }
 
   public  findAllDaysOffWork(): Observable<Array<DayOffWork>> {
+    console.log('call find all');
     return this.http.get<Array<DayOffWork>>(environment.apiUrls.calendar.findAllDaysOffWork);
   }
 }

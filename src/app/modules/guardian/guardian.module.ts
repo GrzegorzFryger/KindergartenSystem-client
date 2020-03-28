@@ -26,6 +26,7 @@ import {AbsenceComponent} from './page/absence/absence.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
+import {SelectedChildService} from './component/children/selected-child.service';
 
 
 @NgModule({
@@ -66,10 +67,11 @@ import {environment} from '../../core/environment.dev';
   exports: [
     MatInputModule,
   ],
-  bootstrap: [GuardianComponent],
+  bootstrap: [GuardianComponent ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-    {provide: MAT_DATE_LOCALE, useValue: environment.locale}
+    {provide: MAT_DATE_LOCALE, useValue: environment.locale},
+    SelectedChildService
   ]
 })
 export class GuardianModule {

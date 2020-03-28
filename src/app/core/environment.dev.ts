@@ -7,6 +7,8 @@ const calendarUrl = apiUrl + '/api/calendar/';
 export const environment = {
   production: false,
   locale: 'pl-PL',
+  localeDate: 'pl_PL',
+  formatDate: 'yyyy/MM/dd',
   nameLocalStorageVariableAuth: 'userCredentials',
   nameLocalStorageVariableUser: 'currentUser',
   routes: {
@@ -53,8 +55,8 @@ export const environment = {
       createAbsence: calendarUrl + 'absence',
       updateAbsence: calendarUrl + 'absence',
       deleteAbsence: calendarUrl + 'absence/',
-      getAllAbsencesByChildId: calendarUrl + 'absences/child/',
-      getAllAbsencesByDate: calendarUrl + 'absences/',
+      getAllAbsencesByChildId: calendarUrl + 'absence/childById/',
+      getAllAbsencesByDate: calendarUrl + 'absence/childByDate/',
       getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/child',
 
       // Day off

@@ -1,6 +1,6 @@
 export class Absence {
   id: number;
   childId: string;
-  date: string;
+  date: Date;
   reason: string;
 }

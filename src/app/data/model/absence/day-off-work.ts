@@ -4,7 +4,7 @@ export enum EventType {
 
 export class DayOffWork {
   id: number;
-  date: string;
+  date: Date;
   name: string;
   eventType: EventType;
 }
