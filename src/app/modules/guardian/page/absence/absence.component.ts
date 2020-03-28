@@ -7,6 +7,8 @@ import {Child} from '../../../../data/model/users/child';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {Observable} from 'rxjs';
 import {MatCalendar} from '@angular/material/datepicker';
+import {AbsenceDialogComponent} from './absence-dialog/absence-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-absence',
@@ -30,11 +32,12 @@ export class AbsenceComponent implements OnInit {
       return newDate.getFullYear() === d.getFullYear() && newDate.getMonth() === d.getMonth() && newDate.getDate() === d.getDate();
     });
     return (isDayOff) ? 'day-off-work ' : '';
-  }
+  };
 
   constructor(private dayOffWorkService: DayOffWorkService,
               private absenceService: AbsenceService,
-              private selectedChildService: SelectedChildService) {
+              private selectedChildService: SelectedChildService,
+              public dialog: MatDialog) {
     this.selectedChild = selectedChildService.selectedChild;
     this.daysOff = dayOffWorkService.findAllDaysOffWork();
   }
@@ -63,5 +66,15 @@ export class AbsenceComponent implements OnInit {
   }
 
 
+  openDialog() {
+    const dialogRef = this.dialog.open(AbsenceDialogComponent, {
+      width: '700px',
+    height: '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
 

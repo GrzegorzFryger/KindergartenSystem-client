@@ -3,39 +3,104 @@
 <!--  <mat-calendar #calendar (monthSelected)="monthSelected($event)" [(selected)]="selectedDate" (selectedChange)="dateChanged()">-->
 <!--  </mat-calendar>-->
 <!--</div>-->
-<div class="absence-container">
+<!--<div class="absence-container">-->
 
-  <mat-card class="calendar">
-    <div class="calendar-wrapper">
-      <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"
-                    [(selected)]="selectedDate" (selectedChange)="dateChanged() ">
-      </mat-calendar>
+<!--  <mat-card class="calendar">-->
+<!--    <div class="calendar-wrapper">-->
+<!--      <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"-->
+<!--                    [(selected)]="selectedDate" (selectedChange)="dateChanged() ">-->
+<!--      </mat-calendar>-->
+<!--    </div>-->
+
+<!--    <button mat-stroked-button color="primary" (click)="openDialog()">Primary</button>-->
+
+<!--  </mat-card>-->
+<!--  -->
+<!--  <mat-card class="calendar-info" *ngIf="selectedDate" [ngClass]="'space-card'">-->
+
+<!--&lt;!&ndash;    <div class="left">&ndash;&gt;-->
+<!--&lt;!&ndash;      <p>Wybrano: {{this.selectedDate  | date }}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button (click)="selectedDate = null" mat-icon-button class="right">&ndash;&gt;-->
+<!--&lt;!&ndash;      <span class="material-icons ">close</span>&ndash;&gt;-->
+<!--&lt;!&ndash;    </button>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;    <div class="context">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="item">&ndash;&gt;-->
+
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--  </mat-card>-->
+
+
+<!--</div>-->
+
+
+<mat-card class="calendar-container">
+  <div class="item">
+    <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"
+                  [(selected)]="selectedDate" (selectedChange)="dateChanged() ">
+    </mat-calendar>
+
+    <div class="con2">
+      <button mat-stroked-button color="primary" (click)="openDialog()">Zaplanuj nieobecność</button>
+    </div>
+  </div>
+
+  <div class="item2">
+    <div class="info-container">
+
+      <div class="header">
+        <div class="d-flex justify-content-center">
+          <p>{{selectedDate | date}}</p>
+        </div>
+      </div>
+
+      <div class="day-info">
+        <div class="d-flex">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col">
+                <p>Legenda:  </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="d-flex">
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absence">
+        <div class="d-flex">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col">
+                <p>Infomacje:  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <button mat-stroked-button color="primary">Primary</button>
-
-  </mat-card>
-
-
-
-  <mat-card class="calendar-info" *ngIf="selectedDate" [ngClass]="'space-card'">
-
-<!--    <div class="left">-->
-<!--      <p>Wybrano: {{this.selectedDate  | date }}</p>-->
-<!--    </div>-->
-<!--    <button (click)="selectedDate = null" mat-icon-button class="right">-->
-<!--      <span class="material-icons ">close</span>-->
-<!--    </button>-->
-
-
-<!--    <div class="context">-->
-<!--      <div class="item">-->
-
-<!--      </div>-->
-<!--    </div>-->
-
-
-  </mat-card>
-
-
-</div>
+  </div>
+</mat-card>

@@ -27,6 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {SelectedChildService} from './component/children/selected-child.service';
+import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dialog.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {SelectedChildService} from './component/children/selected-child.service'
     DialogOverviewExampleDialog,
     MealPriceComponent,
     MealDictionaryComponent,
-    AbsenceComponent
+    AbsenceComponent,
+    AbsenceDialogComponent
   ],
 
   imports: [

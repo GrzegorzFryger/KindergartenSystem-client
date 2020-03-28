@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <h3>Zaplanuj nieobecność</h3>
+
+  <h4>Wybierz datę</h4>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <h4>Wybierz wybierz powód</h4>
+  <div class="row">
+    <div class="col">
+        <mat-form-field>
+          <mat-label>Cars</mat-label>
+          <select matNativeControl required>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </mat-form-field>
+      </div>
+  </div>
+
+  <h4>Dddaj uwagi</h4>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+</div>
+
+
