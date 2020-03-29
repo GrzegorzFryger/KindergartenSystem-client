@@ -32,4 +32,41 @@
   }
 }
 
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  box-shadow: none;
+}
+
+.mealType {
+  margin-left: 10px;
+  padding: 10px;
+
+  h4 {
+    font-weight: 400;
+  }
+  span {
+    margin-left: 3px;
+  }
+
+  .mat-divider {
+    width: 70%;
+    margin: 10px 0 10px 40px;
+  }
+}
+
+.dietType {
+  margin-left: 10px;
+  padding: 10px;
+
+  h4 {
+    font-weight: 400;
+  }
+  span {
+    margin-left: 3px;
+  }
+
+  .mat-divider {
+    width: 70%;
+    margin: 10px 0 10px 40px;
+  }
+}
 

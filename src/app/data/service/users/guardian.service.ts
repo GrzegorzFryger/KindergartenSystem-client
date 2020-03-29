@@ -38,5 +38,9 @@ export class GuardianService {
         }));
   }
 
+  getChildById(childID: string): Observable<Child> {
+    return this.http.get<Child>(environment.apiUrls.account.getChildById + childID);
+  }
+
 
 }

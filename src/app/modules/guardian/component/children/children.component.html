@@ -3,7 +3,7 @@
     <div class="context-container">
 
       <div *ngIf="selected === true" class="item">
-        <img src="../../../../../assets/images/teacher.png" height="50" width="50" class="img-fluid"
+        <img src="../../../../../assets/images/teacher.png" height="100" width="100" class="img-fluid"
              alt="image-cover"/>
       </div>
 
@@ -14,7 +14,7 @@
       </div>
 
       <div class="item">
-        <mat-form-field class="child-form-field">
+        <mat-form-field class="child-form-field" >
           <mat-label>Wybierz Dziecko</mat-label>
           <mat-select (selectionChange)="onSelectChange($event)" panelClass="item">
             <mat-option *ngFor="let child of children | async; let i = index" value="{{i}}">{{child.name}}</mat-option>
