@@ -7,4 +7,8 @@ export class Child {
   streetNumber: number;
   pesel: string;
   group: string;
+  gender: string;
+  dateOfBirth: string;
+  startDate: string;
+  endDate: string;
 }

@@ -1,8 +1,11 @@
 
 export class Meal {
+  id: number;
+  mealPrice: number;
   mealType: string;
   dietType: string;
   childID: string;
-  mealFromDate: Date;
-  mealToDate: Date;
+  mealStatus: string;
+  mealFromDate: string;
+  mealToDate: string;
 }

@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="row">
+    <mat-card class="allMealsCard">
+      <mat-card-header class="mealCardHeader">
+        <mat-card-title>Wszystkie zamówione posiłki</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="cardContent">
+
+
+          <mat-table #table [dataSource]="dataSource">
+
+
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="meaPrice">
+              <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł</mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="mealFromDate">
+              <mat-header-cell *matHeaderCellDef> Data początku</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealFromDate}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="mealToDate">
+              <mat-header-cell *matHeaderCellDef> Data końca</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealToDate}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="mealStatus">
+              <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealStatus}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="mealType">
+              <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dietType">
+              <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.dietType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="childID">
+              <mat-header-cell *matHeaderCellDef> Dziecko</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="openDialog()" color="primary">Dodaj kolejny</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+
+  <div class="childDetailsCard" *ngIf="openChildDetailsTable">
+    <div class="row">
+      <mat-card class="childDetailsCardContent">
+        <mat-card-header class="mealCardHeader">
+          <mat-card-title>Szczegóły dziecka</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="cardContent">
+
+            <div class="container">
+              <div class="row">
+                <div class="col col-3">
+                  <div class="childImage">
+
+                    <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
+                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png"/>
+
+                  </div>
+                </div>
+                <div class="col col-9 childDetails">
+                  <div class="childDetailsHeader">
+                    <span>{{childDetails.name}} {{childDetails.name}}</span>
+                  </div>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          <mat-icon>account_circle</mat-icon>
+
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Dane osobowe
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <div class="tabContent">
+
+                        <h4>Pesel : <span> {{childDetails.pesel}}</span></h4>
+                        <h4>Data urodzenia : <span> {{childDetails.dateOfBirth}}</span></h4>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <h4>Data rozpoczęcia : <span> {{childDetails.startDate}}</span></h4>
+                        <h4>Data zakończenia : <span> {{childDetails.endDate}}</span></h4>
+                      </div>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          <mat-icon>home</mat-icon>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Dane adresowe
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <div class="tabContent">
+
+                        <h4>Kod pocztowy : <span> {{childDetails.postalCode}}</span></h4>
+                        <h4>Miasto : <span> {{childDetails.city}}</span></h4>
+                        <h4>Ulica : <span> {{childDetails.streetNumber}}</span></h4>
+                      </div>
+
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+
+
+              </div>
+
+            </div>
+
+
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row mealAdminRow" *ngIf="userCredentials.roles[0] == 'ADMINISTRATOR' ">
+    <div class="mealPriceCard">
+      <app-meal-price></app-meal-price>
+    </div>
+    <div class="mealDictionaryCard">
+      <app-meal-dictionary></app-meal-dictionary>
+    </div>
+  </div>
+
+</div>

@@ -5,6 +5,7 @@ import {User} from '../../model/users/user';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
+import {UserCredentials} from '../../model/users/user-credentials';
 
 
 @Injectable({
@@ -31,5 +32,6 @@ export class UserService {
       return resp;
     }));
   }
+
 
 }
