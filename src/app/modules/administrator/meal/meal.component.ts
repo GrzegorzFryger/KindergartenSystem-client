@@ -9,7 +9,6 @@ import {Child} from '../../../data/model/users/child';
 import {GuardianService} from '../../../data/service/users/guardian.service';
 import {UserService} from '../../../data/service/users/user.service';
 import {MealService} from '../../../data/service/meal/meal.service';
-import {AccountService} from '../../../data/service/account/account.service';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
 
 

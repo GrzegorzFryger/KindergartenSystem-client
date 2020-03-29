@@ -69,7 +69,6 @@ import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add
     MatExpansionModule,
     MatDividerModule,
   ],
-  entryComponents: [MealComponent, DialogOverviewExampleDialog],
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
