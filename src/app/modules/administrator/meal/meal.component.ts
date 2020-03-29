@@ -55,8 +55,7 @@ export class MealComponent implements OnInit {
               private guardianService: GuardianService,
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
-              private mealService: MealService,
-              private accountService: AccountService) {
+              private mealService: MealService) {
   }
 
   ngOnInit(): void {
@@ -85,7 +84,7 @@ export class MealComponent implements OnInit {
 
   openChildDetails(childID: string): void {
     this.openChildDetailsTable = !this.openChildDetailsTable;
-    this.accountService.getChildById(childID).subscribe(resp => {
+    this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
     });
   }
