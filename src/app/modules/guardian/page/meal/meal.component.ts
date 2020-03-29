@@ -5,20 +5,12 @@ import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Child} from '../../../../data/model/users/child';
 import {GuardianService} from '../../../../data/service/users/guardian.service';
-import {UserService} from '../../../../data/service/users/user.service';
 import {UserCredentials} from '../../../../data/model/users/user-credentials';
 import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
-import {AccountService} from '../../../../data/service/account/account.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  symbol1: string;
-}
+
 
 export interface DialogData {
   animal: string;
@@ -54,8 +46,7 @@ export class MealComponent implements OnInit {
               private guardianService: GuardianService,
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
-              private mealService: MealService,
-              private accountService: AccountService) {
+              private mealService: MealService) {
   }
 
   ngOnInit(): void {
@@ -84,7 +75,7 @@ export class MealComponent implements OnInit {
 
   openChildDetails(childID: string): void {
     this.openChildDetailsTable = !this.openChildDetailsTable;
-    this.accountService.getChildById(childID).subscribe(resp => {
+    this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
     });
   }
