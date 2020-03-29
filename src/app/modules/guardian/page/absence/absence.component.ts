@@ -6,7 +6,7 @@ import {AbsenceService} from '../../../../data/service/absence/absence.service';
 import {Child} from '../../../../data/model/users/child';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {Observable} from 'rxjs';
-import {MatCalendar} from '@angular/material/datepicker';
+import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {AbsenceDialogComponent} from './absence-dialog/absence-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -17,21 +17,28 @@ import {MatDialog} from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None
 })
 export class AbsenceComponent implements OnInit {
-  @ViewChild('calendar') myCalendar: MatCalendar<any>;
-
+  @ViewChild('calendar')
+  myCalendar: MatCalendar<any>;
   selectedDate: any;
-  selectedChild: Observable<Child>;
   dayOffWorks: Array<DayOffWork>;
+  absences: Array<Absence>;
+  daysEvents: Array<string>;
 
-  absences: Array<Absence> = new Array<Absence>();
-  daysOff: Observable<Array<DayOffWork>>;
+  selectedChildId: string;
+  selectedChild: Observable<Child>;
 
-  dateCssClass = (d: Date) => {
-    const isDayOff = this.dayOffWorks.some(data => {
-      const newDate = new Date(data.date);
-      return newDate.getFullYear() === d.getFullYear() && newDate.getMonth() === d.getMonth() && newDate.getDate() === d.getDate();
-    });
-    return (isDayOff) ? 'day-off-work ' : '';
+  dateCssClass = (d: Date): MatCalendarCellCssClasses => {
+    const cssClasses = new Set();
+
+    if (this.contains(this.absences, d)) {
+      cssClasses.add('absence');
+    }
+
+    if (this.contains(this.dayOffWorks, d)) {
+      cssClasses.add('day-off-work');
+    }
+
+    return cssClasses;
   };
 
   constructor(private dayOffWorkService: DayOffWorkService,
@@ -39,22 +46,26 @@ export class AbsenceComponent implements OnInit {
               private selectedChildService: SelectedChildService,
               public dialog: MatDialog) {
     this.selectedChild = selectedChildService.selectedChild;
-    this.daysOff = dayOffWorkService.findAllDaysOffWork();
+    this.daysEvents = new Array<string>();
   }
 
 
   ngOnInit(): void {
-
     this.selectedChild.subscribe(child => {
+      this.selectedChildId = child.id;
       this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absence => {
         this.absences = absence;
+        this.myCalendar.updateTodaysDate();
       });
     });
 
-    this.daysOff.subscribe(resp => {
-      this.dayOffWorks = resp;
-      this.myCalendar.updateTodaysDate();
-    });
+    this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
+        this.dayOffWorks = resp;
+        this.myCalendar.updateTodaysDate();
+      }
+    );
+
+    this.selectedDate = new Date();
   }
 
   monthSelected($event: any) {
@@ -62,19 +73,43 @@ export class AbsenceComponent implements OnInit {
   }
 
   dateChanged() {
-    console.log(this.selectedDate);
-  }
+    if (this.absences) {
+      this.daysEvents = this.absences.filter(absence => {
+        const newDate = new Date(absence.date);
+        return newDate.getFullYear() === this.selectedDate.getFullYear() && newDate.getMonth() === this.selectedDate.getMonth()
+          && newDate.getDate() === this.selectedDate.getDate();
+      }).map(absence => absence.reason);
+    }
 
+    if (this.dayOffWorks) {
+      this.daysEvents.push(this.dayOffWorks.filter(absence => {
+        const newDate = new Date(absence.date);
+        return newDate.getFullYear() === this.selectedDate.getFullYear() && newDate.getMonth() === this.selectedDate.getMonth()
+          && newDate.getDate() === this.selectedDate.getDate();
+      }).map(absence => absence.name).toString());
+    }
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(AbsenceDialogComponent, {
       width: '700px',
-    height: '600px'
+      height: '300px',
+      data: {childId: this.selectedChildId}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  private contains(arr: Array<any>, dateToCheck: Date): boolean {
+    if (arr) {
+      return arr.some(data => {
+        const newDate = new Date(data.date);
+        return newDate.getFullYear() === dateToCheck.getFullYear() && newDate.getMonth() === dateToCheck.getMonth()
+          && newDate.getDate() === dateToCheck.getDate();
+      });
+    }
   }
 }
 

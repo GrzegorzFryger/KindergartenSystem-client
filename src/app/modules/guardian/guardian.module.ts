@@ -28,6 +28,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {SelectedChildService} from './component/children/selected-child.service';
 import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dialog.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dial
     MatToolbarModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatStepperModule
   ],
 
   exports: [
