@@ -3,14 +3,22 @@ import {Observable} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Child} from '../../../../data/model/users/child';
-import {GuardianService} from '../../../../data/service/users/guardian.service';
-import {UserCredentials} from '../../../../data/model/users/user-credentials';
-import {Meal} from '../../../../data/model/meal/meal';
-import {MealService} from '../../../../data/service/meal/meal.service';
-import {AuthenticationService} from '../../../../core/auth/authentication.service';
+import {Meal} from '../../../data/model/meal/meal';
+import {UserCredentials} from '../../../data/model/users/user-credentials';
+import {Child} from '../../../data/model/users/child';
+import {GuardianService} from '../../../data/service/users/guardian.service';
+import {UserService} from '../../../data/service/users/user.service';
+import {MealService} from '../../../data/service/meal/meal.service';
+import {AuthenticationService} from '../../../core/auth/authentication.service';
 
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  symbol1: string;
+}
 
 export interface DialogData {
   animal: string;

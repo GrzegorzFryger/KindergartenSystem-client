@@ -10,36 +10,52 @@
 
           <mat-table #table [dataSource]="dataSource">
 
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-              <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
             </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+
+            <ng-container matColumnDef="meaPrice">
+              <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł</mat-cell>
             </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="weight">
-              <mat-header-cell *matHeaderCellDef> Weight</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+
+            <ng-container matColumnDef="mealFromDate">
+              <mat-header-cell *matHeaderCellDef> Data początku</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealFromDate}} </mat-cell>
             </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+
+            <ng-container matColumnDef="mealToDate">
+              <mat-header-cell *matHeaderCellDef> Data końca</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealToDate}} </mat-cell>
             </ng-container>
 
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol1">
-              <mat-header-cell *matHeaderCellDef> Symbol</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.symbol1}} </mat-cell>
+
+            <ng-container matColumnDef="mealStatus">
+              <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealStatus}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="mealType">
+              <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dietType">
+              <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.dietType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="childID">
+              <mat-header-cell *matHeaderCellDef> Dziecko</mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
+              </mat-cell>
+            </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -53,13 +69,6 @@
     </mat-card>
   </div>
 
-  <div class="row mealAdminRow">
-    <div class="mealPriceCard">
-      <app-meal-price></app-meal-price>
-    </div>
-    <div class="mealDictionaryCard">
-      <app-meal-dictionary></app-meal-dictionary>
-    </div>
-  </div>
+
 
 </div>

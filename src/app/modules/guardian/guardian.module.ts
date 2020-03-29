@@ -15,8 +15,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
-import {MealPriceComponent} from './page/meal/meal-price/meal-price.component';
-import {MealDictionaryComponent} from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatTreeModule} from '@angular/material/tree';
 import {FinancesComponent} from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
@@ -29,18 +27,18 @@ import {environment} from '../../core/environment.dev';
 import {SelectedChildService} from './component/children/selected-child.service';
 import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dialog.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
   declarations: [
     ChildrenComponent,
     GuardianComponent,
-    MealComponent,
     ReceiablesComponent,
     FinancesComponent,
+    MealComponent,
     DialogOverviewExampleDialog,
-    MealPriceComponent,
-    MealDictionaryComponent,
     AbsenceComponent,
     AbsenceDialogComponent
   ],
@@ -65,7 +63,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatStepperModule
+    MatStepperModule,
+
+    MatExpansionModule,
+    MatDividerModule,
   ],
 
   exports: [

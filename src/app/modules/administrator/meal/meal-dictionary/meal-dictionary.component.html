@@ -1,0 +1,47 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Słownik poisłków</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <div class="mealPriceContent">
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Rodzaje posiłków
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+
+          <div class="mealType" *ngFor="let mealType of mealTypes; let i = index">
+
+           <h4>{{i + 1}}. {{mealType.description}} <span>({{mealType.value}})</span></h4>
+            <mat-divider *ngIf="i != mealTypes.length - 1"></mat-divider>
+          </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Rodzaje diet
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+
+          <div class="dietType" *ngFor="let dietType  of dietTypes; let i = index">
+
+            <h4>{{i + 1}}. {{dietType.description}} <span>({{dietType.value}})</span></h4>
+            <mat-divider *ngIf="i != dietTypes.length - 1"></mat-divider>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+    </div>
+
+  </mat-card-content>
+</mat-card>
