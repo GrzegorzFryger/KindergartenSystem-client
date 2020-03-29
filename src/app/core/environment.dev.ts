@@ -73,8 +73,6 @@ export const environment = {
       deleteDayOffWork: calendarUrl + 'dayoff/',
     },
 
-  },
-
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
       getDietType: mealDictionaryUrl + 'dietType',
@@ -86,4 +84,5 @@ export const environment = {
     }
   }
 };
+
 

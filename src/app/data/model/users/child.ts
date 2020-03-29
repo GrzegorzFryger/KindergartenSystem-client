@@ -1,7 +1,3 @@
-export enum Gender {
-  MALE, FEMALE, UNSPECIFIED
-}
-
 export class Child {
   id: string;
   name: string;
@@ -11,7 +7,7 @@ export class Child {
   streetNumber: number;
   pesel: string;
   group: string;
-  gender: Gender;
+  gender: string;
   startDate: string;
   endDate: string;
   dateOfBirth: string;

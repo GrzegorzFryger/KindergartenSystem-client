@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/users/child';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
-import {AccountService} from './Account.service';
+import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
 
