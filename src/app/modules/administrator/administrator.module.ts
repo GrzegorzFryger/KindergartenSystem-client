@@ -29,6 +29,7 @@ import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-pay
 import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
 import { ImportComponent } from './page/receivables/import/import.component';
 import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add
     MatSortModule,
     MatExpansionModule,
     MatDividerModule,
+    MatTabsModule,
   ],
   bootstrap: [],
   providers: [

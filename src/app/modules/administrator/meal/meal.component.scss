@@ -140,3 +140,78 @@
   overflow: auto;
   max-height: 200px;
 }
+
+md-tab-group {
+  background-color: pink;
+}
+.mat-tab-body-wrapper {
+  color: white;
+  background-color: red;
+}
+.mat-tab-label.mat-tab-label-active {
+  background-color: #3f51b5;
+}
+
+.nnForm {
+
+  ::ng-deep .mat-form-field {
+
+    .mat-form-field-flex{
+      background-color: #fff;
+    }
+
+    .mat-input-element {
+    color: rgba(0,0,0,.6)
+
+    }
+    .mat-form-field-label {
+      color: #606FEE;
+    }
+    .mat-form-field-underline {
+      background-color: #606FEE;
+    }
+    .mat-form-field-ripple {
+      background-color: #606FEE;
+    }
+    .mat-form-field-required-marker {
+      color: red;
+    }
+  }
+
+  ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: red !important;
+  }
+
+  .input_area {
+
+    .mat-button[disabled]{
+      color: rgba(0,0,0,.2)
+    }
+
+    .mat-input-wrapper {
+      background: gray;
+    }
+
+    margin-top: 5px;
+    padding: 20px;
+
+    .example-small-box{
+      box-shadow: none !important;
+      background-color: #ffffff;
+    }
+
+    .mat-form-field-flex {
+      background-color: #ffffff;
+    }
+  }
+
+  .submit_button {
+    float:right;
+    margin-top: 5px;
+
+    .mat-button {
+      background-color: #EDEEF4;
+      color: #606FEE;
+    }
+  }
+}

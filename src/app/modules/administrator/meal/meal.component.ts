@@ -41,6 +41,7 @@ export class MealComponent implements OnInit {
   displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   dataSource: Array<Meal>;
   openChildDetailsTable = false;
+  openNutritionalNotes = false;
   userCredentials: UserCredentials;
   childDetails: Child = new Child();
 
