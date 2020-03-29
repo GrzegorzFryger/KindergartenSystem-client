@@ -3,69 +3,71 @@
     <mat-card-title>Finanse</mat-card-title>
   </mat-card-header>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        Numer konta to opłat: <b>83101010230000261395100000</b> <!-- For now it's hardcoded - maybe I will create backend service for it -->
-        <hr>
+  <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          Numer konta to opłat: <b>83101010230000261395100000</b> <!-- For now it's hardcoded - maybe I will create backend service for it -->
+          <hr>
+        </div>
       </div>
-    </div>
-    <div class="row" *ngIf="balanceForAllChildren | async as balance">
-      <div class="col">
-        Saldo: <span [ngClass]="{'font-success': isBalancePositive==true,
-        'font-danger': isBalancePositive==false }">{{ balance.balance }} PLN</span>
+      <div class="row" *ngIf="balanceForAllChildren | async as balance">
+        <div class="col">
+          Saldo: <span [ngClass]="{'font-success': isBalancePositive==true,
+          'font-danger': isBalancePositive==false }">{{ balance.balance }} PLN</span>
+        </div>
+        <div class="col">
+          Wpłaty: <span class="font-warning">{{ balance.receivables }} PLN</span>
+        </div>
+        <div class="col">
+          Należności: <span class="font-danger">{{ balance.liabilities }} PLN</span>
+        </div>
       </div>
-      <div class="col">
-        Wpłaty: <span class="font-warning">{{ balance.receivables }} PLN</span>
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
       </div>
-      <div class="col">
-        Należności: <span class="font-danger">{{ balance.liabilities }} PLN</span>
+      <div class="row">
+        <div class="col">
+          <p>Tytuły przelewów do automatycznego mapowania:</p>
+          <ul>
+            <!-- TODO change it into name of child -->
+            <li *ngFor="let mapping of transactionMappings | async">
+              {{ mapping.title }} - Dziecko nr {{ mapping.childId }}
+            </li>
+          </ul>
+          <hr>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <hr>
+      <div class="row">
+        <div class="col">
+          Szczegóły:
+          <br>
+          <br>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <p>Tytuły przelewów do automatycznego mapowania:</p>
-        <ul>
-          <!-- TODO change it into name of child -->
-          <li *ngFor="let mapping of transactionMappings | async">
-            {{ mapping.title }} - Dziecko nr {{ mapping.childId }}
-          </li>
-        </ul>
-        <hr>
+      <div class="row">
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/parent/receivables">Transakcje przychodzące</button>
+        </div>
+        <div class="col">
+          <button mat-stroked-button class="max_width">Płatności</button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        Szczegóły:
-        <br>
-        <br>
+      <div class="row">
+        <div class="col">
+          <br>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button mat-stroked-button class="max_width" routerLink="/parent/receivables">Transakcje przychodzące</button>
-      </div>
-      <div class="col">
-        <button mat-stroked-button class="max_width">Płatności</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <br>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button mat-stroked-button class="max_width">Posiłki</button>
-      </div>
-      <div class="col">
+      <div class="row">
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/parent/meal">Posiłki</button>
+        </div>
+        <div class="col">
 
+        </div>
       </div>
     </div>
-  </div>
+  </mat-card-content>
 </mat-card>

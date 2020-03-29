@@ -1,14 +1,16 @@
-import { TransactionMappingService } from './../../../../data/service/receivables/transaction-mapping.service';
+import {UserService} from './../../../../data/service/users/user.service';
+import {TransactionMappingService} from './../../../../data/service/receivables/transaction-mapping.service';
 
-import { Component, OnInit } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { SnackErrorHandlingService } from 'src/app/core/snack-error-handling/snack-error-handling.service';
-import { Balance } from 'src/app/data/model/finances/balance';
-import { BalanceService } from 'src/app/data/service/finances/balance.service';
-import { TransactionMapping } from 'src/app/data/model/receivables/transaction-mapping';
+import {Component, OnInit} from '@angular/core';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {Balance} from 'src/app/data/model/finances/balance';
+import {BalanceService} from 'src/app/data/service/finances/balance.service';
+import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
+import { User } from 'src/app/data/model/users/user';
 
-const ERROR_MESSAGE = 'error';
+const ERROR_MESSAGE = 'Finances component failed to perform operation';
 
 @Component({
   selector: 'app-finances',
@@ -16,19 +18,27 @@ const ERROR_MESSAGE = 'error';
   styleUrls: ['./finances.component.scss']
 })
 export class FinancesComponent implements OnInit {
+  public currentUserId: string;
   public balanceForAllChildren: Observable<Balance>;
   public transactionMappings: Observable<Array<TransactionMapping>>;
   public isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
+              private userService: UserService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
-
   }
 
   ngOnInit(): void {
+    this.userService.currentUser.subscribe(u => {
+      this.initializeBalance(u);
+      this.initializeTransactionMappings(u);
+    });
+  }
+
+  private initializeBalance(u: User): void {
     this.balanceForAllChildren = this.balanceService
-    .getBalanceForAllChildren('c4029244-e8ff-4328-8658-28964dda3c4e')
+    .getBalanceForAllChildren(u.id)
     .pipe(
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
@@ -40,9 +50,11 @@ export class FinancesComponent implements OnInit {
         return response;
       })
     );
+  }
 
+  private initializeTransactionMappings(u: User): void {
     this.transactionMappings = this.transactionMappingService
-    .getAllPaymentMappingsForGuardian('c4029244-e8ff-4328-8658-28964dda3c4e')
+    .getAllPaymentMappingsForGuardian(u.id)
     .pipe(
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
@@ -54,5 +66,4 @@ export class FinancesComponent implements OnInit {
       })
     );
   }
-
 }

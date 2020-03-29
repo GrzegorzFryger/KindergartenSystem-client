@@ -1,9 +1,11 @@
+import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
+import { ImportComponent } from './page/receivables/import/import.component';
 import {AdministratorComponent} from './administrator.component';
+import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
+import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {CashPaymentsComponent} from './receivables/cash-payments/cash-payments.component';
-import {TransactionsComponent} from './receivables/transactions/transactions.component';
-import {ReceivablesComponent} from './receivables/receivables.component';
+import { ReceivablesComponent } from './page/receivables/receivables.component';
 import {MealComponent} from './meal/meal.component';
 
 
@@ -17,12 +19,20 @@ const routes: Routes = [
         component: ReceivablesComponent,
         children: [
           {
+            path: 'add-cash-payment',
+            component: AddCashPaymentComponent,
+          },
+          {
             path: 'cash-payments',
             component: CashPaymentsComponent,
           },
           {
             path: 'transactions',
             component: TransactionsComponent,
+          },
+          {
+            path: 'import',
+            component: ImportComponent,
           }
         ]
       },

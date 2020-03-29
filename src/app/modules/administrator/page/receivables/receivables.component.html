@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Finanse - Panel administratora</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          Przelewy
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/receivables/import">Dodaj przelewy (.csv)</button>
+        </div>
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/receivables/transactions">Zarządzaj przelewami</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <br>
+          Wpłaty gotówkowe
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/receivables/add-cash-payment">Dodaj wpłatę gotówkową</button>
+        </div>
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/receivables/cash-payments">Zarządzaj wpłatami gotówkowymi</button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<router-outlet></router-outlet>
