@@ -17,11 +17,6 @@ export interface DialogData {
   name: string;
 }
 
-const ELEMENT_DATA: Meal[] = [
-  {id: 1, mealPrice: 15.5, mealFromDate: '2020-01-27T12:00:00', mealToDate: '2020-08-27T00:00:00', mealStatus: 'ACTIVE',
-    mealType: 'BREAKFAST', dietType: 'VEGETARIAN', childID: '0560d77d-e0db-4914-ae4a-4f39690ecb2d'
-  },
-];
 
 @Component({
   selector: 'app-meal',

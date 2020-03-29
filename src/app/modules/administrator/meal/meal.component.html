@@ -8,7 +8,7 @@
         <div class="cardContent">
 
 
-          <mat-table #table [dataSource]="dataSource">
+          <mat-table #table [dataSource]="meals">
 
 
             <ng-container matColumnDef="id">
@@ -54,6 +54,7 @@
               <mat-header-cell *matHeaderCellDef> Dziecko</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
+                <mat-icon (click)="getNutritionalNotes(element.id)">eco</mat-icon>
               </mat-cell>
             </ng-container>
 
@@ -185,8 +186,9 @@
 
                     </mat-tab>
                     <mat-tab label="Już dodane">
-                      <div class="example-large-box mat-elevation-z4">
-                        Już dodane
+                      <div class="example-large-box mat-elevation-z4" *ngFor="let i of selectedNutritionalNotes">
+                        {{i.id}}
+                        {{i.nutritionalNotesValue}}
                       </div>
                     </mat-tab>
                   </mat-tab-group>
