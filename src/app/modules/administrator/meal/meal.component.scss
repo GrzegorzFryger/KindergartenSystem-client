@@ -214,4 +214,15 @@ md-tab-group {
       color: #606FEE;
     }
   }
+
+
+  .mat-chip-list {
+    padding: 10px;
+    width: 100%;
+
+    .mat-chip {
+      width: 44%;
+      margin: 0 auto;
+    }
+  }
 }

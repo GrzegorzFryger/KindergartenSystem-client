@@ -30,6 +30,7 @@ import { TransactionsComponent } from './page/receivables/transactions/transacti
 import { ImportComponent } from './page/receivables/import/import.component';
 import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatExpansionModule,
     MatDividerModule,
     MatTabsModule,
+    MatChipsModule,
   ],
   bootstrap: [],
   providers: [
