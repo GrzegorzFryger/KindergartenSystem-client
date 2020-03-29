@@ -25,13 +25,13 @@
 
             <ng-container matColumnDef="mealFromDate">
               <mat-header-cell *matHeaderCellDef> Data początku</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealFromDate}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealFromDate  | date:'longDate'}} </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="mealToDate">
               <mat-header-cell *matHeaderCellDef> Data końca</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealToDate}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealToDate  | date:'longDate'}} </mat-cell>
             </ng-container>
 
 

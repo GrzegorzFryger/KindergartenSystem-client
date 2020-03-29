@@ -25,13 +25,13 @@
 
             <ng-container matColumnDef="mealFromDate">
               <mat-header-cell *matHeaderCellDef> Data początku</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealFromDate}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealFromDate | date:'longDate'}} </mat-cell>
             </ng-container>
 
 
             <ng-container matColumnDef="mealToDate">
               <mat-header-cell *matHeaderCellDef> Data końca</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealToDate}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealToDate | date:'longDate'}} </mat-cell>
             </ng-container>
 
 
@@ -42,12 +42,12 @@
 
             <ng-container matColumnDef="mealType">
               <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealType }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dietType">
               <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.dietType}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.dietType }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="childID">
