@@ -81,8 +81,15 @@ export class MealComponent implements OnInit {
 
   getNutritionalNotes(mealID: number): void {
     this.openNutritionalNotes = !this.openNutritionalNotes;
+    this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
       .find( ({ id }) => id === mealID ).nutritionalNotesList;
+  }
+
+  deleteNN(nn: NutritionalNotes): void {
+    this.mealService.deleteNN(nn.id, nn.fromSelectedMealId).subscribe(resp => {
+      this.selectedNutritionalNotes = resp;
+    });
   }
 }
 

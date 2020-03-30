@@ -56,6 +56,7 @@ export const environment = {
       getDietType: mealDictionaryUrl + 'dietType',
       getMealPrice: mealPriceUrl,
       getAllMeals: mealUrl,
+      deleteNN: mealUrl + '/nn',
     },
     account: {
       getChildById: accountUrl + 'child/'
