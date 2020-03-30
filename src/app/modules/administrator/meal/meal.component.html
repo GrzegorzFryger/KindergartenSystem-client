@@ -139,7 +139,7 @@
   </div>
 
 
-  <div class="childDetailsCard" *ngIf="!openNutritionalNotes">
+  <div class="childDetailsCard nnContainer" *ngIf="!openNutritionalNotes">
     <div class="row">
       <mat-card class="childDetailsCardContent">
         <mat-card-header class="mealCardHeader">
@@ -195,11 +195,20 @@
 
                       <div class="example-large-box mat-elevation-z4">
 
-                        <div class="nnContent" *ngFor="let i of selectedNutritionalNotes">
-                          <span class="dateValue">{{i.createdTime | date:'longDate' }} </span>
-                          <span class="textValue">{{i.nutritionalNotesValue}} </span>
-                          <span class="textValue">{{i.nutritionalNotesValue}} </span>
+                        <div class="container nnContent" *ngFor="let i of selectedNutritionalNotes">
+                          <div class="row">
+                          <div class="col-3 dateValue justify-content-center">
+                            <span>{{i.createdTime | date:'longDate' }} </span>
+                          </div>
+                          <div class="col-8 textValue justify-content-center">
+                            <span>{{i.nutritionalNotesValue}} </span>
+                          </div>
+                          <div class="col-1 iconsValue justify-content-center">
+                            <span><mat-icon>eco</mat-icon></span>
+                          </div>
+                          </div>
                         </div>
+
                       </div>
                     </mat-tab>
                   </mat-tab-group>
