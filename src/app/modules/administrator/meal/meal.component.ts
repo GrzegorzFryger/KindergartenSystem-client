@@ -32,7 +32,7 @@ export class MealComponent implements OnInit {
   openNutritionalNotes = false;
   childDetails: Child = new Child();
   userCredentials: UserCredentials;
-  selectedNutritionalNotes: Array<NutritionalNotes>;
+  selectedNutritionalNotes: Array<NutritionalNotes> = [];
 
 
 

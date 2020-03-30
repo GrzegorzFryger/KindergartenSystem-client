@@ -168,8 +168,8 @@
                     <mat-tab label="Dodaj kolejną">
 
                       <form class="example-form">
-                      <div class="input_area">
-                        <div class="example-small-box mat-elevation-z4">
+                        <div class="input_area">
+                          <div class="example-small-box mat-elevation-z4">
 
                             <mat-form-field class="example-full-width">
                               <mat-label>Uwagi</mat-label>
@@ -177,27 +177,29 @@
                               <mat-hint align="start">{{message.value.length}} / 256</mat-hint>
                             </mat-form-field>
 
+                          </div>
+                          <div class="submit_button">
+                            <button [disabled]="message.value.length == 0" mat-button>Dodaj</button>
+                          </div>
                         </div>
-                        <div class="submit_button">
-                          <button [disabled]="message.value.length == 0" mat-button>Dodaj</button>
-                        </div>
-                      </div>
                       </form>
 
                     </mat-tab>
                     <mat-tab label="Już dodane">
 
 
-                      <mat-chip-list>
+                      <mat-chip-list *ngIf="selectedNutritionalNotes.length == 0">
                         <mat-chip>Nie dodano jescze żadnej uwagi</mat-chip>
                       </mat-chip-list>
 
 
-                      <div class="example-large-box mat-elevation-z4" *ngFor="let i of selectedNutritionalNotes">
+                      <div class="example-large-box mat-elevation-z4">
 
-
-                        {{i.id}}
-                        {{i.nutritionalNotesValue}}
+                        <div class="nnContent" *ngFor="let i of selectedNutritionalNotes">
+                          <span class="dateValue">{{i.createdTime | date:'longDate' }} </span>
+                          <span class="textValue">{{i.nutritionalNotesValue}} </span>
+                          <span class="textValue">{{i.nutritionalNotesValue}} </span>
+                        </div>
                       </div>
                     </mat-tab>
                   </mat-tab-group>

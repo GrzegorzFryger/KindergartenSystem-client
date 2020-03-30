@@ -178,9 +178,6 @@ md-tab-group {
     }
   }
 
-  ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: red !important;
-  }
 
   .input_area {
 
@@ -224,5 +221,33 @@ md-tab-group {
       width: 44%;
       margin: 0 auto;
     }
+  }
+}
+
+.example-large-box{
+  box-shadow: none !important;
+  background-color: #ffffff;
+}
+
+.nnContent {
+  padding: 10px;
+  margin-top: 20px;
+
+
+  span {
+    padding: 15px 0 15px 10px;
+  }
+
+  .textValue {
+    width: auto;
+    justify-content: center
+  }
+
+  .dateValue{
+    float: left;
+    width: auto;
+    border-right: 1px solid #bdc3c7;
+    margin-right: 15px;
+    padding-right: 10px;
   }
 }
