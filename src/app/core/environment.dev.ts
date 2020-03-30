@@ -59,6 +59,7 @@ export const environment = {
       // Absence
       findAbsence: calendarUrl + 'absence/',
       createAbsence: calendarUrl + 'absence',
+      createAbsences: calendarUrl + 'absences',
       updateAbsence: calendarUrl + 'absence',
       deleteAbsence: calendarUrl + 'absence/',
       getAllAbsencesByChildId: calendarUrl + 'absence/childById/',

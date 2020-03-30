@@ -7,9 +7,9 @@
           <form [formGroup]="startFormGroup">
             <ng-template matStepLabel>Od kiedy</ng-template>
             <mat-form-field class="full-width">
-              <input formControlName="startDate"  matInput [matDatepicker]="startDate">
+              <input formControlName="startDate" matInput [matDatepicker]="startDate">
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-              <mat-datepicker #startDate ></mat-datepicker>
+              <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
             <div class="d-flex justify-content-end">
               <button mat-button matStepperNext>Next</button>
@@ -21,9 +21,9 @@
           <form [formGroup]="endFormGroup">
             <ng-template matStepLabel>Do kiedy</ng-template>
             <mat-form-field class="full-width">
-              <input formControlName="endDate" matInput [matDatepicker]="endDate" >
+              <input formControlName="endDate" matInput [matDatepicker]="endDate">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-              <mat-datepicker #endDate ></mat-datepicker>
+              <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
             <div class="d-flex justify-content-end">
               <button mat-button matStepperPrevious>Cofnij</button>
@@ -41,7 +41,7 @@
             </mat-form-field>
             <div class="d-flex justify-content-end">
               <button mat-button matStepperPrevious>Cofnij</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext (click)="prepareData()">Next</button>
             </div>
           </form>
         </mat-step>
@@ -49,8 +49,14 @@
 
         <mat-step>
           <ng-template matStepLabel>Gotowe</ng-template>
-          <p>You are now done.</p>
-
+          <div class="d-flex justify-content-center">
+            <div class="info">
+              <h4>Zaplanowana nieobecność:</h4>
+              <p>Od dnia: {{absencePreview?.dateFrom | date}}</p>
+              <p> Do dnia: {{absencePreview?.dateTo | date}}</p>
+              <p>Z podwodu: {{absencePreview?.reason}}</p>
+            </div>
+          </div>
           <div class="d-flex justify-content-end">
             <button mat-button matStepperPrevious>Cofnij</button>
             <button mat-button (click)="stepper.reset()">Zresetuj</button>

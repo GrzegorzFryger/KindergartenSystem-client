@@ -3,7 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../core/environment.dev';
 import {Absence} from '../../model/absence/absence';
-import {map} from 'rxjs/operators';
+import {AbsenceRange} from '../../model/absence/absence-range';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class AbsenceService {
 
   public createAbsence(absence: Absence): Observable<Absence> {
     return this.http.post<Absence>(environment.apiUrls.calendar.createAbsence, absence);
+  }
+
+  public createAbsences(absenceRange: AbsenceRange ): Observable<AbsenceRange> {
+    return this.http.post<AbsenceRange>(environment.apiUrls.calendar.createAbsences, absenceRange);
   }
 
   public updateAbsence(absence: Absence): Observable<Absence> {

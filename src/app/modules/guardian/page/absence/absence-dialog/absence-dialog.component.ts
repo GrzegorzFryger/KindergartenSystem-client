@@ -2,7 +2,8 @@ import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {AbsenceService} from '../../../../../data/service/absence/absence.service';
-import {Absence} from '../../../../../data/model/absence/absence';
+import {Observable, Subject} from 'rxjs';
+import {AbsenceRange} from '../../../../../data/model/absence/absence-range';
 
 @Component({
   selector: 'app-absence-dialog',
@@ -11,13 +12,18 @@ import {Absence} from '../../../../../data/model/absence/absence';
   encapsulation: ViewEncapsulation.None
 })
 export class AbsenceDialogComponent implements OnInit {
+  absencePreview: AbsenceRange;
   startFormGroup: FormGroup;
   endFormGroup: FormGroup;
   reasonFormGroup: FormGroup;
+  formResponseSub: Subject<AbsenceRange>;
+  formResponse: Observable<AbsenceRange>;
 
   constructor(private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private absenceService: AbsenceService) {
+    this.formResponseSub = new Subject<AbsenceRange>();
+    this.formResponse = this.formResponseSub.asObservable();
   }
 
   ngOnInit(): void {
@@ -34,13 +40,15 @@ export class AbsenceDialogComponent implements OnInit {
     });
   }
 
+  prepareData() {
+    this.absencePreview = {
+      childId: this.data.childId,
+      dateFrom: new Date(this.startFormGroup.get('startDate').value),
+      dateTo: new Date(this.endFormGroup.get('endDate').value),
+      reason: this.reasonFormGroup.get('comment').value
+    };
+  }
   sendForm() {
-    const absence = new Array<Absence>();
-
-    let start = new Date (this.startFormGroup.get('startDate').value);
-    let end = new Date (this.endFormGroup.get('endDate').value);
-
-    //todo
-   // this.absenceService.createAbsence(absence);
+    this.formResponseSub.next(this.absencePreview);
   }
 }

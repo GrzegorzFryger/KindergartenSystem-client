@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {AbsenceDialogComponent} from './absence-dialog/absence-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {SnackErrorHandlingService} from '../../../../core/snack-error-handling/snack-error-handling.service';
 
 @Component({
   selector: 'app-absence',
@@ -44,7 +45,8 @@ export class AbsenceComponent implements OnInit {
   constructor(private dayOffWorkService: DayOffWorkService,
               private absenceService: AbsenceService,
               private selectedChildService: SelectedChildService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private  snackErrorHandlingService: SnackErrorHandlingService) {
     this.selectedChild = selectedChildService.selectedChild;
     this.daysEvents = new Array<string>();
   }
@@ -69,7 +71,7 @@ export class AbsenceComponent implements OnInit {
   }
 
   monthSelected($event: any) {
-
+    //todo
   }
 
   dateChanged() {
@@ -93,11 +95,22 @@ export class AbsenceComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AbsenceDialogComponent, {
       width: '700px',
-      height: '300px',
+      height: '550px',
       data: {childId: this.selectedChildId}
     });
 
+    const sub = dialogRef.componentInstance.formResponse.subscribe(res => {
+      this.dialog.closeAll();
+      this.absenceService.createAbsences(res).subscribe(
+        absence => {
+        },
+        error => {
+          this.snackErrorHandlingService.openSnackBar('can not add absence');
+        });
+    });
+
     dialogRef.afterClosed().subscribe(result => {
+      sub.unsubscribe();
       console.log('The dialog was closed');
     });
   }
