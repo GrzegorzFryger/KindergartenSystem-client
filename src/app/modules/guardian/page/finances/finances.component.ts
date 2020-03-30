@@ -8,6 +8,8 @@ import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
 import {AccountService} from '../../../../data/service/users/account.service';
 import {Account} from '../../../../data/model/users/account';
+import {SelectedChildService} from '../../component/children/selected-child.service';
+import {Child} from '../../../../data/model/users/child';
 
 
 const ERROR_MESSAGE = 'Finances component failed to perform operation';
@@ -23,9 +25,13 @@ export class FinancesComponent implements OnInit {
   public transactionMappings: Observable<Array<TransactionMapping>>;
   public isBalancePositive: boolean;
 
+  public transactionMappingForCurrentChild: TransactionMapping;
+  public selectedChild: Child;
+
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
               private userService: AccountService,
+              private selectedChildService: SelectedChildService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
@@ -33,6 +39,13 @@ export class FinancesComponent implements OnInit {
     this.userService.currentUser.subscribe(u => {
       this.initializeBalance(u);
       this.initializeTransactionMappings(u);
+    });
+
+    this.selectedChildService.selectedChild.subscribe(selectedChild => {
+      this.selectedChild = selectedChild;
+      this.transactionMappings.subscribe(trans => {
+        this.transactionMappingForCurrentChild = trans.find(item => item.childId === selectedChild.id);
+      });
     });
   }
 
