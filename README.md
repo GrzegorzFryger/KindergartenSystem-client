@@ -18,6 +18,20 @@ Above command will install it as dev dependency (so you should run it from repo 
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## SSL Config
+
+To run project over SSL You need to generate trusted certificate.
+In cert folder You will find all necessities.
+
+First run make-cert.bat to generate certificate, it will save in cert directory.
+Now You are ready to run project over SSL but browser will recognise connection as not trusted.
+
+To change that run install-cer.bat it will add Certificate to Trusted Root Certificate Store
+After all of this feel free to run project as trusted over SSL
+
+Run `npm start` for a dev server over SSL. Navigate to `https://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
