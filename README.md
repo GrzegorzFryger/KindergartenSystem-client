@@ -23,6 +23,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 To run project over SSL You need to generate trusted certificate.
 In cert folder You will find all necessities.
 
+To run all bat file You need to have Administrator privileges
+
 First run make-cert.bat to generate certificate, it will save in cert directory.
 Now You are ready to run project over SSL but browser will recognise connection as not trusted.
 
