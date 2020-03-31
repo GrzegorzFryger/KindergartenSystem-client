@@ -1,6 +1,4 @@
-import {UserService} from './../../../../data/service/users/user.service';
 import {TransactionMappingService} from './../../../../data/service/receivables/transaction-mapping.service';
-
 import {Component, OnInit} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
@@ -8,7 +6,9 @@ import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
-import { User } from 'src/app/data/model/users/user';
+import {AccountService} from '../../../../data/service/users/account.service';
+import {Account} from '../../../../data/model/users/account';
+
 
 const ERROR_MESSAGE = 'Finances component failed to perform operation';
 
@@ -25,7 +25,7 @@ export class FinancesComponent implements OnInit {
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
-              private userService: UserService,
+              private userService: AccountService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
@@ -36,34 +36,34 @@ export class FinancesComponent implements OnInit {
     });
   }
 
-  private initializeBalance(u: User): void {
+  private initializeBalance(u: Account): void {
     this.balanceForAllChildren = this.balanceService
-    .getBalanceForAllChildren(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        this.isBalancePositive = response.balance >= 0;
-        return response;
-      })
-    );
+      .getBalanceForAllChildren(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          console.log(response);
+          this.isBalancePositive = response.balance >= 0;
+          return response;
+        })
+      );
   }
 
-  private initializeTransactionMappings(u: User): void {
+  private initializeTransactionMappings(u: Account): void {
     this.transactionMappings = this.transactionMappingService
-    .getAllPaymentMappingsForGuardian(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
+      .getAllPaymentMappingsForGuardian(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          console.log(response);
+          return response;
+        })
+      );
   }
 }

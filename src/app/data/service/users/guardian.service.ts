@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/users/child';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
-import {UserService} from './user.service';
+import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
 
@@ -17,7 +17,7 @@ export class GuardianService {
   public children: Observable<Array<Child>>;
   public userId: string;
 
-  constructor(private http: HttpClient, private userService: UserService, private errorHandlingService: SnackErrorHandlingService) {
+  constructor(private http: HttpClient, private userService: AccountService, private errorHandlingService: SnackErrorHandlingService) {
     this.childrenSub = new Subject<Array<Child>>();
     this.children = this.childrenSub.asObservable();
 

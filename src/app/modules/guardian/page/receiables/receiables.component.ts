@@ -6,8 +6,9 @@ import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
 import {Observable, throwError} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {UserService} from 'src/app/data/service/users/user.service';
+
 import {catchError} from 'rxjs/operators';
+import {AccountService} from '../../../../data/service/users/account.service';
 
 @Component({
   selector: 'app-receiables',
@@ -24,7 +25,7 @@ export class ReceiablesComponent implements OnInit {
   public incomingPaymentsForAllChildren: Observable<Array<IncomingPayment>>;
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
-              private userService: UserService,
+              private userService: AccountService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
