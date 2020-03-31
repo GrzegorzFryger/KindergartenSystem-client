@@ -80,7 +80,12 @@ export class MealComponent implements OnInit {
   }
 
   getNutritionalNotes(mealID: number, childID: string): void {
-    this.openNutritionalNotes = !this.openNutritionalNotes;
+
+    if (!this.openNutritionalNotes) {
+      this.openNutritionalNotes = !this.openNutritionalNotes;
+    }
+
+
     this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
       .find( ({ id }) => id === mealID ).nutritionalNotesList;

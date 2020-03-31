@@ -78,7 +78,11 @@ export class MealComponent implements OnInit {
       this.openNutritionalNotes = !this.openNutritionalNotes;
     }
 
-    this.openChildDetailsTable = !this.openChildDetailsTable;
+    if (!this.openChildDetailsTable) {
+      this.openChildDetailsTable = !this.openChildDetailsTable;
+    }
+
+
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
     });
@@ -90,7 +94,11 @@ export class MealComponent implements OnInit {
       this.openChildDetailsTable = !this.openChildDetailsTable;
     }
 
-    this.openNutritionalNotes = !this.openNutritionalNotes;
+    if (!this.openNutritionalNotes) {
+      this.openNutritionalNotes = !this.openNutritionalNotes;
+    }
+
+
     this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
       .find(({id}) => id === mealID).nutritionalNotesList;
