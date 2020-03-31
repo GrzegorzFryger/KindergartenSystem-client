@@ -5,91 +5,104 @@
   height: 100%;
   width: 100%;
 
-  .card {
-    flex-basis: 95%;
-    height: 95%;
-    border-radius: 50px;
+  .card-app {
+    flex-basis: 98%;
+    height: 98%;
+    border-radius: 25px;
     padding: 0;
 
-    .context-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      height: 100%;
-      width: 100%;
 
-      .context-left {
-        flex-grow: 0;
-        flex-basis: 12%;
+    .left {
+      flex-basis: 15%;
+
+      .d-flex {
         height: 100%;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        padding: 16px 0 16px 16px;
 
-        .context-left-container {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          width: 100%;
+        .mat-card {
+          padding: 0;
+          flex-basis: 100%;
+          border-radius: 16px;
 
-          .logo {
-            flex-grow: 0;
-            flex-basis: 10%;
-            padding: 10%;
+          .d-flex {
+            padding: 0;
 
-            .img {
-              display: flex;
-              height: 100%;
-              width: 100%;
-              background-image: url('../../../assets/images/skarwek.png');
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: contain;
+            .logo {
+              flex-grow: 0;
+              flex-basis: 10%;
+              padding: 10%;
+
+              .img {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                background-image: url('../../../assets/images/skarwek.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+            }
+
+            .nav {
+
             }
           }
-
-          .navigation {
-            flex-grow: 1;
-            flex-basis: 90%;
-          }
         }
       }
+    }
 
-      .context-main {
-        flex-grow: 1;
-        flex-shrink: 1;
-        flex-basis: 73%;
+    .main {
+      flex-basis: 85%;
+
+      .content-container {
         height: 100%;
-        padding: 1%;
-        background-color: #F9F9FB;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
 
-        .context-main-container {
-          display: flex;
-          flex-direction: column;
-          flex-wrap: nowrap;
-          height: 100%;
-          width: 100%;
+        .mat-card {
+          height: 98%;
+          flex-basis: 98%;
+          background-color: #F9F9FB;
+          border-radius: 16px;
 
-          .children {
-            flex-grow: 1;
-            flex-shrink: 1;
-            order: 1;
-            margin-bottom: 2%;
-          }
-
-          .components {
-            flex-basis: 90%;
-            flex-grow: 1;
+          .content-card-container {
             width: 100%;
-            order: 2;
-            overflow: auto;
+            height: 100%;
+            flex-direction: column;
 
+            .top {
+              flex-basis: 10%;
+              margin-bottom: 16px;
+              .d-flex {
+                justify-content: flex-end;
+                height: 100%;
+
+                .child {
+                  margin-right: 16px;
+                }
+
+                .user {
+
+                }
+              }
+
+            }
+
+            .down {
+              flex-basis: 90%;
+              overflow: auto;
+            }
           }
         }
       }
+    }
 
-      .context-right {
-        flex-basis: 15%;
-        height: 100%;
-
-      }
+    .right {
+      flex-basis: 0;
     }
   }
 }

@@ -8,7 +8,8 @@ export class Child {
   pesel: string;
   group: string;
   gender: string;
-  dateOfBirth: string;
   startDate: string;
   endDate: string;
+  dateOfBirth: string;
+
 }

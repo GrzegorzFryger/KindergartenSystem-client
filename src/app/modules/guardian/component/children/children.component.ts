@@ -4,6 +4,7 @@ import {Observable, Subject} from 'rxjs';
 import {Child} from '../../../../data/model/users/child';
 import {MatSelectChange} from '@angular/material/select';
 import {map} from 'rxjs/operators';
+import {SelectedChildService} from './selected-child.service';
 
 @Component({
   selector: 'app-children',
@@ -16,9 +17,9 @@ export class ChildrenComponent implements OnInit {
 
   selected: boolean;
   children: Observable<Array<Child>>;
-  child: Child;
+  selectedChild: Child;
 
-  constructor(private guardianService: GuardianService) {
+  constructor(private guardianService: GuardianService, private selectedChildService: SelectedChildService) {
     this.children = this.guardianService.children;
   }
 
@@ -31,6 +32,7 @@ export class ChildrenComponent implements OnInit {
 
   onSelectChange($event: MatSelectChange) {
     this.selected = true;
-    this.child = this.childrenList[$event.value];
+    this.selectedChild = this.childrenList[$event.value];
+    this.selectedChildService.changeChild(this.selectedChild);
   }
 }

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GuardianRoutingModule} from './guardian-routing.module';
 import {ChildrenComponent} from './component/children/children.component';
-import {DashboardComponent} from './page/dashboard/dashboard.component';
 import {GuardianComponent} from './guardian.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -11,17 +10,23 @@ import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.compo
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import { ReceiablesComponent } from './page/receiables/receiables.component';
+import {ReceiablesComponent} from './page/receiables/receiables.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatTreeModule} from '@angular/material/tree';
-import {FinancesComponent } from './page/finances/finances.component';
+import {FinancesComponent} from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {AbsenceComponent} from './page/absence/absence.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {environment} from '../../core/environment.dev';
+import {SelectedChildService} from './component/children/selected-child.service';
+import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dialog.component';
+import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -31,12 +36,13 @@ import {MatChipsModule} from '@angular/material/chips';
 @NgModule({
   declarations: [
     ChildrenComponent,
-    DashboardComponent,
     GuardianComponent,
     ReceiablesComponent,
     FinancesComponent,
     MealComponent,
     DialogOverviewExampleDialog,
+    AbsenceComponent,
+    AbsenceDialogComponent
   ],
 
   imports: [
@@ -57,7 +63,10 @@ import {MatChipsModule} from '@angular/material/chips';
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
-    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatStepperModule,
+
     MatExpansionModule,
     MatDividerModule,
     MatTabsModule,
@@ -67,11 +76,11 @@ import {MatChipsModule} from '@angular/material/chips';
   exports: [
     MatInputModule,
   ],
-  bootstrap: [],
+  bootstrap: [GuardianComponent ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
-    MatPaginatorModule,
-    MatSortModule
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    {provide: MAT_DATE_LOCALE, useValue: environment.locale},
+    SelectedChildService
   ]
 })
 export class GuardianModule {

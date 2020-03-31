@@ -1,15 +1,14 @@
-<div class="children-container">
+<div class="children-container ">
   <mat-card>
     <div class="context-container">
-
       <div *ngIf="selected === true" class="item">
-        <img src="../../../../../assets/images/teacher.png" height="100" width="100" class="img-fluid"
+        <img src="../../../../../assets/images/teacher.png" height="50" width="50" class="img-fluid"
              alt="image-cover"/>
       </div>
 
       <div *ngIf="selected === true" class="item">
         <div class="child-information">
-          <p>Grupa: {{child.name}} </p>
+          <p>Grupa: {{selectedChild.name}} </p>
         </div>
       </div>
 

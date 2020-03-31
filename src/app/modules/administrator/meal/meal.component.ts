@@ -7,7 +7,6 @@ import {Meal} from '../../../data/model/meal/meal';
 import {UserCredentials} from '../../../data/model/users/user-credentials';
 import {Child} from '../../../data/model/users/child';
 import {GuardianService} from '../../../data/service/users/guardian.service';
-import {UserService} from '../../../data/service/users/user.service';
 import {MealService} from '../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../data/model/meal/nutritional-notes';

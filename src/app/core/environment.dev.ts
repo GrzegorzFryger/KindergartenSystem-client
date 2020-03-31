@@ -1,6 +1,8 @@
 const apiUrl = 'https://localhost:8080';
 const receivablesUrl = apiUrl + '/api/receivables/';
 const financesUrl = apiUrl + '/api/finances/';
+const calendarUrl = apiUrl + '/api/calendar/';
+
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
@@ -8,6 +10,9 @@ const accountUrl = apiUrl + '/api/account/';
 
 export const environment = {
   production: false,
+  locale: 'pl-PL',
+  localeDate: 'pl_PL',
+  formatDate: 'yyyy/MM/dd',
   nameLocalStorageVariableAuth: 'userCredentials',
   nameLocalStorageVariableUser: 'currentUser',
   routes: {
@@ -16,7 +21,6 @@ export const environment = {
   },
   apiUrls: {
     apiUrl,
-
     authorization: apiUrl + '/api/authenticate',
     user: apiUrl + '/api/account/user',
     guardian: apiUrl + '/api/account/guardians/',
@@ -51,6 +55,25 @@ export const environment = {
       getBalance: financesUrl + 'balance/',
       getBalanceForAllChildren: financesUrl + 'balance/guardian/'
     },
+    calendar: {
+      // Absence
+      findAbsence: calendarUrl + 'absence/',
+      createAbsence: calendarUrl + 'absence',
+      createAbsences: calendarUrl + 'absences',
+      updateAbsence: calendarUrl + 'absence',
+      deleteAbsence: calendarUrl + 'absence/',
+      getAllAbsencesByChildId: calendarUrl + 'absence/childById/',
+      getAllAbsencesByDate: calendarUrl + 'absence/childByDate/',
+      getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/child',
+
+      // Day off
+      findDayOffWork: calendarUrl + 'dayoff/',
+      findAllDaysOffWork: calendarUrl + 'daysoff/',
+      createDayOffWork: calendarUrl + 'dayoff',
+      updateDayOffWork: calendarUrl + 'dayoff',
+      deleteDayOffWork: calendarUrl + 'dayoff/',
+    },
+
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
       getDietType: mealDictionaryUrl + 'dietType',
@@ -64,4 +87,5 @@ export const environment = {
     }
   }
 };
+
 

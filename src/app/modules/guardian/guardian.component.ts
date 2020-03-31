@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-guardian',
@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class GuardianComponent implements OnInit {
   logoSrc = '../../../../../assets/images/skarwek.png';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
