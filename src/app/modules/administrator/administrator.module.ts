@@ -29,6 +29,7 @@ import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-pay
 import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
 import { ImportComponent } from './page/receivables/import/import.component';
 import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
+import { AbsenceComponent } from './page/calendar/absence/absence.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add
     MealPriceComponent,
     MealComponent,
     MealDictionaryComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    AbsenceComponent
   ],
 
 
