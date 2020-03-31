@@ -1,3 +1,5 @@
+import {NutritionalNotes} from './nutritional-notes';
+
 
 export class Meal {
   id: number;
@@ -8,4 +10,6 @@ export class Meal {
   mealStatus: string;
   mealFromDate: string;
   mealToDate: string;
+  nutritionalNotesList: Array<NutritionalNotes>;
 }
+
