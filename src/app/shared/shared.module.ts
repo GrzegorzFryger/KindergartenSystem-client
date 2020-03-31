@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
-import { UserComponent } from './user/user.component';
-
+import {UserComponent} from './user/user.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { UserComponent } from './user/user.component';
     imports: [
         CommonModule,
         MatButtonModule,
-        RouterModule
+        RouterModule,
+        MatCardModule
     ],
   exports: [NavbarComponent, UserComponent]
 })

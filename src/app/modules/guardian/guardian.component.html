@@ -1,29 +1,37 @@
 <div class="app">
-  <mat-card class="card mat-elevation-z16">
-    <div class="context-container">
-      <div class="context-left">
-        <div class="context-left-container">
-          <div class="logo">
-            <span class="img"></span>
+  <mat-card class="d-flex card-app">
+    <div class="left">
+      <div class="d-flex">
+        <mat-card class="mat-elevation-z0">
+          <div class="d-flex">
+            <div class="logo">
+              <span class="img"></span>
+            </div>
+          <div class="nav">  <app-navbar></app-navbar></div>
           </div>
-          <div class="navigation">
-            <app-navbar></app-navbar>
-          </div>
-        </div>
+        </mat-card>
       </div>
-      <div class="context-main">
-        <div class="context-main-container">
-          <div class="children">
-            <app-children></app-children>
-          </div>
-          <div class="components">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
+
+    </div>
+    <div class="main">
+      <div class="d-flex content-container">
+        <mat-card class="mat-elevation-z0">
+            <div class="d-flex content-card-container">
+             <div class="top">
+               <div class="d-flex align-items-center">
+                   <div class="child"><app-children></app-children></div>
+                 <div class="user"><app-user></app-user></div>
+               </div>
+             </div>
+            <div class="down">
+              <router-outlet></router-outlet>
+            </div>
+            </div>
+        </mat-card>
       </div>
-      <div class="context-right">
-       <app-user></app-user>
-      </div>
+    </div>
+    <div class="right">
+
     </div>
   </mat-card>
 </div>
