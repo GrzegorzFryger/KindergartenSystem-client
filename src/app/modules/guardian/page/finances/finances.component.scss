@@ -13,3 +13,39 @@
 .max_width {
   width: 100%;
 }
+
+.information-container {
+  justify-content: space-between;
+  margin-bottom: 2%;
+
+  .inline {
+    padding: 8px 0 8px 0;
+
+    .test {
+      display: inline-block;
+    }
+
+    p {
+      margin: 0;
+    }
+
+  }
+}
+
+.finances-card {
+  margin-bottom: 2%;
+}
+
+
+.finances-card-contnet {
+  .mat-card {
+    padding: 5% 8% 5% 8%;
+    flex-shrink: 1;
+    .mat-card-content {
+      .balance {
+        white-space: nowrap;
+        //margin: 15% 20% 15% 20%;
+      }
+    }
+  }
+}
