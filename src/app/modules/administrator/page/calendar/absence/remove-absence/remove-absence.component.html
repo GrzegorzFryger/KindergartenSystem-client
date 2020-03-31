@@ -7,17 +7,31 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
+
+
           <mat-table #table [dataSource]="dataSource">
-            <ng-container matColumnDef="id">
+
+            <ng-container matColumnDef="childId">
+              <mat-header-cell *matHeaderCellDef> Id dziecka</mat-header-cell>
+              <mat-cell *matCellDef="let absence"> {{absence.childId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
               <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
               <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="id">
+
+            <ng-container matColumnDef="reason">
               <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
               <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
             </ng-container>
 
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
           </mat-table>
+
+
         </div>
       </div>
     </div>
