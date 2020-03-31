@@ -73,6 +73,11 @@ export class MealComponent implements OnInit {
   }
 
   openChildDetails(childID: string): void {
+
+    if (this.openNutritionalNotes) {
+      this.openNutritionalNotes = !this.openNutritionalNotes;
+    }
+
     this.openChildDetailsTable = !this.openChildDetailsTable;
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
@@ -80,10 +85,15 @@ export class MealComponent implements OnInit {
   }
 
   getNutritionalNotes(mealID: number, childID: string): void {
+
+    if (this.openChildDetailsTable) {
+      this.openChildDetailsTable = !this.openChildDetailsTable;
+    }
+
     this.openNutritionalNotes = !this.openNutritionalNotes;
     this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
-      .find( ({ id }) => id === mealID ).nutritionalNotesList;
+      .find(({id}) => id === mealID).nutritionalNotesList;
 
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
