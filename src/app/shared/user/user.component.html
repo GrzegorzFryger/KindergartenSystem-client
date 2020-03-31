@@ -1,17 +1,12 @@
-<div class="user-container container-fluid">
-  <div class="row">
-    <div class="col">
-      <div class="user-image">
-        <img src="../../../assets/images/teacher.png" height="80" width="80" class="img-fluid"
-             alt="image-cover"/>
+<div class="d-flex user">
+  <mat-card>
+    <div class="user-container">
+      <div class="name">
+         {{(user | async)?.name }}  {{(user | async)?.surname }}
+      </div>
+      <div class="img">
+        <img src="../../../assets/images/tata.png" height="50" width="50" class="img-fluid"/>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="person-data">
-        <p>{{(user | async)?.name }} {{(user | async)?.surname }}</p>
-      </div>
-    </div>
-  </div>
+  </mat-card>
 </div>
