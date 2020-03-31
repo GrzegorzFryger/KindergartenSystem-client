@@ -2,4 +2,19 @@
   <mat-card-header>
     <mat-card-title>Obecność - Panel Administratora</mat-card-title>
   </mat-card-header>
+
+  <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/absence/add-absence">Dodaj nieobecność</button>
+        </div>
+        <div class="col">
+          <button mat-stroked-button class="max_width" routerLink="/administrator/absence/remove-absence">Usuń nieobecność</button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
+
+<router-outlet></router-outlet>

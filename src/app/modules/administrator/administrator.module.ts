@@ -30,6 +30,8 @@ import { TransactionsComponent } from './page/receivables/transactions/transacti
 import { ImportComponent } from './page/receivables/import/import.component';
 import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
 import { AbsenceComponent } from './page/calendar/absence/absence.component';
+import { AddAbsenceComponent } from './page/calendar/absence/add-absence/add-absence.component';
+import { RemoveAbsenceComponent } from './page/calendar/absence/remove-absence/remove-absence.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { AbsenceComponent } from './page/calendar/absence/absence.component';
     MealComponent,
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
-    AbsenceComponent
+    AbsenceComponent,
+    AddAbsenceComponent,
+    RemoveAbsenceComponent
   ],
 
 
