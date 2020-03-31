@@ -53,7 +53,7 @@
             <ng-container matColumnDef="childID">
               <mat-header-cell *matHeaderCellDef> Opcjegit add</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
+                <mat-icon matTooltip="Szczegóły dziecka" (click)="openChildDetails(element.childID)">child_care</mat-icon>
                 <mat-icon matTooltip="Uwagi żywieniowe" style="color: #6DB33F" (click)="getNutritionalNotes(element.id, element.childID); selectedMeal=element">eco</mat-icon>
               </mat-cell>
             </ng-container>
