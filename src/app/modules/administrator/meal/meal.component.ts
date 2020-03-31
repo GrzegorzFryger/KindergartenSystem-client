@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
@@ -11,6 +11,8 @@ import {UserService} from '../../../data/service/users/user.service';
 import {MealService} from '../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../data/model/meal/nutritional-notes';
+import {tap} from 'rxjs/operators';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 export interface DialogData {
@@ -33,8 +35,6 @@ export class MealComponent implements OnInit {
   childDetails: Child = new Child();
   userCredentials: UserCredentials;
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
-
-
 
   animal: string;
   name: string;
@@ -88,6 +88,13 @@ export class MealComponent implements OnInit {
 
   deleteNN(nn: NutritionalNotes): void {
     this.mealService.deleteNN(nn.id, nn.fromSelectedMealId).subscribe(resp => {
+      this.selectedNutritionalNotes = resp;
+    });
+  }
+
+
+  addNN(nnValue: string) {
+    this.mealService.addNN(nnValue, this.selectedNutritionalNotes[0].fromSelectedMealId).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
     });
   }

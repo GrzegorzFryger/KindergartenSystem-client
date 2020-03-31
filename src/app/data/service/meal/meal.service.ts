@@ -34,4 +34,8 @@ export class MealService {
 
     return this.http.delete<Array<NutritionalNotes>>(environment.apiUrls.meals.deleteNN, {params});
   }
+
+  addNN(nnValue: string, mealID: number): Observable<Array<NutritionalNotes>>  {
+    return this.http.post<Array<NutritionalNotes>>(environment.apiUrls.meals.addNN, {nutritionalNotesValue: nnValue, mealId: mealID });
+  }
 }
