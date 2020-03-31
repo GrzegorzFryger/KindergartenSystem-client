@@ -29,10 +29,10 @@ export class MealService {
   deleteNN(nnId: number, mealId: number): Observable<Array<NutritionalNotes>> {
     let params = new HttpParams();
 
-    params = params.append('nnId', nnId.toString());
-    params = params.append('mealId', mealId.toString());
+    params = params.append('nnId', String(nnId));
+    params = params.append('mealId', String(mealId));
 
-    return this.http.delete<Array<NutritionalNotes>>(environment.apiUrls.meals.deleteNN, {params});
+    return this.http.get<Array<NutritionalNotes>>(environment.apiUrls.meals.deleteNN, {params});
   }
 
   addNN(nnValue: string, mealID: number): Observable<Array<NutritionalNotes>>  {

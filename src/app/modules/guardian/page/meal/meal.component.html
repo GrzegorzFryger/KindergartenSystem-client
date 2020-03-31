@@ -8,7 +8,7 @@
         <div class="cardContent">
 
 
-          <mat-table #table [dataSource]="dataSource">
+          <mat-table #table [dataSource]="meals">
 
 
             <ng-container matColumnDef="id">
@@ -54,6 +54,7 @@
               <mat-header-cell *matHeaderCellDef> Dziecko</mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <mat-icon (click)="openChildDetails(element.childID)">child_care</mat-icon>
+                <mat-icon style="color: #6DB33F" (click)="getNutritionalNotes(element.id, element.childID); selectedMeal=element">eco</mat-icon>
               </mat-cell>
             </ng-container>
 
@@ -68,7 +69,90 @@
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
 
 
+<div class="childDetailsCard nnContainer" *ngIf="openNutritionalNotes">
+  <div class="row">
+    <mat-card class="childDetailsCardContent">
+      <mat-card-header class="mealCardHeader">
+        <mat-card-title>Uwagi żywieniowe - {{selectedMeal.mealType}} - {{selectedMeal.dietType}} ({{selectedMeal.id}})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="cardContent">
 
+          <div class="container">
+            <div class="row">
+              <div class="col col-3">
+                <div class="childImage">
+
+                  <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
+                  <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png"/>
+
+                </div>
+              </div>
+              <div class="col col-9 childDetails">
+                <div class="childDetailsHeader">
+                  <span>{{childDetails.name}} {{childDetails.name}}</span>
+                </div>
+
+
+                <mat-tab-group dynamicHeight class="nnForm">
+                  <mat-tab label="Dodaj kolejną">
+
+                    <form class="example-form">
+                      <div class="input_area">
+                        <div class="example-small-box mat-elevation-z4">
+
+                          <mat-form-field class="example-full-width">
+                            <mat-label>Uwagi</mat-label>
+                            <textarea matInput #message maxlength="256"></textarea>
+                            <mat-hint align="start">{{message.value.length}} / 256</mat-hint>
+                          </mat-form-field>
+
+                        </div>
+                        <div class="submit_button" (click)="addNN(message.value); message.value = null">
+                          <button [disabled]="message.value.length == 0" mat-button>Dodaj</button>
+                        </div>
+                      </div>
+                    </form>
+
+                  </mat-tab>
+                  <mat-tab label="Już dodane">
+
+
+                    <mat-chip-list *ngIf="selectedNutritionalNotes.length == 0">
+                      <mat-chip>Nie dodano jescze żadnej uwagi</mat-chip>
+                    </mat-chip-list>
+
+
+                    <div class="example-large-box mat-elevation-z4">
+
+                      <div class="container nnContent" *ngFor="let i of selectedNutritionalNotes">
+                        <div class="row">
+                          <div class="col-3 dateValue justify-content-center">
+                            <span>{{i.createdTime | date:'longDate' }} </span>
+                          </div>
+                          <div class="col-8 textValue justify-content-center">
+                            <span>{{i.nutritionalNotesValue}} </span>
+                          </div>
+                          <div class="col-1 iconsValue justify-content-center">
+                            <span><mat-icon (click)="deleteNN(i)">delete</mat-icon></span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </mat-tab>
+                </mat-tab-group>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

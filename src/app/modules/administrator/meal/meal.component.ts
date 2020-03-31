@@ -35,6 +35,7 @@ export class MealComponent implements OnInit {
   childDetails: Child = new Child();
   userCredentials: UserCredentials;
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
+  selectedMeal: Meal;
 
   animal: string;
   name: string;
@@ -79,22 +80,26 @@ export class MealComponent implements OnInit {
     });
   }
 
-  getNutritionalNotes(mealID: number): void {
+  getNutritionalNotes(mealID: number, childID: string): void {
     this.openNutritionalNotes = !this.openNutritionalNotes;
     this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
       .find( ({ id }) => id === mealID ).nutritionalNotesList;
+
+    this.guardianService.getChildById(childID).subscribe(resp => {
+      this.childDetails = resp;
+    });
   }
 
   deleteNN(nn: NutritionalNotes): void {
-    this.mealService.deleteNN(nn.id, nn.fromSelectedMealId).subscribe(resp => {
+    this.mealService.deleteNN(nn.id, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
     });
   }
 
 
   addNN(nnValue: string) {
-    this.mealService.addNN(nnValue, this.selectedNutritionalNotes[0].fromSelectedMealId).subscribe(resp => {
+    this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
     });
   }
