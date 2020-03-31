@@ -4,6 +4,23 @@
   </mat-card-header>
 
   <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
+              <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+              <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
+            </ng-container>
+
+          </mat-table>
+        </div>
+      </div>
+    </div>
 
   </mat-card-content>
 </mat-card>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AbsenceService} from '../../../../../../data/service/absence/absence.service';
+import {Absence} from '../../../../../../data/model/absence/absence';
 
 @Component({
   selector: 'app-remove-absence',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveAbsenceComponent implements OnInit {
 
-  constructor() { }
+  dataSource: Array<Absence>;
 
-  ngOnInit(): void {
+  public columnsToDisplay: string[] = ['childId', 'date', 'reason'];
+
+  private childId = 'cb34b97c-bbe9-4719-9091-0e0939804426';
+
+  constructor(private absenceService: AbsenceService) {
   }
 
+  ngOnInit(): void {
+    this.absenceService.getAllAbsencesByChildId(this.childId).subscribe(resp => {
+      this.dataSource = resp;
+    });
+  }
 }
