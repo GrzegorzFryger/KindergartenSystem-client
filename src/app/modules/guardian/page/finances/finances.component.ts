@@ -22,7 +22,7 @@ const ERROR_MESSAGE = 'Finances component failed to perform operation';
 export class FinancesComponent implements OnInit {
   // Data retrieved from backend
   public sumOfBalancesForAllChildren: Observable<Balance>;
-  public balancesForAllChildren: Observable<Array<Balance>>;
+  public balancesForAllChildren: Array<Balance>;
   public transactionMappings: Observable<Array<TransactionMapping>>;
 
   // Data for selected child
@@ -49,58 +49,46 @@ export class FinancesComponent implements OnInit {
 
     this.selectedChildService.selectedChild.subscribe(selectedChild => {
       this.selectedChild = selectedChild;
-      this.balancesForAllChildren.subscribe(balance => {
-        this.balanceForCurrentChild = balance.find(item => item.childId = selectedChild.id);
-      });
-      this.transactionMappings.subscribe(trans => {
-        this.transactionMappingForCurrentChild = trans.find(item => item.childId === selectedChild.id);
-      });
+      this.balanceForCurrentChild = this.balancesForAllChildren.find(item => item.childId === selectedChild.id);
     });
   }
 
   private initializeSumOfAllBalances(u: Account): void {
     this.sumOfBalancesForAllChildren = this.balanceService
-    .getSumOfBalancesForAllChildren(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        this.isBalancePositive = response.balance >= 0;
-        return response;
-      })
-    );
+      .getSumOfBalancesForAllChildren(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          this.isBalancePositive = response.balance >= 0;
+          return response;
+        })
+      );
   }
 
   private initializeBalancesForAllChildren(u: Account): void {
-    this.balancesForAllChildren = this.balanceService
-    .getBalancesForAllChildren(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
+    this.balanceService.getBalancesForAllChildren(u.id).subscribe(resp => {
+      this.balancesForAllChildren = resp;
+    }, error => {
+      this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+      return throwError(error);
+    });
   }
 
   private initializeTransactionMappings(u: Account): void {
     this.transactionMappings = this.transactionMappingService
-    .getAllPaymentMappingsForGuardian(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
+      .getAllPaymentMappingsForGuardian(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          // console.log(response);
+          return response;
+        })
+      );
   }
 }
