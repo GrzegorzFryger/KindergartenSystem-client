@@ -28,8 +28,9 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex justify-content-center balance">
-            <span [ngClass]="{'font-success': isBalancePositive==true,'font-danger': isBalancePositive==false }">
-        {{ (balanceForAllChildren | async)?.balance }} PLN
+            <span
+              [ngClass]="{'font-success': isChildBalancePositive==true,'font-danger': isChildBalancePositive==false }">
+        {{ balanceForCurrentChild?.balance }} PLN
       </span>
         </div>
       </mat-card-content>
@@ -42,7 +43,8 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex  justify-content-center balance">
-          <span class="font-warning">{{ (balanceForAllChildren | async)?.receivables }} PLN</span>
+          <span class="font-warning">{{ balanceForCurrentChild?.receivables }}
+            PLN</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -53,7 +55,8 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex justify-content-center balance">
-          <span class="font-danger">{{ (balanceForAllChildren | async)?.liabilities }} PLN</span>
+          <span class="font-danger">{{ balanceForCurrentChild?.liabilities }}
+            PLN</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -76,8 +79,9 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex justify-content-center balance">
-            <span [ngClass]="{'font-success': isBalancePositive==true,'font-danger': isBalancePositive==false }">
-        {{ (balanceForAllChildren | async)?.balance }} PLN
+            <span
+              [ngClass]="{'font-success': isTotalBalancePositive==true,'font-danger': isTotalBalancePositive==false }">
+        {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN
       </span>
         </div>
       </mat-card-content>
@@ -90,7 +94,8 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex  justify-content-center balance">
-          <span class="font-warning">{{ (balanceForAllChildren | async)?.receivables }} PLN</span>
+          <span class="font-warning">{{ (sumOfBalancesForAllChildren | async)?.receivables }}
+            PLN</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -101,7 +106,8 @@
       </mat-card-header>
       <mat-card-content>
         <div class="d-flex justify-content-center balance">
-          <span class="font-danger">{{ (balanceForAllChildren | async)?.liabilities }} PLN</span>
+          <span class="font-danger">{{ (sumOfBalancesForAllChildren | async)?.liabilities }}
+            PLN</span>
         </div>
       </mat-card-content>
     </mat-card>
