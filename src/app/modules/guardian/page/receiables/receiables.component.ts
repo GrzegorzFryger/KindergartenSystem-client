@@ -1,9 +1,9 @@
 import {MatTableDataSource} from '@angular/material/table';
-import {IncomingPaymentsService} from './../../../../data/service/receivables/incoming-payments.service';
+import {IncomingPaymentsService} from '../../../../data/service/receivables/incoming-payments.service';
 import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
-import {Observable, throwError} from 'rxjs';
+import {throwError} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
@@ -22,7 +22,6 @@ export class ReceiablesComponent implements OnInit {
   public dataSource: MatTableDataSource<IncomingPayment> = new MatTableDataSource();
 
   public columnsToDisplay: string[] = ['contractorDetails', 'paymentType', 'title', 'transactionAmount', 'transactionDate'];
-  public incomingPaymentsForAllChildren: Observable<Array<IncomingPayment>>;
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
               private userService: AccountService,
