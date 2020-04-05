@@ -32,6 +32,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTabsModule,
     MatChipsModule,
     MatTooltipModule,
+    MatSortModule
   ],
 
   exports: [
