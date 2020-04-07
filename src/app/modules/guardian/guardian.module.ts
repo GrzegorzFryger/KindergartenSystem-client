@@ -10,7 +10,7 @@ import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.compo
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {ReceiablesComponent} from './page/receiables/receiables.component';
+import {ReceivablesComponent} from './page/finances/receiables/receivables.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -41,7 +41,7 @@ import {ChartsModule} from 'ng2-charts';
   declarations: [
     ChildrenComponent,
     GuardianComponent,
-    ReceiablesComponent,
+    ReceivablesComponent,
     FinancesComponent,
     MealComponent,
     DialogOverviewExampleDialog,

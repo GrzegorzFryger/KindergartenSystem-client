@@ -45,7 +45,7 @@
 
       <p>Lista dzieci</p>
       <div *ngFor="let data of children" class="">
-        <mat-card [ngClass]="findBalanceForChild(data.id)?.receivables > 0? 'warring-balance': '' ">
+        <mat-card [ngClass]="findBalanceForChild(data.id)?.liabilities > 0? 'warring-balance': '' ">
           <div class="user-container">
             <div class="img">
               <img *ngIf="data.gender === 'FEMALE'" src="../../../assets/images/girl.png" height="30" width="30"
@@ -130,5 +130,6 @@
 
   <div class="right">
     <p>Historia wpłat</p>
+    <app-receiables></app-receiables>
   </div>
 </div>
