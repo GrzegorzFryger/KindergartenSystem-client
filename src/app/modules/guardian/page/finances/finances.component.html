@@ -1,118 +1,83 @@
-<mat-card class="d-flex information-container">
-  <div class="inline">
-    <p>Numer konta to opłat: <b>83101010230000261395100000</b></p>
+<div class="finances">
+  <div class="left">
+    <div class="left-flex-container">
+
+      <p>Całkowity stan</p>
+      <div class="chart">
+        <app-finance-chart></app-finance-chart>
+      </div>
+
+      <div class="common-finance-item">
+        <div class="common-finance-container">
+
+            <mat-card class="test">
+              <div class="card-flex-container">
+                <div class="header">
+                  <p>Saldo</p>
+                </div>
+                <div class="amount">
+                    <p> {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN</p>
+                </div>
+              </div>
+            </mat-card>
+
+          <mat-card class="test">
+            <div class="card-flex-container">
+              <div class="header">
+                <p>Saldo</p>
+              </div>
+              <div class="amount">
+                <p> {{ (sumOfBalancesForAllChildren | async)?.receivables }} PLN</p>
+              </div>
+            </div>
+          </mat-card>
+
+          <mat-card class="test">
+            <div class="card-flex-container">
+              <div class="header">
+                <p>Saldo</p>
+              </div>
+              <div class="amount">
+                <p> {{ (sumOfBalancesForAllChildren | async)?.liabilities }} PLN</p>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <p>Lista dzieci</p>
+
+      <mat-card>
+        <div class="user-container">
+          <div class="img">
+            <img src="../../../assets/images/tata.png" height="30" width="30" class="img-fluid"/>
+          </div>
+          <div class="name">
+            <p> Marianna nowak</p>
+          </div>
+        </div>
+        <mat-divider [vertical]="false" [inset]="true"></mat-divider>
+        <div class="inline">
+          <div class="common-finance-container">
+            Tytuł przelewu:&nbsp;
+          </div>
+          <div class="common-finance-container">
+            <b>{{ transactionMappingForCurrentChild?.title}} </b>
+            <b *ngIf="!transactionMappingForCurrentChild">Nie wybrano dziecka </b>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
   </div>
 
-  <div class="inline">
-    <div class="test">
-      Tytuł przelewu:&nbsp;
-    </div>
-    <div class="test">
-      <b>{{ transactionMappingForCurrentChild?.title}} </b>
-      <b *ngIf="!transactionMappingForCurrentChild">Nie wybrano dziecka </b>
+  <div class="center">
+    <div class="left-flex-container">
+      <mat-divider [vertical]="true" [inset]="true"></mat-divider>
     </div>
   </div>
-</mat-card>
 
-<mat-card class="finances-card" *ngIf="selectedChild">
-  <mat-card-header>
-    <mat-card-title>
-      Finanse dla {{selectedChild?.name}}:
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="d-flex justify-content-around finances-card-contnet">
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title>Saldo:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex justify-content-center balance">
-            <span
-              [ngClass]="{'font-success': isChildBalancePositive==true,'font-danger': isChildBalancePositive==false }">
-        {{ balanceForCurrentChild?.balance }} PLN
-      </span>
-        </div>
-      </mat-card-content>
-
-    </mat-card>
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title> Wpłaty:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex  justify-content-center balance">
-          <span class="font-warning">{{ balanceForCurrentChild?.receivables }}
-            PLN</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title>Należności:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex justify-content-center balance">
-          <span class="font-danger">{{ balanceForCurrentChild?.liabilities }}
-            PLN</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-  </mat-card-content>
-</mat-card>
-
-
-<mat-card class="finances-all">
-  <mat-card-header>
-    <mat-card-title>
-      Finanse całkowite:
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="d-flex justify-content-around finances-card-contnet">
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title>Saldo:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex justify-content-center balance">
-            <span
-              [ngClass]="{'font-success': isBalancePositive==true,'font-danger': isBalancePositive==false }">
-        {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN
-      </span>
-        </div>
-      </mat-card-content>
-
-    </mat-card>
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title> Wpłaty:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex  justify-content-center balance">
-          <span class="font-warning">{{ (sumOfBalancesForAllChildren | async)?.receivables }}
-            PLN</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="mat-elevation-z1">
-      <mat-card-header>
-        <mat-card-title>Należności:</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="d-flex justify-content-center balance">
-          <span class="font-danger">{{ (sumOfBalancesForAllChildren | async)?.liabilities }}
-            PLN</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-  </mat-card-content>
-</mat-card>
-
-
+  <div class="right">
+    <p>Historia wpłat</p>
+  </div>
+</div>

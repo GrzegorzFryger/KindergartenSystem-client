@@ -1,54 +1,97 @@
-.font-success {
-  color: #34bfa3 !important;
-  font-size: large;
-}
+.finances {
+  display: flex;
+  height: 100%;
+  margin-top: 16px;
+  border-radius: 16px;
 
-.font-warning {
-  color: #ffb822 !important;
-  font-size: large;
-}
+  .left {
+    padding: 16px;
+    flex-basis: 49.5%;
 
-.font-danger {
-  color: #C40F11 !important;
-  font-size: large;
-}
+    .left-flex-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
 
-.max_width {
-  width: 100%;
-}
+      .chart {
+        height: 15%;
+        width: 100%;
+        margin-bottom: 16px;
+      }
 
-.information-container {
-  justify-content: space-between;
-  margin-bottom: 2%;
+      .common-finance-item {
 
-  .inline {
-    padding: 8px 0 8px 0;
+        .common-finance-container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
 
-    .test {
-      display: inline-block;
-    }
+          .test {
 
-    p {
-      margin: 0;
-    }
+            .card-flex-container {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              align-items: center;
 
-  }
-}
+              .header {
+                p{margin: 8px}
+              }
+              .amount {
+                p{margin: 8px}
+              }
+            }
+          }
+        }
+      }
 
-.finances-card {
-  margin-bottom: 2%;
-}
+      .mat-card {
+        margin-bottom: 16px;
 
+        .user-container {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: baseline;
+          justify-content: space-between;
 
-.finances-card-contnet {
-  .mat-card {
-    padding: 5% 8% 5% 8%;
-    flex-shrink: 1;
-    .mat-card-content {
-      .balance {
-        white-space: nowrap;
-        //margin: 15% 20% 15% 20%;
+          .name {
+            p {
+              //margin-bottom: 0;
+            }
+          }
+
+          .img {
+            margin-right: 16px;
+          }
+        }
+
+        .inline {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: baseline;
+          justify-content: space-between;
+        }
       }
     }
+  }
+
+  .center {
+
+    .left-flex-container {
+      justify-content: center;
+      height: 100%;
+
+      .mat-divider {
+        margin-left: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  .right {
+    flex-basis: 49.5%;
+    padding: 16px;
   }
 }

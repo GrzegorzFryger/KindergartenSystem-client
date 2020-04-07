@@ -11,7 +11,6 @@ import {Account} from '../../../../data/model/users/account';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {Child} from '../../../../data/model/users/child';
 
-
 const ERROR_MESSAGE = 'Finances component failed to perform operation';
 
 @Component({
@@ -51,6 +50,8 @@ export class FinancesComponent implements OnInit {
       this.selectedChild = selectedChild;
       this.balanceForCurrentChild = this.balancesForAllChildren.find(item => item.childId === selectedChild.id);
     });
+
+
   }
 
   private initializeSumOfAllBalances(u: Account): void {
@@ -91,4 +92,5 @@ export class FinancesComponent implements OnInit {
         })
       );
   }
+
 }

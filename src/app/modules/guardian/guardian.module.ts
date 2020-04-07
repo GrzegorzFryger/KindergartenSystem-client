@@ -33,6 +33,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
+import {FinanceChartComponent} from './page/finances/finance-chart/finance-chart.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import {MatSortModule} from '@angular/material/sort';
     MealComponent,
     DialogOverviewExampleDialog,
     AbsenceComponent,
-    AbsenceDialogComponent
+    AbsenceDialogComponent,
+    FinanceChartComponent
   ],
 
   imports: [
@@ -74,7 +77,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatTabsModule,
     MatChipsModule,
     MatTooltipModule,
-    MatSortModule
+    MatSortModule,
+    ChartsModule
   ],
 
   exports: [
