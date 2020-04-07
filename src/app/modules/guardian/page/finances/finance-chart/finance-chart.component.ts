@@ -1,6 +1,6 @@
 import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ChartDataSets, ChartOptions} from 'chart.js';
-import {Color} from 'ng2-charts';
+import {Color, Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-finance-chart',
@@ -13,8 +13,9 @@ export class FinanceChartComponent implements OnInit, AfterViewChecked, AfterVie
   public chartHeight: any;
 
   public lineChartData: ChartDataSets[] = [
-    {data: [0, 1500, 1400, 1800]}
+    { data: [65, 59, 80, 81, 56, 55, 40] },
   ];
+  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
@@ -47,14 +48,14 @@ export class FinanceChartComponent implements OnInit, AfterViewChecked, AfterVie
       display: false,
     },
     tooltips: {
-      enabled: false
+      enabled: true
     },
     annotation: {},
   };
 
   public lineChartColors: Color[] = [
     {
-      backgroundColor: 'rgb(130,177,234)',
+      // backgroundColor: 'rgb(130,177,234)',
       borderColor: 'rgb(240,187,218)',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#fff',
@@ -63,22 +64,24 @@ export class FinanceChartComponent implements OnInit, AfterViewChecked, AfterVie
     }
   ];
   public lineChartType = 'line';
+  public lineChartPlugins = [];
 
-
-  constructor() { }
+  constructor() {
+    this.chartHeight = 50;
+  }
 
   ngOnInit(): void {
 
   }
 
   ngAfterViewChecked(): void {
-    this.chartHeight = this.element.nativeElement.offsetHeight;
-    console.log(this.element.nativeElement.offsetHeight);
+    const sizeBox = this.element.nativeElement.offsetHeight;
+    if (sizeBox !== this.chartHeight) {
+      this.chartHeight = sizeBox;
+    }
   }
 
   ngAfterViewInit(): void {
-    // this.chartHeight = this.element.nativeElement.offsetHeight;
-    // console.log(this.element.nativeElement.offsetHeight);
   }
 
 }

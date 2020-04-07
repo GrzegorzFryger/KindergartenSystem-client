@@ -1,7 +1,6 @@
 <div class="finances">
   <div class="left">
     <div class="left-flex-container">
-
       <p>Całkowity stan</p>
       <div class="chart">
         <app-finance-chart></app-finance-chart>
@@ -9,22 +8,21 @@
 
       <div class="common-finance-item">
         <div class="common-finance-container">
-
-            <mat-card class="test">
-              <div class="card-flex-container">
-                <div class="header">
-                  <p>Saldo</p>
-                </div>
-                <div class="amount">
-                    <p> {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN</p>
-                </div>
+          <mat-card class="test">
+            <div class="card-flex-container">
+              <div class="header">
+                <p>Opłacono</p>
               </div>
-            </mat-card>
+              <div class="amount">
+                <p> {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN</p>
+              </div>
+            </div>
+          </mat-card>
 
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
-                <p>Saldo</p>
+                <p>Należności</p>
               </div>
               <div class="amount">
                 <p> {{ (sumOfBalancesForAllChildren | async)?.receivables }} PLN</p>
@@ -35,7 +33,7 @@
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
-                <p>Saldo</p>
+                <p>Pozostało do zapłaty</p>
               </div>
               <div class="amount">
                 <p> {{ (sumOfBalancesForAllChildren | async)?.liabilities }} PLN</p>
@@ -46,28 +44,81 @@
       </div>
 
       <p>Lista dzieci</p>
+      <div *ngFor="let data of children" class="">
+        <mat-card [ngClass]="findBalanceForChild(data.id)?.receivables > 0? 'warring-balance': '' ">
+          <div class="user-container">
+            <div class="img">
+              <img *ngIf="data.gender === 'FEMALE'" src="../../../assets/images/girl.png" height="30" width="30"
+                   class="img-fluid"/>
+              <img *ngIf="data.gender === 'MALE'" src="../../../assets/images/icon-boy.png" height="30" width="30"
+                   class="img-fluid"/>
+            </div>
+            <div class="name">
+              <p>{{data.name}} {{data.surname}}</p>
+            </div>
+          </div>
 
-      <mat-card>
-        <div class="user-container">
-          <div class="img">
-            <img src="../../../assets/images/tata.png" height="30" width="30" class="img-fluid"/>
-          </div>
-          <div class="name">
-            <p> Marianna nowak</p>
-          </div>
-        </div>
-        <mat-divider [vertical]="false" [inset]="true"></mat-divider>
-        <div class="inline">
-          <div class="common-finance-container">
-            Tytuł przelewu:&nbsp;
-          </div>
-          <div class="common-finance-container">
-            <b>{{ transactionMappingForCurrentChild?.title}} </b>
-            <b *ngIf="!transactionMappingForCurrentChild">Nie wybrano dziecka </b>
-          </div>
-        </div>
-      </mat-card>
+          <mat-divider [vertical]="false" [inset]="true"></mat-divider>
 
+          <div class="inline">
+            <div class="common-finance-container">
+              Tytuł przelewu:&nbsp;
+            </div>
+            <div class="common-finance-container">
+              <b>{{findTransactionMapping(data.id)?.title}} </b>
+              <b *ngIf="!findTransactionMapping(data.id)">Nie przydzielono konta </b>
+            </div>
+          </div>
+
+          <div class="finance-info">
+            <mat-accordion>
+              <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Informacje finansowe</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="mat-expansion-panel-container">
+                  <div class="item">
+                    <div class="item-container">
+                      <div class="header">
+                        Saldo:
+                      </div>
+                      <div class="amount">
+                        <b> {{findBalanceForChild(data.id)?.balance}} PLN </b>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="item-container">
+                      <div class="header">
+                        Należności:
+                      </div>
+                      <div class="amount">
+                        <b> {{findBalanceForChild(data.id)?.receivables}} PLN </b>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="item-container">
+                      <div class="header">
+                        Zobowiązania do opłacenia:
+                      </div>
+                      <div class="amount">
+                        <b> {{findBalanceForChild(data.id)?.liabilities}} PLN </b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="button-container">
+                  <button mat-flat-button>Generuj dane do przelewu</button>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+
+          </div>
+        </mat-card>
+      </div>
     </div>
   </div>
 
