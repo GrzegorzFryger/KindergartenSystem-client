@@ -29,6 +29,9 @@ import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dial
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -67,6 +70,9 @@ import {MatDividerModule} from '@angular/material/divider';
 
     MatExpansionModule,
     MatDividerModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatTooltipModule,
   ],
 
   exports: [

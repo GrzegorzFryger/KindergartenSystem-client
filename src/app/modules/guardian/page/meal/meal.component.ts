@@ -9,6 +9,7 @@ import {UserCredentials} from '../../../../data/model/users/user-credentials';
 import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
+import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
 
 
 
@@ -17,11 +18,6 @@ export interface DialogData {
   name: string;
 }
 
-const ELEMENT_DATA: Meal[] = [
-  {id: 1, mealPrice: 15.5, mealFromDate: '2020-01-27T12:00:00', mealToDate: '2020-08-27T00:00:00', mealStatus: 'ACTIVE',
-    mealType: 'BREAKFAST', dietType: 'VEGETARIAN', childID: '0560d77d-e0db-4914-ae4a-4f39690ecb2d'
-  },
-];
 
 @Component({
   selector: 'app-meal',
@@ -31,10 +27,13 @@ const ELEMENT_DATA: Meal[] = [
 export class MealComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
-  dataSource: Array<Meal>;
+  meals: Array<Meal>;
   openChildDetailsTable = false;
   userCredentials: UserCredentials;
   childDetails: Child = new Child();
+  selectedNutritionalNotes: Array<NutritionalNotes> = [];
+  selectedMeal: Meal;
+  openNutritionalNotes = false;
 
 
   animal: string;
@@ -55,7 +54,7 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
     this.mealService.getAllMeals().subscribe(resp => {
-      this.dataSource = resp;
+      this.meals = resp;
       console.log(resp);
     });
   }
@@ -79,6 +78,37 @@ export class MealComponent implements OnInit {
       this.childDetails = resp;
     });
   }
+
+  getNutritionalNotes(mealID: number, childID: string): void {
+
+    if (!this.openNutritionalNotes) {
+      this.openNutritionalNotes = !this.openNutritionalNotes;
+    }
+
+
+    this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
+    this.selectedNutritionalNotes = this.meals
+      .find( ({ id }) => id === mealID ).nutritionalNotesList;
+
+    this.guardianService.getChildById(childID).subscribe(resp => {
+      this.childDetails = resp;
+    });
+  }
+
+  deleteNN(nn: NutritionalNotes): void {
+    this.mealService.deleteNN(nn.id, this.selectedMeal.id).subscribe(resp => {
+      this.selectedNutritionalNotes = resp;
+    });
+  }
+
+
+  addNN(nnValue: string) {
+    this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
+      this.selectedNutritionalNotes = resp;
+    });
+  }
+
+
 }
 
 

@@ -32,6 +32,9 @@ import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add
 import { AbsenceComponent } from './page/calendar/absence/absence.component';
 import { AddAbsenceComponent } from './page/calendar/absence/add-absence/add-absence.component';
 import { RemoveAbsenceComponent } from './page/calendar/absence/remove-absence/remove-absence.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -52,29 +55,32 @@ import { RemoveAbsenceComponent } from './page/calendar/absence/remove-absence/r
   ],
 
 
-  imports: [
-    CommonModule,
-    AdministratorRoutingModule,
-    FormsModule,
-    MatCardModule,
-    SharedModule,
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatTreeModule,
-    MatPaginatorModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSortModule,
-    MatExpansionModule,
-    MatDividerModule,
-  ],
+    imports: [
+        CommonModule,
+        AdministratorRoutingModule,
+        FormsModule,
+        MatCardModule,
+        SharedModule,
+        MatCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatTreeModule,
+        MatPaginatorModule,
+        MatSliderModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSortModule,
+        MatExpansionModule,
+        MatDividerModule,
+        MatTabsModule,
+        MatChipsModule,
+        MatTooltipModule,
+    ],
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
