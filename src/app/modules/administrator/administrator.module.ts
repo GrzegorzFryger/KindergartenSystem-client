@@ -32,6 +32,7 @@ import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ActuatorComponent } from './actuator/actuator.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MealPriceComponent,
     MealComponent,
     MealDictionaryComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    ActuatorComponent
   ],
 
 
