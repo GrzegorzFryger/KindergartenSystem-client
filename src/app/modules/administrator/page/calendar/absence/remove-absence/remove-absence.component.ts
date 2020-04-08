@@ -21,4 +21,8 @@ export class RemoveAbsenceComponent implements OnInit {
       this.dataSource = resp;
     });
   }
+
+  removeAbsence(id: string): void {
+    this.absenceService.deleteAbsence(id);
+  }
 }

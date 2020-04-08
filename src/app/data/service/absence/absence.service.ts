@@ -31,7 +31,7 @@ export class AbsenceService {
   }
 
   public deleteAbsence(id: string): void {
-    this.http.delete<Absence>(environment.apiUrls.calendar.deleteAbsence);
+    this.http.delete<Absence>(environment.apiUrls.calendar.deleteAbsence + `${id}`);
   }
 
   public getAllAbsencesByChildId(childId: string): Observable<Array<Absence>> {

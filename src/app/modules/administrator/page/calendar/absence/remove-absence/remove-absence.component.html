@@ -10,7 +10,7 @@
 
 
           <mat-table #table [dataSource]="dataSource">
-
+            <!--            TODO: change display to name-->
             <ng-container matColumnDef="childId">
               <mat-header-cell *matHeaderCellDef> Id dziecka</mat-header-cell>
               <mat-cell *matCellDef="let absence"> {{absence.childId}} </mat-cell>
@@ -29,7 +29,7 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
               <mat-cell *matCellDef="let absence">
-                <button mat-stroked-button>Usuń</button>
+                <button mat-stroked-button (click)="removeAbsence(absence.id)">Usuń</button>
                 <button mat-stroked-button>Edytuj</button>
               </mat-cell>
             </ng-container>
