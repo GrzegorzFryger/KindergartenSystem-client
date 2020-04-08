@@ -12,7 +12,7 @@
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
-                <p>Opłacono</p>
+                <p>Saldo:</p>
               </div>
               <div class="amount">
                 <p> {{ balance?.balance }} PLN</p>
@@ -23,7 +23,7 @@
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
-                <p>Należności</p>
+                <p>Wpłaty:</p>
               </div>
               <div class="amount">
                 <p> {{ balance?.receivables }} PLN</p>
@@ -34,7 +34,7 @@
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
-                <p>Pozostało do zapłaty</p>
+                <p>Należności:</p>
               </div>
               <div class="amount">
                 <p> {{ balance?.liabilities }} PLN</p>
@@ -50,9 +50,9 @@
           <div class="user-container">
             <div class="img">
               <img *ngIf="data.gender === 'FEMALE'" src="../../../assets/images/girl.png" height="30" width="30"
-                   class="img-fluid"/>
+                   class="img-fluid" alt="dziewczynka"/>
               <img *ngIf="data.gender === 'MALE'" src="../../../assets/images/icon-boy.png" height="30" width="30"
-                   class="img-fluid"/>
+                   class="img-fluid" alt="chłopiec"/>
             </div>
             <div class="name">
               <p>{{data.name}} {{data.surname}}</p>
@@ -92,7 +92,7 @@
                   <div class="item">
                     <div class="item-container">
                       <div class="header">
-                        Należności:
+                        Wpłaty:
                       </div>
                       <div class="amount">
                         <b> {{findBalanceForChild(data.id)?.receivables}} PLN </b>
@@ -102,7 +102,7 @@
                   <div class="item">
                     <div class="item-container">
                       <div class="header">
-                        Zobowiązania do opłacenia:
+                        Należności:
                       </div>
                       <div class="amount">
                         <b> {{findBalanceForChild(data.id)?.liabilities}} PLN </b>
