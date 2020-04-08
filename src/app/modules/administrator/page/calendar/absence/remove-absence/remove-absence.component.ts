@@ -23,6 +23,6 @@ export class RemoveAbsenceComponent implements OnInit {
   }
 
   removeAbsence(id: string): void {
-    this.absenceService.deleteAbsence(id);
+    this.absenceService.deleteAbsence(id).subscribe();
   }
 }
