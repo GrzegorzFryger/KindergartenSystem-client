@@ -17,12 +17,19 @@ export class RemoveAbsenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.absenceService.getAllAbsences().subscribe(resp => {
-      this.dataSource = resp;
-    });
+    this.getAllAbsence();
   }
 
   removeAbsence(id: string): void {
-    this.absenceService.deleteAbsence(id).subscribe();
+    this.absenceService.deleteAbsence(id).subscribe(resp => {
+      this.getAllAbsence();
+    });
+
+  }
+
+  getAllAbsence(): void {
+    this.absenceService.getAllAbsences().subscribe(resp => {
+      this.dataSource = resp;
+    });
   }
 }
