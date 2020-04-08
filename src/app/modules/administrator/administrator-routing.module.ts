@@ -7,6 +7,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { ReceivablesComponent } from './page/receivables/receivables.component';
 import {MealComponent} from './meal/meal.component';
+import {ActuatorComponent} from './actuator/actuator.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+      },
+      {
+        path: 'actuator',
+        component: ActuatorComponent,
       },
     ]
   }
