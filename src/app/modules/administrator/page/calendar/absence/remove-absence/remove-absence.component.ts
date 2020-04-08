@@ -11,15 +11,13 @@ export class RemoveAbsenceComponent implements OnInit {
 
   dataSource: Array<Absence>;
 
-  public columnsToDisplay: string[] = ['childId', 'date', 'reason'];
-
-  private childId = 'cb34b97c-bbe9-4719-9091-0e0939804426';
+  public columnsToDisplay: string[] = ['childId', 'date', 'reason', 'actions'];
 
   constructor(private absenceService: AbsenceService) {
   }
 
   ngOnInit(): void {
-    this.absenceService.getAllAbsencesByChildId(this.childId).subscribe(resp => {
+    this.absenceService.getAllAbsences().subscribe(resp => {
       this.dataSource = resp;
     });
   }
