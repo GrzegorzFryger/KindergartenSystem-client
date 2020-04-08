@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/users/child';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
@@ -13,22 +13,13 @@ const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
   providedIn: 'root'
 })
 export class GuardianService {
-  private childrenSub: BehaviorSubject<Array<Child>>;
   public children: Observable<Array<Child>>;
   public userId: string;
 
-  private childrenArray: Array<Child>;
-
   constructor(private http: HttpClient, private userService: AccountService, private errorHandlingService: SnackErrorHandlingService) {
-    this.childrenSub = new BehaviorSubject(this.childrenArray);
-    this.children = this.childrenSub.asObservable();
-
     this.userService.currentUser.subscribe(user => {
-      this.findAllChildren(user.id).toPromise().then(children => {
-        this.userId = user.id;
-        this.childrenArray = children;
-        this.childrenSub.next(children);
-      });
+      this.userId = user.id;
+      this.children = this.findAllChildren(user.id);
     });
   }
 

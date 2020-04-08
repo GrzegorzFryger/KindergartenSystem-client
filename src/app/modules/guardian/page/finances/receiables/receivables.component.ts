@@ -3,17 +3,19 @@ import {IncomingPaymentsService} from '../../../../../data/service/receivables/i
 import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
-import {throwError, zip} from 'rxjs';
+import {throwError} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {AccountService} from '../../../../../data/service/users/account.service';
 import {TransactionMapping} from '../../../../../data/model/receivables/transaction-mapping';
 import {Child} from '../../../../../data/model/users/child';
 import {Account} from '../../../../../data/model/users/account';
 import {GuardianService} from '../../../../../data/service/users/guardian.service';
 import {TransactionMappingService} from '../../../../../data/service/receivables/transaction-mapping.service';
+
+const ERROR_MESSAGE = 'Receivables component failed to perform operation';
 
 @Component({
   selector: 'app-receiables',
@@ -27,9 +29,9 @@ export class ReceivablesComponent implements OnInit {
 
   public transactionMappings: Array<TransactionMapping>;
   public children: Array<Child>;
+
   public dataSource: MatTableDataSource<IncomingPayment> = new MatTableDataSource();
   public columnsToDisplay: string[] = ['contractorDetails', 'paymentType', 'title', 'transactionAmount', 'transactionDate'];
-
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
               private userService: AccountService,
@@ -40,34 +42,23 @@ export class ReceivablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(user => {
-      this.incomingPaymentsService.getAllIncomingPaymentsForGuardian(user.id).subscribe(resp => {
-        this.setUpDataTable(resp);
-      },
-      catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to find user');
-        return throwError(err);
-      }));
 
-      this.forkResources(user);
+     this.incomingPaymentsService.getAllIncomingPaymentsForGuardian(user.id).subscribe(resp => {
+          this.setUpDataTable(resp);
+        },
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar('Failed to find user');
+          return throwError(err);
+        }));
+
+     this.guardianService.children.subscribe(children => {
+        this.initializeTransactionMappings(user).subscribe(tras => {
+          this.transactionMappings = tras;
+          this.children = children;
+        });
+      });
 
     });
-  }
-
-  private forkResources(u: Account) {
-    zip(
-      this.transactionMappingService.getAllPaymentMappingsForGuardian(u.id),
-      this.guardianService.children
-    ).subscribe(([transaction, children]) => {
-      this.transactionMappings = transaction;
-      this.children = children;
-    });
-  }
-
-  private setUpDataTable(incomingPayment: Array<IncomingPayment>): void {
-    this.dataSource.data = incomingPayment;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
   }
 
   applyFilter($event: KeyboardEvent) {
@@ -82,4 +73,26 @@ export class ReceivablesComponent implements OnInit {
   clear() {
     this.dataSource.filter = '';
   }
+
+  private setUpDataTable(incomingPayment: Array<IncomingPayment>): void {
+    this.dataSource.data = incomingPayment;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
+  }
+
+  private initializeTransactionMappings(u: Account) {
+    return this.transactionMappingService
+      .getAllPaymentMappingsForGuardian(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          return response;
+        })
+      );
+  }
+
 }

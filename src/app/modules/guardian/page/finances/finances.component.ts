@@ -28,9 +28,9 @@ interface UserMapping {
 export class FinancesComponent implements OnInit {
   // Data retrieved from backend
   public sumOfBalancesForAllChildren: Observable<Balance>;
-  public balancesForAllChildren: Array<Balance>;
-  public transactionMappings: Array<TransactionMapping>;
-  public children: Array<Child>;
+  public balancesForAllChildren: Array<Balance> = new Array<Balance>();
+  public transactionMappings: Array<TransactionMapping> = new Array<TransactionMapping>();
+  public children: Array<Child> = new Array<Child>();
   private isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
@@ -43,8 +43,11 @@ export class FinancesComponent implements OnInit {
   ngOnInit(): void {
     this.userService.currentUser.subscribe(u => {
       this.initializeSumOfAllBalances(u);
-      this.initializeBalancesForAllChildren(u);
-      this.forkResources(u);
+      this.guardianService.children.subscribe(resp => {
+          this.forkResources(u);
+          this.children = resp;
+        }
+      );
     });
   }
 
@@ -59,14 +62,14 @@ export class FinancesComponent implements OnInit {
   private forkResources(u: Account) {
     zip(
       this.initializeTransactionMappings(u),
-      this.guardianService.children
-    ).subscribe(([transaction, children]) => {
+      this.initializeBalancesForAllChildren(u)
+    ).subscribe(([transaction, balance]) => {
       this.transactionMappings = transaction;
-      this.children = children;
+      this.balancesForAllChildren = balance;
     });
   }
 
-  private initializeSumOfAllBalances(u: Account): void {
+  private initializeSumOfAllBalances(u: Account) {
     this.sumOfBalancesForAllChildren = this.balanceService
       .getSumOfBalancesForAllChildren(u.id)
       .pipe(
@@ -81,13 +84,16 @@ export class FinancesComponent implements OnInit {
       );
   }
 
-  private initializeBalancesForAllChildren(u: Account): void {
-    this.balanceService.getBalancesForAllChildren(u.id).subscribe(resp => {
-      this.balancesForAllChildren = resp;
-    }, error => {
-      this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-      return throwError(error);
-    });
+  private initializeBalancesForAllChildren(u: Account) {
+    return this.balanceService.getBalancesForAllChildren(u.id).pipe(
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        return throwError(err);
+      }),
+      map(response => {
+        return response;
+      })
+    );
   }
 
   private initializeTransactionMappings(u: Account) {

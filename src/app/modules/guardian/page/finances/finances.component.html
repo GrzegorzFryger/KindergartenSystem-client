@@ -7,14 +7,15 @@
       </div>
 
       <div class="common-finance-item">
-        <div class="common-finance-container">
+        <div *ngIf="sumOfBalancesForAllChildren | async as balance" class="common-finance-container">
+
           <mat-card class="test">
             <div class="card-flex-container">
               <div class="header">
                 <p>Opłacono</p>
               </div>
               <div class="amount">
-                <p> {{ (sumOfBalancesForAllChildren | async)?.balance }} PLN</p>
+                <p> {{ balance?.balance }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -25,7 +26,7 @@
                 <p>Należności</p>
               </div>
               <div class="amount">
-                <p> {{ (sumOfBalancesForAllChildren | async)?.receivables }} PLN</p>
+                <p> {{ balance?.receivables }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -36,7 +37,7 @@
                 <p>Pozostało do zapłaty</p>
               </div>
               <div class="amount">
-                <p> {{ (sumOfBalancesForAllChildren | async)?.liabilities }} PLN</p>
+                <p> {{ balance?.liabilities }} PLN</p>
               </div>
             </div>
           </mat-card>
