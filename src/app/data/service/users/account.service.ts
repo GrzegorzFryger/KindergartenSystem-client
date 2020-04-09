@@ -23,7 +23,7 @@ export class AccountService {
 
   getByEmail(email: string): Observable<Account> {
     const params = new HttpParams().set('email', email);
-    return this.http.get<Account>(environment.apiUrls.user, {params}).pipe(map(resp => {
+    return this.http.get<Account>(environment.apiUrls.account.user, {params}).pipe(map(resp => {
       return resp;
     }));
   }
