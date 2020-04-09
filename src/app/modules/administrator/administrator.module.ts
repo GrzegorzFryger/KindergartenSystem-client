@@ -35,6 +35,7 @@ import { RemoveAbsenceComponent } from './page/calendar/absence/remove-absence/r
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DialogOverviewExampleDialog,
     AbsenceComponent,
     AddAbsenceComponent,
-    RemoveAbsenceComponent
+    RemoveAbsenceComponent,
+    DayOffWorkComponent
   ],
 
 
