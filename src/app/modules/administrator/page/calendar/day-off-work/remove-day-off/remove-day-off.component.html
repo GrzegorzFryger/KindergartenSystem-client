@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Usuń dzień wolny</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+
+
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef> Data</mat-header-cell>
+              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="eventType">
+              <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.eventType}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+              <mat-cell *matCellDef="let dayOffWork">
+                <button mat-stroked-button (click)="removeDayOff(dayOffWork.id)">Usuń</button>
+                <button mat-stroked-button>Edytuj</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>

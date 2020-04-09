@@ -9,7 +9,8 @@ import {DayOffWork} from '../../model/absence/day-off-work';
 })
 export class DayOffWorkService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public findDayOffWorkById(id: string): Observable<DayOffWork> {
     return this.http.get<DayOffWork>(environment.apiUrls.calendar.findDayOffWork + `${id}`);
@@ -23,11 +24,11 @@ export class DayOffWorkService {
     return this.http.put<DayOffWork>(environment.apiUrls.calendar.updateDayOffWork, dayOffWork);
   }
 
-  public deleteDayOffWork(id: string): void {
-    this.http.delete<DayOffWork>(environment.apiUrls.calendar.deleteDayOffWork);
+  public deleteDayOffWork(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrls.calendar.deleteDayOffWork + id);
   }
 
-  public  findAllDaysOffWork(): Observable<Array<DayOffWork>> {
+  public findAllDaysOffWork(): Observable<Array<DayOffWork>> {
     console.log('call find all');
     return this.http.get<Array<DayOffWork>>(environment.apiUrls.calendar.findAllDaysOffWork);
   }

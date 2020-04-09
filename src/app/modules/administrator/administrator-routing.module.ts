@@ -11,6 +11,7 @@ import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {RemoveAbsenceComponent} from './page/calendar/absence/remove-absence/remove-absence.component';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
+import {RemoveDayOffComponent} from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
 
 
 const routes: Routes = [
@@ -60,7 +61,13 @@ const routes: Routes = [
       },
       {
         path: 'dayOff',
-        component: DayOffWorkComponent
+        component: DayOffWorkComponent,
+        children: [
+          {
+            path: 'remove-day-off',
+            component: RemoveDayOffComponent,
+          }
+        ]
       }
     ]
   }

@@ -36,6 +36,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
+import { RemoveDayOffComponent } from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.c
     AbsenceComponent,
     AddAbsenceComponent,
     RemoveAbsenceComponent,
-    DayOffWorkComponent
+    DayOffWorkComponent,
+    RemoveDayOffComponent
   ],
 
 
