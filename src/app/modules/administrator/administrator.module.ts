@@ -33,6 +33,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ActuatorComponent } from './actuator/actuator.component';
+import { ServicesStatusComponent } from './actuator/services-status/services-status.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ActuatorComponent } from './actuator/actuator.component';
     MealComponent,
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
-    ActuatorComponent
+    ActuatorComponent,
+    ServicesStatusComponent
   ],
 
 
