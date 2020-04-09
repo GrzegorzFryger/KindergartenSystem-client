@@ -4,6 +4,10 @@
     <div class="col-12">
       <mat-card class="http-trace-card">
 
+        <div *ngFor="let i of httpTrace.traces">
+          <p>{{i.request.method}}</p>
+        </div>
+
       </mat-card>
     </div>
   </div>

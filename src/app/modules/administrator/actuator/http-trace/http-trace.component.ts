@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpTrace} from '../../../../data/model/actuator/http-trace';
+import {ActuatorService} from '../../../../data/service/actuator/actuator-service';
 
 @Component({
   selector: 'app-http-trace',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HttpTraceComponent implements OnInit {
 
-  constructor() { }
+  httpTrace: HttpTrace;
+
+  constructor(private actuatorService: ActuatorService) {
+  }
 
   ngOnInit(): void {
+    this.actuatorService.getHttpTrace().subscribe(resp => {
+      this.httpTrace = resp;
+    });
   }
 
 }

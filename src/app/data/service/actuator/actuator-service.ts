@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Health} from '../../model/actuator/health';
 import {Meal} from '../../model/meal/meal';
 import {environment} from '../../../core/environment.dev';
+import {HttpTrace} from '../../model/actuator/http-trace';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,9 @@ export class ActuatorService {
 
   getHealth(): Observable<Health> {
     return this.http.get<Health>(environment.apiUrls.actuator.getHealth);
+  }
+
+  getHttpTrace(): Observable<HttpTrace> {
+    return this.http.get<HttpTrace>(environment.apiUrls.actuator.getHttpTrace);
   }
 }

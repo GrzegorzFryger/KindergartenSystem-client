@@ -87,7 +87,8 @@ export const environment = {
       getChildById: accountUrl + 'child/'
     },
     actuator: {
-      getHealth: actuatorUrl + 'health'
+      getHealth: actuatorUrl + 'health',
+      getHttpTrace: actuatorUrl + 'httptrace',
     }
   }
 };
