@@ -1,0 +1,47 @@
+<mat-card class="payments-history">
+  <p>Wybierz dziecko</p>
+  <div class="d-flex filters">
+    <mat-chip-list [selectable]="true" aria-label="child-selection">
+      <mat-chip *ngFor="let child of children" (click)="onSelectChild(child)">{{child?.name}} </mat-chip>
+      <mat-chip (click)="clear()">Usuń filtr</mat-chip>
+    </mat-chip-list>
+  </div>
+  <mat-form-field>
+    <mat-label>Szukaj</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Szukaj w płatnościach">
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate" matSortDirection="desc">
+    <ng-container matColumnDef="contractorDetails">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+      <mat-cell *matCellDef="let incomingPayment"> {{incomingPayment.contractorDetails}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Typ płatności</mat-header-cell>
+      <mat-cell *matCellDef="let incomingPayment"> {{incomingPayment.paymentType}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+      <mat-cell *matCellDef="let incomingPayment"> {{incomingPayment.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="transactionAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota</mat-header-cell>
+      <mat-cell
+        *matCellDef="let incomingPayment"> {{incomingPayment.transactionAmount}} {{ incomingPayment.transactionCurrency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="transactionDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Data</mat-header-cell>
+      <mat-cell *matCellDef="let incomingPayment"> {{incomingPayment.transactionDate}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+</mat-card>
+
