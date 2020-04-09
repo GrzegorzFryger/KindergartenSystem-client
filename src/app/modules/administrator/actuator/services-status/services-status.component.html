@@ -1,22 +1,84 @@
 <div class="component">
   <div class="row">
-    <div class="col-4 status-card-success">
+    <div class="col-3 status-card status-card-success">
       <div class="card-icon">
         <mat-icon>memory</mat-icon>
       </div>
+      <div class="clear"></div>
+      <div class="card-details">
+        <span>Application is:  <h4>{{health.status}}</h4></span>
+        <div class="clear"></div>
+        <span>Free disk space: <h4>{{health.components.diskSpace.details.free}}</h4></span>
+        <div class="clear"></div>
+        <span>Total disk space:  <h4>{{health.components.diskSpace.details.total}}</h4></span>
+        <div class="clear"></div>
+        <span>Threshold:  <h4>{{health.components.diskSpace.details.threshold}}</h4></span>
+      </div>
     </div>
 
-    <div class="col-4 status-card-success">
+    <div class="col-3 status-card status-card-success">
       <div class="card-icon">
         <mat-icon>email</mat-icon>
       </div>
+      <div class="clear"></div>
+      <div class="card-details">
+        <span>SMTP servicer is:  <h4>{{health.components.mail.status}}</h4></span>
+        <div class="clear"></div>
+        <span>SMTP: <h4>{{health.components.mail.details.location}}</h4></span>
+        <div class="clear"></div>
+      </div>
     </div>
 
 
-    <div class="col-4 status-card-success">
+    <div class="col-5 status-card status-card-success">
       <div class="card-icon">
         <mat-icon>storage</mat-icon>
       </div>
+      <div class="clear"></div>
+      <div class="card-details">
+        <span>accountModuleDataSource is:  <h4>
+          {{health.components.db.components.accountModuleDataSource.status}}
+          ( {{health.components.db.components.accountModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>calendarModuleDataSource is:  <h4>
+          {{health.components.db.components.calendarModuleDataSource.status}}
+          ( {{health.components.db.components.calendarModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>financesModuleDataSource is:  <h4>
+          {{health.components.db.components.financesModuleDataSource.status}}
+          ( {{health.components.db.components.financesModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>groupsModuleDataSource is:  <h4>
+          {{health.components.db.components.groupsModuleDataSource.status}}
+          ( {{health.components.db.components.groupsModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>mealModuleDataSource is:  <h4>
+          {{health.components.db.components.mealModuleDataSource.status}}
+          ( {{health.components.db.components.mealModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>paymentDataSource is:  <h4>
+          {{health.components.db.components.paymentDataSource.status}}
+          ( {{health.components.db.components.paymentDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>receivablesModuleDataSource is:  <h4>
+          {{health.components.db.components.receivablesModuleDataSource.status}}
+          ( {{health.components.db.components.receivablesModuleDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+        <span>schedulerDataSource is:  <h4>
+          {{health.components.db.components.schedulerDataSource.status}}
+          ( {{health.components.db.components.schedulerDataSource.details.database}} )
+        </h4></span>
+        <div class="clear"></div>
+      </div>
     </div>
+
+
   </div>
 </div>

@@ -11,7 +11,7 @@ class Components {
 
 class Mail {
   status: string;
-  mailDescription: MailDescription;
+  details: MailDescription;
 }
 
 class MailDescription {
@@ -20,7 +20,7 @@ class MailDescription {
 
 class DiskSpace {
   status: string;
-  diskSpaceDetails: DiskSpaceDetails;
+  details: DiskSpaceDetails;
 }
 
 class DiskSpaceDetails {
