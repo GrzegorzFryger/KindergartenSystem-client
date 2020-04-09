@@ -34,6 +34,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ActuatorComponent } from './actuator/actuator.component';
 import { ServicesStatusComponent } from './actuator/services-status/services-status.component';
+import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ServicesStatusComponent } from './actuator/services-status/services-sta
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
     ActuatorComponent,
-    ServicesStatusComponent
+    ServicesStatusComponent,
+    HttpTraceComponent
   ],
 
 
