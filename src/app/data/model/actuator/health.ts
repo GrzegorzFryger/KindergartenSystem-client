@@ -106,7 +106,7 @@ class PaymentDataSource {
 }
 
 class ReceivablesModuleDataSource {
-  moduleName = 'groupsModuleDataSource';
+  moduleName = 'receivablesModuleDataSource';
   status: string;
   details: {
     database: string;
