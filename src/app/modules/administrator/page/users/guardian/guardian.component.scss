@@ -1,0 +1,76 @@
+.user-guardian-container {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  width: 100%;
+
+  .guardian-container {
+    flex-shrink: 1;
+    margin-top: 32px;
+    flex-basis: 50%;
+
+    p {
+    }
+
+    .mat-form-field {
+      width: 100%;
+      .mat-form-field-flex {
+        background-color: white;
+      }
+    }
+
+    .mat-table {
+
+      .mat-row {
+
+        &:hover {
+          background-color: rgb(240, 187, 218);
+          cursor: pointer;
+        }
+      }
+    }
+
+    .buttons {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  .person-container {
+    margin-top: 32px;
+    flex-basis: 50%;
+    flex-shrink: 1;
+  }
+}
+
+.move {
+  animation: fade 500ms forwards;
+}
+
+.move2 {
+  animation: fadeIn 500ms forwards;
+
+}
+
+@keyframes fade {
+  0% {
+    //cubic-bezier(0.35, 0, 0.25, 1)
+  }
+
+  100% {
+    transform: translate3d(-100%, 0px, 0px);
+    display: none;
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    transform: translate3d(100%, 0px, 0px);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0px, 0px);
+  }
+}

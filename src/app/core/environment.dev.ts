@@ -23,7 +23,7 @@ export const environment = {
     apiUrl,
     authorization: apiUrl + '/api/authenticate',
     user: apiUrl + '/api/account/user',
-    guardian: apiUrl + '/api/account/guardians/',
+    guardianUrl: apiUrl + '/api/account/guardians/',
     meal: apiUrl + '/api/meal',
     mealDictionary: apiUrl + '/api/dictionary/meal/',
 
@@ -85,7 +85,11 @@ export const environment = {
     },
     account: {
       getChildById: accountUrl + 'child/'
+    },
+    guardian: {
+      guardians: accountUrl + 'guardians'
     }
+
   }
 };
 

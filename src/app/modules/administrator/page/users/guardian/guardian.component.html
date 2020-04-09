@@ -1,0 +1,55 @@
+<div class="user-guardian-container">
+
+   <div [ngClass]="clicked? 'move':''" class="guardian-container">
+     <p>Lista rodziców</p>
+     <mat-form-field>
+       <mat-label>Szukaj</mat-label>
+       <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj rodzica">
+     </mat-form-field>
+
+     <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate" matSortDirection="desc">
+       <ng-container matColumnDef="name">
+         <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+         <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="surname">
+         <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+         <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="phone">
+         <mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</mat-header-cell>
+         <mat-cell *matCellDef="let guardian"> {{guardian.phone}} </mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="email">
+         <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+         <mat-cell
+           *matCellDef="let guardian"> {{guardian.email}} </mat-cell>
+       </ng-container>
+
+       <ng-container matColumnDef="status">
+         <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
+         <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
+       </ng-container>
+
+       <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+       <mat-row *matRowDef="let row, let guardian; columns: columnsToDisplay;" (click)="selectGuardian(guardian)"></mat-row>
+     </mat-table>
+
+     <div class="buttons">
+       <div class="div">
+         <button mat-raised-button color="primary">Dodaj nowego rodzica</button>
+       </div>
+     </div>
+   </div>
+
+  <ng-template [ngIf]="clicked">
+    <div  [ngClass]="clicked? 'move2':''"  class="person-container">
+      <app-profile [person]="personToDisplay" (personEmitter)="receiveFromPersonComponent($event)"></app-profile>
+    </div>
+  </ng-template>
+
+</div>
+

@@ -6,6 +6,7 @@ import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
+import {Guardian} from '../../model/users/guardian';
 
 const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
 
@@ -24,7 +25,7 @@ export class GuardianService {
   }
 
   public findAllChildren(userId: string): Observable<Array<Child>> {
-    return this.http.get<Array<Child>>(environment.apiUrls.guardian + `${userId}` + '/children')
+    return this.http.get<Array<Child>>(environment.apiUrls.guardianUrl + `${userId}` + '/children')
       .pipe(
         catchError(err => {
           this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
@@ -36,5 +37,8 @@ export class GuardianService {
     return this.http.get<Child>(environment.apiUrls.account.getChildById + childID);
   }
 
+  getAllGuardian(): Observable<Array<Guardian>> {
+    return this.http.get<Array<Guardian>>(environment.apiUrls.guardian.guardians);
+  }
 
 }

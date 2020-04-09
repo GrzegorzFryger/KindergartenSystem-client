@@ -1,0 +1,16 @@
+<div class="d-flex">
+  <mat-card>
+    <mat-card-header>
+     <div class="header">
+       <div class="img">
+         <img src="../../../assets/images/tata.png" height="150" width="150" class="img-fluid"/>
+       </div>
+       <div class="name">
+         {{person?.name }}  {{person?.surname }}
+       </div>
+     </div>
+    </mat-card-header>
+
+    <button (click)=" closePersonComponent()" mat-raised-button color="primary">Dodaj nowego rodzica</button>
+  </mat-card>
+</div>

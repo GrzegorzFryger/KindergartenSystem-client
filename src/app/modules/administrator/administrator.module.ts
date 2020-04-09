@@ -33,6 +33,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {UsersComponent} from './page/users/users.component';
+import {ProfileComponent} from './page/users/profile/profile.component';
+import {GuardianComponent} from './page/users/guardian/guardian.component';
+import {EmployeeComponent} from './page/users/employee/employee.component';
+import {ChildComponent} from './page/users/child/child.component';
 
 
 @NgModule({
@@ -47,7 +52,12 @@ import {AdministratorNavigationMenuComponent} from './component/administrator-na
     MealComponent,
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
-    AdministratorNavigationMenuComponent
+    AdministratorNavigationMenuComponent,
+    UsersComponent,
+    ProfileComponent,
+    GuardianComponent,
+    EmployeeComponent,
+    ChildComponent
   ],
 
 
