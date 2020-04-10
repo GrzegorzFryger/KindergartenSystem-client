@@ -12,6 +12,7 @@ import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absen
 import {RemoveAbsenceComponent} from './page/calendar/absence/remove-absence/remove-absence.component';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {RemoveDayOffComponent} from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
+import {GroupsComponent} from './page/groups/groups.component';
 
 
 const routes: Routes = [
@@ -68,7 +69,11 @@ const routes: Routes = [
             component: RemoveDayOffComponent,
           }
         ]
-      }
+      },
+      {
+        path: 'groups',
+        component: GroupsComponent,
+      },
     ]
   }
 ];

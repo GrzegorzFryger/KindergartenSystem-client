@@ -37,6 +37,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
 import { RemoveDayOffComponent } from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
+import { GroupsComponent } from './page/groups/groups.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { RemoveDayOffComponent } from './page/calendar/day-off-work/remove-day-o
     AddAbsenceComponent,
     RemoveAbsenceComponent,
     DayOffWorkComponent,
-    RemoveDayOffComponent
+    RemoveDayOffComponent,
+    GroupsComponent
   ],
 
 
