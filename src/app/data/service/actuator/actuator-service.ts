@@ -28,6 +28,6 @@ export class ActuatorService {
   }
 
   getMetricsDetails(i: string): Observable<Metric> {
-    return this.http.get(environment.apiUrls.actuator.getMetrics + '/' + i);
+    return this.http.get<Metric>(environment.apiUrls.actuator.getMetrics + '/' + i);
   }
 }
