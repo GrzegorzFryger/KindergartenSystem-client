@@ -5,6 +5,7 @@ import {Health} from '../../model/actuator/health';
 import {Meal} from '../../model/meal/meal';
 import {environment} from '../../../core/environment.dev';
 import {HttpTrace} from '../../model/actuator/http-trace';
+import {Metric} from '../../model/actuator/metric';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ActuatorService {
     return this.http.get(environment.apiUrls.actuator.getMetrics);
   }
 
-  getMetricsDetails(i: string):Observable<Metric> {
-
+  getMetricsDetails(i: string): Observable<Metric> {
+    return this.http.get(environment.apiUrls.actuator.getMetrics + '/' + i);
   }
 }

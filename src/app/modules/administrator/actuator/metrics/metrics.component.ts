@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {access} from 'fs';
 import {ActuatorService} from '../../../../data/service/actuator/actuator-service';
+import {Metric} from '../../../../data/model/actuator/metric';
 
 @Component({
   selector: 'app-metrics',
@@ -10,7 +11,7 @@ import {ActuatorService} from '../../../../data/service/actuator/actuator-servic
 export class MetricsComponent implements OnInit {
 
   names: [];
-  presentingMetrics: Metrics;
+  presentingMetrics: Metric;
 
   constructor(private actuatorService: ActuatorService) {
   }
