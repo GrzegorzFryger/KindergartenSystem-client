@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -35,6 +35,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ActuatorComponent } from './actuator/actuator.component';
 import { ServicesStatusComponent } from './actuator/services-status/services-status.component';
 import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
+import { ChartComponent } from './actuator/chart/chart.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
     DialogOverviewExampleDialog,
     ActuatorComponent,
     ServicesStatusComponent,
-    HttpTraceComponent
+    HttpTraceComponent,
+    ChartComponent
   ],
 
 
@@ -84,6 +86,7 @@ import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    DatePipe
   ]
 })
 export class AdministratorModule {
