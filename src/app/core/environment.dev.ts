@@ -89,6 +89,8 @@ export const environment = {
     actuator: {
       getHealth: actuatorUrl + 'health',
       getHttpTrace: actuatorUrl + 'httptrace',
+      getMetrics: actuatorUrl + 'metrics'
+
     }
   }
 };

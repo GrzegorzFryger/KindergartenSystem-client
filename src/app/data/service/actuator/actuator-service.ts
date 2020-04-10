@@ -21,4 +21,8 @@ export class ActuatorService {
   getHttpTrace(): Observable<HttpTrace> {
     return this.http.get<HttpTrace>(environment.apiUrls.actuator.getHttpTrace);
   }
+
+  getMetrics(): Observable<any> {
+    return this.http.get(environment.apiUrls.actuator.getMetrics);
+  }
 }
