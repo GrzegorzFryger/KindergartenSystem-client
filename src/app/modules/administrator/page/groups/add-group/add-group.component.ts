@@ -23,7 +23,9 @@ export class AddGroupComponent implements OnInit {
     this.group = new Group();
     this.group.groupName = groupN;
     this.group.groupDescription = groupDes;
-    this.groupService.createGroup(this.group);
+    this.groupService.createGroup(this.group).subscribe(res => {
+      console.log(res);
+    });
   }
 
 }
