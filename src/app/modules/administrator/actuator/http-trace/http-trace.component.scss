@@ -7,6 +7,9 @@
 
   .http-trace-single-card {
     margin: 5px 0;
+    border-radius: 25px;
+    -webkit-box-shadow: 1px 1px 1px 1px #E8E8E8;
+    box-shadow: 1px 1px 1px 1px #E8E8E8;
   }
 
   h3 {
@@ -25,7 +28,27 @@
     float:right;
   }
 
+}
 
+
+.resp-positive {
+  h3 {
+    color: #2ecc71;
+  }
+
+  span {
+    color: #2ecc71;
+  }
+}
+
+.resp-negative {
+  h3 {
+    color: #e74c3c;
+  }
+
+  span {
+    color: #e74c3c;
+  }
 }
 
 
