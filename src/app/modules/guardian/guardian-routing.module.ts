@@ -1,5 +1,5 @@
-import { FinancesComponent } from './page/finances/finances.component';
-import { ReceiablesComponent } from './page/receiables/receiables.component';
+import {FinancesComponent} from './page/finances/finances.component';
+import {ReceivablesComponent} from './page/finances/receiables/receivables.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {GuardianComponent} from './guardian.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'receivables',
-        component: ReceiablesComponent,
+        component: ReceivablesComponent,
       },
       {
         path: 'finances',

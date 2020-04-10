@@ -1,0 +1,12 @@
+
+.d-flex {
+  justify-content: center;
+  height: 100%;
+
+  .item {
+    flex-shrink: 1;
+    flex-basis: 100%;
+
+    }
+  }
+

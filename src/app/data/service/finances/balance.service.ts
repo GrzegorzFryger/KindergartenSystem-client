@@ -17,9 +17,15 @@ export class BalanceService {
     );
   }
 
-  getBalanceForAllChildren(guardianId: string): Observable<Balance> {
+  getBalancesForAllChildren(guardianId: string): Observable<Array<Balance>> {
+    return this.http.get<Array<Balance>>(
+      environment.apiUrls.finances.getBalancesForAllChildren + `${guardianId}`
+    );
+  }
+
+  getSumOfBalancesForAllChildren(guardianId: string): Observable<Balance> {
     return this.http.get<Balance>(
-      environment.apiUrls.finances.getBalanceForAllChildren + `${guardianId}`
+      environment.apiUrls.finances.getSumOfBalancesForAllChildren + `${guardianId}`
     );
   }
 }
