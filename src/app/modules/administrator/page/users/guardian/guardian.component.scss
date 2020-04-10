@@ -39,7 +39,7 @@
 
   .person-container {
     margin-top: 32px;
-    flex-basis: 50%;
+    flex-basis: 100%;
     flex-shrink: 1;
   }
 }
@@ -50,12 +50,10 @@
 
 .move2 {
   animation: fadeIn 500ms forwards;
-
 }
 
 @keyframes fade {
   0% {
-    //cubic-bezier(0.35, 0, 0.25, 1)
   }
 
   100% {
@@ -64,13 +62,13 @@
   }
 }
 
-
 @keyframes fadeIn {
   0% {
     transform: translate3d(100%, 0px, 0px);
   }
 
   100% {
-    transform: translate3d(-50%, 0px, 0px);
+    transform: translate3d(0%, 0px, 0px);
   }
 }
+

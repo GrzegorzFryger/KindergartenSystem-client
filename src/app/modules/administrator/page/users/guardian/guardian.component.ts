@@ -3,6 +3,8 @@ import {Guardian} from '../../../../../data/model/users/guardian';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {GuardianService} from '../../../../../data/service/users/guardian.service';
+import {InputPerson, PersonType} from '../../../../../data/model/users/input-person';
+
 
 @Component({
   selector: 'app-guardian',
@@ -16,7 +18,7 @@ export class GuardianComponent implements OnInit {
   columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email', 'status'];
   clicked = false;
   animationClass: string;
-  personToDisplay: any;
+  personToDisplay: InputPerson;
 
   constructor(private guardianService: GuardianService) {
     this.guardians = this.guardianService.getAllGuardian();
@@ -35,7 +37,7 @@ export class GuardianComponent implements OnInit {
 
   selectGuardian(guardian: Guardian) {
     this.clicked = true;
-    this.personToDisplay = guardian;
+    this.personToDisplay = {type: PersonType.Guardian, data: guardian};
   }
 
   receiveFromPersonComponent($event) {

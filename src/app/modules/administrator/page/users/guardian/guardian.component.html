@@ -1,6 +1,6 @@
 <div class="user-guardian-container">
 
-   <div [ngClass]="clicked? 'move':''" class="guardian-container">
+   <div *ngIf="!clicked" [ngClass]="clicked? 'move':''" class="guardian-container">
      <p>Lista rodziców</p>
      <mat-form-field>
        <mat-label>Szukaj</mat-label>
@@ -47,7 +47,7 @@
 
   <ng-template [ngIf]="clicked">
     <div  [ngClass]="clicked? 'move2':''"  class="person-container">
-      <app-profile [person]="personToDisplay" (personEmitter)="receiveFromPersonComponent($event)"></app-profile>
+      <app-profile [personData]="personToDisplay" (personEmitter)="receiveFromPersonComponent($event)"></app-profile>
     </div>
   </ng-template>
 
