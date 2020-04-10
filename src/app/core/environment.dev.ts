@@ -7,6 +7,7 @@ const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
 const accountUrl = apiUrl + '/api/account/';
+const groupsUrl = apiUrl + '/api/groups/';
 
 export const environment = {
   production: false,
@@ -86,6 +87,12 @@ export const environment = {
       createDayOffWork: calendarUrl + 'dayoff',
       updateDayOffWork: calendarUrl + 'dayoff',
       deleteDayOffWork: calendarUrl + 'dayoff/',
+    },
+    groups: {
+      createGroup: groupsUrl,
+      getGroup: groupsUrl,
+      getAllGroups: groupsUrl + 'groups',
+      updateGroup: groupsUrl,
     },
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
