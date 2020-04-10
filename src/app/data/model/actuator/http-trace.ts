@@ -8,6 +8,7 @@ class HttpTraces {
   response: HttpTraceResponse;
   principal: string;
   session: string;
+  timeTaken: number;
 }
 
 class HttpTraceRequest {
@@ -17,5 +18,4 @@ class HttpTraceRequest {
 
 class HttpTraceResponse {
   status: number;
-  timeTaken: number;
 }

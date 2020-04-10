@@ -4,6 +4,29 @@
   height: 450px;
   overflow-y:auto;
   border-radius: 10px;
+
+  .http-trace-single-card {
+    margin: 5px 0;
+  }
+
+  h3 {
+    display: inline;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  h4 {
+    display: inline;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  span {
+    float:right;
+  }
+
+
 }
+
 
 

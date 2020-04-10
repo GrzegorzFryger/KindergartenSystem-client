@@ -2,13 +2,18 @@
   <div class="row">
 
     <div class="col-12">
-      <mat-card class="http-trace-card">
+      <div class="http-trace-card">
 
-        <div *ngFor="let i of httpTrace.traces">
-          <p>{{i.request.method}}</p>
+        <div class="http-trace-single-card" *ngFor="let i of httpTrace.traces">
+          <mat-card>
+            <h3>[{{i.request.method}}] </h3>
+            <h4>{{i.request.uri}}</h4>
+            <span>Http Status Code: {{i.response.status}} ({{i.timeTaken}} ms)</span>
+          </mat-card>
+
         </div>
 
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>
