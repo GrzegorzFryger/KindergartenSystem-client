@@ -1,7 +1,18 @@
 <div class="row">
-  <div class="metrics-details" >
+  <div class="metrics-details">
 
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let i of names">
+        <mat-expansion-panel-header (click)="getMetricsDetails(i)">
+          <mat-panel-title>
+            {{i}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        {{presentingMetrics}}
 
+      </mat-expansion-panel>
+
+    </mat-accordion>
 
 
   </div>

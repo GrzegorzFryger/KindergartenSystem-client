@@ -25,4 +25,8 @@ export class ActuatorService {
   getMetrics(): Observable<any> {
     return this.http.get(environment.apiUrls.actuator.getMetrics);
   }
+
+  getMetricsDetails(i: string):Observable<Metric> {
+
+  }
 }

@@ -10,6 +10,7 @@ import {ActuatorService} from '../../../../data/service/actuator/actuator-servic
 export class MetricsComponent implements OnInit {
 
   names: [];
+  presentingMetrics: Metrics;
 
   constructor(private actuatorService: ActuatorService) {
   }
@@ -20,4 +21,9 @@ export class MetricsComponent implements OnInit {
     });
   }
 
+  getMetricsDetails(i: string) {
+    this.actuatorService.getMetricsDetails(i).subscribe(resp => {
+      this.presentingMetrics = resp;
+    });
+  }
 }
