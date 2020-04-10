@@ -36,6 +36,7 @@ import { ActuatorComponent } from './actuator/actuator.component';
 import { ServicesStatusComponent } from './actuator/services-status/services-status.component';
 import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
 import { ChartComponent } from './actuator/chart/chart.component';
+import { MetricsComponent } from './actuator/metrics/metrics.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ChartComponent } from './actuator/chart/chart.component';
     ActuatorComponent,
     ServicesStatusComponent,
     HttpTraceComponent,
-    ChartComponent
+    ChartComponent,
+    MetricsComponent
   ],
 
 
