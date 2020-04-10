@@ -38,6 +38,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
 import { RemoveDayOffComponent } from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
 import { GroupsComponent } from './page/groups/groups.component';
+import { AddGroupComponent } from './page/groups/add-group/add-group.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { GroupsComponent } from './page/groups/groups.component';
     RemoveAbsenceComponent,
     DayOffWorkComponent,
     RemoveDayOffComponent,
-    GroupsComponent
+    GroupsComponent,
+    AddGroupComponent
   ],
 
 

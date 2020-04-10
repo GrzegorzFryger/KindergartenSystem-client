@@ -13,6 +13,7 @@ import {RemoveAbsenceComponent} from './page/calendar/absence/remove-absence/rem
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {RemoveDayOffComponent} from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
 import {GroupsComponent} from './page/groups/groups.component';
+import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 
 
 const routes: Routes = [
@@ -73,6 +74,12 @@ const routes: Routes = [
       {
         path: 'groups',
         component: GroupsComponent,
+        children: [
+          {
+            path: 'add-group',
+            component: AddGroupComponent,
+          }
+        ]
       },
     ]
   }
