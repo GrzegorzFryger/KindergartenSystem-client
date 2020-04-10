@@ -1,5 +1,5 @@
 <div class="user-person-container">
-  <mat-card [ngClass]="isEdit? 'resize': ''" class="person-card">
+  <mat-card [ngClass]="cssClassToSet" class="person-card">
     <mat-card-content>
       <div class="person-content-container">
         <div class="header-item">
@@ -82,77 +82,33 @@
           <button mat-raised-button (click)="close('person')" color="primary">Cofnij</button>
         </div>
         <div class="button">
-          <button mat-raised-button (click)="openEdit()" color="primary">Edytuj</button>
+          <button mat-raised-button (click)="openEditCard()" color="primary">Edytuj</button>
         </div>
       </div>
     </mat-card-footer>
 
   </mat-card>
 
-  <mat-card *ngIf="isEdit" class="person-edit-card">
-    <mat-card-content>
-      <div class="d-flex">
-        <form class="person-form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
-          <p>Postawowe dane:</p>
-          <div class="section">
-            <mat-form-field appearance="standard">
-              <mat-label>Imie</mat-label>
-              <input matInput placeholder="Imie" formControlName="name">
-              <mat-error *ngIf="hasError('name', 'required')">Imie jest wymagane</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="standard">
-              <mat-label>Nazwisko</mat-label>
-              <input matInput placeholder="Nazwisko" formControlName="surname">
-              <mat-error *ngIf="hasError('surname', 'required')">Imie jest wymagan</mat-error>
-            </mat-form-field>
-          </div>
-          <p>Dane kontaktowe:</p>
-          <div class="section">
-            <mat-form-field appearance="standard">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="email" formControlName="email">
-              <mat-error *ngIf="hasError('email', 'required')">Email jest wymagan</mat-error>
-              <mat-error *ngIf="hasError('email', 'email')">Email jest niepoprawny</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="standard">
-              <mat-label>Telefon</mat-label>
-              <input matInput placeholder="phone" formControlName="phone">
-              <mat-error *ngIf="hasError('phone', 'required')">Telefon jest wymagany</mat-error>
-            </mat-form-field>
-          </div>
-          <p>Adres:</p>
-          <div class="section" formGroupName="address">
-            <mat-form-field appearance="standard">
-              <mat-label>Kod pocztowy</mat-label>
-              <input matInput placeholder="Kod pocztowy" formControlName="zip_code">
-              <mat-error *ngIf="hasChildError('address','zip_code','required')">Kod pocztowy jest wymagany</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="standard">
-              <mat-label>Miasto</mat-label>
-              <input matInput placeholder="city" formControlName="city">
-              <mat-error *ngIf="hasChildError('address','city','required')">Miasto jest wymagane</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="standard">
-              <mat-label>Ulica i numer</mat-label>
-              <input matInput placeholder="street" formControlName="street">
-              <mat-error *ngIf="hasChildError('address','street','required')">Ulica jest wymagana</mat-error>
-            </mat-form-field>
-          </div>
-        </form>
-      </div>
-    </mat-card-content>
-
-    <mat-card-footer>
-      <div class="footer-container">
-        <div class="button">
-          <button mat-raised-button (click)="close('edit')" color="primary">Anuluj</button>
+  <ng-container *ngIf="isEditCardOpen">
+    <mat-card class="person-edit-card">
+      <mat-card-content>
+        <div class="d-flex">
+          <app-person-form [initialState]="personFormInitial"
+                           (formValuesChanged)="formValuesChange($event)">
+          </app-person-form>
         </div>
-        <div class="button">
-          <button mat-raised-button color="primary">Zapisz</button>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="footer-container">
+          <div class="button">
+            <button mat-raised-button (click)="close('edit')" color="primary">Anuluj</button>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary">Zapisz</button>
+          </div>
         </div>
-      </div>
-    </mat-card-footer>
-  </mat-card>
+      </mat-card-footer>
+    </mat-card>
+  </ng-container>
 
 </div>

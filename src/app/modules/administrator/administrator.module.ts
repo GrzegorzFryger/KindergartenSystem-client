@@ -38,6 +38,7 @@ import {ProfileComponent} from './page/users/profile/profile.component';
 import {GuardianComponent} from './page/users/guardian/guardian.component';
 import {EmployeeComponent} from './page/users/employee/employee.component';
 import {ChildComponent} from './page/users/child/child.component';
+import {PersonFormComponent} from './page/users/person-form/person-form.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {ChildComponent} from './page/users/child/child.component';
     ProfileComponent,
     GuardianComponent,
     EmployeeComponent,
-    ChildComponent
+    ChildComponent,
+    PersonFormComponent
   ],
 
 

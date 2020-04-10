@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {InputPerson, PersonType} from '../../../../../data/model/users/input-person';
 import {Guardian} from '../../../../../data/model/users/guardian';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 enum CloseType {
   EDIT, PERSON
@@ -15,48 +15,31 @@ enum CloseType {
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
-  @Output() personEmitter: EventEmitter<boolean>;
+  @Output() profileEmitter: EventEmitter<boolean>;
   @Input() personData: InputPerson;
+
   isInstanceOfGuardian: boolean;
-  isEdit: boolean;
-  form: FormGroup;
+  isEditCardOpen: boolean;
+  cssClassToSet: Array<string>;
+
+  personFormInitial: { [key: string]: any };
 
   constructor(private fb: FormBuilder) {
-    this.personEmitter = new EventEmitter<boolean>();
+    this.profileEmitter = new EventEmitter<boolean>();
+    this.cssClassToSet = new Array<string>();
   }
 
   ngOnInit(): void {
     this.isInstanceOfGuardian = this.personData.type === PersonType.Guardian;
-
-    this.form = this.fb.group({
-      name: [this.person.name, [Validators.required, Validators.min(3)]],
-      surname: [this.person.surname, [Validators.required]],
-      email: [this.person.email, [Validators.required, Validators.email]],
-      phone: [this.person.phone, [Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$')]],
-      address: this.fb.group({
-        zip_code: [this.person.postalCode, [Validators.required]],
-        city: [this.person.city, [Validators.required]],
-        street: [this.person.streetNumber, [Validators.required]],
-      })
-    });
   }
-
-  public get f() {
-    return this.form.controls;
-  }
-  public hasError = (controlName: string, errorName: string) => {
-    return this.form.controls[controlName].hasError(errorName);
-  };
-
-  public hasChildError  = (childName: string, controlName: string, errorName: string) => {
-    return this.form.get(childName).get(controlName).hasError(errorName);
-  };
 
   close(type: string) {
     if (type === 'edit') {
-      this.isEdit = false;
+      this.cssClassToSet = this.cssClassToSet.filter(cssClass => cssClass !== 'resize');
+      this.isEditCardOpen = false;
     } else {
-      this.personEmitter.emit(false);
+      this.cssClassToSet = this.cssClassToSet.filter(cssClass => cssClass !== 'resize');
+      this.profileEmitter.emit(false);
     }
   }
 
@@ -64,12 +47,17 @@ export class ProfileComponent implements OnInit {
     return this.personData.data;
   }
 
-  openEdit() {
-    this.isEdit = true;
+  openEditCard() {
+    this.personFormInitial = this.person;
+    this.cssClassToSet.push('resize');
+    this.isEditCardOpen = true;
   }
 
   onSubmit() {
 
   }
 
+  formValuesChange($event: { [p: string]: any }) {
+    console.log($event);
+  }
 }

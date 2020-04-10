@@ -5,6 +5,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import {GuardianService} from '../../../../../data/service/users/guardian.service';
 import {InputPerson, PersonType} from '../../../../../data/model/users/input-person';
 
+interface CssClass {
+  in: Array<string>;
+  out: Array<string>;
+}
 
 @Component({
   selector: 'app-guardian',
@@ -16,12 +20,20 @@ export class GuardianComponent implements OnInit {
   guardians: Observable<Array<Guardian>>;
   dataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
   columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email', 'status'];
-  clicked = false;
-  animationClass: string;
   personToDisplay: InputPerson;
+
+  // view control
+  createGuardianCardIsOpen: boolean;
+  personCardIsOpen: boolean;
+  classToSet: CssClass;
+  form: any;
+  personFormInitial: Guardian;
+
 
   constructor(private guardianService: GuardianService) {
     this.guardians = this.guardianService.getAllGuardian();
+    this.classToSet = {in: new Array<string>(), out: new Array<string>()};
+    this.personFormInitial = new Guardian();
   }
 
   ngOnInit(): void {
@@ -36,12 +48,29 @@ export class GuardianComponent implements OnInit {
   }
 
   selectGuardian(guardian: Guardian) {
-    this.clicked = true;
+    this.classToSet.out.push('move');
+    this.classToSet.in.push('move2');
+    this.personCardIsOpen = true;
     this.personToDisplay = {type: PersonType.Guardian, data: guardian};
   }
 
   receiveFromPersonComponent($event) {
-    this.clicked = $event;
+    this.classToSet.out = this.classToSet.out.filter(cssClass => cssClass !== 'move');
+    this.classToSet.in = this.classToSet.out.filter(cssClass => cssClass !== 'move2');
+    this.personCardIsOpen = $event;
   }
 
+  createGuardian() {
+    this.classToSet.out.push('moveUp');
+    this.classToSet.in.push('moveUp2');
+    this.createGuardianCardIsOpen = true;
+  }
+
+  onSubmit() {
+
+  }
+
+  formValuesChange($event: { [p: string]: any }) {
+
+  }
 }

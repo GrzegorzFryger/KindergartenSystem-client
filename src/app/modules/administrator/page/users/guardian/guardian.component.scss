@@ -42,6 +42,33 @@
     flex-basis: 100%;
     flex-shrink: 1;
   }
+
+  .create {
+    margin-top: 32px;
+    flex-basis: 50%;
+    flex-shrink: 1;
+
+    .d-flex {
+      justify-content: center;
+
+      .person-form-container {
+
+        p {
+          margin-bottom: 8px;
+          margin-top: 8px;
+        }
+
+        .section {
+          margin-left: 16px;
+
+          .mat-form-field {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+
+  }
 }
 
 .move {
@@ -50,6 +77,16 @@
 
 .move2 {
   animation: fadeIn 500ms forwards;
+}
+
+.moveUp {
+  animation: moveUp 500ms forwards;
+  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+.moveUp2 {
+  animation: moveUp2 500ms forwards;
+  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
 }
 
 @keyframes fade {
@@ -72,3 +109,24 @@
   }
 }
 
+@keyframes moveUp {
+  0% {
+
+  }
+
+  100% {
+    transform: translate3d(0%, -100%, 0px);
+    display: none;
+  }
+}
+
+@keyframes moveUp2 {
+  0% {
+    transform: translate3d(0%, 100%, 0px);
+    display: none;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0px);
+  }
+}
