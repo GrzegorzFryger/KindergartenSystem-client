@@ -16,4 +16,8 @@ export class ImportPaymentsService {
   public importTransactions(formData): Observable<Array<Transaction>> {
     return this.http.post<Array<Transaction>>(environment.apiUrls.receivables.importTransactions, formData);
   }
+
+  public checkTransactionsFromCsvFile(formData): Observable<Array<Transaction>> {
+    return this.http.post<Array<Transaction>>(environment.apiUrls.receivables.checkTransactionsReturnedInputFile, formData);
+  }
 }

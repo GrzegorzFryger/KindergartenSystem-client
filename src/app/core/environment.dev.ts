@@ -48,6 +48,7 @@ export const environment = {
       getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardian/',
       getAllPaymentMappingsForGuardian: receivablesUrl + 'payments/mappings/',
       importTransactions: receivablesUrl + 'transactions/import',
+      checkTransactionsReturnedInputFile: receivablesUrl + 'transactions/import/check',
 
       // CashPayment Controller
       getAllCashPayments: receivablesUrl + 'cash-payments',

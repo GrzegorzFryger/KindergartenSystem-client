@@ -18,6 +18,8 @@ export class ImportComponent implements OnInit {
   public form: FormGroup;
   public fileName: string;
   public unloaded = true;
+  public loaded = false;
+  public inputNotVerified = true;
 
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,32 +41,48 @@ export class ImportComponent implements OnInit {
     });
   }
 
-  onFileChange(event) {
+  onFileChange(event): void {
     console.log('Input file changed');
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       console.log(file);
       this.form.get('transfers_input_file').setValue(file);
       this.fileName = file.name;
-      this.unloaded = false;
+      this.markFileAsLoaded();
     }
   }
 
-  clearFile() {
+  clearFile(): void {
     console.log('Clearing file');
-    this.fileInput.nativeElement.value = '';
-    this.unloaded = true;
-    this.fileName = '';
+    this.markFileAsUnloaded();
+    this.resetInput();
+    this.inputNotVerified = true;
+    this.clearDataTable();
   }
 
-  onSubmit() {
-    console.log('Sending input file to REST API');
+  loadTransactionsForVerification(): void {
     const formData = this.prepareFormData();
-    this.importPaymentsService.importTransactions(formData).subscribe(
+    console.log('Sending input file to REST API (Checking what transactions are stored in file)');
+    this.importPaymentsService.checkTransactionsFromCsvFile(formData).subscribe(
       resp => {
         console.log(resp);
         this.uploadedTransactions = resp;
         this.setUpDataTable(resp);
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
+        return throwError(err);
+      })
+    );
+    this.inputNotVerified = false; // We assume that user reads table and accepts it
+  }
+
+  saveTransactionsInDatabase(): void {
+    console.log('Sending input file to REST API (Saving list of transactions)');
+    const formData = this.prepareFormData();
+    this.importPaymentsService.importTransactions(formData).subscribe(
+      resp => {
+        console.log(resp);
       },
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
@@ -81,9 +99,28 @@ export class ImportComponent implements OnInit {
     this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
   }
 
+  private clearDataTable(): void {
+    this.dataSource.data = [];
+  }
+
   private prepareFormData(): any {
     const formData = new FormData();
     formData.append('input', this.form.get('transfers_input_file').value);
     return formData;
+  }
+
+  private resetInput(): void {
+    this.fileName = '';
+    this.fileInput.nativeElement.value = '';
+  }
+
+  private markFileAsUnloaded(): void {
+    this.unloaded = true;
+    this.loaded = false;
+  }
+
+  private markFileAsLoaded(): void {
+    this.unloaded = false;
+    this.loaded = true;
   }
 }

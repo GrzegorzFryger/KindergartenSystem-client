@@ -5,7 +5,7 @@
 
   <mat-card-content>
     <div class="container-fluid">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="saveTransactionsInDatabase()">
         <div class="row">
           <div class="col">
             <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <button mat-raised-button color="primary" type="button" (click)="clearFile()">Wyczyść
+            <button mat-raised-button color="primary" type="button" [disabled]="unloaded" (click)="clearFile()">Wyczyść
               plik
             </button>
           </div>
@@ -38,7 +38,19 @@
         </div>
         <div class="row">
           <div class="col">
-            <button mat-raised-button color="primary" type="submit" [disabled]="unloaded">Wyślij
+            <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
+                    (click)="loadTransactionsForVerification()">Załaduj plik
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <br><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified">Wyślij
             </button>
           </div>
         </div>
