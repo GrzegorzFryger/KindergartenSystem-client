@@ -7,6 +7,7 @@ const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
 const accountUrl = apiUrl + '/api/account/';
+const actuatorUrl = apiUrl + '/actuator/';
 
 export const environment = {
   production: false,
@@ -85,6 +86,13 @@ export const environment = {
     },
     account: {
       getChildById: accountUrl + 'child/'
+    },
+    actuator: {
+      getHealth: actuatorUrl + 'health',
+      getHttpTrace: actuatorUrl + 'httptrace',
+      getMetrics: actuatorUrl + 'metrics',
+      getMetricsDetails: ''
+
     }
   }
 };

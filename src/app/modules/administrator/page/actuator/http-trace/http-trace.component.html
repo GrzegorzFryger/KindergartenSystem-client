@@ -1,0 +1,25 @@
+<div class="component">
+  <div class="row">
+
+    <div class="col-12">
+      <div class="http-trace-card">
+
+        <div *ngFor="let i of httpTrace.traces">
+          <div class="http-trace-single-card"
+               [ngClass]="{
+                  'resp-positive': i.response.status == 200,
+                  'resp-negative': i.response.status != 200
+                  }">
+            <mat-card>
+              <h3 class="">[{{i.request.method}}] </h3>
+              <h4>{{i.request.uri}}</h4>
+              <span class="">Status Code: {{i.response.status}} ({{i.timeTaken}} ms)</span>
+            </mat-card>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,8 +5,10 @@ import {TransactionsComponent} from './page/receivables/transactions/transaction
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ReceivablesComponent} from './page/receivables/receivables.component';
+import { ReceivablesComponent } from './page/receivables/receivables.component';
+import {ActuatorComponent} from './page/actuator/actuator.component';
 import {MealComponent} from './page/meal/meal.component';
+
 
 
 const routes: Routes = [
@@ -39,6 +41,10 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+      },
+      {
+        path: 'actuator',
+        component: ActuatorComponent,
       },
     ]
   }
