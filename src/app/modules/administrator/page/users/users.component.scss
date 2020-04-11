@@ -1,4 +1,5 @@
 .d-flex {
+  height: 90%;
   justify-content: start;
 
   .mat-tab-group {
@@ -8,6 +9,10 @@
       span {
         margin-left: 8px;
       }
+    }
+
+    .mat-tab-body-wrapper {
+      height: 100%;
     }
 
 

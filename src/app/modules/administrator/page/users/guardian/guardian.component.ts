@@ -73,4 +73,9 @@ export class GuardianComponent implements OnInit {
   formValuesChange($event: { [p: string]: any }) {
 
   }
+
+  close(person: string) {
+    this.classToSet.out = this.classToSet.out.filter(cssClass => cssClass !== 'moveUp');
+    this.createGuardianCardIsOpen = false;
+  }
 }

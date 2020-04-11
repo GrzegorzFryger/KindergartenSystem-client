@@ -2,69 +2,100 @@
 
   <ng-container *ngIf="!createGuardianCardIsOpen">
     <ng-container *ngIf="!personCardIsOpen">
+
       <div [ngClass]="classToSet.out" class="guardian-container">
-        <p>Lista rodziców</p>
-        <mat-form-field>
-          <mat-label>Szukaj</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj rodzica">
-        </mat-form-field>
+        <h2>Lista rodziców</h2>
+        <div class="flex">
+         <div class="search">
+           <mat-form-field>
+             <mat-label>Szukaj</mat-label>
+             <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj rodzica">
+           </mat-form-field>
+         </div>
 
-        <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate" matSortDirection="desc">
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-            <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
-          </ng-container>
+          <div class="table">
+            <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate" matSortDirection="desc">
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+                <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
+              </ng-container>
 
-          <ng-container matColumnDef="surname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
-            <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
-          </ng-container>
+              <ng-container matColumnDef="surname">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+                <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
+              </ng-container>
 
-          <ng-container matColumnDef="phone">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</mat-header-cell>
-            <mat-cell *matCellDef="let guardian"> {{guardian.phone}} </mat-cell>
-          </ng-container>
+              <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</mat-header-cell>
+                <mat-cell *matCellDef="let guardian"> {{guardian.phone}} </mat-cell>
+              </ng-container>
 
-          <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-            <mat-cell
-              *matCellDef="let guardian"> {{guardian.email}} </mat-cell>
-          </ng-container>
+              <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                <mat-cell
+                  *matCellDef="let guardian"> {{guardian.email}} </mat-cell>
+              </ng-container>
 
-          <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
-            <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
-          </ng-container>
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
+                <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
+              </ng-container>
 
-          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-          <mat-row *matRowDef="let row, let guardian; columns: columnsToDisplay;" (click)="selectGuardian(guardian)"></mat-row>
-        </mat-table>
+              <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+              <mat-row *matRowDef="let row, let guardian; columns: columnsToDisplay;"
+                       (click)="selectGuardian(guardian)">
+              </mat-row>
+            </mat-table>
+          </div>
 
-        <div class="buttons">
-          <div class="div">
-            <button mat-raised-button color="primary" (click)="createGuardian()" >Dodaj nowego rodzica</button>
+          <div class="buttons">
+            <div class="buttons-container">
+              <div class="div">
+                <button mat-raised-button color="primary" (click)="createGuardian()" >Dodaj nowego rodzica</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </ng-container>
   </ng-container>
 
 
   <ng-template [ngIf]="personCardIsOpen">
     <div [ngClass]="classToSet.in" class="person-container">
-      <app-profile [personData]="personToDisplay" (profileEmitter)="receiveFromPersonComponent($event)"></app-profile>
+      <app-profile [personData]="personToDisplay"
+                   (profileEmitter)="receiveFromPersonComponent($event)">
+
+      </app-profile>
     </div>
   </ng-template>
 
   <ng-template [ngIf]="createGuardianCardIsOpen">
     <mat-card [ngClass]="classToSet.in" class="create">
-      <mat-card-content>
-        <div class="d-flex">
-          <app-person-form [initialState]="personFormInitial"
-                           (formValuesChanged)="formValuesChange($event)">
-          </app-person-form>
+
+        <div class="create-guardian-container">
+          <mat-card-header>
+            <h2>Tworzenie nowgo konta</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="d-flex">
+              <app-person-form [initialState]="personFormInitial"
+                               (formValuesChanged)="formValuesChange($event)">
+              </app-person-form>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <div class="footer-container">
+              <div class="button">
+                <button mat-raised-button (click)="close('person')" color="primary">Cofnij</button>
+              </div>
+              <div class="button">
+                <button mat-raised-button (click)="onSubmit()" color="primary">Dodaj Rodzica</button>
+              </div>
+            </div>
+          </mat-card-footer>
         </div>
-      </mat-card-content>
     </mat-card>
   </ng-template>
 
