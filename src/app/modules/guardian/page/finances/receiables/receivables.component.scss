@@ -1,0 +1,30 @@
+
+
+.payments-history {
+  border-radius: 16px;
+  padding: 8px;
+
+  p {
+    margin-left: 8px;
+    color: rgba(0, 0, 0, 0.6);;
+  }
+
+  .mat-chip {
+   background-color:  rgb(240,187,218);
+  }
+
+  .filters {
+    margin-left: 8px;
+    margin-bottom: 8px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+
+    .mat-form-field-flex {
+      background-color: white;
+    }
+  }
+}
+
+//rgb(240,187,218)

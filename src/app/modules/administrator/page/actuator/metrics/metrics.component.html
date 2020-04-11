@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="metrics-card">
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let i of names">
+        <mat-expansion-panel-header (click)="getMetricsDetails(i)">
+          <mat-panel-title>
+            {{i}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngIf="presentingMetrics">
+        <p><b>desc:</b> {{presentingMetrics.description}} <b>base unit:</b> {{presentingMetrics.baseUnit}}</p>
+          <div class="metrics-card-details" *ngFor="let m of presentingMetrics.measurements">
+            <p>{{m.statistic}} : {{m.value}}</p>
+          </div>
+          <div *ngFor="let a of presentingMetrics.availableTags">
+            <span class="font-weight-bold">{{a.tag}}</span>
+            <div *ngFor="let v of a.values">
+              {{v}}
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-guardian',
@@ -6,12 +7,15 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./guardian.component.scss']
 })
 export class GuardianComponent implements OnInit {
-  logoSrc = '../../../../../assets/images/skarwek.png';
+  displayChildComponent: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe(value => {
+      this.displayChildComponent = this.router.url !== '/parent/finances';
+    });
   }
 
 }

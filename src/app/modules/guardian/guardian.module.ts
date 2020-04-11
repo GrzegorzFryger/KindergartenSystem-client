@@ -10,7 +10,7 @@ import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.compo
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {ReceiablesComponent} from './page/receiables/receiables.component';
+import {ReceivablesComponent} from './page/finances/receiables/receivables.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -32,18 +32,24 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
+import {FinanceChartComponent} from './page/finances/finance-chart/finance-chart.component';
+import {ChartsModule} from 'ng2-charts';
+import {NavbarComponent} from './component/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     ChildrenComponent,
     GuardianComponent,
-    ReceiablesComponent,
+    ReceivablesComponent,
     FinancesComponent,
     MealComponent,
     DialogOverviewExampleDialog,
     AbsenceComponent,
-    AbsenceDialogComponent
+    AbsenceDialogComponent,
+    FinanceChartComponent,
+    NavbarComponent
   ],
 
   imports: [
@@ -73,6 +79,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTabsModule,
     MatChipsModule,
     MatTooltipModule,
+    MatSortModule,
+    ChartsModule
   ],
 
   exports: [

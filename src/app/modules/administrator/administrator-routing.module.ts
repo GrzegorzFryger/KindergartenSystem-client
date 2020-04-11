@@ -1,12 +1,14 @@
-import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
-import { ImportComponent } from './page/receivables/import/import.component';
+import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-cash-payment.component';
+import {ImportComponent} from './page/receivables/import/import.component';
 import {AdministratorComponent} from './administrator.component';
-import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
-import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { ReceivablesComponent } from './page/receivables/receivables.component';
-import {MealComponent} from './meal/meal.component';
+import {ActuatorComponent} from './page/actuator/actuator.component';
+import {MealComponent} from './page/meal/meal.component';
+
 
 
 const routes: Routes = [
@@ -39,6 +41,10 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+      },
+      {
+        path: 'actuator',
+        component: ActuatorComponent,
       },
     ]
   }
