@@ -24,7 +24,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
-import {ReceivablesComponent} from './page/receivables/receivables.component';
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {ImportComponent} from './page/receivables/import/import.component';
@@ -45,7 +44,6 @@ import { AdministratorNavigationMenuComponent } from './component/administrator-
     AdministratorComponent,
     CashPaymentsComponent,
     TransactionsComponent,
-    ReceivablesComponent,
     AddCashPaymentComponent,
     ImportComponent,
     MealPriceComponent,
