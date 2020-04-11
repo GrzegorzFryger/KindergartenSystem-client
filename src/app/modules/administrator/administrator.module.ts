@@ -5,9 +5,9 @@ import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
 import {MatCardModule} from '@angular/material/card';
 import {SharedModule} from '../../shared/shared.module';
-import {MealPriceComponent} from './meal/meal-price/meal-price.component';
-import {DialogOverviewExampleDialog, MealComponent} from './meal/meal.component';
-import {MealDictionaryComponent} from './meal/meal-dictionary/meal-dictionary.component';
+import {MealPriceComponent} from './page/meal/meal-price/meal-price.component';
+import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.component';
+import {MealDictionaryComponent} from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -24,14 +24,15 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
-import { ReceivablesComponent } from './page/receivables/receivables.component';
-import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
-import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
-import { ImportComponent } from './page/receivables/import/import.component';
-import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
+import {ReceivablesComponent} from './page/receivables/receivables.component';
+import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {ImportComponent} from './page/receivables/import/import.component';
+import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-cash-payment.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MealPriceComponent,
     MealComponent,
     MealDictionaryComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    AdministratorNavigationMenuComponent
   ],
 
 
