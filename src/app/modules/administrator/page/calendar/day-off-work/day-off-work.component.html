@@ -7,8 +7,38 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          <button mat-stroked-button class="max_width" routerLink="/administrator/dayOff/remove-day-off">Usuń dzień wolny</button>
+          <button mat-stroked-button class="max_width" routerLink="/administrator/dayOff/remove-day-off">Usuń dzień
+            wolny
+          </button>
         </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <mat-card-title>Dodaj dzień wolny</mat-card-title>
+      </div>
+      <div class="row">
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+          <div class="form-group">
+            <label for="date">Podaj datę</label>
+            <input type="text" id="date" name="date" class="form-control" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="name">Podaj nazwę</label>
+            <input type="text" id="name" name="name" class="form-control" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="eventType">Podaj typ</label>
+            <input type="text" id="eventType" name="eventType" class="form-control" ngModel>
+            <!--            TODO: Fix this-->
+            <!--            <select id="eventType" name="eventType" class="form-control" ngModel>-->
+            <!--              <option *ngFor="let option of enumValues" value="option.value">-->
+            <!--                {{option.display}}-->
+            <!--              </option>-->
+            <!--            </select>-->
+          </div>
+          <button mat-stroked-button class="btn-primary" type="submit">Dodaj</button>
+        </form>
       </div>
     </div>
   </mat-card-content>
