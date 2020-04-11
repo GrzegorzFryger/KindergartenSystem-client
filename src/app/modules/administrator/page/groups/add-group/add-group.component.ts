@@ -8,9 +8,6 @@ import {Group} from '../../../../../data/model/groups/group';
   styleUrls: ['./add-group.component.scss']
 })
 export class AddGroupComponent implements OnInit {
-
-  groupName: string;
-  groupDescription: string;
   group: Group;
 
   constructor(private groupService: GroupService) {
@@ -19,10 +16,10 @@ export class AddGroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addGroup(groupN: string, groupDes: string) {
+  onSubmit(submittedForm) {
     this.group = new Group();
-    this.group.groupName = groupN;
-    this.group.groupDescription = groupDes;
+    this.group.groupName = submittedForm.value.groupName;
+    this.group.groupDescription = submittedForm.value.groupDescription;
     this.groupService.createGroup(this.group).subscribe(res => {
       console.log(res);
     });

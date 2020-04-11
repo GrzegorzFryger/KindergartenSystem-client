@@ -6,28 +6,32 @@
   <mat-card-content>
     <div class="container-fluid">
       <div class="row">
-        <div class="col">
-          <p>Nazwa grupy</p>
-        </div>
-        <div class="col">
-          <p>Opis grupy</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="text" [(ngModel)]="groupName">
-        </div>
-        <div class="col">
-          <input type="text" [(ngModel)]="groupDescription">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-        </div>
-        <div class="col">
-          <button mat-stroked-button (click)="addGroup(groupName, groupDescription)">Dodaj</button>
-        </div>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="groupName">Nazwa grupy</label>
+                <br>
+                <input type="text" id="groupName" name="groupName" class="form-control" ngModel>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="groupDescription">Opis grupy</label>
+                <br>
+                <input type="text" id="groupDescription" name="groupDescription" class="form-control" ngModel>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <button class="btn-primary" type="submit">Utwórz</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+
   </mat-card-content>
 </mat-card>
