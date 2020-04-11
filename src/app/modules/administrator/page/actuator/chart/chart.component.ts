@@ -11,7 +11,7 @@ import {DatePipe} from '@angular/common';
 })
 export class ChartComponent implements OnInit {
 
-  chart = [];
+  chart: Chart;
   trace: HttpTrace;
   data: [20, 10];
   times = [];
