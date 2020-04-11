@@ -75,8 +75,13 @@
     <div class="row">
       <mat-card class="childDetailsCardContent">
         <mat-card-header class="mealCardHeader">
-          <mat-card-title>Szczegóły dziecka</mat-card-title>
+          <mat-card-title>
+            <span>Szczegóły dziecka</span>
+          </mat-card-title>
         </mat-card-header>
+        <div class="close-cross">
+          <mat-icon matTooltip="Zamknij" (click)="closeChildDetails()">close</mat-icon>
+        </div>
         <mat-card-content>
           <div class="cardContent">
 
@@ -86,7 +91,7 @@
                   <div class="childImage">
 
                     <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
-                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png"/>
+                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/icon-boy.png"/>
 
                   </div>
                 </div>
@@ -146,6 +151,9 @@
           <mat-card-title>Uwagi żywieniowe - {{selectedMeal.mealType}} - {{selectedMeal.dietType}} ({{selectedMeal.id}})</mat-card-title>
         </mat-card-header>
         <mat-card-content>
+          <div class="close-cross" style="">
+            <mat-icon matTooltip="Zamknij" (click)="closeNutritionalNotes()">close</mat-icon>
+          </div>
           <div class="cardContent">
 
             <div class="container">
@@ -154,7 +162,7 @@
                   <div class="childImage">
 
                     <img *ngIf="childDetails.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
-                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/boy.png"/>
+                    <img *ngIf="childDetails.gender == 'MALE' " src="../../../../../assets/images/icon-boy.png"/>
 
                   </div>
                 </div>

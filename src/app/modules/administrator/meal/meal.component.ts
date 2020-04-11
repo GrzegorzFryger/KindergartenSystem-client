@@ -83,6 +83,7 @@ export class MealComponent implements OnInit {
     }
 
 
+
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
     });
@@ -119,6 +120,14 @@ export class MealComponent implements OnInit {
     this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
     });
+  }
+
+  closeChildDetails() {
+    this.openChildDetailsTable = false;
+  }
+
+  closeNutritionalNotes() {
+    this.openNutritionalNotes = false;
   }
 }
 
