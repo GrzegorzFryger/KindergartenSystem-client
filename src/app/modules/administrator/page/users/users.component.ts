@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -8,32 +9,12 @@ import {Router} from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
-  title = 'angular-material-tab-router';
-  navLinks: any[];
-  activeLinkIndex = -1;
+  selected = new  FormControl(0);
 
-  constructor(private router: Router) {
-    this.navLinks = [
-      {
-        label: 'guardian',
-        link: './first',
-        index: 0
-      }, {
-        label: 'Second',
-        link: './second',
-        index: 1
-      }, {
-        label: 'Third',
-        link: './third',
-        index: 2
-      },
-    ];
+  constructor(private router: Router, private activateRoutes: ActivatedRoute) {
   }
+
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-    });
   }
-
 
 }
