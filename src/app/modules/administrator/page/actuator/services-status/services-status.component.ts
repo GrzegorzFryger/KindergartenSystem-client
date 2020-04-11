@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Health} from '../../../../data/model/actuator/health';
-import {ActuatorService} from '../../../../data/service/actuator/actuator-service';
+import {Health} from '../../../../../data/model/actuator/health';
+import {ActuatorService} from '../../../../../data/service/actuator/actuator-service';
 
 @Component({
   selector: 'app-services-status',

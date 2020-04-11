@@ -5,9 +5,9 @@ import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
 import {MatCardModule} from '@angular/material/card';
 import {SharedModule} from '../../shared/shared.module';
-import {MealPriceComponent} from './meal/meal-price/meal-price.component';
-import {DialogOverviewExampleDialog, MealComponent} from './meal/meal.component';
-import {MealDictionaryComponent} from './meal/meal-dictionary/meal-dictionary.component';
+import {MealPriceComponent} from './page/meal/meal-price/meal-price.component';
+import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.component';
+import {MealDictionaryComponent} from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -24,19 +24,20 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
-import { ReceivablesComponent } from './page/receivables/receivables.component';
-import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
-import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
-import { ImportComponent } from './page/receivables/import/import.component';
-import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
+import {ReceivablesComponent} from './page/receivables/receivables.component';
+import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {ImportComponent} from './page/receivables/import/import.component';
+import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-cash-payment.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ActuatorComponent } from './actuator/actuator.component';
-import { ServicesStatusComponent } from './actuator/services-status/services-status.component';
-import { HttpTraceComponent } from './actuator/http-trace/http-trace.component';
-import { ChartComponent } from './actuator/chart/chart.component';
-import { MetricsComponent } from './actuator/metrics/metrics.component';
+import { ActuatorComponent } from './page/actuator/actuator.component';
+import { ServicesStatusComponent } from './page/actuator/services-status/services-status.component';
+import { HttpTraceComponent } from './page/actuator/http-trace/http-trace.component';
+import { ChartComponent } from './page/actuator/chart/chart.component';
+import { MetricsComponent } from './page/actuator/metrics/metrics.component';
+import { AdministratorNavigationMenuComponent } from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { MetricsComponent } from './actuator/metrics/metrics.component';
     ServicesStatusComponent,
     HttpTraceComponent,
     ChartComponent,
-    MetricsComponent
+    MetricsComponent,
+    AdministratorNavigationMenuComponent
   ],
 
 

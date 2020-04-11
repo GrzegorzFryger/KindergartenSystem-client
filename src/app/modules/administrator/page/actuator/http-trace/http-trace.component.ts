@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpTrace} from '../../../../data/model/actuator/http-trace';
-import {ActuatorService} from '../../../../data/service/actuator/actuator-service';
+import {HttpTrace} from '../../../../../data/model/actuator/http-trace';
+import {ActuatorService} from '../../../../../data/service/actuator/actuator-service';
 
 @Component({
   selector: 'app-http-trace',

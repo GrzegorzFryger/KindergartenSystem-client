@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActuatorService} from '../../../../data/service/actuator/actuator-service';
+import {ActuatorService} from '../../../../../data/service/actuator/actuator-service';
 import { Chart } from 'chart.js';
-import {HttpTrace} from '../../../../data/model/actuator/http-trace';
+import {HttpTrace} from '../../../../../data/model/actuator/http-trace';
 import {DatePipe} from '@angular/common';
 
 @Component({
