@@ -6,6 +6,8 @@ import {Transaction} from '../../../../../data/model/receivables/transaction';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-import',
@@ -18,6 +20,10 @@ export class ImportComponent implements OnInit {
   public unloaded = true;
 
   @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  public columnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'accountNumber',
+    'bankName', 'details', 'transactionNumber', 'transactionAmount'];
   public uploadedTransactions: Array<Transaction>;
 
   public dataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
@@ -58,12 +64,21 @@ export class ImportComponent implements OnInit {
       resp => {
         console.log(resp);
         this.uploadedTransactions = resp;
+        this.setUpDataTable(resp);
       },
       catchError(err => {
         this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
         return throwError(err);
       })
     );
+    this.clearFile();
+  }
+
+  private setUpDataTable(incomingPayment: Array<Transaction>): void {
+    this.dataSource.data = incomingPayment;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę'; // TODO Change it into better solution (more global)
   }
 
   private prepareFormData(): any {
