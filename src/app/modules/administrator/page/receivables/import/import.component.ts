@@ -46,9 +46,12 @@ export class ImportComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       console.log(file);
-      this.form.get('transfers_input_file').setValue(file);
-      this.fileName = file.name;
-      this.markFileAsLoaded();
+
+      if (file.name.endsWith('.csv')) {
+        this.form.get('transfers_input_file').setValue(file);
+        this.fileName = file.name;
+        this.markFileAsLoaded();
+      }
     }
   }
 
