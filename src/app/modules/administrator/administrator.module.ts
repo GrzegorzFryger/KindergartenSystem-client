@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -32,7 +32,12 @@ import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-c
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import { ActuatorComponent } from './page/actuator/actuator.component';
+import { ServicesStatusComponent } from './page/actuator/services-status/services-status.component';
+import { HttpTraceComponent } from './page/actuator/http-trace/http-trace.component';
+import { ChartComponent } from './page/actuator/chart/chart.component';
+import { MetricsComponent } from './page/actuator/metrics/metrics.component';
+import { AdministratorNavigationMenuComponent } from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 
 
 @NgModule({
@@ -47,6 +52,11 @@ import {AdministratorNavigationMenuComponent} from './component/administrator-na
     MealComponent,
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
+    ActuatorComponent,
+    ServicesStatusComponent,
+    HttpTraceComponent,
+    ChartComponent,
+    MetricsComponent,
     AdministratorNavigationMenuComponent
   ],
 
@@ -80,6 +90,7 @@ import {AdministratorNavigationMenuComponent} from './component/administrator-na
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    DatePipe
   ]
 })
 export class AdministratorModule {
