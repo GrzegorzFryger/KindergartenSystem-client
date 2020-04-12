@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Przypisywanie przelewów</mat-card-title>
+    <mat-card-title>Przypisywanie płatności</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
@@ -56,11 +56,26 @@
               </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="isAssigned">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+              <mat-cell
+                *matCellDef="let transaction"> <mat-checkbox [(ngModel)]="transaction.isAssigned"></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
             <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
           </mat-table>
 
           <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="button"
+                  (click)="assignTransactions()">Przypisz do dziecka
+          </button>
         </div>
       </div>
     </mat-card>

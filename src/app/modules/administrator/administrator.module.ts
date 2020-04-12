@@ -37,6 +37,7 @@ import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.componen
 import {ChartComponent} from './page/actuator/chart/chart.component';
 import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import {AdministratorNavigationMenuComponent} from './component/administrator-na
     MatTabsModule,
     MatChipsModule,
     MatTooltipModule,
+    MatCheckboxModule,
   ],
   bootstrap: [],
   providers: [

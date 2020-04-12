@@ -59,6 +59,7 @@ export const environment = {
 
       // Transactions Controller
       getAllUnassignedTransactions: receivablesUrl + 'transactions',
+      assignTransactionToChild: receivablesUrl + 'transactions/assign/',
       getTransaction: receivablesUrl + 'transactions/',
       deleteTransaction: receivablesUrl + 'transactions/',
       createTransaction: receivablesUrl + 'transactions',

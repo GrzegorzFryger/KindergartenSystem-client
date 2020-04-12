@@ -18,7 +18,7 @@ export class TransactionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public columnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'accountNumber',
-    'bankName', 'details', 'transactionNumber', 'transactionAmount'];
+    'bankName', 'details', 'transactionNumber', 'transactionAmount', 'isAssigned'];
 
   public unassignedTransactions: Array<Transaction>;
 
@@ -29,17 +29,56 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.transactionsService.getAllUnassignedTransactions().subscribe(
+    this.loadData();
+  }
+
+  assignTransactions(): void {
+    const transactionsToBeAssigned = this.unassignedTransactions.filter((transaction: Transaction) => {
+      return transaction.isAssigned === true;
+    });
+    transactionsToBeAssigned.forEach(obj => {
+      delete obj.isAssigned;
+      // TODO: Remove hardcoded UUID's in next commits
+      this.assignTransaction(obj, '0560d77d-e0db-4914-ae4a-4f39690ecb2d', 'c4029244-e8ff-4328-8658-28964dda3c4e');
+    });
+    this.reloadData();
+  }
+
+  assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
+    console.log('Assigning transaction: ' + transaction.id + ' to: ' + childId + ' - ' + guardianId);
+    this.transactionsService.assignTransactionToChild(transaction, childId, guardianId).subscribe(
       resp => {
         console.log(resp);
-        this.unassignedTransactions = resp;
-        this.setUpDataTable(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
+        this.snackErrorHandlingService.openSnackBar('Failed to send transaction mapping to REST API');
         return throwError(err);
       })
     );
+  }
+
+  loadData(): void {
+    this.transactionsService.getAllUnassignedTransactions().subscribe(
+      resp => {
+        this.unassignedTransactions = resp;
+        this.unassignedTransactions.forEach(obj => {
+          obj.isAssigned = false;
+        });
+        console.log(this.unassignedTransactions);
+        this.setUpDataTable(resp);
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to retrieve unassigned transaction list from REST API');
+        return throwError(err);
+      })
+    );
+  }
+
+  private reloadData(): void {
+    this.unassignedTransactions = this.unassignedTransactions.filter((transaction: Transaction) => {
+      return transaction.isAssigned === false;
+    });
+    this.dataSource.data = this.unassignedTransactions;
   }
 
   private setUpDataTable(incomingPayment: Array<Transaction>): void {
