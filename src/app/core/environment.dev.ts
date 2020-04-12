@@ -58,7 +58,7 @@ export const environment = {
       updateCashPayment: receivablesUrl + 'cash-payments',
 
       // Transactions Controller
-      getAllTransactions: receivablesUrl + 'transactions',
+      getAllUnassignedTransactions: receivablesUrl + 'transactions',
       getTransaction: receivablesUrl + 'transactions/',
       deleteTransaction: receivablesUrl + 'transactions/',
       createTransaction: receivablesUrl + 'transactions',

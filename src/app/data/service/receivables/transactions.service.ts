@@ -13,9 +13,9 @@ export class TransactionsService {
 
   }
 
-  getAllTransactions(): Observable<Array<Transaction>> {
+  getAllUnassignedTransactions(): Observable<Array<Transaction>> {
     return this.http.get<Array<Transaction>>(
-      environment.apiUrls.receivables.getAllTransactions
+      environment.apiUrls.receivables.getAllUnassignedTransactions
     );
   }
 
