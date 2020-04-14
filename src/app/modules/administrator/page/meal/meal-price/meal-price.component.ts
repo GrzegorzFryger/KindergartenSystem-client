@@ -24,9 +24,13 @@ export class MealPriceComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get<Array<MealPrice>>(environment.apiUrls.meals.getMealPrice).subscribe(resp => {
+    .subscribe(resp => {
       this.dataSource = resp;
     });
+  }
+
+  getAllMealPrice() {
+
   }
 
   editMeal() {

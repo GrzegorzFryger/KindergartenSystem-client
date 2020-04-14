@@ -41,6 +41,10 @@ export class MealService {
     return this.http.post<Array<NutritionalNotes>>(environment.apiUrls.meals.addNN, {nutritionalNotesValue: nnValue, mealId: mealID});
   }
 
+  getAllMealPrice(): Observable<Array<MealPrice>> {
+    return this.http.get<Array<MealPrice>>(environment.apiUrls.meals.getMealPrice);
+  }
+
   getMealPriceById(id: number): Observable<MealPrice> {
     return this.http.get<MealPrice>(environment.apiUrls.meals.getMealPriceById + id);
   }
