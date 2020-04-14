@@ -83,6 +83,9 @@ export const environment = {
       getAllMeals: mealUrl,
       deleteNN: mealUrl + '/nn/delete',
       addNN: mealUrl + '/nn',
+      updateMealPrice: mealUrl + '/price',
+      getMealPriceById: mealUrl + '/price/'
+
     },
     account: {
       getChildById: accountUrl + 'child/'

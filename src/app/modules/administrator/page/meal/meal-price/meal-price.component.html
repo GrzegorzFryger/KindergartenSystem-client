@@ -21,14 +21,29 @@
 
           <ng-container matColumnDef="mealPrice">
             <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł </mat-cell>
+            <div *matCellDef="let element">
+              <div *ngIf="!editingMeal">
+                <mat-cell> {{element.mealPrice}} zł</mat-cell>
+              </div>
+              <div *ngIf="editingMeal">
+                <mat-form-field class="mealPrice-input" style="background: #ffffff">
+                  <input [value]="element.mealPrice" (input)="editedMealPrice = $event.target.value" matInput >
+                  <span matSuffix>zł</span>
+                </mat-form-field>
+              </div>
+            </div>
           </ng-container>
 
           <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon>edit</mat-icon>
-              <mat-icon>delete_outline</mat-icon>
+              <div *ngIf="!editingMeal">
+                <mat-icon (click)="editMeal()">edit</mat-icon>
+                <mat-icon>delete_outline</mat-icon>
+              </div>
+              <div *ngIf="editingMeal" class="mealPrice-saveButton">
+                <button mat-stroked-button (click)="saveMealPrice(element.id)" color="primary">Zapisz</button>
+              </div>
             </mat-cell>
           </ng-container>
 

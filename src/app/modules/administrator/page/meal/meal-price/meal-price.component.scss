@@ -64,3 +64,22 @@
   }
 
 }
+
+.mealPrice-input {
+  width: 100px;
+  margin-right: 40px;
+
+  span {
+    padding-left: 20px;
+  }
+
+}
+
+
+
+::ng-deep .mat-form-field {
+
+  .mat-form-field-flex {
+    background-color: #fff;
+  }
+}

@@ -5,6 +5,7 @@ import {Meal} from '../../model/meal/meal';
 import {environment} from '../../../core/environment.dev';
 import {MealDictionary} from '../../model/meal/meal-dictionary';
 import {NutritionalNotes} from '../../model/meal/nutritional-notes';
+import {MealPrice} from '../../model/meal/meal-price';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class MealService {
   getDietType(): Observable<Array<MealDictionary>> {
     return this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getDietType);
   }
+
   getMealType(): Observable<Array<MealDictionary>> {
     return this.http.get<Array<MealDictionary>>(environment.apiUrls.meals.getMealType);
   }
@@ -35,7 +37,23 @@ export class MealService {
     return this.http.get<Array<NutritionalNotes>>(environment.apiUrls.meals.deleteNN, {params});
   }
 
-  addNN(nnValue: string, mealID: number): Observable<Array<NutritionalNotes>>  {
-    return this.http.post<Array<NutritionalNotes>>(environment.apiUrls.meals.addNN, {nutritionalNotesValue: nnValue, mealId: mealID });
+  addNN(nnValue: string, mealID: number): Observable<Array<NutritionalNotes>> {
+    return this.http.post<Array<NutritionalNotes>>(environment.apiUrls.meals.addNN, {nutritionalNotesValue: nnValue, mealId: mealID});
+  }
+
+  getMealPriceById(id: number): Observable<MealPrice> {
+    return this.http.get<MealPrice>(environment.apiUrls.meals.getMealPriceById + id);
+  }
+
+
+  updateMealPrice(mealPrice: MealPrice): Observable<MealPrice> {
+    let params = new HttpParams();
+
+    params = params.append('id', String(mealPrice.id));
+
+    return this.http.put<MealPrice>(environment.apiUrls.meals.updateMealPrice, {
+      mealType: mealPrice.mealType,
+      mealPrice: mealPrice.mealPrice
+    }, {params});
   }
 }
