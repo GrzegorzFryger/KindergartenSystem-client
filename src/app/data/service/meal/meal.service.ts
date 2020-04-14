@@ -41,9 +41,10 @@ export class MealService {
     return this.http.post<Array<NutritionalNotes>>(environment.apiUrls.meals.addNN, {nutritionalNotesValue: nnValue, mealId: mealID});
   }
 
-  getAllMealPrice(): Observable<Array<MealPrice>> {
+  getMealPriceAll(): Observable<Array<MealPrice>> {
     return this.http.get<Array<MealPrice>>(environment.apiUrls.meals.getMealPrice);
   }
+
 
   getMealPriceById(id: number): Observable<MealPrice> {
     return this.http.get<MealPrice>(environment.apiUrls.meals.getMealPriceById + id);
@@ -61,10 +62,10 @@ export class MealService {
     }, {params});
   }
 
-  deleteMealPriceById(id: any): void {
+  deleteMealPriceById(id: number): Observable<any> {
     let params = new HttpParams();
 
     params = params.append('id', String(id));
-    this.http.delete(environment.apiUrls.meals.deleteMealPriceById, {params});
+    return this.http.delete(environment.apiUrls.meals.deleteMealPriceById, {params});
   }
 }

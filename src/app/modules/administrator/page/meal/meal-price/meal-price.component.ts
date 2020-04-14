@@ -27,7 +27,7 @@ export class MealPriceComponent implements OnInit {
   }
 
   getAllMealPrice() {
-    this.mealService.getAllMealPrice().subscribe(resp => {
+    this.mealService.getMealPriceAll().subscribe(resp => {
       this.dataSource = resp;
     });
   }
@@ -41,15 +41,15 @@ export class MealPriceComponent implements OnInit {
     this.mealService.getMealPriceById(id).subscribe(resp => {
       resp.mealPrice = this.editedMealPrice;
       this.mealService.updateMealPrice(resp).subscribe(re => {
-        this.ngOnInit();
+        this.getAllMealPrice();
         this.editingMeal = false;
       });
     });
   }
 
-  deleteMealPrice(id: any) {
-    this.mealService.deleteMealPriceById(id).subscribe(resp => {
-
-    })
+  async deleteMealPrice(id: number) {
+    await this.mealService.deleteMealPriceById(id).subscribe(resp => {
+      this.getAllMealPrice();
+    });
   }
 }
