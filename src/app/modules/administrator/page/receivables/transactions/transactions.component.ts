@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {TransactionsService} from '../../../../../data/service/receivables/transactions.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -8,6 +8,7 @@ import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
 import {Child} from '../../../../../data/model/users/child';
+import {GuardianService} from '../../../../../data/service/users/guardian.service';
 
 @Component({
   selector: 'app-transactions',
@@ -20,14 +21,18 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
     'transactionNumber', 'transactionAmount', 'isAssigned'];
-  public childColumnsToDisplay: string[] = ['name', 'surname'];
+  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth'];
 
   public unassignedTransactions: Array<Transaction>;
 
   public transactionDataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
   public childDataSource: MatTableDataSource<Child> = new MatTableDataSource();
 
+  public childName = '';
+  public childSurname = '';
+
   constructor(private transactionsService: TransactionsService,
+              private guardianService: GuardianService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
@@ -52,7 +57,17 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   }
 
   public findChildren(): void {
-
+    console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
+    this.guardianService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
+      resp => {
+        console.log(resp);
+        this.setChildDataToTable(resp);
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to get children list from REST API');
+        return throwError(err);
+      })
+    );
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
@@ -94,7 +109,10 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   private setTransactionDataToTable(incomingPayment: Array<Transaction>): void {
     this.transactionDataSource.data = incomingPayment;
+  }
 
+  private setChildDataToTable(children: Array<Child>): void {
+    this.childDataSource.data = children;
   }
 
   private initializeTables(): void {

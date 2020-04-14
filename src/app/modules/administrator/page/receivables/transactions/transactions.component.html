@@ -64,24 +64,27 @@
 
       <div class="row">
         <div class="col">
-          Wyszukaj dziecko
+          <br><br><p>Wyszukaj dziecko</p>
         </div>
       </div>
       <div class="row">
-        <form class="example-form">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <mat-label>Imię</mat-label>
-              <input matInput placeholder="Na przykład: Jan">
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <mat-label>Nazwisko</mat-label>
-              <input matInput placeholder="Na przykład: Kowalski">
-            </mat-form-field>
-          </div>
-        </form>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Imię</mat-label>
+            <input [(ngModel)]="childName" matInput placeholder="Na przykład: Jan">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nazwisko</mat-label>
+            <input [(ngModel)]="childSurname" matInput placeholder="Na przykład: Kowalski">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <br><br>
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -96,6 +99,16 @@
             <ng-container matColumnDef="surname">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
               <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pesel">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> PESEL</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateOfBirth">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Data urodzenia</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.dateOfBirth}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
