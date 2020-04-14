@@ -7,7 +7,7 @@
     <mat-card>
       <div class="row">
         <div class="col">
-          <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate"
+          <mat-table [dataSource]="transactionDataSource" matSort matSortActive="transactionDate"
                      matSortDirection="desc">
             <ng-container matColumnDef="transactionDate">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
@@ -49,12 +49,13 @@
             <ng-container matColumnDef="isAssigned">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
               <mat-cell
-                *matCellDef="let transaction"> <mat-checkbox [(ngModel)]="transaction.isAssigned"></mat-checkbox>
+                *matCellDef="let transaction">
+                <mat-checkbox [(ngModel)]="transaction.isAssigned"></mat-checkbox>
               </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+            <mat-header-row *matHeaderRowDef="transactionColumnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: transactionColumnsToDisplay;"></mat-row>
           </mat-table>
 
           <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
@@ -63,8 +64,50 @@
 
       <div class="row">
         <div class="col">
+          Wyszukaj dziecko
+        </div>
+      </div>
+      <div class="row">
+        <form class="example-form">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Imię</mat-label>
+              <input matInput placeholder="Na przykład: Jan">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Nazwisko</mat-label>
+              <input matInput placeholder="Na przykład: Kowalski">
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-table [dataSource]="childDataSource" matSort
+                     matSortDirection="asc" matSortActive="surname">
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <button mat-raised-button color="primary" type="button"
-                  (click)="assignTransactions()">Przypisz do dziecka
+                  (click)="findChildren()">Szukaj
           </button>
         </div>
       </div>
