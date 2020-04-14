@@ -84,7 +84,8 @@ export const environment = {
       deleteNN: mealUrl + '/nn/delete',
       addNN: mealUrl + '/nn',
       updateMealPrice: mealUrl + '/price',
-      getMealPriceById: mealUrl + '/price/'
+      getMealPriceById: mealUrl + '/price/',
+      deleteMealPriceById: mealUrl + '/price'
 
     },
     account: {

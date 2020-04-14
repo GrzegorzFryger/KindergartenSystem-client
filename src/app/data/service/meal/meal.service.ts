@@ -60,4 +60,11 @@ export class MealService {
       mealPrice: mealPrice.mealPrice
     }, {params});
   }
+
+  deleteMealPriceById(id: any): void {
+    let params = new HttpParams();
+
+    params = params.append('id', String(id));
+    this.http.delete(environment.apiUrls.meals.deleteMealPriceById, {params});
+  }
 }
