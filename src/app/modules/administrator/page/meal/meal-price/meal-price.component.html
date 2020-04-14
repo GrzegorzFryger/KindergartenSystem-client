@@ -39,10 +39,10 @@
             <mat-cell *matCellDef="let element">
               <div *ngIf="!editingMeal">
                 <mat-icon (click)="editMeal()">edit</mat-icon>
-                <mat-icon>delete_outline</mat-icon>
+                <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
               </div>
               <div *ngIf="editingMeal" class="mealPrice-saveButton">
-                <button mat-stroked-button (click)="saveMealPrice(element.id)" color="primary">Zapisz</button>
+                <button mat-stroked-button (click)="uploadMealPrice(element.id)" color="primary">Zapisz</button>
               </div>
             </mat-cell>
           </ng-container>

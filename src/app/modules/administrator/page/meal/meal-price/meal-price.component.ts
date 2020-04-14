@@ -34,8 +34,7 @@ export class MealPriceComponent implements OnInit {
   }
 
 
-  saveMealPrice(id: number) {
-
+  uploadMealPrice(id: number) {
     this.mealService.getMealPriceById(id).subscribe(resp => {
       resp.mealPrice = this.editedMealPrice;
       this.mealService.updateMealPrice(resp).subscribe(re => {
@@ -43,5 +42,11 @@ export class MealPriceComponent implements OnInit {
         this.editingMeal = false;
       });
     });
+  }
+
+  deleteMealPrice(id: any) {
+    this.mealService.deleteMealPriceById(id).subscribe( resp => {
+
+    })
   }
 }
