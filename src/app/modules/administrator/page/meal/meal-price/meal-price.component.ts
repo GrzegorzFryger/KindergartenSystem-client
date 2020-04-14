@@ -23,14 +23,13 @@ export class MealPriceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    .subscribe(resp => {
-      this.dataSource = resp;
-    });
+    this.getAllMealPrice();
   }
 
   getAllMealPrice() {
-
+    this.mealService.getAllMealPrice().subscribe(resp => {
+      this.dataSource = resp;
+    });
   }
 
   editMeal() {
@@ -49,7 +48,7 @@ export class MealPriceComponent implements OnInit {
   }
 
   deleteMealPrice(id: any) {
-    this.mealService.deleteMealPriceById(id).subscribe( resp => {
+    this.mealService.deleteMealPriceById(id).subscribe(resp => {
 
     })
   }
