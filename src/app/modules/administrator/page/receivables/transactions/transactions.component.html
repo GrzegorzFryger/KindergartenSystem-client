@@ -29,16 +29,6 @@
               <mat-cell *matCellDef="let transaction"> {{transaction.title}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="accountNumber">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Numer konta</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.accountNumber}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="bankName">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa banku</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.bankName}} </mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="details">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
               <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>

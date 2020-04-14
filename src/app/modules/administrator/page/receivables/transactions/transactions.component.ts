@@ -17,8 +17,8 @@ export class TransactionsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public columnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'accountNumber',
-    'bankName', 'details', 'transactionNumber', 'transactionAmount', 'isAssigned'];
+  public columnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
+    'transactionNumber', 'transactionAmount', 'isAssigned'];
 
   public unassignedTransactions: Array<Transaction>;
 
