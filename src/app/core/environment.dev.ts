@@ -87,7 +87,16 @@ export const environment = {
       getChildById: accountUrl + 'child/'
     },
     guardian: {
-      guardians: accountUrl + 'guardians'
+      guardians: accountUrl + 'guardians',
+      count: accountUrl + 'guardians/count'
+    },
+    employee: {
+      employees: accountUrl + 'employees',
+      count: accountUrl + 'employees/count'
+    },
+    child: {
+      children: accountUrl + 'children',
+      count: accountUrl + 'children/count'
     }
 
   }

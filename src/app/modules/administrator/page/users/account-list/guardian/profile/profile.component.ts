@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {InputPerson, PersonType} from '../../../../../data/model/users/input-person';
-import {Guardian} from '../../../../../data/model/users/guardian';
+import {InputPerson, PersonType} from '../../../../../../../data/model/users/input-person';
+import {Guardian} from '../../../../../../../data/model/users/guardian';
 import {FormBuilder} from '@angular/forms';
 
 enum CloseType {

@@ -8,9 +8,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {ReceivablesComponent} from './page/receivables/receivables.component';
 import {MealComponent} from './page/meal/meal.component';
 import {UsersComponent} from './page/users/users.component';
-import {GuardianComponent} from './page/users/guardian/guardian.component';
-import {EmployeeComponent} from './page/users/employee/employee.component';
-import {ChildrenComponent} from '../guardian/component/children/children.component';
+import {AccountListComponent} from './page/users/account-list/account-list.component';
+import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
 
 
 const routes: Routes = [
@@ -49,17 +48,14 @@ const routes: Routes = [
         component: UsersComponent,
         children: [
           {
-            path: 'guardians',
-            component: GuardianComponent,
+            path: 'list',
+            component: AccountListComponent,
           },
           {
-            path: 'employee',
-            component: EmployeeComponent,
+            path: 'create',
+            component: AccountCreatorComponent,
           },
-          {
-            path: 'children',
-            component: ChildrenComponent,
-          }
+
           ]
       },
     ]

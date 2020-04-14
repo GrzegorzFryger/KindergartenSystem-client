@@ -34,11 +34,15 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 import {UsersComponent} from './page/users/users.component';
-import {ProfileComponent} from './page/users/profile/profile.component';
-import {GuardianComponent} from './page/users/guardian/guardian.component';
-import {EmployeeComponent} from './page/users/employee/employee.component';
-import {ChildComponent} from './page/users/child/child.component';
-import {PersonFormComponent} from './page/users/person-form/person-form.component';
+import {ProfileComponent} from './page/users/account-list/guardian/profile/profile.component';
+import {GuardianComponent} from './page/users/account-list/guardian/guardian.component';
+import {EmployeeComponent} from './page/users/account-list/employee/employee.component';
+import {ChildComponent} from './page/users/account-list/child/child.component';
+import {PersonFormComponent} from './page/users/account-creator/person-form/person-form.component';
+import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
+import {AccountListComponent} from './page/users/account-list/account-list.component';
+import {UserChartComponent} from './page/users/user-chart/user-chart.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({
@@ -59,36 +63,40 @@ import {PersonFormComponent} from './page/users/person-form/person-form.componen
     GuardianComponent,
     EmployeeComponent,
     ChildComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    AccountCreatorComponent,
+    AccountListComponent,
+    UserChartComponent,
   ],
 
 
-    imports: [
-        CommonModule,
-        AdministratorRoutingModule,
-        FormsModule,
-        MatCardModule,
-        SharedModule,
-        MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatTableModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatTreeModule,
-        MatPaginatorModule,
-        MatSliderModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSortModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatTabsModule,
-        MatChipsModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    CommonModule,
+    AdministratorRoutingModule,
+    FormsModule,
+    MatCardModule,
+    SharedModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatTreeModule,
+    MatPaginatorModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSortModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatTooltipModule,
+    ChartsModule,
+  ],
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

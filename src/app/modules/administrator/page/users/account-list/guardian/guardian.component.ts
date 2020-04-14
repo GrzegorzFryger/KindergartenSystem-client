@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Guardian} from '../../../../../data/model/users/guardian';
+import {Guardian} from '../../../../../../data/model/users/guardian';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
-import {GuardianService} from '../../../../../data/service/users/guardian.service';
-import {InputPerson, PersonType} from '../../../../../data/model/users/input-person';
+import {GuardianService} from '../../../../../../data/service/users/guardian.service';
+import {InputPerson, PersonType} from '../../../../../../data/model/users/input-person';
 
 interface CssClass {
   in: Array<string>;
@@ -13,7 +13,7 @@ interface CssClass {
 @Component({
   selector: 'app-guardian',
   templateUrl: './guardian.component.html',
-  styleUrls: ['./guardian.component.scss'],
+  styleUrls: ['./guardian.component.scss', '../common-account-layout.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class GuardianComponent implements OnInit {
@@ -23,7 +23,7 @@ export class GuardianComponent implements OnInit {
   personToDisplay: InputPerson;
 
   // view control
-  createGuardianCardIsOpen: boolean;
+  // createGuardianCardIsOpen: boolean;
   personCardIsOpen: boolean;
   classToSet: CssClass;
   form: any;
@@ -61,9 +61,9 @@ export class GuardianComponent implements OnInit {
   }
 
   createGuardian() {
-    this.classToSet.out.push('moveUp');
-    this.classToSet.in.push('moveUp2');
-    this.createGuardianCardIsOpen = true;
+    // this.classToSet.out.push('moveUp');
+    // this.classToSet.in.push('moveUp2');
+    // this.createGuardianCardIsOpen = true;
   }
 
   onSubmit() {
@@ -76,6 +76,6 @@ export class GuardianComponent implements OnInit {
 
   close(person: string) {
     this.classToSet.out = this.classToSet.out.filter(cssClass => cssClass !== 'moveUp');
-    this.createGuardianCardIsOpen = false;
+    // this.createGuardianCardIsOpen = false;
   }
 }
