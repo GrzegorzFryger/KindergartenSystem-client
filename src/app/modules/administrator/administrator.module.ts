@@ -24,7 +24,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
-import {ReceivablesComponent} from './page/receivables/receivables.component';
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {ImportComponent} from './page/receivables/import/import.component';
@@ -32,12 +31,13 @@ import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-c
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ActuatorComponent } from './page/actuator/actuator.component';
-import { ServicesStatusComponent } from './page/actuator/services-status/services-status.component';
-import { HttpTraceComponent } from './page/actuator/http-trace/http-trace.component';
-import { ChartComponent } from './page/actuator/chart/chart.component';
-import { MetricsComponent } from './page/actuator/metrics/metrics.component';
-import { AdministratorNavigationMenuComponent } from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {ActuatorComponent} from './page/actuator/actuator.component';
+import {ServicesStatusComponent} from './page/actuator/services-status/services-status.component';
+import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.component';
+import {ChartComponent} from './page/actuator/chart/chart.component';
+import {MetricsComponent} from './page/actuator/metrics/metrics.component';
+import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -45,7 +45,6 @@ import { AdministratorNavigationMenuComponent } from './component/administrator-
     AdministratorComponent,
     CashPaymentsComponent,
     TransactionsComponent,
-    ReceivablesComponent,
     AddCashPaymentComponent,
     ImportComponent,
     MealPriceComponent,
@@ -61,35 +60,36 @@ import { AdministratorNavigationMenuComponent } from './component/administrator-
   ],
 
 
-    imports: [
-        CommonModule,
-        AdministratorRoutingModule,
-        FormsModule,
-        MatCardModule,
-        SharedModule,
-        MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatTableModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatTreeModule,
-        MatPaginatorModule,
-        MatSliderModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSortModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatTabsModule,
-        MatChipsModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    CommonModule,
+    AdministratorRoutingModule,
+    FormsModule,
+    MatCardModule,
+    SharedModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatTreeModule,
+    MatPaginatorModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSortModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+  ],
   bootstrap: [],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     DatePipe
   ]
 })

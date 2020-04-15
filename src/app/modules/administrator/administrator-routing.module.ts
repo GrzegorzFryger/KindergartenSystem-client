@@ -5,10 +5,8 @@ import {TransactionsComponent} from './page/receivables/transactions/transaction
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import { ReceivablesComponent } from './page/receivables/receivables.component';
 import {ActuatorComponent} from './page/actuator/actuator.component';
 import {MealComponent} from './page/meal/meal.component';
-
 
 
 const routes: Routes = [
@@ -17,26 +15,20 @@ const routes: Routes = [
     component: AdministratorComponent,
     children: [
       {
-        path: 'receivables',
-        component: ReceivablesComponent,
-        children: [
-          {
-            path: 'add-cash-payment',
-            component: AddCashPaymentComponent,
-          },
-          {
-            path: 'cash-payments',
-            component: CashPaymentsComponent,
-          },
-          {
-            path: 'transactions',
-            component: TransactionsComponent,
-          },
-          {
-            path: 'import',
-            component: ImportComponent,
-          }
-        ]
+        path: 'add-cash-payment',
+        component: AddCashPaymentComponent,
+      },
+      {
+        path: 'cash-payments',
+        component: CashPaymentsComponent,
+      },
+      {
+        path: 'transactions',
+        component: TransactionsComponent,
+      },
+      {
+        path: 'import',
+        component: ImportComponent,
       },
       {
         path: 'meal',
