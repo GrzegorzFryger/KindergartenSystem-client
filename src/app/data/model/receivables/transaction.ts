@@ -1,4 +1,5 @@
 export class Transaction {
+  id: number;
   transactionDate: Date;
   bookingDate: Date;
   contractorDetails: string;
@@ -10,4 +11,5 @@ export class Transaction {
   transactionCurrency: string;
   childId: string;
   guardianId: string;
+  isAssigned: boolean; // Field for checkbox purposes - to be removed before sending to REST API
 }

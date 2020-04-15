@@ -47,7 +47,7 @@ export class MealComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.children = this.guardianService.findAllChildren(this.guardianService.userId);
+    this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
     console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
 

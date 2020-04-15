@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -24,7 +24,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
-import {ReceivablesComponent} from './page/receivables/receivables.component';
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {ImportComponent} from './page/receivables/import/import.component';
@@ -32,6 +31,11 @@ import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-c
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ActuatorComponent} from './page/actuator/actuator.component';
+import {ServicesStatusComponent} from './page/actuator/services-status/services-status.component';
+import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.component';
+import {ChartComponent} from './page/actuator/chart/chart.component';
+import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 import {UsersComponent} from './page/users/users.component';
 import {ProfileComponent} from './page/users/account-list/profiles/person-profile/profile.component';
@@ -48,6 +52,7 @@ import {ChildFormComponent} from './page/users/forms/child-form/child-form.compo
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -55,7 +60,6 @@ import {environment} from '../../core/environment.dev';
     AdministratorComponent,
     CashPaymentsComponent,
     TransactionsComponent,
-    ReceivablesComponent,
     AddCashPaymentComponent,
     ImportComponent,
     MealPriceComponent,
@@ -74,6 +78,12 @@ import {environment} from '../../core/environment.dev';
     UserChartComponent,
     ChildProfileComponent,
     ChildFormComponent,
+    ActuatorComponent,
+    ServicesStatusComponent,
+    HttpTraceComponent,
+    ChartComponent,
+    MetricsComponent,
+    AdministratorNavigationMenuComponent
   ],
 
 
@@ -104,13 +114,14 @@ import {environment} from '../../core/environment.dev';
     MatTooltipModule,
     ChartsModule,
     MatDatepickerModule,
-    MatDatepickerModule,
     MatNativeDateModule
   ],
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
+    MatCheckboxModule,
+    DatePipe
   ]
 })
 export class AdministratorModule {
