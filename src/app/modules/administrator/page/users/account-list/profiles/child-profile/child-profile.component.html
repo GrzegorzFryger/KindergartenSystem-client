@@ -1,7 +1,7 @@
-<div class="user-person-container">
-  <mat-card [ngClass]="{'resize': isEditCardOpen}" class="person-card">
+<div class="profile-layout-container">
+  <mat-card [ngClass]="{'resize': isEditCardOpen}" class="profile-card-layout">
     <mat-card-content>
-      <div class="person-content-container">
+      <div class="profile-content-container">
         <div class="header-item">
           <div class="header">
             <div class="center">
@@ -13,7 +13,7 @@
           </div>
         </div>
         <mat-divider [inset]="true"></mat-divider>
-        <div class="person-data-item contact">
+        <div class="profile-data-item contact">
           <p>Dane kontaktowe:</p>
           <div class="d-flex">
             <div class="item">
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <div class="person-data-item address">
+        <div class="profile-data-item address">
           <p>Adres:</p>
           <div class="d-flex">
             <div class="item street">
@@ -86,7 +86,7 @@
   </mat-card>
 
   <ng-container *ngIf="isEditCardOpen">
-    <mat-card class="person-edit-card">
+    <mat-card class="profile-edit-card">
       <mat-card-content>
         <div class="d-flex">
           <app-child-form [initialState]="personFormInitial"

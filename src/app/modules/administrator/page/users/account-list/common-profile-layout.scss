@@ -1,8 +1,8 @@
-.user-person-container {
+.profile-layout-container {
   display: flex;
   justify-content: center;
 
-  .person-card {
+  .profile-card-layout {
     width: 30%;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
     .mat-card-content {
       flex-shrink: 1;
 
-      .person-content-container {
+      .profile-content-container {
         display: flex;
         flex-direction: column;
 
@@ -24,7 +24,7 @@
           }
         }
 
-        .person-data-item {
+        .profile-data-item {
           margin-top: 8px;
 
           p {
@@ -59,7 +59,7 @@
     }
   }
 
-  .person-edit-card {
+  .profile-edit-card {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -68,16 +68,20 @@
     .mat-card-content {
       flex-shrink: 0;
 
-      .person-form-container {
+     .d-flex {
+       justify-content: center;
 
-        .section {
-          margin-left: 16px;
+       .form-layout-container {
 
-          .mat-form-field {
-            margin-right: 16px;
-          }
-        }
-      }
+         .section {
+           margin-left: 16px;
+
+           .mat-form-field {
+             margin-right: 16px;
+           }
+         }
+       }
+     }
     }
 
     .mat-card-footer {
