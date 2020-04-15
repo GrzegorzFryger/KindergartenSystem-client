@@ -22,7 +22,7 @@
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="email" formControlName="email">
+        <input matInput placeholder="Email" formControlName="email">
         <mat-error *ngIf="hasError('email', 'required')">Email jest wymagan</mat-error>
         <mat-error *ngIf="hasError('email', 'email')">Email jest niepoprawny</mat-error>
       </mat-form-field>
@@ -30,7 +30,7 @@
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Telefon</mat-label>
-        <input matInput placeholder="phone" formControlName="phone">
+        <input matInput placeholder="Telefon" formControlName="phone">
         <mat-error *ngIf="hasError('phone', 'required')">Telefon jest wymagany</mat-error>
       </mat-form-field>
     </div>
@@ -48,12 +48,12 @@
    <div class="col">
      <mat-form-field appearance="standard">
        <mat-label>Miasto</mat-label>
-       <input matInput placeholder="city" formControlName="city">
+       <input matInput placeholder="Miasto" formControlName="city">
        <mat-error *ngIf="hasChildError('address','city','required')">Miasto jest wymagane</mat-error>
      </mat-form-field>
    </div>
     <div class="col-12">
-      <mat-form-field class="street" appearance="standard">
+      <mat-form-field class="Ulica" appearance="standard">
         <mat-label>Ulica i numer</mat-label>
         <input matInput placeholder="street" formControlName="street">
         <mat-error *ngIf="hasChildError('address','street','required')">Ulica jest wymagana</mat-error>

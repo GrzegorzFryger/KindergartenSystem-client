@@ -12,10 +12,10 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   getAllEmployees(): Observable<Array<Employee>> {
-    return this.http.get<Array<Employee>>(environment.apiUrls.employee.employees);
+    return this.http.get<Array<Employee>>(environment.apiUrls.account.employee.employees);
   }
 
   getCountEmployee(): Observable<number> {
-    return this.http.get<number>(environment.apiUrls.employee.count);
+    return this.http.get<number>(environment.apiUrls.account.employee.count);
   }
 }

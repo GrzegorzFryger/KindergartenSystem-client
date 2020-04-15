@@ -12,10 +12,10 @@ export class ChildService {
   constructor(private http: HttpClient) { }
 
   getAllChildren(): Observable<Array<Child>> {
-    return this.http.get<Array<Child>>(environment.apiUrls.child.children);
+    return this.http.get<Array<Child>>(environment.apiUrls.account.child.children);
   }
 
   getCountChildren(): Observable<number> {
-    return this.http.get<number>(environment.apiUrls.child.count);
+    return this.http.get<number>(environment.apiUrls.account.child.count);
   }
 }
