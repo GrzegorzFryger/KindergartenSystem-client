@@ -7,6 +7,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ActuatorComponent} from './page/actuator/actuator.component';
 import {MealComponent} from './page/meal/meal.component';
+import {UsersComponent} from './page/users/users.component';
+import {AccountListComponent} from './page/users/account-list/account-list.component';
+import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
 
 
 const routes: Routes = [
@@ -35,9 +38,25 @@ const routes: Routes = [
         component: MealComponent,
       },
       {
-        path: 'actuator',
-        component: ActuatorComponent,
-      },
+        path: 'users',
+        component: UsersComponent,
+        children: [
+          {
+            path: 'list',
+            component: AccountListComponent,
+          },
+          {
+            path: 'create',
+            component: AccountCreatorComponent,
+          },
+
+          ]
+        },
+        {
+          path: 'actuator',
+          component: ActuatorComponent,
+        }
+    
     ]
   }
 ];

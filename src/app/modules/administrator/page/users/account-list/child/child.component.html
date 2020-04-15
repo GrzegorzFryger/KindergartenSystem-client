@@ -1,0 +1,74 @@
+<div class="account-list-container">
+  <ng-container *ngIf="!childCardIsOpen">
+    <div [ngClass]="{'move': childCardIsOpen }" class="table-container">
+      <h2>Lista dzieci</h2>
+      <div class="flex">
+        <div class="search">
+          <mat-form-field>
+            <mat-label>Szukaj</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj dzecko">
+          </mat-form-field>
+
+        </div>
+        <div class="table">
+          <mat-table [dataSource]="dataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+              <mat-cell *matCellDef="let children"> {{children.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let children"> {{children.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pesel">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Pesel</mat-header-cell>
+              <mat-cell *matCellDef="let children"> {{children.pesel}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Płeć</mat-header-cell>
+              <mat-cell
+                *matCellDef="let children"> {{children.gender}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateOfBirth">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data urodzenia</mat-header-cell>
+              <mat-cell
+                *matCellDef="let children"> {{children.dateOfBirth}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="startDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data rozpoczecia</mat-header-cell>
+              <mat-cell
+                *matCellDef="let children"> {{children.startDate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="endDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data zakończenia</mat-header-cell>
+              <mat-cell
+                *matCellDef="let children"> {{children.endDate}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row, let children; columns: columnsToDisplay;"
+                     (click)="selectChildren(children)">
+            </mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template [ngIf]="childCardIsOpen">
+    <div [ngClass]="{'move2': childCardIsOpen }" class="person-container">
+      <app-child-profile [child]="childToDisplay"
+                         (childOutputEmitter)="receiveFromPersonComponent($event)">
+
+      </app-child-profile>
+    </div>
+  </ng-template>
+
+</div>

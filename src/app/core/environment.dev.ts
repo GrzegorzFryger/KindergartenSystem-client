@@ -22,23 +22,28 @@ export const environment = {
   },
   apiUrls: {
     authorization: apiUrl + '/api/authenticate',
+    user: apiUrl + '/api/account/user',
+    guardianUrl: apiUrl + '/api/account/guardians/',
     meal: apiUrl + '/api/meal',
     mealDictionary: apiUrl + '/api/dictionary/meal/',
 
     account: {
-      // Account Controller
       user: accountUrl + 'user',
-
-      // Borough Controller
-
-      // Child Controller
-      getChildById: accountUrl + 'child/',
-      searchChildrenByFullName: accountUrl + 'children/search',
-
-      // Employee Controller
-
-      // Guardian Controller
-      findAllGuardianChildren: accountUrl + 'guardians/'
+      guardian: {
+        findAllGuardianChildren: accountUrl + 'guardians/',
+        guardians: accountUrl + 'guardians',
+        count: accountUrl + 'guardians/count'
+      },
+      employee: {
+        employees: accountUrl + 'employees',
+        count: accountUrl + 'employees/count'
+      },
+      child: {
+        children: accountUrl + 'children',
+        getChildById: accountUrl + 'child/',
+        count: accountUrl + 'children/count',
+        searchChildrenByFullName: accountUrl + 'children/search',
+      },
     },
     receivables: {
       // Receivables Controller
@@ -103,7 +108,9 @@ export const environment = {
       getMetrics: actuatorUrl + 'metrics',
       getMetricsDetails: ''
     }
+
   }
+
 };
 
 

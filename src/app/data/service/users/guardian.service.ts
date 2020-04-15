@@ -6,6 +6,7 @@ import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
+import {Guardian} from '../../model/users/guardian';
 
 const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
 
@@ -25,7 +26,7 @@ export class GuardianService {
   }
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
-    return this.http.get<Array<Child>>(environment.apiUrls.account.findAllGuardianChildren + `${userId}` + '/children')
+    return this.http.get<Array<Child>>(environment.apiUrls.account.guardian.findAllGuardianChildren + `${userId}` + '/children')
       .pipe(
         catchError(err => {
           this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
@@ -34,11 +35,19 @@ export class GuardianService {
   }
 
   public getChildById(childID: string): Observable<Child> {
-    return this.http.get<Child>(environment.apiUrls.account.getChildById + childID);
+    return this.http.get<Child>(environment.apiUrls.account.child.getChildById + childID);
+  }
+
+  getAllGuardian(): Observable<Array<Guardian>> {
+    return this.http.get<Array<Guardian>>(environment.apiUrls.account.guardian.guardians);
+  }
+
+  getCountGuardians(): Observable<number> {
+    return this.http.get<number>(environment.apiUrls.account.guardian.count);
   }
 
   public searchChildrenByFullName(name: string, surname: string): Observable<Array<Child>> {
     const params = new HttpParams().append('name', name).append('surname', surname);
-    return this.http.get<Array<Child>>(environment.apiUrls.account.searchChildrenByFullName, {params});
+    return this.http.get<Array<Child>>(environment.apiUrls.account.child.searchChildrenByFullName, {params});
   }
 }

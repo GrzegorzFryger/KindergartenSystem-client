@@ -1,0 +1,58 @@
+<div class="display-flex-col user-menu-container">
+
+  <ng-container *ngIf="isSelected">
+    <div class="information-container">
+      <div class="display-flex-row">
+        <app-user-chart></app-user-chart>
+      </div>
+    </div>
+    <div class="options-container">
+      <div class="display-flex-row">
+        <mat-card id="create" (click)="onSelect('create')" class="menu-option">
+          <mat-card-header>
+            <h2>Dodaj nowe konto</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Kliknij aby dodac dowolne nowe konto w systemie</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card id="list" (click)="onSelect('list')" class="menu-option">
+          <mat-card-header>
+            <h2>Lista wszystkich kont</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Kliknij aby zobaczyc oraz zarządzać wszsytkimi kontami w systemie</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card id="asignChild" (click)="onSelect('assignchild')" class="menu-option">
+          <mat-card-header>
+            <h2>Przypisz konto dziecka do rodzica</h2>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Kliknij aby zobaczyc aby przypsiac dziecko do rodzica</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isSelected">
+    <div class="selected-container">
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="navigation-button">
+      <div class="display-flex-row">
+        <div class="button">
+          <button mat-raised-button (click)="back()" color="primary">Cofnij</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+
+</div>

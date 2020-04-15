@@ -37,6 +37,21 @@ import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.componen
 import {ChartComponent} from './page/actuator/chart/chart.component';
 import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {UsersComponent} from './page/users/users.component';
+import {ProfileComponent} from './page/users/account-list/profiles/person-profile/profile.component';
+import {GuardianComponent} from './page/users/account-list/guardian/guardian.component';
+import {EmployeeComponent} from './page/users/account-list/employee/employee.component';
+import {ChildComponent} from './page/users/account-list/child/child.component';
+import {PersonFormComponent} from './page/users/forms/person-form/person-form.component';
+import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
+import {AccountListComponent} from './page/users/account-list/account-list.component';
+import {UserChartComponent} from './page/users/user-chart/user-chart.component';
+import {ChartsModule} from 'ng2-charts';
+import {ChildProfileComponent} from './page/users/account-list/profiles/child-profile/child-profile.component';
+import {ChildFormComponent} from './page/users/forms/child-form/child-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {environment} from '../../core/environment.dev';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
@@ -51,6 +66,18 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MealComponent,
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
+    AdministratorNavigationMenuComponent,
+    UsersComponent,
+    ProfileComponent,
+    GuardianComponent,
+    EmployeeComponent,
+    ChildComponent,
+    PersonFormComponent,
+    AccountCreatorComponent,
+    AccountListComponent,
+    UserChartComponent,
+    ChildProfileComponent,
+    ChildFormComponent,
     ActuatorComponent,
     ServicesStatusComponent,
     HttpTraceComponent,
@@ -85,11 +112,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTabsModule,
     MatChipsModule,
     MatTooltipModule,
-    MatCheckboxModule,
+    ChartsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_DATE_LOCALE, useValue: environment.locale},
+    MatCheckboxModule,
     DatePipe
   ]
 })
