@@ -114,7 +114,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTooltipModule,
     ChartsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   bootstrap: [],
   providers: [
