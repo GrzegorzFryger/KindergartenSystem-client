@@ -34,15 +34,20 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 import {UsersComponent} from './page/users/users.component';
-import {ProfileComponent} from './page/users/account-list/guardian/profile/profile.component';
+import {ProfileComponent} from './page/users/account-list/profiles/person-profile/profile.component';
 import {GuardianComponent} from './page/users/account-list/guardian/guardian.component';
 import {EmployeeComponent} from './page/users/account-list/employee/employee.component';
 import {ChildComponent} from './page/users/account-list/child/child.component';
-import {PersonFormComponent} from './page/users/account-creator/person-form/person-form.component';
+import {PersonFormComponent} from './page/users/forms/person-form/person-form.component';
 import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
 import {AccountListComponent} from './page/users/account-list/account-list.component';
 import {UserChartComponent} from './page/users/user-chart/user-chart.component';
 import {ChartsModule} from 'ng2-charts';
+import {ChildProfileComponent} from './page/users/account-list/profiles/child-profile/child-profile.component';
+import {ChildFormComponent} from './page/users/forms/child-form/child-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {environment} from '../../core/environment.dev';
 
 
 @NgModule({
@@ -67,6 +72,8 @@ import {ChartsModule} from 'ng2-charts';
     AccountCreatorComponent,
     AccountListComponent,
     UserChartComponent,
+    ChildProfileComponent,
+    ChildFormComponent,
   ],
 
 
@@ -96,10 +103,14 @@ import {ChartsModule} from 'ng2-charts';
     MatChipsModule,
     MatTooltipModule,
     ChartsModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_DATE_LOCALE, useValue: environment.locale},
   ]
 })
 export class AdministratorModule {

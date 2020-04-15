@@ -1,81 +1,60 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Guardian} from '../../../../../../data/model/users/guardian';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {GuardianService} from '../../../../../../data/service/users/guardian.service';
 import {InputPerson, PersonType} from '../../../../../../data/model/users/input-person';
-
-interface CssClass {
-  in: Array<string>;
-  out: Array<string>;
-}
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-guardian',
   templateUrl: './guardian.component.html',
-  styleUrls: ['./guardian.component.scss', '../common-account-layout.component.scss'],
+  styleUrls: ['./guardian.component.scss', '../common-account-layout.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class GuardianComponent implements OnInit {
-  guardians: Observable<Array<Guardian>>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   dataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
   columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email', 'status'];
+  personDetailCardOpen: boolean;
   personToDisplay: InputPerson;
 
-  // view control
-  // createGuardianCardIsOpen: boolean;
-  personCardIsOpen: boolean;
-  classToSet: CssClass;
-  form: any;
-  personFormInitial: Guardian;
-
+  private personFormInitial: Guardian;
+  private guardians: Observable<Array<Guardian>>;
 
   constructor(private guardianService: GuardianService) {
     this.guardians = this.guardianService.getAllGuardian();
-    this.classToSet = {in: new Array<string>(), out: new Array<string>()};
     this.personFormInitial = new Guardian();
   }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.guardians.subscribe(guardians => {
       this.dataSource.data = guardians;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
     });
   }
 
   applyFilter($event: KeyboardEvent) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    const filterValue = ($event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   selectGuardian(guardian: Guardian) {
-    this.classToSet.out.push('move');
-    this.classToSet.in.push('move2');
-    this.personCardIsOpen = true;
+    this.personDetailCardOpen = true;
     this.personToDisplay = {type: PersonType.Guardian, data: guardian};
   }
 
-  receiveFromPersonComponent($event) {
-    this.classToSet.out = this.classToSet.out.filter(cssClass => cssClass !== 'move');
-    this.classToSet.in = this.classToSet.out.filter(cssClass => cssClass !== 'move2');
-    this.personCardIsOpen = $event;
-  }
-
-  createGuardian() {
-    // this.classToSet.out.push('moveUp');
-    // this.classToSet.in.push('moveUp2');
-    // this.createGuardianCardIsOpen = true;
-  }
-
-  onSubmit() {
-
+  receiveDataFromPersonDetail($event) {
+    this.personDetailCardOpen = $event;
   }
 
   formValuesChange($event: { [p: string]: any }) {
 
   }
 
-  close(person: string) {
-    this.classToSet.out = this.classToSet.out.filter(cssClass => cssClass !== 'moveUp');
-    // this.createGuardianCardIsOpen = false;
-  }
 }

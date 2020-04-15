@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-person-form',
   templateUrl: './person-form.component.html',
-  styleUrls: ['./person-form.component.scss']
+  styleUrls: ['./person-form.component.scss', '../common-form-layout.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PersonFormComponent implements OnInit {
   @Output()
@@ -56,7 +57,7 @@ export class PersonFormComponent implements OnInit {
 
   public hasChildError = (childName: string, controlName: string, errorName: string) => {
     return this.form.get(childName).get(controlName).hasError(errorName);
-  };
+  }
 
 
 }

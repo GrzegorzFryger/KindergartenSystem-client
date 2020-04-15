@@ -1,60 +1,47 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {InputPerson, PersonType} from '../../../../../../../data/model/users/input-person';
-import {Guardian} from '../../../../../../../data/model/users/guardian';
 import {FormBuilder} from '@angular/forms';
-
-enum CloseType {
-  EDIT, PERSON
-}
-
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  styleUrls: ['./profile.component.scss', '../../common-profile-layout.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
-  @Output() profileEmitter: EventEmitter<boolean>;
+  @Output() profileOutputEmitter: EventEmitter<boolean>;
   @Input() personData: InputPerson;
 
-  isInstanceOfGuardian: boolean;
+  personType: string;
   isEditCardOpen: boolean;
-  cssClassToSet: Array<string>;
-
   personFormInitial: { [key: string]: any };
 
   constructor(private fb: FormBuilder) {
-    this.profileEmitter = new EventEmitter<boolean>();
-    this.cssClassToSet = new Array<string>();
+    this.profileOutputEmitter = new EventEmitter<boolean>();
   }
 
   ngOnInit(): void {
-    this.isInstanceOfGuardian = this.personData.type === PersonType.Guardian;
+    this.personType = this.personData.type === PersonType.Guardian ? 'guardian' : 'employee';
   }
 
   close(type: string) {
     if (type === 'edit') {
-      this.cssClassToSet = this.cssClassToSet.filter(cssClass => cssClass !== 'resize');
       this.isEditCardOpen = false;
     } else {
-      this.cssClassToSet = this.cssClassToSet.filter(cssClass => cssClass !== 'resize');
-      this.profileEmitter.emit(false);
+      this.profileOutputEmitter.emit(false);
     }
   }
 
-  public get person(): Guardian {
+  public get person() {
     return this.personData.data;
   }
 
   openEditCard() {
     this.personFormInitial = this.person;
-    this.cssClassToSet.push('resize');
     this.isEditCardOpen = true;
   }
 
   onSubmit() {
-
   }
 
   formValuesChange($event: { [p: string]: any }) {

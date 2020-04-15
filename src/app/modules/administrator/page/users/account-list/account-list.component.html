@@ -1,6 +1,6 @@
 <div class="d-flex">
   <mat-tab-group [selectedIndex]="selected.value"
-                 (selectedIndexChange)="selected.setValue($event)" >
+                 (selectedIndexChange)="selected.setValue($event)">
     <mat-tab>
       <ng-template mat-tab-label>
         <img src="../../../assets/images/tata.png"
@@ -16,6 +16,17 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <img src="../../../../../assets/images/teacher.png"
+             height="30"
+             width="30"
+             class="img-fluid"
+             alt="image-cover"/>
+        <span>Pracownicy</span>
+      </ng-template>
+      <app-employee></app-employee>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="../../../../../assets/images/teacher.png"
              height="30" width="30"
              class="img-fluid"
              alt="image-cover"/>
@@ -24,17 +35,6 @@
       <ng-template matTabContent>
         <app-child></app-child>
       </ng-template>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <img src="../../../../../assets/images/teacher.png"
-             height="30"
-             width="30"
-             class="img-fluid"
-             alt="image-cover"/>
-        <span>Pracownicy</span>
-      </ng-template>
-      <app-employee></app-employee>
     </mat-tab>
   </mat-tab-group>
 </div>
