@@ -21,7 +21,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
     'transactionNumber', 'transactionAmount', 'isAssigned'];
-  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth'];
+  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
 
   public unassignedTransactions: Array<Transaction>;
 
@@ -30,6 +30,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   public childName = '';
   public childSurname = '';
+  public selectedChildId = '';
 
   constructor(private transactionsService: TransactionsService,
               private guardianService: GuardianService,
@@ -51,7 +52,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     transactionsToBeAssigned.forEach(obj => {
       delete obj.isAssigned;
       // TODO: Remove hardcoded UUID's in next commits
-      this.assignTransaction(obj, '0560d77d-e0db-4914-ae4a-4f39690ecb2d', 'c4029244-e8ff-4328-8658-28964dda3c4e');
+      this.assignTransaction(obj, this.selectedChildId, 'c4029244-e8ff-4328-8658-28964dda3c4e');
     });
     this.reloadTransactionData();
   }
@@ -68,6 +69,11 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         return throwError(err);
       })
     );
+  }
+
+  public selectChild(childId: string): void {
+    console.log('Selected child: ' + childId);
+    this.selectedChildId = childId;
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {

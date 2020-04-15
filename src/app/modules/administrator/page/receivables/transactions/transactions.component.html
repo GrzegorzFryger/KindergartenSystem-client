@@ -111,6 +111,14 @@
               <mat-cell *matCellDef="let child"> {{child.dateOfBirth}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="isSelected">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+              <mat-cell
+                *matCellDef="let child">
+                <mat-radio-button (click)="selectChild(child.id)"></mat-radio-button>
+              </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
             <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
           </mat-table>
