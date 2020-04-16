@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../core/environment.dev';
 import {MealPrice} from '../../../../../data/model/meal/meal-price';
 import {MealService} from '../../../../../data/service/meal/meal.service';
-import {Meal} from '../../../../../data/model/meal/meal';
 
 
 @Component({
@@ -16,7 +14,7 @@ export class MealPriceComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'mealType', 'mealPrice', 'action'];
   dataSource: Array<MealPrice>;
-  editingMeal = true;
+  editingMeal = false;
   editedMealPrice;
 
   constructor(private http: HttpClient, private mealService: MealService) {
