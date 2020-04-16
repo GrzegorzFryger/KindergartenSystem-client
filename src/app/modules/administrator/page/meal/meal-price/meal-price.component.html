@@ -52,8 +52,42 @@
         </mat-table>
       </div>
 
+
+      <div class="addMealPrice-container">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-3 offset-2">
+              <mat-form-field>
+                <mat-label>Typ</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type" >
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-2">
+              <mat-form-field class="mealPrice-input" style="background: #ffffff">
+                <input  matInput >
+                <span matSuffix>zł</span>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4 addMealPrice-buttons">
+              <button mat-button color="primary">zapisz</button>
+              <button mat-button color="primary">anuluj</button>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
     </mat-card-content>
-    <mat-card-actions *ngIf="isAnyMealPriceAvailableToAdd">
+    <mat-card-actions *ngIf="mealPriceAvailableToAdd.length > 0">
       <button mat-button color="primary">Dodaj</button>
     </mat-card-actions>
   </mat-card>

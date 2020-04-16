@@ -16,7 +16,7 @@ export class MealPriceComponent implements OnInit {
   dataSource: Array<MealPrice>;
   editingMeal = false;
   editedMealPrice;
-  isAnyMealPriceAvailableToAdd = false;
+  mealPriceAvailableToAdd = [];
 
   constructor(private http: HttpClient, private mealService: MealService) {
   }
@@ -60,7 +60,7 @@ export class MealPriceComponent implements OnInit {
 
   getAvailableMealPrice() {
     this.mealService.getAvailableMealPrice().subscribe(resp => {
-      this.isAnyMealPriceAvailableToAdd = resp.length > 0;
+      this.mealPriceAvailableToAdd = resp;
     });
   }
 }
