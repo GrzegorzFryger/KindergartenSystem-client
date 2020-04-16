@@ -37,6 +37,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   public childSurname = '';
   public selectedChildId = '';
   public selectedGuardianId = '';
+  public amountOfSelectedTranactions = 0;
 
   constructor(private transactionsService: TransactionsService,
               private childService: ChildService,
@@ -103,6 +104,11 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     this.selectedGuardianId = guardianId;
   }
 
+  public onCheckBoxClick(checked: boolean) {
+    checked ? this.amountOfSelectedTranactions += 1 : this.amountOfSelectedTranactions -= 1;
+    console.log('Amount of selected transactions: ' + this.amountOfSelectedTranactions);
+  }
+
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
     console.log('Assigning transaction: ' + transaction.id + ' to: ' + childId + ' - ' + guardianId);
     this.transactionsService.assignTransactionToChild(transaction, childId, guardianId).subscribe(
@@ -138,6 +144,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       return transaction.isAssigned === false;
     });
     this.transactionDataSource.data = this.unassignedTransactions;
+    this.amountOfSelectedTranactions = 0;
   }
 
   private setTransactionDataToTable(incomingPayment: Array<Transaction>): void {

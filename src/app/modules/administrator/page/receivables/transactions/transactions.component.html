@@ -50,7 +50,7 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
               <mat-cell
                 *matCellDef="let transaction">
-                <mat-checkbox [(ngModel)]="transaction.isAssigned"></mat-checkbox>
+                <mat-checkbox [(ngModel)]="transaction.isAssigned" (change)="onCheckBoxClick($event.checked)"></mat-checkbox>
               </mat-cell>
             </ng-container>
 
@@ -169,7 +169,7 @@
       <div class="row">
         <div class="col">
           <button mat-raised-button color="primary" type="button"
-                  (click)="assignTransactions()" [disabled]="selectedGuardianId === ''">Przypisz transakcje
+                  (click)="assignTransactions()" [disabled]="selectedGuardianId === '' || amountOfSelectedTranactions === 0">Przypisz transakcje
           </button>
         </div>
       </div>
