@@ -36,6 +36,11 @@ export class MealPriceComponent implements OnInit {
     this.editingMeal = true;
   }
 
+  addMealPrice(mealType: string, mealPrice: number) {
+    this.mealService.addMealPrice(mealType, mealPrice).subscribe(resp => {
+      this.getAllMealPrice();
+    });
+  }
 
   uploadMealPrice(id: number) {
     this.mealService.getMealPriceById(id).subscribe(resp => {
