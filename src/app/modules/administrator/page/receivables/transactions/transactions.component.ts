@@ -8,7 +8,7 @@ import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
 import {Child} from '../../../../../data/model/users/child';
-import {GuardianService} from '../../../../../data/service/users/guardian.service';
+import {ChildService} from '../../../../../data/service/users/child.service';
 
 @Component({
   selector: 'app-transactions',
@@ -33,7 +33,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   public selectedChildId = '';
 
   constructor(private transactionsService: TransactionsService,
-              private guardianService: GuardianService,
+              private childService: ChildService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
@@ -59,7 +59,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   public findChildren(): void {
     console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
-    this.guardianService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
+    this.childService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
       resp => {
         console.log(resp);
         this.setChildDataToTable(resp);
