@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -125,7 +125,8 @@ import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
-    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }}
+    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
+    DatePipe
   ]
 })
 export class AdministratorModule {

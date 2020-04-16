@@ -8,9 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class PersonFormComponent implements OnInit {
-  @Output()
-  public formValuesChanged = new EventEmitter<{ [key: string]: any }>();
-
+  @Output() formValuesChanged = new EventEmitter<{ formValues: { [key: string]: any }, formValid: boolean }>();
   @Input() initialState: { [key: string]: any };
   form: FormGroup;
 
@@ -43,7 +41,7 @@ export class PersonFormComponent implements OnInit {
     });
 
     this.form.valueChanges.subscribe((val) => {
-      this.formValuesChanged.emit(val);
+      this.formValuesChanged.emit({formValues: val, formValid: this.form.valid});
     });
   }
 

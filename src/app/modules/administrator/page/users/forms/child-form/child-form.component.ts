@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+
 @Component({
   selector: 'app-child-form',
   templateUrl: './child-form.component.html',
@@ -8,59 +9,35 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildFormComponent implements OnInit {
-  @Output()
-  public formValuesChanged = new EventEmitter<{ [key: string]: any }>();
+  @Output() formValuesChanged = new EventEmitter<{ formValues: any, formValid: boolean }>();
   @Input() initialState: { [key: string]: any };
   @Input() mode: string;
+
   form: FormGroup;
-  requireField: boolean;
+  turnOnField: boolean;
 
   constructor(private fb: FormBuilder) {
-    this.requireField = true;
+    this.turnOnField = true;
   }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [
-        this.initialState?.name ? this.initialState.name : '',
-        [Validators.required, Validators.min(3)]
-      ],
-      surname: [
-        this.initialState?.surname ? this.initialState.surname : '',
-        [Validators.required]
-      ],
-      pesel: [
-        this.initialState?.pesel ? this.initialState.pesel : ''
-      ],
-      gender: [
-        this.initialState?.gender ? this.initialState?.gender : '',
-        [Validators.required]
-      ],
-      dateOfBirth: [
-        this.initialState?.dateOfBirth ? this.initialState?.dateOfBirth : '',
-        [Validators.required]
-      ],
-      startDate: [
-        this.initialState?.startDate ? this.initialState?.startDate : '',
-        [Validators.required]
-      ],
-      endDate: [
-        this.initialState?.endDate ? this.initialState?.endDate : '',
-        [Validators.required]
-      ],
-      address: this.fb.group({
-        zip_code: [this.initialState?.postalCode ? this.initialState.postalCode : '', [Validators.required]],
-        city: [this.initialState?.city ? this.initialState.city : '', [Validators.required]],
-        street: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]],
-      })
+    this.createFromObject();
+
+    this.form.get('pesel').valueChanges.subscribe(val => {
+      if (this.mode === 'create' && val !== '') {
+        this.form.get('gender').disable();
+        this.form.get('dateOfBirth').disable();
+        this.turnOnField = false;
+      } else {
+        this.form.get('gender').enable();
+        this.form.get('dateOfBirth').enable();
+        this.form.get('pesel').disable();
+        this.turnOnField = true;
+      }
     });
 
     this.form.valueChanges.subscribe((val) => {
-      this.formValuesChanged.emit(val);
-
-      if (this.mode === 'create') {
-        this.requireField = this.checkIfPeselIsEmpty();
-      }
+      this.formValuesChanged.emit({formValues: val, formValid: this.form.valid});
     });
   }
 
@@ -76,7 +53,40 @@ export class ChildFormComponent implements OnInit {
     return this.form.get(childName).get(controlName).hasError(errorName);
   };
 
-  private checkIfPeselIsEmpty(): boolean {
-    return this.form.get('pesel').value === '';
+
+  private createFromObject(): void {
+    this.form = this.fb.group({
+      name: [
+        this.initialState?.name ? this.initialState.name : '',
+        [Validators.required, Validators.min(3)]
+      ],
+      surname: [
+        this.initialState?.surname ? this.initialState.surname : '',
+        [Validators.required]
+      ],
+      pesel: [
+        this.initialState?.pesel ? this.initialState.pesel : '',
+        [Validators.pattern('[0-9]*'), Validators.minLength(11), Validators.maxLength(11)]
+      ],
+      gender: [
+        this.initialState?.gender ? this.initialState?.gender : '',
+        [Validators.required]
+      ],
+      dateOfBirth: [
+        this.initialState?.dateOfBirth ? this.initialState?.dateOfBirth : '',
+        [Validators.required]
+      ],
+      startDate: [
+        {value: this.initialState?.startDate ? this.initialState?.startDate : '', disabled: this.mode === 'create'},
+        [Validators.required]
+      ],
+      endDate: [
+        {value: this.initialState?.endDate ? this.initialState?.endDate : '', disabled: this.mode === 'create'},
+        [Validators.required]
+      ],
+      postalCode: [this.initialState?.postalCode ? this.initialState.postalCode : '', [Validators.required]],
+      city: [this.initialState?.city ? this.initialState.city : '', [Validators.required]],
+      streetNumber: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]],
+    });
   }
 }
