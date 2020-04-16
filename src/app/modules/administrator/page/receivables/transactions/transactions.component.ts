@@ -66,6 +66,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   public findChildren(): void {
     console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
+    this.resetChildAndGuardianState();
     this.childService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
       resp => {
         console.log(resp);
@@ -157,6 +158,13 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   private setGuardianDataToTable(guardians: Array<Guardian>): void {
     this.guardianDataSource.data = guardians;
+  }
+
+  private resetChildAndGuardianState(): void {
+    this.guardianDataSource.data = []; // Remove all found guardians when performing new children search
+    this.childDataSource.data = [];  // Remove all found children when performing new children search
+    this.selectedGuardianId = ''; // Reset state of selected guardian
+    this.selectedChildId = ''; // Reset state of selected child
   }
 
   private initializeTables(): void {
