@@ -28,16 +28,19 @@
       </mat-form-field>
     </div>
 
-    <div class="col">
-      <mat-form-field appearance="standard">
-        <mat-label>Płeć</mat-label>
-        <input matInput placeholder="Płeć" formControlName="gender">
-        <mat-error *ngIf="hasError('gender', 'required')">Płeć jest wymagana</mat-error>
-      </mat-form-field>
-    </div>
+    <ng-container *ngIf="requireField">
+      <div class="col">
+        <mat-form-field appearance="standard">
+          <mat-label>Płeć</mat-label>
+          <input matInput placeholder="Płeć" formControlName="gender">
+          <mat-error *ngIf="hasError('gender', 'required')">Płeć jest wymagana</mat-error>
+        </mat-form-field>
+      </div>
+    </ng-container>
   </div>
 
   <div class="row">
+    <ng-container *ngIf="requireField">
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Data urodzin</mat-label>
@@ -47,7 +50,9 @@
         <mat-datepicker #dateOfBirth></mat-datepicker>
       </mat-form-field>
     </div>
+    </ng-container>
 
+    <ng-container *ngIf="mode !== 'create'">
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Data rozpoczecia</mat-label>
@@ -57,16 +62,19 @@
         <mat-datepicker #startDate></mat-datepicker>
       </mat-form-field>
     </div>
+    </ng-container>
 
-    <div class="col">
-      <mat-form-field appearance="standard">
-        <mat-label>Data zakończenia</mat-label>
-        <input matInput [matDatepicker]="endDate"  formControlName="endDate">
-        <mat-error *ngIf="hasError('endDate', 'required')">Data jest wymagana</mat-error>
-        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-        <mat-datepicker #endDate></mat-datepicker>
-      </mat-form-field>
-    </div>
+    <ng-container *ngIf="mode !== 'create'">
+      <div class="col">
+        <mat-form-field appearance="standard">
+          <mat-label>Data zakończenia</mat-label>
+          <input matInput [matDatepicker]="endDate"  formControlName="endDate">
+          <mat-error *ngIf="hasError('endDate', 'required')">Data jest wymagana</mat-error>
+          <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+          <mat-datepicker #endDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </ng-container>
   </div>
 
   <p>Adres:</p>

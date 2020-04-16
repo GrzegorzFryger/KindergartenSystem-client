@@ -11,9 +11,12 @@ export class ChildFormComponent implements OnInit {
   @Output()
   public formValuesChanged = new EventEmitter<{ [key: string]: any }>();
   @Input() initialState: { [key: string]: any };
+  @Input() mode: string;
   form: FormGroup;
+  requireField: boolean;
 
   constructor(private fb: FormBuilder) {
+    this.requireField = true;
   }
 
   ngOnInit(): void {
@@ -27,8 +30,7 @@ export class ChildFormComponent implements OnInit {
         [Validators.required]
       ],
       pesel: [
-        this.initialState?.pesel ? this.initialState.pesel : '',
-        [Validators.required]
+        this.initialState?.pesel ? this.initialState.pesel : ''
       ],
       gender: [
         this.initialState?.gender ? this.initialState?.gender : '',
@@ -55,6 +57,10 @@ export class ChildFormComponent implements OnInit {
 
     this.form.valueChanges.subscribe((val) => {
       this.formValuesChanged.emit(val);
+
+      if (this.mode === 'create') {
+        this.requireField = this.checkIfPeselIsEmpty();
+      }
     });
   }
 
@@ -68,6 +74,9 @@ export class ChildFormComponent implements OnInit {
 
   public hasChildError = (childName: string, controlName: string, errorName: string) => {
     return this.form.get(childName).get(controlName).hasError(errorName);
-  }
+  };
 
+  private checkIfPeselIsEmpty(): boolean {
+    return this.form.get('pesel').value === '';
+  }
 }
