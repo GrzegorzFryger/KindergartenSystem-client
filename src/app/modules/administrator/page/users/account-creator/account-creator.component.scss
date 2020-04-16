@@ -1,72 +1,55 @@
-.create {
-  margin: 32px 0 32px 0;
-  flex-basis: 40%;
-  padding: 7% 5% 7% 5%;
+.create-form-layout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 
-  .create-guardian-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  .mat-card{
 
-    .mat-card-header {
-      flex-shrink: 1;
+    .card-container {
+      margin: 32px 16px 32px 16px;
+      display: flex;
+      flex-direction: column;
 
-      .mat-card-header-text {
-        margin-left: 0;
-        margin-right: 0;
+      .mat-card-header  {
+        margin-bottom: 32px;
+        .mat-card-header-text {
+          margin: 0;
+        }
+      }
+
+      .mat-card-content {
+
+        .card-content-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+         .form-type {
+           align-self: start;
+           margin-bottom: 32px;
+
+           .example-radio-group{
+
+             .mat-radio-button {
+               margin-right: 8px;
+             }
+           }
+         }
+
+          .selected-form {
+
+          }
+        }
+      }
+
+      .mat-card-footer {
+        margin-bottom: 30px;
       }
     }
-
-    .mat-card-content {
-      flex-shrink: 1;
-    }
-
-    .mat-card-footer {
-      flex-grow: 1;
-    }
   }
 }
 
-.footer-container {
-  padding: 16px;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
 
-  .button {
-    padding: 8px;
-  }
-}
-
-.moveUp {
-  animation: moveUp 500ms forwards;
-  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-.moveUp2 {
-  animation: moveUp2 500ms forwards;
-  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-@keyframes moveUp {
-  0% {
-
-  }
-
-  100% {
-    transform: translate3d(0%, -100%, 0px);
-    display: none;
-  }
-}
-
-@keyframes moveUp2 {
-  0% {
-    transform: translate3d(0%, 100%, 0px);
-    display: none;
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0px);
-  }
-}

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -53,6 +53,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -115,14 +117,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ChartsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatStepperModule,
+    MatRadioModule
   ],
   bootstrap: [],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
-    MatCheckboxModule,
-    DatePipe
+    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }}
   ]
 })
 export class AdministratorModule {
