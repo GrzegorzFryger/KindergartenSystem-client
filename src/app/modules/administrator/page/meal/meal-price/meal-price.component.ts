@@ -23,6 +23,7 @@ export class MealPriceComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllMealPrice();
+    this.getAvailableMealPrice();
   }
 
   getAllMealPrice() {
@@ -54,7 +55,7 @@ export class MealPriceComponent implements OnInit {
 
   getAvailableMealPrice() {
     this.mealService.getAvailableMealPrice().subscribe(resp => {
-
+      this.isAnyMealPriceAvailableToAdd = resp.length > 0;
     });
   }
 }
