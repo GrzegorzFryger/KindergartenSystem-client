@@ -115,7 +115,7 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
               <mat-cell
                 *matCellDef="let child">
-                <mat-radio-button (click)="selectChild(child.id)"></mat-radio-button>
+                <mat-radio-button name="child_selection" (click)="selectChild(child.id)"></mat-radio-button>
               </mat-cell>
             </ng-container>
 
@@ -129,6 +129,47 @@
         <div class="col">
           <button mat-raised-button color="primary" type="button"
                   (click)="findChildren()">Szukaj
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <br><br><p>Wybierz opiekuna</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-table [dataSource]="guardianDataSource" matSort
+                     matSortDirection="asc" matSortActive="surname">
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isSelected">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+              <mat-cell
+                *matCellDef="let guardian">
+                <mat-radio-button name="guardian_selection" (click)="selectGuardian(guardian.id)"></mat-radio-button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="guardianColumnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: guardianColumnsToDisplay;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="button"
+                  (click)="assignTransactions()">Przypisz transakcje
           </button>
         </div>
       </div>

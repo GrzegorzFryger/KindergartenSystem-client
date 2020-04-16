@@ -9,6 +9,8 @@ import {throwError} from 'rxjs';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
 import {Child} from '../../../../../data/model/users/child';
 import {ChildService} from '../../../../../data/service/users/child.service';
+import {GuardianService} from '../../../../../data/service/users/guardian.service';
+import {Guardian} from '../../../../../data/model/users/guardian';
 
 @Component({
   selector: 'app-transactions',
@@ -19,21 +21,26 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+
   public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
     'transactionNumber', 'transactionAmount', 'isAssigned'];
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
+  public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
 
   public unassignedTransactions: Array<Transaction>;
 
   public transactionDataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
   public childDataSource: MatTableDataSource<Child> = new MatTableDataSource();
+  public guardianDataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
 
   public childName = '';
   public childSurname = '';
   public selectedChildId = '';
+  public selectedGuardianId = '';
 
   constructor(private transactionsService: TransactionsService,
               private childService: ChildService,
+              private guardianService: GuardianService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
 
@@ -71,9 +78,29 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public findGuardians(): void {
+    console.log('Searching for guardians for child with id: ' + this.selectedChildId);
+    this.guardianService.findAllGuardians(this.selectedChildId).subscribe(
+      resp => {
+        console.log(resp);
+        this.setGuardianDataToTable(resp);
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to get guardian list for selected child from REST API');
+        return throwError(err);
+      })
+    );
+  }
+
   public selectChild(childId: string): void {
     console.log('Selected child: ' + childId);
     this.selectedChildId = childId;
+    this.findGuardians();
+  }
+
+  public selectGuardian(guardianId: string): void {
+    console.log('Selected guardian: ' + guardianId);
+    this.selectedGuardianId = guardianId;
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
@@ -121,6 +148,10 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     this.childDataSource.data = children;
   }
 
+  private setGuardianDataToTable(guardians: Array<Guardian>): void {
+    this.guardianDataSource.data = guardians;
+  }
+
   private initializeTables(): void {
     this.transactionDataSource.data = [];
     this.transactionDataSource.sort = this.sort.toArray()[0];
@@ -133,6 +164,12 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     this.childDataSource.paginator = this.paginator.toArray()[1];
     // TODO Change it into better solution (more global)
     this.childDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
+
+    this.guardianDataSource.data = [];
+    this.guardianDataSource.sort = this.sort.toArray()[2];
+    this.guardianDataSource.paginator = this.paginator.toArray()[2];
+    // TODO Change it into better solution (more global)
+    this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
   }
 
 }
