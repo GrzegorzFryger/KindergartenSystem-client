@@ -58,8 +58,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     });
     transactionsToBeAssigned.forEach(obj => {
       delete obj.isAssigned;
-      // TODO: Remove hardcoded UUID's in next commits
-      this.assignTransaction(obj, this.selectedChildId, 'c4029244-e8ff-4328-8658-28964dda3c4e');
+      this.assignTransaction(obj, this.selectedChildId, this.selectedGuardianId);
     });
     this.reloadTransactionData();
   }
@@ -95,6 +94,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   public selectChild(childId: string): void {
     console.log('Selected child: ' + childId);
     this.selectedChildId = childId;
+    this.selectedGuardianId = ''; // Reset state of selected guardian when selecting new child
     this.findGuardians();
   }
 
