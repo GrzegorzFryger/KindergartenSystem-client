@@ -32,7 +32,8 @@ export const environment = {
       guardian: {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',
-        count: accountUrl + 'guardians/count'
+        count: accountUrl + 'guardians/count',
+        findAllGuardians: accountUrl + 'guardians/search/'
       },
       employee: {
         employees: accountUrl + 'employees',

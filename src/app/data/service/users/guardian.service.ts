@@ -45,4 +45,8 @@ export class GuardianService {
   getCountGuardians(): Observable<number> {
     return this.http.get<number>(environment.apiUrls.account.guardian.count);
   }
+
+  public findAllGuardians(childId: string): Observable<Array<Guardian>> {
+    return this.http.get<Array<Guardian>>(environment.apiUrls.account.guardian.findAllGuardians + `${childId}`);
+  }
 }
