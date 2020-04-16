@@ -18,4 +18,8 @@ export class ChildService {
   getCountChildren(): Observable<number> {
     return this.http.get<number>(environment.apiUrls.account.child.count);
   }
+
+  createChild(child: Child) {
+    return this.http.post<Child>(environment.apiUrls.account.child.create, child);
+  }
 }

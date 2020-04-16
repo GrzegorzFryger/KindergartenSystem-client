@@ -43,6 +43,7 @@ export const environment = {
         getChildById: accountUrl + 'child/',
         count: accountUrl + 'children/count',
         searchChildrenByFullName: accountUrl + 'children/search',
+        create: accountUrl + 'child'
       },
     },
     receivables: {
