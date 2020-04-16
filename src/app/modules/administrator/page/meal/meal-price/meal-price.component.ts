@@ -16,6 +16,7 @@ export class MealPriceComponent implements OnInit {
   dataSource: Array<MealPrice>;
   editingMeal = false;
   editedMealPrice;
+  isAnyMealPriceAvailableToAdd = false;
 
   constructor(private http: HttpClient, private mealService: MealService) {
   }
@@ -48,6 +49,12 @@ export class MealPriceComponent implements OnInit {
   async deleteMealPrice(id: number) {
     await this.mealService.deleteMealPriceById(id).subscribe(resp => {
       this.getAllMealPrice();
+    });
+  }
+
+  getAvailableMealPrice() {
+    this.mealService.getAvailableMealPrice().subscribe(resp => {
+
     });
   }
 }

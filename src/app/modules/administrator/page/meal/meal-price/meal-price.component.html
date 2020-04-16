@@ -53,9 +53,8 @@
       </div>
 
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+    <mat-card-actions *ngIf="isAnyMealPriceAvailableToAdd">
+      <button mat-button color="primary">Dodaj</button>
     </mat-card-actions>
   </mat-card>
 </div>

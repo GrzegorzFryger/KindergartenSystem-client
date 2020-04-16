@@ -68,4 +68,8 @@ export class MealService {
     params = params.append('id', String(id));
     return this.http.delete(environment.apiUrls.meals.deleteMealPriceById, {params});
   }
+
+  getAvailableMealPrice(): Observable<Array<MealPrice>> {
+    return this.http.get<Array<MealPrice>>(environment.apiUrls.meals.getAvailableMealPrice);
+  }
 }
