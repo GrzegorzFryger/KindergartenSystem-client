@@ -1,5 +1,5 @@
 <div class="create-form-layout-container">
-  <mat-card [ngClass]="{ 'resize' : selectedAccount == null }">
+  <mat-card [ngClass]="{ 'grow' : selectedAccount == null }">
     <div class="card-container">
       <mat-card-header>
         <h2>Utwórz wybrane konto</h2>
@@ -7,7 +7,7 @@
       <mat-card-content>
         <div class="card-content-container">
           <div class="form-type">
-            <mat-radio-group class="account-radio-group" [(ngModel)]="selectedAccount">
+            <mat-radio-group  class="account-radio-group" [(ngModel)]="selectedAccount">
               <mat-radio-button
                 class="account-radio-button" *ngFor="let account of typeAccount" [value]="account">
                 {{account}}

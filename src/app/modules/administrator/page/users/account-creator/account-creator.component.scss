@@ -55,20 +55,25 @@
   }
 }
 
-.resize {
+.grow {
   height: 90%;
+  background-image: url("../../../../../../assets/images/back-small.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 0;
 
   .card-container {
-    height: 100%;
 
     .mat-card-content {
-      background-repeat: no-repeat;
-      background-position: center;
-      flex-basis: 100%;
+
+      .mat-radio-button {
+        display: inline;
+      }
+
     }
   }
 }
 
 .profile-layout-container {
-  width: 50%;
+  //width: 50%;
 }
