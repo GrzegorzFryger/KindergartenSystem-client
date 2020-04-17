@@ -1,0 +1,28 @@
+<div class="assign-children-layout-container">
+  <div class="steeper">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Wybierz dzieci</ng-template>
+        <app-children></app-children>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Wybierz rodziców</ng-template>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>
