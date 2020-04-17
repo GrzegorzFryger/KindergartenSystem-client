@@ -6,13 +6,39 @@ import {SnackMessageHandlingComponent} from './snack-message-handling.component'
   providedIn: 'root'
 })
 export class SnackMessageHandlingService {
-  durationInSeconds = 5;
+  // Configuration
+  private readonly DURATION_IN_SECONDS = 5;
 
-  constructor(private snackBar: MatSnackBar) {}
+  // CSS classes
+  private readonly RED_SNACKBAR = 'red-snackbar';
+  private readonly YELLOW_SNACKBAR = 'yellow-snackbar';
+  private readonly GREEN_SNACKBAR = 'green-snackbar';
+  private readonly BLUE_SNACKBAR = 'blue-snackbar';
 
-  error(errorMessage: string) {
+  constructor(private snackBar: MatSnackBar) {
+  }
+
+  public error(message: string): void {
+    this.openSnackBar(message, this.RED_SNACKBAR);
+  }
+
+  public warning(message: string): void {
+    this.openSnackBar(message, this.YELLOW_SNACKBAR);
+  }
+
+  public success(message: string): void {
+    this.openSnackBar(message, this.GREEN_SNACKBAR);
+  }
+
+  public info(message: string): void {
+    this.openSnackBar(message, this.BLUE_SNACKBAR);
+  }
+
+  private openSnackBar(message: string, className: string): void {
     this.snackBar.openFromComponent(SnackMessageHandlingComponent, {
-      duration: this.durationInSeconds * 1000, data: errorMessage
+      duration: this.DURATION_IN_SECONDS * 1000,
+      data: message,
+      panelClass: [className]
     });
   }
 }
