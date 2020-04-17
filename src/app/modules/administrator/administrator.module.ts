@@ -52,7 +52,7 @@ import {ChildFormComponent} from './page/accounts/account-form/child-form/child-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
@@ -127,6 +127,7 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
     {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
+    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
     DatePipe,
     MatCheckboxModule
   ]

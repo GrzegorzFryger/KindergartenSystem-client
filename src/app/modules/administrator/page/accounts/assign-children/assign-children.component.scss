@@ -1,0 +1,9 @@
+.assign-children-layout-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .steeper {
+    flex-basis: 90%;
+  }
+}
