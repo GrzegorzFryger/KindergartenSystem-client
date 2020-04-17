@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {Child} from '../../../../data/model/users/child';
+import {Child} from '../../../../data/model/accounts/child';
 
 @Injectable()
 export class SelectedChildService {

@@ -7,10 +7,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
-import {Child} from '../../../../../data/model/users/child';
-import {ChildService} from '../../../../../data/service/users/child.service';
-import {GuardianService} from '../../../../../data/service/users/guardian.service';
-import {Guardian} from '../../../../../data/model/users/guardian';
+import {Child} from '../../../../../data/model/accounts/child';
+import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
+import { ChildService } from 'src/app/data/service/accounts/child.service';
+import { Guardian } from 'src/app/data/model/accounts/guardian';
 
 @Component({
   selector: 'app-transactions',
