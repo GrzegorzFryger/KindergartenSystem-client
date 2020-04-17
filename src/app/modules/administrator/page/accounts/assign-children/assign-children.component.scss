@@ -5,5 +5,10 @@
 
   .steeper {
     flex-basis: 90%;
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }

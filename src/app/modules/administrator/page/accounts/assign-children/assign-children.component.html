@@ -3,16 +3,27 @@
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step>
         <ng-template matStepLabel>Wybierz dzieci</ng-template>
-        <app-children></app-children>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+        <app-children
+          [mode]="childListMode"
+        (checkedChildrenEvent)="onSelectedChildren($event)"
+        ></app-children>
+
+          <div class="button-container">
+            <div>
+              <button mat-raised-button matStepperNext [color]="'primary'" >Next</button>
+            </div>
+          </div>
+
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Wybierz rodziców</ng-template>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <div class="button-container">
+            <div>
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button mat-raised-button matStepperNext>Next</button>
+            </div>
+          </div>
         </div>
       </mat-step>
       <mat-step>
