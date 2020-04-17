@@ -11,8 +11,8 @@ import {SnackErrorHandlingService} from '../../../../../../../core/snack-error-h
   encapsulation: ViewEncapsulation.None
 })
 export class ChildProfileComponent implements OnInit {
-  @Output() childOutputEmitter: EventEmitter<{closeProfileCard: boolean}>;
-  @Input() child: Child;
+  @Output() childOutputEmitter: EventEmitter<{ closeProfileCard: boolean }>;
+  @Input() inputData: { child: Child, mode: string };
 
   isEditCardOpen: boolean;
   personFormInitial: { [key: string]: any };
@@ -20,7 +20,7 @@ export class ChildProfileComponent implements OnInit {
 
   constructor(private childService: ChildService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
-    this.childOutputEmitter = new EventEmitter<{closeProfileCard: boolean}>();
+    this.childOutputEmitter = new EventEmitter<{ closeProfileCard: boolean }>();
   }
 
   ngOnInit(): void {
@@ -35,24 +35,28 @@ export class ChildProfileComponent implements OnInit {
   }
 
   openEditCard() {
-    this.personFormInitial = this.child;
+    this.personFormInitial = this.inputData.child;
     this.isEditCardOpen = true;
   }
 
   onSubmit() {
+    this.updateChild();
+  }
+
+  formValuesChange(event: { form: FormGroup }) {
+    this.formOutput = event;
+  }
+
+  private updateChild(): void {
     const childToUpdate = new Child(this.formOutput.form.value);
-    childToUpdate.id = this.child.id;
+    childToUpdate.id = this.inputData.child.id;
 
     this.childService.updateChild(childToUpdate).subscribe(child => {
       this.formOutput.form.reset();
       this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
-      this.child = child;
+      this.inputData.child = child;
       setTimeout(() => this.isEditCardOpen = false);
     });
-  }
-
-  formValuesChange(event: { form: FormGroup} ) {
-    this.formOutput = event;
   }
 
 }
