@@ -1,6 +1,10 @@
 import {Injectable} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SnackMessageHandlingComponent} from './snack-message-handling.component';
+import {ErrorComponent} from './error/error.component';
+import {ComponentType} from '@angular/cdk/overlay';
+import {WarningComponent} from './warning/warning.component';
+import {SuccessComponent} from './success/success.component';
+import {InfoComponent} from './info/info.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,26 +23,26 @@ export class SnackMessageHandlingService {
   }
 
   public error(message: string): void {
-    this.openSnackBar(message, this.RED_SNACKBAR);
+    this.openSnackBar(ErrorComponent, message, this.RED_SNACKBAR);
   }
 
   public warning(message: string): void {
-    this.openSnackBar(message, this.YELLOW_SNACKBAR);
+    this.openSnackBar(WarningComponent, message, this.YELLOW_SNACKBAR);
   }
 
   public success(message: string): void {
-    this.openSnackBar(message, this.GREEN_SNACKBAR);
+    this.openSnackBar(SuccessComponent, message, this.GREEN_SNACKBAR);
   }
 
   public info(message: string): void {
-    this.openSnackBar(message, this.BLUE_SNACKBAR);
+    this.openSnackBar(InfoComponent, message, this.BLUE_SNACKBAR);
   }
 
-  private openSnackBar(message: string, className: string): void {
-    this.snackBar.openFromComponent(SnackMessageHandlingComponent, {
+  private openSnackBar(component: ComponentType<any>, message: string, backgroundColorClass: string): void {
+    this.snackBar.openFromComponent(component, {
       duration: this.DURATION_IN_SECONDS * 1000,
       data: message,
-      panelClass: [className]
+      panelClass: [backgroundColorClass]
     });
   }
 }

@@ -7,12 +7,15 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './auth/jwt.interceptor';
 import {AuthenticationGuard} from './auth/authentication.guard';
 import {ErrorAuthInterceptor} from './auth/error-auth.interceptor';
-import {SnackMessageHandlingComponent} from './snack-message-handling/snack-message-handling.component';
+import {ErrorComponent} from './snack-message-handling/error/error.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {InfoComponent} from './snack-message-handling/info/info.component';
+import {SuccessComponent} from './snack-message-handling/success/success.component';
+import {WarningComponent} from './snack-message-handling/warning/warning.component';
 
 
 @NgModule({
-  declarations: [SnackMessageHandlingComponent],
+  declarations: [ErrorComponent, InfoComponent, SuccessComponent, WarningComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
