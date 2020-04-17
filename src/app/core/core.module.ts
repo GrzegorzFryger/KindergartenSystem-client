@@ -12,6 +12,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {InfoComponent} from './snack-message-handling/info/info.component';
 import {SuccessComponent} from './snack-message-handling/success/success.component';
 import {WarningComponent} from './snack-message-handling/warning/warning.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {WarningComponent} from './snack-message-handling/warning/warning.compone
     CoreRoutingModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
   providers: [
     AuthenticationGuard,
