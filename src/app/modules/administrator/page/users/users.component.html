@@ -6,6 +6,7 @@
         <app-user-chart></app-user-chart>
       </div>
     </div>
+
     <div class="options-container">
       <div class="display-flex-row">
         <mat-card id="create" (click)="onSelect('create')" class="menu-option">
@@ -42,17 +43,16 @@
     <div class="selected-container">
       <router-outlet></router-outlet>
     </div>
-
     <div class="navigation-button">
       <div class="display-flex-row">
         <div class="button">
-          <button mat-raised-button (click)="back()" color="primary">Cofnij</button>
+          <button mat-raised-button (click)="back()">
+            <span class="material-icons">arrow_back</span>
+          </button>
         </div>
       </div>
     </div>
   </ng-container>
-
-
 
 
 </div>

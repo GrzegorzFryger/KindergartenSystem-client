@@ -9,23 +9,35 @@ import {FormControl} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
-  selected = new  FormControl(0);
+  selected = new FormControl(0);
   isSelected = true;
 
   constructor(private router: Router, private activeRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe(ev => {
+      const stateFromRoute = this.router.getCurrentNavigation().extras.state as { state: string };
+      if (stateFromRoute) {
+        this.onNavigationBack(stateFromRoute);
+      }
+    });
   }
 
   onSelect(event) {
-   this.isSelected = false;
-   this.router.navigate(['administrator/users/' + `${event}`]);
+    this.isSelected = false;
+    this.router.navigate(['administrator/users/' + `${event}`]);
 
   }
 
   back() {
     this.isSelected = true;
     this.router.navigate(['administrator/users']);
+  }
+
+  onNavigationBack(value: { state: string }) {
+    if (value.state === 'back') {
+      this.isSelected = true;
+    }
   }
 }

@@ -17,6 +17,7 @@ export class EmployeeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   dataSource: MatTableDataSource<Employee> = new MatTableDataSource();
+
   columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email'];
   personDetailCardOpen: boolean;
   personToDisplay: InputPerson;

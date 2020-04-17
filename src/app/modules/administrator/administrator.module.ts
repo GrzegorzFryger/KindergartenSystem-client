@@ -126,7 +126,8 @@ import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
     {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
-    DatePipe
+    DatePipe,
+    MatCheckboxModule
   ]
 })
 export class AdministratorModule {
