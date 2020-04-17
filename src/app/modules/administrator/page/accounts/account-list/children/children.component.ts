@@ -7,7 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
 @Component({
-  selector: 'app-child',
+  selector: 'app-children',
   templateUrl: './children.component.html',
   styleUrls: ['./children.component.scss', '../common-account-layout.scss'],
   encapsulation: ViewEncapsulation.None

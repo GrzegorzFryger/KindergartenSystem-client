@@ -6,7 +6,7 @@ const calendarUrl = apiUrl + '/api/calendar/';
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
-const accountUrl = apiUrl + '/api/accounts/';
+const accountUrl = apiUrl + '/api/account/';
 const actuatorUrl = apiUrl + '/actuator/';
 
 export const environment = {

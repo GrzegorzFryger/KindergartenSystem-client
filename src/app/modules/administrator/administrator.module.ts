@@ -57,7 +57,6 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 
-
 @NgModule({
   declarations: [
     AdministratorComponent,
@@ -121,7 +120,7 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     MatNativeDateModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   bootstrap: [],
   providers: [

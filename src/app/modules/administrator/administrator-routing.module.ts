@@ -39,7 +39,7 @@ const routes: Routes = [
         component: MealComponent,
       },
       {
-        path: 'account',
+        path: 'accounts',
         component: AccountsComponent,
         children: [
           {

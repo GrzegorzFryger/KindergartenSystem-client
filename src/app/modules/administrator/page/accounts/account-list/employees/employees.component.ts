@@ -8,7 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
 @Component({
-  selector: 'app-employee',
+  selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss', '../common-profile-layout.scss'],
   encapsulation: ViewEncapsulation.None

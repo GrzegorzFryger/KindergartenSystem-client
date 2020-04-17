@@ -9,7 +9,7 @@ import {FormControl} from '@angular/forms';
 })
 export class AccountListComponent implements OnInit {
 
-  selected = new  FormControl(0);
+  selected = new FormControl(0);
 
   constructor() {
   }

@@ -7,7 +7,7 @@ import {GuardianService} from '../../../../../data/service/accounts/guardian.ser
 import {zip} from 'rxjs';
 
 @Component({
-  selector: 'app-user-chart',
+  selector: 'app-account-chart',
   templateUrl: './account-chart.component.html',
   styleUrls: ['./account-chart.component.scss']
 })
