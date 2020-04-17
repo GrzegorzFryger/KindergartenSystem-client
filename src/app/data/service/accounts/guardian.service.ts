@@ -27,11 +27,11 @@ export class GuardianService {
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
     return this.http.get<Array<Child>>(environment.apiUrls.account.guardian.findAllGuardianChildren + `${userId}` + '/children')
-      .pipe(
-        catchError(err => {
-          this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
-          return throwError(err);
-        }));
+    .pipe(
+      catchError(err => {
+        this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
+        return throwError(err);
+      }));
   }
 
   public getChildById(childID: string): Observable<Child> {
@@ -46,9 +46,8 @@ export class GuardianService {
     return this.http.get<number>(environment.apiUrls.account.guardian.count);
   }
 
-  public searchChildrenByFullName(name: string, surname: string): Observable<Array<Child>> {
-    const params = new HttpParams().append('name', name).append('surname', surname);
-    return this.http.get<Array<Child>>(environment.apiUrls.account.child.searchChildrenByFullName, {params});
+  public findAllGuardians(childId: string): Observable<Array<Guardian>> {
+    return this.http.get<Array<Guardian>>(environment.apiUrls.account.guardian.findAllGuardians + `${childId}`);
   }
 
   public createGuardian(guardian: Guardian): Observable<Guardian> {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {Child} from '../../model/accounts/child';
@@ -25,5 +25,10 @@ export class ChildService {
 
   public updateChild(child: Child): Observable<Child> {
     return this.http.put<Child>(environment.apiUrls.account.child.create, child);
+  }
+  
+  public searchChildrenByFullName(name: string, surname: string): Observable<Array<Child>> {
+    const params = new HttpParams().append('name', name).append('surname', surname);
+    return this.http.get<Array<Child>>(environment.apiUrls.account.child.searchChildrenByFullName, {params});
   }
 }

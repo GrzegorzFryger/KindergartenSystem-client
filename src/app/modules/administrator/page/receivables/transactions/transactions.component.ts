@@ -9,6 +9,8 @@ import {throwError} from 'rxjs';
 import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
 import {Child} from '../../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
+import { ChildService } from 'src/app/data/service/accounts/child.service';
+import { Guardian } from 'src/app/data/model/accounts/guardian';
 
 @Component({
   selector: 'app-transactions',
@@ -19,19 +21,26 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+
   public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
     'transactionNumber', 'transactionAmount', 'isAssigned'];
-  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth'];
+  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
+  public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
 
   public unassignedTransactions: Array<Transaction>;
 
   public transactionDataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
   public childDataSource: MatTableDataSource<Child> = new MatTableDataSource();
+  public guardianDataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
 
   public childName = '';
   public childSurname = '';
+  public selectedChildId = '';
+  public selectedGuardianId = '';
+  public amountOfSelectedTranactions = 0;
 
   constructor(private transactionsService: TransactionsService,
+              private childService: ChildService,
               private guardianService: GuardianService,
               private snackErrorHandlingService: SnackErrorHandlingService) {
   }
@@ -50,15 +59,15 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     });
     transactionsToBeAssigned.forEach(obj => {
       delete obj.isAssigned;
-      // TODO: Remove hardcoded UUID's in next commits
-      this.assignTransaction(obj, '0560d77d-e0db-4914-ae4a-4f39690ecb2d', 'c4029244-e8ff-4328-8658-28964dda3c4e');
+      this.assignTransaction(obj, this.selectedChildId, this.selectedGuardianId);
     });
     this.reloadTransactionData();
   }
 
   public findChildren(): void {
     console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
-    this.guardianService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
+    this.resetChildAndGuardianState();
+    this.childService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
       resp => {
         console.log(resp);
         this.setChildDataToTable(resp);
@@ -68,6 +77,37 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         return throwError(err);
       })
     );
+  }
+
+  public findGuardians(): void {
+    console.log('Searching for guardians for child with id: ' + this.selectedChildId);
+    this.guardianService.findAllGuardians(this.selectedChildId).subscribe(
+      resp => {
+        console.log(resp);
+        this.setGuardianDataToTable(resp);
+      },
+      catchError(err => {
+        this.snackErrorHandlingService.openSnackBar('Failed to get guardian list for selected child from REST API');
+        return throwError(err);
+      })
+    );
+  }
+
+  public selectChild(childId: string): void {
+    console.log('Selected child: ' + childId);
+    this.selectedChildId = childId;
+    this.selectedGuardianId = ''; // Reset state of selected guardian when selecting new child
+    this.findGuardians();
+  }
+
+  public selectGuardian(guardianId: string): void {
+    console.log('Selected guardian: ' + guardianId);
+    this.selectedGuardianId = guardianId;
+  }
+
+  public onCheckBoxClick(checked: boolean) {
+    checked ? this.amountOfSelectedTranactions += 1 : this.amountOfSelectedTranactions -= 1;
+    console.log('Amount of selected transactions: ' + this.amountOfSelectedTranactions);
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
@@ -105,6 +145,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       return transaction.isAssigned === false;
     });
     this.transactionDataSource.data = this.unassignedTransactions;
+    this.amountOfSelectedTranactions = 0;
   }
 
   private setTransactionDataToTable(incomingPayment: Array<Transaction>): void {
@@ -113,6 +154,17 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   private setChildDataToTable(children: Array<Child>): void {
     this.childDataSource.data = children;
+  }
+
+  private setGuardianDataToTable(guardians: Array<Guardian>): void {
+    this.guardianDataSource.data = guardians;
+  }
+
+  private resetChildAndGuardianState(): void {
+    this.guardianDataSource.data = []; // Remove all found guardians when performing new children search
+    this.childDataSource.data = [];  // Remove all found children when performing new children search
+    this.selectedGuardianId = ''; // Reset state of selected guardian
+    this.selectedChildId = ''; // Reset state of selected child
   }
 
   private initializeTables(): void {
@@ -127,6 +179,12 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     this.childDataSource.paginator = this.paginator.toArray()[1];
     // TODO Change it into better solution (more global)
     this.childDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
+
+    this.guardianDataSource.data = [];
+    this.guardianDataSource.sort = this.sort.toArray()[2];
+    this.guardianDataSource.paginator = this.paginator.toArray()[2];
+    // TODO Change it into better solution (more global)
+    this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
   }
 
 }
