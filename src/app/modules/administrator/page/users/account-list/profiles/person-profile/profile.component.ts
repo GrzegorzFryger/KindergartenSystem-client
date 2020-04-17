@@ -1,6 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {InputPerson, PersonType} from '../../../../../../../data/model/users/input-person';
-import {FormBuilder} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
+import {Guardian} from '../../../../../../../data/model/users/guardian';
+import {Employee} from '../../../../../../../data/model/users/employee';
+import {GuardianService} from '../../../../../../../data/service/users/guardian.service';
+import {EmployeeService} from '../../../../../../../data/service/users/employee.service';
+import {SnackErrorHandlingService} from '../../../../../../../core/snack-error-handling/snack-error-handling.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,26 +15,31 @@ import {FormBuilder} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
-  @Output() profileOutputEmitter: EventEmitter<boolean>;
+  @Output() profileOutputEmitter: EventEmitter<{ closeProfileCard: boolean }>;
   @Input() personData: InputPerson;
 
   personType: string;
   isEditCardOpen: boolean;
   personFormInitial: { [key: string]: any };
+  private formOutput: { form: FormGroup };
 
-  constructor(private fb: FormBuilder) {
-    this.profileOutputEmitter = new EventEmitter<boolean>();
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private guardianService: GuardianService,
+              private employeeService: EmployeeService,
+              private snackErrorHandlingService: SnackErrorHandlingService) {
+    this.profileOutputEmitter = new EventEmitter<{ closeProfileCard: boolean }>();
   }
 
   ngOnInit(): void {
     this.personType = this.personData.type === PersonType.Guardian ? 'guardian' : 'employee';
   }
 
-  close(type: string) {
+  onClose(type: string) {
     if (type === 'edit') {
       this.isEditCardOpen = false;
     } else {
-      this.profileOutputEmitter.emit(false);
+      this.profileOutputEmitter.emit({closeProfileCard: true});
     }
   }
 
@@ -42,9 +53,44 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    switch (this.personType) {
+      case 'guardian' : {
+        this.updateGuardian();
+        break;
+      }
+      case 'employee' : {
+        this.updateEmployee();
+        break;
+      }
+    }
   }
 
-  formValuesChange($event: { [p: string]: any }) {
-    console.log($event);
+  formValuesChange(profileForm: { form: FormGroup }) {
+    this.formOutput = profileForm;
   }
+
+  private updateGuardian(): void {
+    const guardianToUpdate = new Guardian(this.formOutput.form.value);
+    guardianToUpdate.id = this.person.id;
+
+    this.guardianService.updateGuardian(guardianToUpdate).subscribe(guardian => {
+      this.formOutput.form.reset();
+      this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+      this.personData.data = guardian;
+      setTimeout(() => this.isEditCardOpen = false);
+    });
+  }
+
+  private updateEmployee(): void {
+    const employeeToUpdate = new Employee(this.formOutput.form.value);
+    employeeToUpdate.id = this.person.id;
+
+    this.employeeService.updateEmployee(employeeToUpdate).subscribe(employee => {
+      this.formOutput.form.reset();
+      this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+      this.personData.data = employee;
+      setTimeout(() => this.isEditCardOpen = false);
+    });
+  }
+
 }

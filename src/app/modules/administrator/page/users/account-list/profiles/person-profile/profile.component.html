@@ -78,7 +78,7 @@
     <mat-card-footer>
       <div class="footer-container">
         <div class="button">
-          <button mat-raised-button (click)="close('person')" color="primary">Cofnij</button>
+          <button mat-raised-button (click)="onClose('person')" color="primary">Cofnij</button>
         </div>
         <div class="button">
           <button mat-raised-button (click)="openEditCard()" color="primary">Edytuj</button>
@@ -99,10 +99,10 @@
       <mat-card-footer>
         <div class="footer-container">
           <div class="button">
-            <button mat-raised-button (click)="close('edit')" color="primary">Anuluj</button>
+            <button mat-raised-button (click)="onClose('edit')" color="primary">Anuluj</button>
           </div>
           <div class="button">
-            <button mat-raised-button color="primary">Zapisz</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" >Zapisz</button>
           </div>
         </div>
       </mat-card-footer>
