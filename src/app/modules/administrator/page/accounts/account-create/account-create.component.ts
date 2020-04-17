@@ -10,7 +10,7 @@ import {EmployeeService} from '../../../../../data/service/accounts/employee.ser
 import {Employee} from '../../../../../data/model/accounts/employee';
 
 @Component({
-  selector: 'app-account-creator',
+  selector: 'app-account-create',
   templateUrl: './account-create.component.html',
   styleUrls: ['./account-create.component.scss'],
   encapsulation: ViewEncapsulation.None

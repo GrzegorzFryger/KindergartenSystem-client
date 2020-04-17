@@ -8,7 +8,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
 @Component({
-  selector: 'app-guardian',
+  selector: 'app-guardians',
   templateUrl: './guardians.component.html',
   styleUrls: ['./guardians.component.scss', '../common-account-layout.scss'],
   encapsulation: ViewEncapsulation.None

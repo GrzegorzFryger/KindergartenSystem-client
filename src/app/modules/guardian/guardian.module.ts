@@ -83,9 +83,10 @@ import {NavbarComponent} from './component/navbar/navbar.component';
     ChartsModule
   ],
 
-  exports: [
-    MatInputModule,
-  ],
+    exports: [
+        MatInputModule,
+        ChildrenComponent,
+    ],
   bootstrap: [GuardianComponent ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
