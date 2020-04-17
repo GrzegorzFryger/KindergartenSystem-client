@@ -2,7 +2,7 @@ import {TransactionMappingService} from '../../../../data/service/receivables/tr
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError, zip} from 'rxjs';
-import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
@@ -36,7 +36,7 @@ export class FinancesComponent implements OnInit {
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
               private userService: AccountService,
-              private snackErrorHandlingService: SnackErrorHandlingService,
+              private snackMessageHandlingService: SnackMessageHandlingService,
               private guardianService: GuardianService) {
   }
 
@@ -74,7 +74,7 @@ export class FinancesComponent implements OnInit {
       .getSumOfBalancesForAllChildren(u.id)
       .pipe(
         catchError(err => {
-          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          this.snackMessageHandlingService.error(ERROR_MESSAGE);
           return throwError(err);
         }),
         map(response => {
@@ -87,7 +87,7 @@ export class FinancesComponent implements OnInit {
   private initializeBalancesForAllChildren(u: Account) {
     return this.balanceService.getBalancesForAllChildren(u.id).pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        this.snackMessageHandlingService.error(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {
@@ -101,7 +101,7 @@ export class FinancesComponent implements OnInit {
       .getAllPaymentMappingsForGuardian(u.id)
       .pipe(
         catchError(err => {
-          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+          this.snackMessageHandlingService.error(ERROR_MESSAGE);
           return throwError(err);
         }),
         map(response => {

@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {SnackErrorHandlingService} from './snack-error-handling.service';
+import {SnackMessageHandlingService} from './snack-message-handling.service';
 
 describe('SnackErrorHandlingService', () => {
-  let service: SnackErrorHandlingService;
+  let service: SnackMessageHandlingService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SnackErrorHandlingService);
+    service = TestBed.inject(SnackMessageHandlingService);
   });
 
   it('should be created', () => {

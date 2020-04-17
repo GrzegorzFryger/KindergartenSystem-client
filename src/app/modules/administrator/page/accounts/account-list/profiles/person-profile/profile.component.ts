@@ -5,7 +5,7 @@ import {Guardian} from '../../../../../../../data/model/accounts/guardian';
 import {Employee} from '../../../../../../../data/model/accounts/employee';
 import {GuardianService} from '../../../../../../../data/service/accounts/guardian.service';
 import {EmployeeService} from '../../../../../../../data/service/accounts/employee.service';
-import {SnackErrorHandlingService} from '../../../../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private guardianService: GuardianService,
               private employeeService: EmployeeService,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService) {
     this.profileOutputEmitter = new EventEmitter<{ closeProfileCard: boolean }>();
   }
 
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
 
     this.guardianService.updateGuardian(guardianToUpdate).subscribe(guardian => {
       this.formOutput.form.reset();
-      this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+      this.snackMessageHandlingService.error('Utworzono pomyślnie');
       this.personData.data = guardian;
       setTimeout(() => this.isEditCardOpen = false);
     });
@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
 
     this.employeeService.updateEmployee(employeeToUpdate).subscribe(employee => {
       this.formOutput.form.reset();
-      this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+      this.snackMessageHandlingService.error('Utworzono pomyślnie');
       this.personData.data = employee;
       setTimeout(() => this.isEditCardOpen = false);
     });

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ChildService} from '../../../../../data/service/accounts/child.service';
 import {Child} from '../../../../../data/model/accounts/child';
-import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
@@ -27,7 +27,7 @@ export class AccountCreateComponent implements OnInit {
               private employeeService: EmployeeService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Dziecko' : {
         this.childService.createChild(new Child(this.formOutput.form.value)).subscribe(child => {
           this.formOutput.form.reset();
-          this.snackErrorHandlingService.openSnackBar(child.name + child.surname);
+          this.snackMessageHandlingService.error(child.name + child.surname);
           this.navigateToParent();
         });
         break;
@@ -51,7 +51,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Rodzic' : {
         this.guardianService.createGuardian(new Guardian(this.formOutput.form.value)).subscribe(guardian => {
           this.formOutput.form.reset();
-          this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+          this.snackMessageHandlingService.error('Utworzono pomyślnie');
           this.navigateToParent();
         });
         break;
@@ -59,7 +59,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Pracownik' : {
         this.employeeService.createEmployee(new Employee(this.formOutput.form.value)).subscribe(guardian => {
           this.formOutput.form.reset();
-          this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
+          this.snackMessageHandlingService.error('Utworzono pomyślnie');
           this.navigateToParent();
         });
         break;
