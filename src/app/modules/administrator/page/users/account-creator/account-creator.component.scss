@@ -5,7 +5,7 @@
   height: 100%;
   width: 100%;
 
-  .mat-card{
+  .mat-card {
 
     .card-container {
       margin: 32px 16px 32px 16px;
@@ -31,7 +31,7 @@
            align-self: start;
            margin-bottom: 32px;
 
-           .example-radio-group{
+           .account-radio-group{
 
              .mat-radio-button {
                margin-right: 8px;
@@ -46,10 +46,29 @@
       }
 
       .mat-card-footer {
-        margin-bottom: 30px;
+        .footer-container {
+          display: flex;
+          justify-content: flex-end;
+        }
       }
     }
   }
 }
 
+.resize {
+  height: 90%;
 
+  .card-container {
+    height: 100%;
+
+    .mat-card-content {
+      background-repeat: no-repeat;
+      background-position: center;
+      flex-basis: 100%;
+    }
+  }
+}
+
+.profile-layout-container {
+  width: 50%;
+}

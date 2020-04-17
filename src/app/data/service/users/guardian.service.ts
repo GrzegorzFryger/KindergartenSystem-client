@@ -50,4 +50,8 @@ export class GuardianService {
     const params = new HttpParams().append('name', name).append('surname', surname);
     return this.http.get<Array<Child>>(environment.apiUrls.account.child.searchChildrenByFullName, {params});
   }
+
+  public createGuardian(guardian: Guardian): Observable<Guardian> {
+    return this.http.post<Guardian>(environment.apiUrls.account.guardian.create, guardian);
+  }
 }

@@ -11,4 +11,8 @@ export class Guardian {
   status: string;
   email: string;
   children: Array<Child>;
+
+  constructor(init?: Partial<Guardian>) {
+    Object.assign(this, init);
+  }
 }

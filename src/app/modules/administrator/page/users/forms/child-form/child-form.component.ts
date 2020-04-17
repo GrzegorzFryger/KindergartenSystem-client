@@ -86,7 +86,7 @@ export class ChildFormComponent implements OnInit {
       ],
       postalCode: [this.initialState?.postalCode ? this.initialState.postalCode : '', [Validators.required]],
       city: [this.initialState?.city ? this.initialState.city : '', [Validators.required]],
-      streetNumber: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]],
+      streetNumber: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]]
     });
   }
 }

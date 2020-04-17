@@ -18,4 +18,8 @@ export class EmployeeService {
   getCountEmployee(): Observable<number> {
     return this.http.get<number>(environment.apiUrls.account.employee.count);
   }
+
+  public createEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(environment.apiUrls.account.employee.create, employee);
+  }
 }

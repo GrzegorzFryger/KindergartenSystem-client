@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class PersonFormComponent implements OnInit {
-  @Output() formValuesChanged = new EventEmitter<{ formValues: { [key: string]: any }, formValid: boolean }>();
+  @Output() formValuesChanged = new EventEmitter<{form: FormGroup}>();
   @Input() initialState: { [key: string]: any };
   form: FormGroup;
 
@@ -33,15 +33,13 @@ export class PersonFormComponent implements OnInit {
         this.initialState?.phone ? this.initialState?.phone : '',
         [Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$'), Validators.required]
       ],
-      address: this.fb.group({
-        zip_code: [this.initialState?.postalCode ? this.initialState.postalCode : '', [Validators.required]],
-        city: [this.initialState?.city ? this.initialState.city : '', [Validators.required]],
-        street: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]],
-      })
+      postalCode: [this.initialState?.postalCode ? this.initialState.postalCode : '', [Validators.required]],
+      city: [this.initialState?.city ? this.initialState.city : '', [Validators.required]],
+      streetNumber: [this.initialState?.streetNumber ? this.initialState.streetNumber : '', [Validators.required]]
     });
 
     this.form.valueChanges.subscribe((val) => {
-      this.formValuesChanged.emit({formValues: val, formValid: this.form.valid});
+      this.formValuesChanged.emit({form: this.form});
     });
   }
 

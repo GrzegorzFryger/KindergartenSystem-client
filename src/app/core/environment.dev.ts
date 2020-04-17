@@ -32,11 +32,13 @@ export const environment = {
       guardian: {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',
-        count: accountUrl + 'guardians/count'
+        count: accountUrl + 'guardians/count',
+        create: accountUrl + 'guardian'
       },
       employee: {
         employees: accountUrl + 'employees',
-        count: accountUrl + 'employees/count'
+        count: accountUrl + 'employees/count',
+        create: accountUrl + 'employee'
       },
       child: {
         children: accountUrl + 'children',
