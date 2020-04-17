@@ -54,4 +54,8 @@ export class GuardianService {
   public createGuardian(guardian: Guardian): Observable<Guardian> {
     return this.http.post<Guardian>(environment.apiUrls.account.guardian.create, guardian);
   }
+
+  public updateGuardian(guardian: Guardian): Observable<Guardian> {
+    return this.http.put<Guardian>(environment.apiUrls.account.guardian.update, guardian);
+  }
 }

@@ -22,4 +22,8 @@ export class EmployeeService {
   public createEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(environment.apiUrls.account.employee.create, employee);
   }
+
+  public updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(environment.apiUrls.account.employee.update, employee);
+  }
 }

@@ -33,19 +33,22 @@ export const environment = {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',
         count: accountUrl + 'guardians/count',
-        create: accountUrl + 'guardian'
+        create: accountUrl + 'guardian',
+        update: accountUrl + 'guardian'
       },
       employee: {
         employees: accountUrl + 'employees',
         count: accountUrl + 'employees/count',
-        create: accountUrl + 'employee'
+        create: accountUrl + 'employee',
+        update: accountUrl + 'employee'
       },
       child: {
         children: accountUrl + 'children',
         getChildById: accountUrl + 'child/',
         count: accountUrl + 'children/count',
         searchChildrenByFullName: accountUrl + 'children/search',
-        create: accountUrl + 'child'
+        create: accountUrl + 'child',
+        update: accountUrl + 'child'
       },
     },
     receivables: {

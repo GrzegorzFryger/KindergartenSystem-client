@@ -22,4 +22,8 @@ export class ChildService {
   createChild(child: Child) {
     return this.http.post<Child>(environment.apiUrls.account.child.create, child);
   }
+
+  public updateChild(child: Child): Observable<Child> {
+    return this.http.put<Child>(environment.apiUrls.account.child.create, child);
+  }
 }
