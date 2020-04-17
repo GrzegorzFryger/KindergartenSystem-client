@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {AbsenceDialogComponent} from './absence-dialog/absence-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {SnackErrorHandlingService} from '../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-absence',
@@ -46,7 +46,7 @@ export class AbsenceComponent implements OnInit {
               private absenceService: AbsenceService,
               private selectedChildService: SelectedChildService,
               public dialog: MatDialog,
-              private  snackErrorHandlingService: SnackErrorHandlingService) {
+              private  snackErrorHandlingService: SnackMessageHandlingService) {
     this.selectedChild = selectedChildService.selectedChild;
     this.daysEvents = new Array<string>();
   }
@@ -105,7 +105,7 @@ export class AbsenceComponent implements OnInit {
         () => {
         },
         () => {
-          this.snackErrorHandlingService.openSnackBar('can not add absence');
+          this.snackErrorHandlingService.error('can not add absence');
         });
     });
 

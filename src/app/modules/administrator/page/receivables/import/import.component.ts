@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {throwError} from 'rxjs';
 import {Transaction} from '../../../../../data/model/receivables/transaction';
 import {catchError} from 'rxjs/operators';
-import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -32,7 +32,7 @@ export class ImportComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private importPaymentsService: ImportPaymentsService,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class ImportComponent implements OnInit {
         this.setUpDataTable(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
+        this.snackMessageHandlingService.error('Failed to retrieve uploaded transactions from REST API');
         return throwError(err);
       })
     );
@@ -88,7 +88,7 @@ export class ImportComponent implements OnInit {
         console.log(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to retrieve uploaded transactions from REST API');
+        this.snackMessageHandlingService.error('Failed to retrieve uploaded transactions from REST API');
         return throwError(err);
       })
     );

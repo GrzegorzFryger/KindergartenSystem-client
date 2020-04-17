@@ -3,14 +3,14 @@ import {MAT_SNACK_BAR_DATA} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-snack-error-handling',
-  templateUrl: './snack-error-handling.component.html',
-  styleUrls: ['./snack-error-handling.component.scss']
+  templateUrl: './snack-message-handling.component.html',
+  styleUrls: ['./snack-message-handling.component.scss']
 })
-export class SnackErrorHandlingComponent implements OnInit {
-  errorMessage: string;
+export class SnackMessageHandlingComponent implements OnInit {
+  message: string;
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
-    this.errorMessage = data;
+    this.message = data;
   }
 
   ngOnInit(): void {

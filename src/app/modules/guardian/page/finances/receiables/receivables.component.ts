@@ -1,6 +1,6 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {IncomingPaymentsService} from '../../../../../data/service/receivables/incoming-payments.service';
-import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
 import {throwError} from 'rxjs';
@@ -35,7 +35,7 @@ export class ReceivablesComponent implements OnInit {
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
               private userService: AccountService,
-              private snackErrorHandlingService: SnackErrorHandlingService,
+              private snackMessageHandlingService: SnackMessageHandlingService,
               private guardianService: GuardianService,
               private transactionMappingService: TransactionMappingService) {
   }
@@ -46,7 +46,7 @@ export class ReceivablesComponent implements OnInit {
           this.setUpDataTable(resp);
         },
         catchError(err => {
-          this.snackErrorHandlingService.openSnackBar('Failed to find user');
+          this.snackMessageHandlingService.error('Failed to find user');
           return throwError(err);
         }));
 
@@ -85,7 +85,7 @@ export class ReceivablesComponent implements OnInit {
     .getAllPaymentMappingsForGuardian(u.id)
     .pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        this.snackMessageHandlingService.error(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {

@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../environment.dev';
 import {JwtDecodeService} from './jwt-decode.service';
 import {catchError, map} from 'rxjs/operators';
-import {SnackErrorHandlingService} from '../snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../snack-message-handling/snack-message-handling.service';
 
 
 const UNAUTHORIZED_MESSAGE = 'Błedne dane logowania';
@@ -19,7 +19,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient,
               private jwtDecodeService: JwtDecodeService,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService) {
 
     this.currentUserCredSubject = new BehaviorSubject<UserCredentials>(this.userCredentialsFromLocalStore);
     this.currentUserCred = this.currentUserCredSubject.asObservable();
@@ -33,7 +33,7 @@ export class AuthenticationService {
         return userCredentials;
       }),
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(UNAUTHORIZED_MESSAGE);
+        this.snackMessageHandlingService.error(UNAUTHORIZED_MESSAGE);
         return throwError(err);
       })
     );
