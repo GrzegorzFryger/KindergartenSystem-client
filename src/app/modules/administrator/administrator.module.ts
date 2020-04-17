@@ -37,25 +37,22 @@ import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.componen
 import {ChartComponent} from './page/actuator/chart/chart.component';
 import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
-import {AccountsComponent} from './page/accounts/accounts.component';
-import {ProfileComponent} from './page/accounts/account-list/profiles/person-profile/profile.component';
-import {GuardiansComponent} from './page/accounts/account-list/guardians/guardians.component';
-import {EmployeesComponent} from './page/accounts/account-list/employees/employees.component';
-import {ChildrenComponent} from './page/accounts/account-list/children/children.component';
-import {PersonFormComponent} from './page/accounts/account-form/person-form/person-form.component';
-import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
-import {AccountListComponent} from './page/accounts/account-list/account-list.component';
-import {AccountChartComponent} from './page/accounts/account-chart/account-chart.component';
+import {UsersComponent} from './page/users/users.component';
+import {ProfileComponent} from './page/users/account-list/profiles/person-profile/profile.component';
+import {GuardianComponent} from './page/users/account-list/guardian/guardian.component';
+import {EmployeeComponent} from './page/users/account-list/employee/employee.component';
+import {ChildComponent} from './page/users/account-list/child/child.component';
+import {PersonFormComponent} from './page/users/forms/person-form/person-form.component';
+import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
+import {AccountListComponent} from './page/users/account-list/account-list.component';
+import {UserChartComponent} from './page/users/user-chart/user-chart.component';
 import {ChartsModule} from 'ng2-charts';
-import {ChildProfileComponent} from './page/accounts/account-list/profiles/child-profile/child-profile.component';
-import {ChildFormComponent} from './page/accounts/account-form/child-form/child-form.component';
+import {ChildProfileComponent} from './page/users/account-list/profiles/child-profile/child-profile.component';
+import {ChildFormComponent} from './page/users/forms/child-form/child-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
-import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 
 
 @NgModule({
@@ -70,15 +67,15 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     MealDictionaryComponent,
     DialogOverviewExampleDialog,
     AdministratorNavigationMenuComponent,
-    AccountsComponent,
+    UsersComponent,
     ProfileComponent,
-    GuardiansComponent,
-    EmployeesComponent,
-    ChildrenComponent,
+    GuardianComponent,
+    EmployeeComponent,
+    ChildComponent,
     PersonFormComponent,
-    AccountCreateComponent,
+    AccountCreatorComponent,
     AccountListComponent,
-    AccountChartComponent,
+    UserChartComponent,
     ChildProfileComponent,
     ChildFormComponent,
     ActuatorComponent,
@@ -86,8 +83,7 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     HttpTraceComponent,
     ChartComponent,
     MetricsComponent,
-    AdministratorNavigationMenuComponent,
-    AssignChildrenComponent
+    AdministratorNavigationMenuComponent
   ],
 
 
@@ -118,18 +114,14 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     MatTooltipModule,
     ChartsModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    MatStepperModule,
-    MatRadioModule
+    MatNativeDateModule
   ],
   bootstrap: [],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
-    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
-    DatePipe,
-    MatCheckboxModule
+    MatCheckboxModule,
+    DatePipe
   ]
 })
 export class AdministratorModule {

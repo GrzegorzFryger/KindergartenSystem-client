@@ -3,7 +3,7 @@ import {Absence} from '../../../../data/model/absence/absence';
 import {DayOffWork} from '../../../../data/model/absence/day-off-work';
 import {DayOffWorkService} from '../../../../data/service/absence/day-off-work.service';
 import {AbsenceService} from '../../../../data/service/absence/absence.service';
-import {Child} from '../../../../data/model/accounts/child';
+import {Child} from '../../../../data/model/users/child';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {Observable} from 'rxjs';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
@@ -102,14 +102,14 @@ export class AbsenceComponent implements OnInit {
     const sub = dialogRef.componentInstance.formResponse.subscribe(res => {
       this.dialog.closeAll();
       this.absenceService.createAbsences(res).subscribe(
-        () => {
+        absence => {
         },
-        () => {
+        error => {
           this.snackErrorHandlingService.openSnackBar('can not add absence');
         });
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe(result => {
       sub.unsubscribe();
       console.log('The dialog was closed');
     });

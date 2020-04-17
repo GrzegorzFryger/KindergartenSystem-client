@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
-import {UserCredentials} from '../../data/model/accounts/user-credentials';
+import {UserCredentials} from '../../data/model/users/user-credentials';
 
 @Injectable({
   providedIn: 'root'

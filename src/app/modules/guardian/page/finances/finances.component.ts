@@ -6,10 +6,10 @@ import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
-import {AccountService} from '../../../../data/service/accounts/account.service';
-import {Account} from '../../../../data/model/accounts/account';
-import {Child} from '../../../../data/model/accounts/child';
-import {GuardianService} from '../../../../data/service/accounts/guardian.service';
+import {AccountService} from '../../../../data/service/users/account.service';
+import {Account} from '../../../../data/model/users/account';
+import {Child} from '../../../../data/model/users/child';
+import {GuardianService} from '../../../../data/service/users/guardian.service';
 
 const ERROR_MESSAGE = 'Finances component failed to perform operation';
 

@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {GuardianService} from '../../../../data/service/accounts/guardian.service';
-import {Observable} from 'rxjs';
-import {Child} from '../../../../data/model/accounts/child';
+import {GuardianService} from '../../../../data/service/users/guardian.service';
+import {Observable, Subject} from 'rxjs';
+import {Child} from '../../../../data/model/users/child';
 import {MatSelectChange} from '@angular/material/select';
+import {map} from 'rxjs/operators';
 import {SelectedChildService} from './selected-child.service';
 
 @Component({

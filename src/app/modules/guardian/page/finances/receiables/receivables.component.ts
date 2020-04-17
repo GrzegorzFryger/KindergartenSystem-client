@@ -8,11 +8,11 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
 import {catchError, map} from 'rxjs/operators';
-import {AccountService} from '../../../../../data/service/accounts/account.service';
+import {AccountService} from '../../../../../data/service/users/account.service';
 import {TransactionMapping} from '../../../../../data/model/receivables/transaction-mapping';
-import {Child} from '../../../../../data/model/accounts/child';
-import {Account} from '../../../../../data/model/accounts/account';
-import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
+import {Child} from '../../../../../data/model/users/child';
+import {Account} from '../../../../../data/model/users/account';
+import {GuardianService} from '../../../../../data/service/users/guardian.service';
 import {TransactionMappingService} from '../../../../../data/service/receivables/transaction-mapping.service';
 
 const ERROR_MESSAGE = 'Receivables component failed to perform operation';
@@ -60,7 +60,7 @@ export class ReceivablesComponent implements OnInit {
     });
   }
 
-  applyFilter(event: KeyboardEvent) {
+  applyFilter($event: KeyboardEvent) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

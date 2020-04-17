@@ -6,7 +6,7 @@ const calendarUrl = apiUrl + '/api/calendar/';
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
-const accountUrl = apiUrl + '/api/accounts/';
+const accountUrl = apiUrl + '/api/account/';
 const actuatorUrl = apiUrl + '/actuator/';
 
 export const environment = {
@@ -22,8 +22,8 @@ export const environment = {
   },
   apiUrls: {
     authorization: apiUrl + '/api/authenticate',
-    user: apiUrl + '/api/accounts/user',
-    guardianUrl: apiUrl + '/api/accounts/guardians/',
+    user: apiUrl + '/api/account/user',
+    guardianUrl: apiUrl + '/api/account/guardians/',
     meal: apiUrl + '/api/meal',
     mealDictionary: apiUrl + '/api/dictionary/meal/',
 
@@ -32,31 +32,25 @@ export const environment = {
       guardian: {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',
-        count: accountUrl + 'guardians/count',
-        create: accountUrl + 'guardian',
-        update: accountUrl + 'guardian'
+        count: accountUrl + 'guardians/count'
       },
       employee: {
         employees: accountUrl + 'employees',
-        count: accountUrl + 'employees/count',
-        create: accountUrl + 'employee',
-        update: accountUrl + 'employee'
+        count: accountUrl + 'employees/count'
       },
       child: {
         children: accountUrl + 'children',
-        getChildById: accountUrl + 'children/',
+        getChildById: accountUrl + 'child/',
         count: accountUrl + 'children/count',
         searchChildrenByFullName: accountUrl + 'children/search',
-        create: accountUrl + 'child',
-        update: accountUrl + 'child'
       },
     },
     receivables: {
       // Receivables Controller
-      getAllIncomingPaymentsForChild: receivablesUrl + 'payments/children/',
-      getAllIncomingPaymentsForChildFromDateToDate: receivablesUrl + 'payments/children/',
-      getAllIncomingPaymentsForGuardian: receivablesUrl + 'payments/guardians/',
-      getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardians/',
+      getAllIncomingPaymentsForChild: receivablesUrl + 'payments/child/',
+      getAllIncomingPaymentsForChildFromDateToDate: receivablesUrl + 'payments/child/',
+      getAllIncomingPaymentsForGuardian: receivablesUrl + 'payments/guardian/',
+      getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardian/',
       getAllPaymentMappingsForGuardian: receivablesUrl + 'payments/mappings/',
       importTransactions: receivablesUrl + 'transactions/import',
       checkTransactionsReturnedInputFile: receivablesUrl + 'transactions/import/check',
@@ -80,7 +74,7 @@ export const environment = {
       // Finances Controller
       getBalance: financesUrl + 'balance/',
       getBalancesForAllChildren: financesUrl + 'balance/children/',
-      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardians/'
+      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardian/'
     },
     calendar: {
       // Absence Controller
@@ -91,7 +85,7 @@ export const environment = {
       deleteAbsence: calendarUrl + 'absence/',
       getAllAbsencesByChildId: calendarUrl + 'absence/childById/',
       getAllAbsencesByDate: calendarUrl + 'absence/childByDate/',
-      getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/children',
+      getAllAbsencesForChildBetweenDates: calendarUrl + 'absences/child',
 
       // DayOffWork Controller
       findDayOffWork: calendarUrl + 'dayoff/',

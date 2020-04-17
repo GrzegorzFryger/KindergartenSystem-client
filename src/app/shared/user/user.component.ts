@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from '../../data/service/accounts/account.service';
+import {AccountService} from '../../data/service/users/account.service';
 import {Observable} from 'rxjs';
-import {Account} from '../../data/model/accounts/account';
+import {Account} from '../../data/model/users/account';
 
 @Component({
   selector: 'app-user',
