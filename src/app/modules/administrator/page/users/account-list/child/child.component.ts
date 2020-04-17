@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {ChildService} from '../../../../../../data/service/users/child.service';
@@ -15,7 +15,6 @@ import {MatSort} from '@angular/material/sort';
 export class ChildComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @Output() childOutputEmitter: EventEmitter<boolean>;
   @Input() child: Child;
 
   dataSource: MatTableDataSource<Child> = new MatTableDataSource();
@@ -43,8 +42,8 @@ export class ChildComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  receiveFromPersonComponent($event) {
-    this.childCardIsOpen = $event;
+  receiveDataFromPersonDetail(event: {closeProfileCard: boolean}) {
+    this.childCardIsOpen  = !event.closeProfileCard;
   }
 
   selectChildren(children: any) {

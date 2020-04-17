@@ -41,8 +41,8 @@ export class EmployeeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  receiveFromPersonComponent($event) {
-    this.personDetailCardOpen = $event;
+  receiveDataFromPersonDetail(event: {closeProfileCard: boolean}) {
+    this.personDetailCardOpen = !event.closeProfileCard;
   }
 
   selectEmployee(employee: any) {

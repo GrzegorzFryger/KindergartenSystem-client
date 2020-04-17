@@ -51,7 +51,7 @@
   <ng-template [ngIf]="personDetailCardOpen">
     <div [ngClass]="{'move2': personDetailCardOpen  }" class="person-container">
       <app-profile [personData]="personToDisplay"
-                   (profileOutputEmitter)="receiveFromPersonComponent($event)">
+                   (profileOutputEmitter)="receiveDataFromPersonDetail($event)">
 
       </app-profile>
     </div>

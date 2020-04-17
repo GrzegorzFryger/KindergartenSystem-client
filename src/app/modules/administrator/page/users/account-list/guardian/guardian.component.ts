@@ -49,12 +49,8 @@ export class GuardianComponent implements OnInit {
     this.personToDisplay = {type: PersonType.Guardian, data: guardian};
   }
 
-  receiveDataFromPersonDetail($event) {
-    this.personDetailCardOpen = $event;
-  }
-
-  formValuesChange($event: { [p: string]: any }) {
-
+  receiveDataFromPersonDetail(event: {closeProfileCard: boolean}) {
+    this.personDetailCardOpen = !event.closeProfileCard;
   }
 
 }

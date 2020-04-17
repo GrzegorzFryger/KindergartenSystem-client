@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -17,6 +17,11 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(ev => {
+      const navEnf = ev as NavigationEnd;
+      if (navEnf.url === '/administrator/users') {
+        this.isSelected = true;
+      }
+
       const stateFromRoute = this.router.getCurrentNavigation().extras.state as { state: string };
       if (stateFromRoute) {
         this.onNavigationBack(stateFromRoute);
@@ -27,7 +32,6 @@ export class UsersComponent implements OnInit {
   onSelect(event) {
     this.isSelected = false;
     this.router.navigate(['administrator/users/' + `${event}`]);
-
   }
 
   back() {
