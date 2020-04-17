@@ -1,0 +1,41 @@
+<div class="create-form-layout-container">
+  <mat-card [ngClass]="{ 'grow' : selectedAccount == null }">
+    <div class="card-container">
+      <mat-card-header>
+        <h2>Utwórz wybrane konto</h2>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card-content-container">
+          <div class="form-type">
+            <mat-radio-group  class="account-radio-group" [(ngModel)]="selectedAccount">
+              <mat-radio-button
+                class="account-radio-button" *ngFor="let account of typeAccount" [value]="account">
+                {{account}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="selected-form">
+            <ng-container *ngIf="selectedAccount === 'Rodzic' || selectedAccount === 'Pracownik'">
+              <app-person-form (formValuesChanged)="onFormValuesChange($event)"></app-person-form>
+            </ng-container>
+            <ng-container *ngIf="selectedAccount === 'Dziecko'">
+              <app-child-form [mode]="'create'" (formValuesChanged)="onFormValuesChange($event)"></app-child-form>
+            </ng-container>
+          </div>
+        </div>
+      </mat-card-content>
+      <ng-container *ngIf="selectedAccount != null">
+        <mat-card-footer>
+          <div class="footer-container">
+            <div class="button">
+              <button mat-raised-button color="primary" [disabled]="!formIsValid" (click)="onSubmit()">
+                Utwórz użytkownika
+              </button>
+            </div>
+          </div>
+        </mat-card-footer>
+      </ng-container>
+    </div>
+  </mat-card>
+</div>
+
