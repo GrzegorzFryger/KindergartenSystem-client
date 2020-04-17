@@ -23,16 +23,9 @@ export class ChildFormComponent implements OnInit {
   ngOnInit(): void {
     this.createFromObject();
 
-    this.form.get('pesel').valueChanges.subscribe(val => {
-      if (this.mode === 'create' && val !== '') {
-        this.form.get('gender').disable();
-        this.form.get('dateOfBirth').disable();
-        this.turnOnField = false;
-      } else {
-        this.form.get('gender').enable();
-        this.form.get('dateOfBirth').enable();
-        this.form.get('pesel').disable();
-        this.turnOnField = true;
+    this.form.get('pesel').valueChanges.subscribe(peselValue => {
+      if (this.mode === 'create') {
+        this.changeStateOptionalFields(peselValue);
       }
     });
 
@@ -53,6 +46,18 @@ export class ChildFormComponent implements OnInit {
     return this.form.get(childName).get(controlName).hasError(errorName);
   };
 
+  private changeStateOptionalFields(val: string): void {
+    if ( val !== '') {
+      this.form.get('gender').disable();
+      this.form.get('dateOfBirth').disable();
+      this.turnOnField = false;
+    } else {
+      this.form.get('gender').enable();
+      this.form.get('dateOfBirth').enable();
+      this.form.get('pesel').disable();
+      this.turnOnField = true;
+    }
+  }
 
   private createFromObject(): void {
     this.form = this.fb.group({
