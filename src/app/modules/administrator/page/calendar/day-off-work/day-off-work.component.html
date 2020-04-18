@@ -15,7 +15,7 @@
             <div class="col">
               <mat-form-field appearance="standard">
                 <mat-label>Podaj datę</mat-label>
-                <input matInput placeholder="Data" type="text" id="date" name="date" class="form-control" ngModel>
+                <input matInput placeholder="Data" type="text" name="date" class="form-control" ngModel>
               </mat-form-field>
             </div>
           </div>
@@ -23,7 +23,7 @@
             <div class="col">
               <mat-form-field appearance="standard">
                 <mat-label>Podaj nazwę</mat-label>
-                <input matInput placeholder="Nazwa" type="text" id="name" name="name" class="form-control" ngModel>
+                <input matInput placeholder="Nazwa" type="text" name="name" class="form-control" ngModel>
               </mat-form-field>
             </div>
           </div>
@@ -31,14 +31,11 @@
             <div class="col">
               <mat-form-field appearance="standard">
                 <mat-label>Podaj typ</mat-label>
-                <input matInput placeholder="Typ wydarzenia" type="text" id="eventType" name="eventType"
-                       class="form-control" ngModel>
-                <!--            TODO: Fix this-->
-                <!--            <select id="eventType" name="eventType" class="form-control" ngModel>-->
-                <!--              <option *ngFor="let option of enumValues" value="option.value">-->
-                <!--                {{option.display}}-->
-                <!--              </option>-->
-                <!--            </select>-->
+                <mat-select class="form-control" id="eventType" name="eventType" ngModel>
+                  <mat-option value="HOLIDAY">Święto</mat-option>
+                  <mat-option value="WEEKEND">Weekend</mat-option>
+                  <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
           </div>
