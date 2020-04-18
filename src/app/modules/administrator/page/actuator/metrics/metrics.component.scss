@@ -1,0 +1,16 @@
+
+.metrics-card {
+  width: 97%;
+  height: 400px;
+  overflow-y:auto;
+}
+.clear {
+  clear:both;
+  margin-top:10px
+}
+
+.metrics-card-details {
+  span {
+    font-weight: bold;
+  }
+}

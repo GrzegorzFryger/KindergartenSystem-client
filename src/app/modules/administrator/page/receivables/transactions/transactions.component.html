@@ -1,10 +1,130 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Zarządzanie przelewami</mat-card-title>
+    <mat-card-title>Przypisywanie płatności</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
+    <mat-card>
+      <div class="row">
+        <div class="col">
+          <mat-table [dataSource]="transactionDataSource" matSort matSortActive="transactionDate"
+                     matSortDirection="desc">
+            <ng-container matColumnDef="transactionDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate}} </mat-cell>
+            </ng-container>
 
+            <ng-container matColumnDef="bookingDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Data księgowania</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.bookingDate}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="contractorDetails">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.contractorDetails}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.title}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="details">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="transactionNumber">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Numer transakcji</mat-header-cell>
+              <mat-cell *matCellDef="let transaction"> {{transaction.transactionNumber}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="transactionAmount">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
+              <mat-cell
+                *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isAssigned">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+              <mat-cell
+                *matCellDef="let transaction">
+                <mat-checkbox [(ngModel)]="transaction.isAssigned"></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="transactionColumnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: transactionColumnsToDisplay;"></mat-row>
+          </mat-table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <br><br><p>Wyszukaj dziecko</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Imię</mat-label>
+            <input [(ngModel)]="childName" matInput placeholder="Na przykład: Jan">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nazwisko</mat-label>
+            <input [(ngModel)]="childSurname" matInput placeholder="Na przykład: Kowalski">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <br><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-table [dataSource]="childDataSource" matSort
+                     matSortDirection="asc" matSortActive="surname">
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pesel">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> PESEL</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dateOfBirth">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Data urodzenia</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.dateOfBirth}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="button"
+                  (click)="findChildren()">Szukaj
+          </button>
+        </div>
+      </div>
+    </mat-card>
   </mat-card-content>
 </mat-card>
 

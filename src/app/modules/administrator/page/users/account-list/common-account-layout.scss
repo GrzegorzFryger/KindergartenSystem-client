@@ -1,0 +1,104 @@
+.account-list-container {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  //background-color: white;
+
+  .table-container {
+    height: 100%;
+    flex-shrink: 1;
+    flex-basis: 80%;
+    margin: 8px 0 8px 0;
+    padding: 16px 8px 16px 8px;
+
+
+    .flex {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+
+      .search {
+        flex-shrink: 1;
+
+        .mat-form-field {
+          width: 100%;
+
+          .mat-form-field-flex {
+            background-color: white;
+          }
+        }
+      }
+
+      .table {
+        flex-shrink: 1;
+
+        .mat-form-field {
+          width: 100%;
+
+          .mat-form-field-flex {
+            background-color: white;
+          }
+        }
+
+        .mat-table {
+          .mat-row {
+            &:hover {
+              background-color: rgb(240, 187, 218);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .buttons {
+        flex-grow: 1;
+
+        .buttons-container {
+          height: 100%;
+          margin-top: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  .person-container {
+    margin: 16px 0 16px 0;
+    flex-basis: 100%;
+    flex-shrink: 1;
+  }
+}
+
+
+.move {
+  animation: fade 500ms forwards;
+}
+
+.move2 {
+  animation: fadeIn 500ms forwards;
+}
+
+@keyframes fade {
+  0% {
+  }
+
+  100% {
+    transform: translate3d(-100%, 0px, 0px);
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translate3d(100%, 0px, 0px);
+  }
+
+  100% {
+    transform: translate3d(0%, 0px, 0px);
+  }
+}

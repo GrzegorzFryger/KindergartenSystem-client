@@ -35,6 +35,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 import {FinanceChartComponent} from './page/finances/finance-chart/finance-chart.component';
 import {ChartsModule} from 'ng2-charts';
+import {NavbarComponent} from './component/navbar/navbar.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {ChartsModule} from 'ng2-charts';
     DialogOverviewExampleDialog,
     AbsenceComponent,
     AbsenceDialogComponent,
-    FinanceChartComponent
+    FinanceChartComponent,
+    NavbarComponent
   ],
 
   imports: [

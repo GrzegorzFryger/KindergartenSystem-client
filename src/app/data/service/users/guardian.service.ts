@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Child} from '../../model/users/child';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
 import {SnackErrorHandlingService} from '../../../core/snack-error-handling/snack-error-handling.service';
-import { HttpParams } from '@angular/common/http';
+import {Guardian} from '../../model/users/guardian';
 
 const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
 
@@ -18,7 +18,7 @@ export class GuardianService {
   public userId: string;
 
   constructor(private http: HttpClient, private userService: AccountService,
-              private errorHandlingService: SnackErrorHandlingService, private httpParams: HttpParams) {
+              private errorHandlingService: SnackErrorHandlingService) {
     this.userService.currentUser.subscribe(user => {
       this.userId = user.id;
       this.children = this.findAllGuardianChildren(user.id);
@@ -26,7 +26,7 @@ export class GuardianService {
   }
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
-    return this.http.get<Array<Child>>(environment.apiUrls.account.findAllGuardianChildren + `${userId}` + '/children')
+    return this.http.get<Array<Child>>(environment.apiUrls.account.guardian.findAllGuardianChildren + `${userId}` + '/children')
       .pipe(
         catchError(err => {
           this.errorHandlingService.openSnackBar(CHILD_NOT_FOUND_MESSAGE);
@@ -35,13 +35,19 @@ export class GuardianService {
   }
 
   public getChildById(childID: string): Observable<Child> {
-    return this.http.get<Child>(environment.apiUrls.account.getChildById + childID);
+    return this.http.get<Child>(environment.apiUrls.account.child.getChildById + childID);
+  }
+
+  getAllGuardian(): Observable<Array<Guardian>> {
+    return this.http.get<Array<Guardian>>(environment.apiUrls.account.guardian.guardians);
+  }
+
+  getCountGuardians(): Observable<number> {
+    return this.http.get<number>(environment.apiUrls.account.guardian.count);
   }
 
   public searchChildrenByFullName(name: string, surname: string): Observable<Array<Child>> {
-    let params = new HttpParams();
-    params = params.append('name', name);
-    params = params.append('surname', surname);
-    return this.http.get<Array<Child>>(environment.apiUrls.account.searchChildrenByFullName, {params});
+    const params = new HttpParams().append('name', name).append('surname', surname);
+    return this.http.get<Array<Child>>(environment.apiUrls.account.child.searchChildrenByFullName, {params});
   }
 }

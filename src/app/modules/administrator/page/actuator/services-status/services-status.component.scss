@@ -1,0 +1,75 @@
+.status-card {
+  margin: 0 10px;
+}
+
+.status-card-success {
+  height: 200px;
+  border-radius: 25px;
+  -webkit-box-shadow: 1px 1px 1px 1px #E8E8E8;
+  box-shadow: 1px 1px 1px 1px #E8E8E8;
+  border: 1px solid #2ecc71;
+  //background-color: #84fb95;
+  //background-image: linear-gradient(315deg, #84fb95 0%, #cef576 74%);
+}
+
+.card-icon {
+  float: right;
+
+  .mat-icon {
+    font-size: 40px;
+    margin-right: 10px;
+    color: #2ecc71;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+.status-card-error {
+  height: 150px;
+  border-radius: 25px;
+  -webkit-box-shadow: 1px 1px 5px 5px #E8E8E8;
+  box-shadow: 1px 1px 1px 1px #E8E8E8;
+  background-color: #ffd9de;
+  background-image: linear-gradient(315deg, #ffd9de 0%, #e99ba6 74%);
+
+}
+
+.card-details {
+  span {
+    font-size: 14px;
+    display: inline;
+  }
+
+  h4 {
+    font-weight: 500;
+    font-size: 16px;
+    display: inline;
+    color: #2ecc71;
+  }
+  height: 140px;
+  overflow-y:auto;
+}
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+
+

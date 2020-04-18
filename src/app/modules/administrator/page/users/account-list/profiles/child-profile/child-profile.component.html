@@ -1,0 +1,110 @@
+<div class="profile-layout-container">
+  <mat-card [ngClass]="{'resize': isEditCardOpen}" class="profile-card-layout">
+    <mat-card-content>
+      <div class="profile-content-container">
+        <div class="header-item">
+          <div class="header">
+            <div class="center">
+              <img src="../../../assets/images/tata.png" height="120" width="120" class="img-fluid"/>
+            </div>
+            <div class="center">
+              {{child?.name }}  {{child?.surname }}
+            </div>
+          </div>
+        </div>
+        <mat-divider [inset]="true"></mat-divider>
+        <div class="profile-data-item contact">
+          <p>Dane kontaktowe:</p>
+          <div class="d-flex">
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Pesel:</div>
+                <div class="value">{{child?.pesel}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Gender:</div>
+                <div class="value">{{child?.gender}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data urodzin:</div>
+                <div class="value">{{child?.dateOfBirth}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data ropoczecia:</div>
+                <div class="value">{{child?.startDate}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data zakończenia:</div>
+                <div class="value">{{child?.endDate}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-data-item address">
+          <p>Adres:</p>
+          <div class="d-flex">
+            <div class="item street">
+              <div class="item-container">
+                <div class="label">Ulica:</div>
+                <div class="value">{{child?.streetNumber}}</div>
+              </div>
+            </div>
+            <div class="item city">
+              <div class="item-container">
+                <div class="label">Kod pocztowy:</div>
+                <div class="value">{{child?.postalCode}}</div>
+              </div>
+            </div>
+            <div class="item zip-code">
+              <div class="item-container">
+                <div class="label">Miasto:</div>
+                <div class="value">{{child?.city}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="footer-container">
+        <div class="button">
+          <button mat-raised-button (click)="close('person')" color="primary">Cofnij</button>
+        </div>
+        <div class="button">
+          <button mat-raised-button (click)="openEditCard()" color="primary">Edytuj</button>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+
+  <ng-container *ngIf="isEditCardOpen">
+    <mat-card class="profile-edit-card">
+      <mat-card-content>
+        <div class="d-flex">
+          <app-child-form [initialState]="personFormInitial"
+                          (formValuesChanged)="formValuesChange($event)">
+          </app-child-form>
+        </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <div class="footer-container">
+          <div class="button">
+            <button mat-raised-button (click)="close('edit')" color="primary">Anuluj</button>
+          </div>
+          <div class="button">
+            <button mat-raised-button color="primary">Zapisz</button>
+          </div>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </ng-container>
+
+</div>

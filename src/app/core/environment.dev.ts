@@ -8,6 +8,7 @@ const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
 const accountUrl = apiUrl + '/api/account/';
 const groupsUrl = apiUrl + '/api/groups/';
+const actuatorUrl = apiUrl + '/actuator/';
 
 export const environment = {
   production: false,
@@ -22,23 +23,28 @@ export const environment = {
   },
   apiUrls: {
     authorization: apiUrl + '/api/authenticate',
+    user: apiUrl + '/api/account/user',
+    guardianUrl: apiUrl + '/api/account/guardians/',
     meal: apiUrl + '/api/meal',
     mealDictionary: apiUrl + '/api/dictionary/meal/',
 
     account: {
-      // Account Controller
       user: accountUrl + 'user',
-
-      // Borough Controller
-
-      // Child Controller
-      getChildById: accountUrl + 'child/',
-      searchChildrenByFullName: accountUrl + 'children/search',
-
-      // Employee Controller
-
-      // Guardian Controller
-      findAllGuardianChildren: accountUrl + 'guardians/'
+      guardian: {
+        findAllGuardianChildren: accountUrl + 'guardians/',
+        guardians: accountUrl + 'guardians',
+        count: accountUrl + 'guardians/count'
+      },
+      employee: {
+        employees: accountUrl + 'employees',
+        count: accountUrl + 'employees/count'
+      },
+      child: {
+        children: accountUrl + 'children',
+        getChildById: accountUrl + 'child/',
+        count: accountUrl + 'children/count',
+        searchChildrenByFullName: accountUrl + 'children/search',
+      },
     },
     receivables: {
       // Receivables Controller
@@ -48,6 +54,7 @@ export const environment = {
       getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardian/',
       getAllPaymentMappingsForGuardian: receivablesUrl + 'payments/mappings/',
       importTransactions: receivablesUrl + 'transactions/import',
+      checkTransactionsReturnedInputFile: receivablesUrl + 'transactions/import/check',
 
       // CashPayment Controller
       getAllCashPayments: receivablesUrl + 'cash-payments',
@@ -57,7 +64,8 @@ export const environment = {
       updateCashPayment: receivablesUrl + 'cash-payments',
 
       // Transactions Controller
-      getAllTransactions: receivablesUrl + 'transactions',
+      getAllUnassignedTransactions: receivablesUrl + 'transactions',
+      assignTransactionToChild: receivablesUrl + 'transactions/assign/',
       getTransaction: receivablesUrl + 'transactions/',
       deleteTransaction: receivablesUrl + 'transactions/',
       createTransaction: receivablesUrl + 'transactions',
@@ -101,8 +109,16 @@ export const environment = {
       getAllMeals: mealUrl,
       deleteNN: mealUrl + '/nn/delete',
       addNN: mealUrl + '/nn',
+    },
+    actuator: {
+      getHealth: actuatorUrl + 'health',
+      getHttpTrace: actuatorUrl + 'httptrace',
+      getMetrics: actuatorUrl + 'metrics',
+      getMetricsDetails: ''
     }
+
   }
+
 };
 
 
