@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {FormGroup} from '@angular/forms';
 import {Child} from '../../../../../../../data/model/accounts/child';
 import {ChildService} from '../../../../../../../data/service/accounts/child.service';
-import {SnackErrorHandlingService} from '../../../../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-child-profile',
@@ -19,8 +19,8 @@ export class ChildProfileComponent implements OnInit {
   private formOutput: { form: FormGroup };
 
   constructor(private childService: ChildService,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
-    this.childOutputEmitter = new EventEmitter<{ closeProfileCard: boolean }>();
+              private snackMessageHandlingService: SnackMessageHandlingService) {
+    this.childOutputEmitter = new EventEmitter<{closeProfileCard: boolean}>();
   }
 
   ngOnInit(): void {
@@ -53,8 +53,8 @@ export class ChildProfileComponent implements OnInit {
 
     this.childService.updateChild(childToUpdate).subscribe(child => {
       this.formOutput.form.reset();
-      this.snackErrorHandlingService.openSnackBar('Utworzono pomyślnie');
-      this.inputData.child = child;
+      this.snackMessageHandlingService.error('Utworzono pomyślnie');
+      this.child = child;
       setTimeout(() => this.isEditCardOpen = false);
     });
   }

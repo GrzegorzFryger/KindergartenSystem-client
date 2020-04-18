@@ -6,7 +6,7 @@ import {Transaction} from '../../../../../data/model/receivables/transaction';
 import {MatTableDataSource} from '@angular/material/table';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {SnackErrorHandlingService} from '../../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
 import { ChildService } from 'src/app/data/service/accounts/child.service';
@@ -42,7 +42,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   constructor(private transactionsService: TransactionsService,
               private childService: ChildService,
               private guardianService: GuardianService,
-              private snackErrorHandlingService: SnackErrorHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         this.setChildDataToTable(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to get children list from REST API');
+        this.snackMessageHandlingService.error('Failed to get children list from REST API');
         return throwError(err);
       })
     );
@@ -87,7 +87,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         this.setGuardianDataToTable(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to get guardian list for selected child from REST API');
+        this.snackMessageHandlingService.error('Failed to get guardian list for selected child from REST API');
         return throwError(err);
       })
     );
@@ -117,7 +117,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         console.log(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to send transaction mapping to REST API');
+        this.snackMessageHandlingService.error('Failed to send transaction mapping to REST API');
         return throwError(err);
       })
     );
@@ -134,7 +134,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         this.setTransactionDataToTable(resp);
       },
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar('Failed to retrieve unassigned transaction list from REST API');
+        this.snackMessageHandlingService.error('Failed to retrieve unassigned transaction list from REST API');
         return throwError(err);
       })
     );
