@@ -11,8 +11,6 @@ import {Account} from '../../../../data/model/accounts/account';
 import {Child} from '../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../data/service/accounts/guardian.service';
 
-const ERROR_MESSAGE = 'Finances component failed to perform operation';
-
 interface UserMapping {
   name: string;
   surname: string;
@@ -74,7 +72,7 @@ export class FinancesComponent implements OnInit {
       .getSumOfBalancesForAllChildren(u.id)
       .pipe(
         catchError(err => {
-          this.snackMessageHandlingService.error(ERROR_MESSAGE);
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem salda');
           return throwError(err);
         }),
         map(response => {
@@ -87,7 +85,7 @@ export class FinancesComponent implements OnInit {
   private initializeBalancesForAllChildren(u: Account) {
     return this.balanceService.getBalancesForAllChildren(u.id).pipe(
       catchError(err => {
-        this.snackMessageHandlingService.error(ERROR_MESSAGE);
+        this.snackMessageHandlingService.error('Wystapił problem z załadowaniem salda dzieci');
         return throwError(err);
       }),
       map(response => {
@@ -101,7 +99,7 @@ export class FinancesComponent implements OnInit {
       .getAllPaymentMappingsForGuardian(u.id)
       .pipe(
         catchError(err => {
-          this.snackMessageHandlingService.error(ERROR_MESSAGE);
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem danych do przelewu');
           return throwError(err);
         }),
         map(response => {

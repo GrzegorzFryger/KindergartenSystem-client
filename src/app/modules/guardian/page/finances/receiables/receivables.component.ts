@@ -46,7 +46,7 @@ export class ReceivablesComponent implements OnInit {
           this.setUpDataTable(resp);
         },
         catchError(err => {
-          this.snackMessageHandlingService.error('Failed to find user');
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem przelewów');
           return throwError(err);
         }));
 

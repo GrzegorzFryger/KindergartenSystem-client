@@ -64,18 +64,20 @@ export class ImportComponent implements OnInit {
   }
 
   loadTransactionsForVerification(): void {
-    const formData = this.prepareFormData();
     console.log('Sending input file to REST API (Checking what transactions are stored in file)');
+    const formData = this.prepareFormData();
     this.importPaymentsService.checkTransactionsFromCsvFile(formData).subscribe(
       resp => {
         console.log(resp);
         this.uploadedTransactions = resp;
         this.setUpDataTable(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to retrieve uploaded transactions from REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy transakcji z pliku');
+      },
+      () => {
+        this.snackMessageHandlingService.info('Załadowano plik z transakcjami');
+      }
     );
     this.inputNotVerified = false; // We assume that user reads table and accepts it
   }
@@ -87,12 +89,14 @@ export class ImportComponent implements OnInit {
       resp => {
         console.log(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to retrieve uploaded transactions from REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z zapisem transakcji w bazie danych');
+      },
+      () => {
+        this.snackMessageHandlingService.success('Transakcje zostały zapisane');
+        this.clearFile();
+      }
     );
-    this.clearFile();
   }
 
   private setUpDataTable(incomingPayment: Array<Transaction>): void {
