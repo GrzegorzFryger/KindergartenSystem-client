@@ -9,6 +9,10 @@ import {DayOffWork, EventType} from '../../../../../data/model/absence/day-off-w
 })
 export class DayOffWorkComponent implements OnInit {
 
+  dataSource: Array<DayOffWork>;
+
+  public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
+
   dayOffWork: DayOffWork;
   // enumValues = [
   //   {display: 'Święto', value: 'HOLIDAY'},
@@ -20,6 +24,7 @@ export class DayOffWorkComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllDaysOff();
   }
 
   onSubmit(submittedForm) {
@@ -30,6 +35,19 @@ export class DayOffWorkComponent implements OnInit {
     this.dayOffWorkService.createDayOffWork(this.dayOffWork).subscribe(resp =>
       console.log(resp));
     submittedForm.reset();
+    this.getAllDaysOff();
+  }
+
+  removeDayOff(id: string): void {
+    this.dayOffWorkService.deleteDayOffWork(id).subscribe(resp => {
+      this.getAllDaysOff();
+    });
+  }
+
+  getAllDaysOff(): void {
+    this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
+      this.dataSource = resp;
+    });
   }
 
 }

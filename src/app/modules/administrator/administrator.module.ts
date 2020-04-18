@@ -56,7 +56,6 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
-import {RemoveDayOffComponent} from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
 import {GroupsComponent} from './page/groups/groups.component';
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 
@@ -95,7 +94,6 @@ import {AddGroupComponent} from './page/groups/add-group/add-group.component';
     AddAbsenceComponent,
     RemoveAbsenceComponent,
     DayOffWorkComponent,
-    RemoveDayOffComponent,
     GroupsComponent,
     AddGroupComponent
   ],
