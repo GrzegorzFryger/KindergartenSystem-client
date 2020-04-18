@@ -15,7 +15,10 @@
             <div class="col">
               <mat-form-field appearance="standard">
                 <mat-label>Podaj datę</mat-label>
-                <input matInput placeholder="Data" type="text" name="date" class="form-control" ngModel>
+                <input matInput [matDatepicker]="myDatepicker" placeholder="Data" name="date" class="form-control"
+                       ngModel>
+                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepicker></mat-datepicker>
               </mat-form-field>
             </div>
           </div>
@@ -86,7 +89,7 @@
             <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
 
           </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator [length]="dataSource.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
       </div>
     </div>

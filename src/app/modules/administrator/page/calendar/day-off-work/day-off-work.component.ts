@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DayOffWorkService} from '../../../../../data/service/absence/day-off-work.service';
-import {DayOffWork, EventType} from '../../../../../data/model/absence/day-off-work';
-import {Sort} from '@angular/material/sort';
+import {DayOffWork} from '../../../../../data/model/absence/day-off-work';
 
 @Component({
   selector: 'app-day-off-work',
@@ -15,11 +14,6 @@ export class DayOffWorkComponent implements OnInit {
   public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
 
   dayOffWork: DayOffWork;
-  // enumValues = [
-  //   {display: 'Święto', value: 'HOLIDAY'},
-  //   {display: 'Weekend', value: 'WEEKEND'},
-  //   {display: 'Wydarzenie wewnętrzne', value: 'INTERNAL_EVENT'}
-  // ];
 
   constructor(private dayOffWorkService: DayOffWorkService) {
   }
