@@ -65,6 +65,7 @@
           <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
           <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
         </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
       </div>
     </div>
     <div class="row">
@@ -117,8 +118,29 @@
     </div>
     <div class="row">
       <div class="col">
+        <br><br>
+        <p>Wprowadź dane płatności</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <form class="form-layout-container container-fluid" [formGroup]="form">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Data transakcji</mat-label>
+            <input matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
+            <mat-error *ngIf="fieldValidationError('transactionDate', 'required')">Data jest wymagana</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="transactionDate"></mat-datepicker-toggle>
+            <mat-datepicker #transactionDate></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
         <button mat-raised-button color="primary" type="button"
-                [disabled]="selectedGuardianId === ''">Dodaj płatność gotówkową
+                (click)="addCashPayment()" [disabled]="selectedGuardianId === '' || selectedChildId === ''">Dodaj płatność gotówkową
         </button>
       </div>
     </div>

@@ -7,6 +7,8 @@ import {Guardian} from '../../../../../../data/model/accounts/guardian';
 import {ChildService} from '../../../../../../data/service/accounts/child.service';
 import {GuardianService} from '../../../../../../data/service/accounts/guardian.service';
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CashPaymentsService} from '../../../../../../data/service/receivables/cash-payments.service';
 
 @Component({
   selector: 'app-add-cash-payment',
@@ -29,12 +31,17 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
   public selectedChildId = '';
   public selectedGuardianId = '';
 
+  form: FormGroup;
+
   constructor(private childService: ChildService,
               private guardianService: GuardianService,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private cashPaymentsService: CashPaymentsService,
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.initializeForm();
   }
 
   ngAfterViewInit(): void {
@@ -86,6 +93,25 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public addCashPayment(): void {
+    console.log('Sending request to REST API to create cash payment)');
+    this.cashPaymentsService.createCashPayment(this.form).subscribe(
+      resp => {
+        // NEXT
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z zapisem płatności');
+      },
+      () => {
+        this.snackMessageHandlingService.success('Płatność pomyślnie zapisana');
+      }
+    );
+  }
+
+  public fieldValidationError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
+  };
+
   private resetChildAndGuardianState(): void {
     this.guardianDataSource.data = []; // Remove all found guardians when performing new children search
     this.childDataSource.data = [];  // Remove all found children when performing new children search
@@ -108,11 +134,36 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     // TODO Change it into better solution (more global)
     this.childDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
 
-    // this.guardianDataSource.data = [];
-    // this.guardianDataSource.sort = this.sort.toArray()[1];
-    // this.guardianDataSource.paginator = this.paginator.toArray()[1];
-    // // TODO Change it into better solution (more global)
-    // this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
+    this.guardianDataSource.data = [];
+    this.guardianDataSource.sort = this.sort.toArray()[1];
+    this.guardianDataSource.paginator = this.paginator.toArray()[1];
+    // TODO Change it into better solution (more global)
+    this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
   }
 
+  private initializeForm(): void {
+    this.form = this.fb.group({
+      transactionDate: [
+        [Validators.required]
+      ],
+      contractorDetails: [
+        [Validators.required]
+      ],
+      title: [
+        [Validators.required]
+      ],
+      transactionAmount: [
+        [Validators.required]
+      ],
+      transactionCurrency: [
+        [Validators.required]
+      ],
+      childId: [
+        [Validators.required]
+      ],
+      guardianId: [
+        [Validators.required]
+      ],
+    });
+  }
 }

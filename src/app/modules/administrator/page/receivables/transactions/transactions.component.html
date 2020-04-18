@@ -169,7 +169,8 @@
       <div class="row">
         <div class="col">
           <button mat-raised-button color="primary" type="button"
-                  (click)="assignTransactions()" [disabled]="selectedGuardianId === '' || amountOfSelectedTranactions === 0">Przypisz transakcje
+                  (click)="assignTransactions()" [disabled]="selectedGuardianId === '' ||
+                  amountOfSelectedTranactions === 0 || selectedChildId === ''">Przypisz transakcje
           </button>
         </div>
       </div>
