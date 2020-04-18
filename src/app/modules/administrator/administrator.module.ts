@@ -23,19 +23,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
-
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {ImportComponent} from './page/receivables/import/import.component';
 import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-cash-payment.component';
-import { ReceivablesComponent } from './page/receivables/receivables.component';
-import { CashPaymentsComponent } from './page/receivables/cash-payments/cash-payments.component';
-import { TransactionsComponent } from './page/receivables/transactions/transactions.component';
-import { ImportComponent } from './page/receivables/import/import.component';
-import { AddCashPaymentComponent } from './page/receivables/add-cash-payment/add-cash-payment.component';
-import { AbsenceComponent } from './page/calendar/absence/absence.component';
-import { AddAbsenceComponent } from './page/calendar/absence/add-absence/add-absence.component';
-import { RemoveAbsenceComponent } from './page/calendar/absence/remove-absence/remove-absence.component';
+import {AbsenceComponent} from './page/calendar/absence/absence.component';
+import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
+import {RemoveAbsenceComponent} from './page/calendar/absence/remove-absence/remove-absence.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -61,10 +55,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
-import { RemoveDayOffComponent } from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
-import { GroupsComponent } from './page/groups/groups.component';
-import { AddGroupComponent } from './page/groups/add-group/add-group.component';
+import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
+import {RemoveDayOffComponent} from './page/calendar/day-off-work/remove-day-off/remove-day-off.component';
+import {GroupsComponent} from './page/groups/groups.component';
+import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 
 
 @NgModule({
@@ -95,7 +89,7 @@ import { AddGroupComponent } from './page/groups/add-group/add-group.component';
     HttpTraceComponent,
     ChartComponent,
     MetricsComponent,
-    AdministratorNavigationMenuComponent
+    AdministratorNavigationMenuComponent,
     DialogOverviewExampleDialog,
     AbsenceComponent,
     AddAbsenceComponent,
@@ -138,7 +132,7 @@ import { AddGroupComponent } from './page/groups/add-group/add-group.component';
   ],
   bootstrap: [],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
     MatCheckboxModule,
     DatePipe

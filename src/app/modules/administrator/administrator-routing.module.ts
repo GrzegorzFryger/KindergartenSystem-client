@@ -10,8 +10,6 @@ import {MealComponent} from './page/meal/meal.component';
 import {UsersComponent} from './page/users/users.component';
 import {AccountListComponent} from './page/users/account-list/account-list.component';
 import {AccountCreatorComponent} from './page/users/account-creator/account-creator.component';
-import {ReceivablesComponent} from './page/receivables/receivables.component';
-import {MealComponent} from './meal/meal.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {RemoveAbsenceComponent} from './page/calendar/absence/remove-absence/remove-absence.component';
@@ -64,7 +62,7 @@ const routes: Routes = [
       {
         path: 'actuator',
         component: ActuatorComponent,
-      }
+      },
 
       {
         path: 'absence',
