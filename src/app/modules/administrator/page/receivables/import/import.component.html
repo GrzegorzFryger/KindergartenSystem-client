@@ -15,7 +15,7 @@
             Nazwa pliku: {{ fileName }}
           </div>
         </div>
-        <div class="row">
+        <div class="row" [hidden]="!fileName">
           <div class="col">
             <div class="col">
               <input hidden type="file" id="transfers_input_file" (change)="onFileChange($event)"
@@ -24,7 +24,7 @@
             <br><br>
           </div>
         </div>
-        <div class="row">
+        <div class="row" [hidden]="!fileName">
           <div class="col">
             <button mat-raised-button color="primary" type="button" [disabled]="unloaded" (click)="clearFile()">Wyczyść
               plik
@@ -36,7 +36,7 @@
             <br><br>
           </div>
         </div>
-        <div class="row">
+        <div class="row" [hidden]="!fileName">
           <div class="col">
             <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
                     (click)="loadTransactionsForVerification()">Załaduj plik
@@ -48,7 +48,7 @@
             <br><br>
           </div>
         </div>
-        <div class="row">
+        <div class="row" [hidden]="!fileName">
           <div class="col">
             <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified">Wyślij
             </button>
@@ -57,7 +57,7 @@
       </form>
     </div>
     <br><br>
-    <mat-card>
+    <mat-card [hidden]="!fileName">
       <div class="row">
         <div class="col">
           <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate"

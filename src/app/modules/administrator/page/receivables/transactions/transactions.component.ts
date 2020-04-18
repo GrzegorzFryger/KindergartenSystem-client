@@ -129,6 +129,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         return false;
       },
       () => {
+        this.resetChildAndGuardianState();
         // ON COMPLETE
       }
     );
