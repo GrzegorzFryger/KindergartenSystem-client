@@ -56,8 +56,8 @@ export const environment = {
       // Receivables Controller
       getAllIncomingPaymentsForChild: receivablesUrl + 'payments/children/',
       getAllIncomingPaymentsForChildFromDateToDate: receivablesUrl + 'payments/children/',
-      getAllIncomingPaymentsForGuardian: receivablesUrl + 'payments/guardians/',
-      getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardians/',
+      getAllIncomingPaymentsForGuardian: receivablesUrl + 'payments/guardian/',
+      getAllIncomingPaymentsForGuardianFromDateToDate: receivablesUrl + 'payments/guardian/',
       getAllPaymentMappingsForGuardian: receivablesUrl + 'payments/mappings/',
       importTransactions: receivablesUrl + 'transactions/import',
       checkTransactionsReturnedInputFile: receivablesUrl + 'transactions/import/check',
@@ -81,7 +81,7 @@ export const environment = {
       // Finances Controller
       getBalance: financesUrl + 'balance/',
       getBalancesForAllChildren: financesUrl + 'balance/children/',
-      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardians/'
+      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardian/'
     },
     calendar: {
       // Absence Controller
