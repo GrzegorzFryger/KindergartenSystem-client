@@ -1,0 +1,21 @@
+.mat-card {
+  padding: 0;
+  margin-top: 20px;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+
+  .mat-card-content {
+    padding: 16px;
+    width: 100%;
+  }
+
+  .mat-card-actions {
+    padding: 0 21px 20px 16px;
+    float:right;
+
+    .mat-button {
+      background-color: #EDEEF4;
+      color: #606FEE;
+    }
+  }
+}

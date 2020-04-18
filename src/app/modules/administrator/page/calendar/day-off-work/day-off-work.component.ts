@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DayOffWorkService} from '../../../../../data/service/absence/day-off-work.service';
 import {DayOffWork, EventType} from '../../../../../data/model/absence/day-off-work';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-day-off-work',
