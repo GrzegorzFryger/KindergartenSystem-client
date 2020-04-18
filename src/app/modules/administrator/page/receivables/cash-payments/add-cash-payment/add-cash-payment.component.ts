@@ -11,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CashPaymentsService} from '../../../../../../data/service/receivables/cash-payments.service';
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {TransactionMappingService} from '../../../../../../data/service/receivables/transaction-mapping.service';
+import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
 
 @Component({
   selector: 'app-add-cash-payment',
@@ -49,6 +50,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
               private cashPaymentsService: CashPaymentsService,
               private snackMessageHandlingService: SnackMessageHandlingService,
               private transactionMappingService: TransactionMappingService,
+              private validationService: ValidatorsService,
               private fb: FormBuilder) {
   }
 
@@ -207,7 +209,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       transactionAmount: [
         '',
-        [Validators.required, Validators.min(1)]
+        [Validators.required, Validators.min(1), this.validationService.isInteger]
       ],
       transactionCurrency: [
         this.CURRENCY,
