@@ -29,9 +29,9 @@ export class CashPaymentsService {
 
   }
 
-  createCashPayment(formData) {
+  createCashPayment(payment: CashPayment) {
     return this.http.post<any>(
-      environment.apiUrls.receivables.createCashPayment, formData
+      environment.apiUrls.receivables.createCashPayment, payment
     );
   }
 

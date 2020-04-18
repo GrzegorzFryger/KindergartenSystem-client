@@ -9,6 +9,8 @@ import {GuardianService} from '../../../../../../data/service/accounts/guardian.
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CashPaymentsService} from '../../../../../../data/service/receivables/cash-payments.service';
+import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
+import {TransactionMappingService} from '../../../../../../data/service/receivables/transaction-mapping.service';
 
 @Component({
   selector: 'app-add-cash-payment',
@@ -31,12 +33,22 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
   public selectedChildId = '';
   public selectedGuardianId = '';
 
-  form: FormGroup;
+  public form: FormGroup;
+
+  private CONTRACTOR_DETAILS_FIELD = 'contractorDetails';
+  private TRANSACTION_DATE_FIELD = 'transactionDate';
+  private CURRENCY_FIELD = 'transactionCurrency';
+  private TITLE_FIELD = 'title';
+  private CHILD_ID_FIELD = 'childId';
+  private GUARDIAN_ID_FIELD = 'guardianId';
+
+  private CURRENCY = 'PLN';
 
   constructor(private childService: ChildService,
               private guardianService: GuardianService,
               private cashPaymentsService: CashPaymentsService,
               private snackMessageHandlingService: SnackMessageHandlingService,
+              private transactionMappingService: TransactionMappingService,
               private fb: FormBuilder) {
   }
 
@@ -51,13 +63,30 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
   public selectChild(childId: string): void {
     console.log('Selected child: ' + childId);
     this.selectedChildId = childId;
+    this.form.controls[this.CHILD_ID_FIELD].setValue(childId);
     this.selectedGuardianId = ''; // Reset state of selected guardian when selecting new child
     this.findGuardians();
   }
 
-  public selectGuardian(guardianId: string): void {
+  public selectGuardian(guardianId: string, guardianName: string, guardianSurname: string): void {
     console.log('Selected guardian: ' + guardianId);
     this.selectedGuardianId = guardianId;
+    this.form.controls[this.GUARDIAN_ID_FIELD].setValue(guardianId);
+    this.form.controls[this.CONTRACTOR_DETAILS_FIELD].setValue(guardianName + ' ' + guardianSurname);
+    this.transactionMappingService.getAllPaymentMappingsForGuardian(this.selectedGuardianId).subscribe(
+      resp => {
+        resp.forEach(mapping => {
+          if (mapping.childId === this.selectedChildId) {
+            console.log('Found title for child: ' + this.selectedChildId + ': ' + mapping.title);
+            this.form.controls[this.TITLE_FIELD].setValue(mapping.title);
+          }
+        });
+      }, error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem tytułu przelewu');
+      },
+      () => {
+        // ON COMPLETE
+      });
   }
 
   public findChildren(): void {
@@ -86,7 +115,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
         this.setGuardianDataToTable(resp);
       },
       error => {
-        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców')
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
         console.log(error);
       },
       () => {
@@ -97,9 +126,11 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
   public addCashPayment(): void {
     console.log('Sending request to REST API to create cash payment)');
-    this.cashPaymentsService.createCashPayment(this.form).subscribe(
+    const cashPayment = this.buildCashPayment();
+    console.log(cashPayment);
+    this.cashPaymentsService.createCashPayment(cashPayment).subscribe(
       resp => {
-        // NEXT
+        console.log(resp);
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z zapisem płatności');
@@ -107,19 +138,23 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       },
       () => {
         this.snackMessageHandlingService.success('Płatność pomyślnie zapisana');
+        this.resetChildAndGuardianState();
+        this.resetForm();
       }
     );
   }
-
-  public fieldValidationError = (controlName: string, errorName: string) => {
-    return this.form.controls[controlName].hasError(errorName);
-  };
 
   private resetChildAndGuardianState(): void {
     this.guardianDataSource.data = []; // Remove all found guardians when performing new children search
     this.childDataSource.data = [];  // Remove all found children when performing new children search
     this.selectedGuardianId = ''; // Reset state of selected guardian
     this.selectedChildId = ''; // Reset state of selected child
+  }
+
+  private resetForm(): void {
+    this.form.reset();
+    this.form.controls[this.TRANSACTION_DATE_FIELD].setValue(new Date());
+    this.form.controls[this.CURRENCY_FIELD].setValue(this.CURRENCY);
   }
 
   private setChildDataToTable(children: Array<Child>): void {
@@ -144,27 +179,46 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
   }
 
+  private buildCashPayment(): CashPayment {
+    const cashPayment = new CashPayment();
+    cashPayment.childId = this.selectedChildId;
+    cashPayment.guardianId = this.selectedGuardianId;
+    cashPayment.transactionDate = this.form.get('transactionDate').value;
+    cashPayment.contractorDetails = this.form.get('contractorDetails').value;
+    cashPayment.transactionAmount = this.form.get('transactionAmount').value;
+    cashPayment.transactionCurrency = this.form.get('transactionCurrency').value;
+    cashPayment.title = this.form.get('title').value;
+    return cashPayment;
+  }
+
   private initializeForm(): void {
     this.form = this.fb.group({
       transactionDate: [
+        new Date(),
         [Validators.required]
       ],
       contractorDetails: [
-        [Validators.required]
+        '',
+        [Validators.required, Validators.minLength(3)]
       ],
       title: [
-        [Validators.required]
+        '',
+        [Validators.required, Validators.minLength(14)]
       ],
       transactionAmount: [
-        [Validators.required]
+        '',
+        [Validators.required, Validators.min(1)]
       ],
       transactionCurrency: [
-        [Validators.required]
+        this.CURRENCY,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(3)]
       ],
       childId: [
+        '',
         [Validators.required]
       ],
       guardianId: [
+        '',
         [Validators.required]
       ],
     });
