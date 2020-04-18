@@ -74,6 +74,7 @@ export class ImportComponent implements OnInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy transakcji z pliku');
+        console.log(error);
       },
       () => {
         this.snackMessageHandlingService.info('Załadowano plik z transakcjami');
@@ -91,6 +92,7 @@ export class ImportComponent implements OnInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z zapisem transakcji w bazie danych');
+        console.log(error);
       },
       () => {
         this.snackMessageHandlingService.success('Transakcje zostały zapisane');

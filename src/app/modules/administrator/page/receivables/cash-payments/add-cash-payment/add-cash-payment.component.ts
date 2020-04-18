@@ -70,6 +70,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy dzieci');
+        console.log(error);
       },
       () => {
         // ON COMPLETE
@@ -85,7 +86,8 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
         this.setGuardianDataToTable(resp);
       },
       error => {
-        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców')
+        console.log(error);
       },
       () => {
         // ON COMPLETE
@@ -101,6 +103,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z zapisem płatności');
+        console.log(error);
       },
       () => {
         this.snackMessageHandlingService.success('Płatność pomyślnie zapisana');

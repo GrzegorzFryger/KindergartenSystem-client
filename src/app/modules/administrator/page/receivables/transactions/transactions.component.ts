@@ -75,6 +75,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy dzieci');
+        console.log(error);
       },
       () => {
         // ON COMPLETE
@@ -91,6 +92,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
+        console.log(error);
       },
       () => {
         // ON COMPLETE
@@ -123,6 +125,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z przypisaniem transakcji do dziecka');
+        console.log(error);
         return false;
       },
       () => {
@@ -144,6 +147,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy transakcji');
+        console.log(error);
       },
       () => {
         // ON COMPLETE
