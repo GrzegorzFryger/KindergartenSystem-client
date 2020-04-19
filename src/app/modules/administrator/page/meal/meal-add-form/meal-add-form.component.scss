@@ -74,3 +74,36 @@
     padding: 16px;
   }
 }
+
+.submit_button {
+  float:right;
+  margin-top: 5px;
+
+
+  .mat-button {
+    background-color: #EDEEF4;
+    color: #606FEE;
+    width: 400px;
+    align-content: center;
+  }
+}
+
+.clear {
+  clear:both;
+}
+
+
+.cardContent {
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mat-form-field {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+  }
+}

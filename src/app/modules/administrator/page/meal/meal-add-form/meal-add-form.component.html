@@ -16,18 +16,44 @@
             <div class="container">
               <div class="row">
 
+                <form [formGroup]="addMealForm">
+
+                  <mat-form-field >
+                    <mat-label>Rodział posiłku</mat-label>
+                    <mat-select required formControlName="mealTypeSelect" [(ngModel)]="mealToAdd.mealType">
+                      <mat-option  *ngFor="let mealType of mealTypes" [value]="mealType.value">
+                        {{mealType.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Rodział diety</mat-label>
+                    <mat-select required formControlName="mealDietSelect" [(ngModel)]="mealToAdd.dietType">
+                      <mat-option  *ngFor="let diet of mealDiets" [value]="diet.value">
+                        {{diet.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
 
-
-
-
-
+                </form>
               </div>
+
+              <div class="clear"></div>
+              <div class="row">
+
+                <div class="submit_button">
+                  <button [disabled]="!addMealForm.valid" (click)="addMeal()" mat-button>Dodaj</button>
+                </div>
+              </div>
+
+
             </div>
+
           </div>
         </mat-card-content>
       </mat-card>
-
 
 
     </div>
