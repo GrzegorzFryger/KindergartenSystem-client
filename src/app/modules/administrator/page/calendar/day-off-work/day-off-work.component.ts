@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {DayOffWorkService} from '../../../../../data/service/absence/day-off-work.service';
 import {DayOffWork} from '../../../../../data/model/absence/day-off-work';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-day-off-work',
@@ -9,7 +12,10 @@ import {DayOffWork} from '../../../../../data/model/absence/day-off-work';
 })
 export class DayOffWorkComponent implements OnInit {
 
-  dataSource: Array<DayOffWork>;
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
+  @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+
+  public dataSource: MatTableDataSource<DayOffWork> = new MatTableDataSource();
 
   public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
 
@@ -41,7 +47,10 @@ export class DayOffWorkComponent implements OnInit {
 
   getAllDaysOff(): void {
     this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
-      this.dataSource = resp;
+      this.dataSource.data = resp;
+      this.dataSource.sort = this.sort.toArray()[0];
+      this.dataSource.paginator = this.paginator.toArray()[0];
+      this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
   }
 
