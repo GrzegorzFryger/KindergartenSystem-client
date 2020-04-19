@@ -11,6 +11,9 @@ import {AccountListComponent} from './page/accounts/account-list/account-list.co
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
+import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delete-cash-payment/delete-cash-payment.component';
+import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
+import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 
 
 const routes: Routes = [
@@ -25,6 +28,18 @@ const routes: Routes = [
           {
             path: 'add',
             component: AddCashPaymentComponent,
+          },
+          {
+            path: 'delete',
+            component: DeleteCashPaymentComponent,
+          },
+          {
+            path: 'edit',
+            component: EditCashPaymentComponent,
+          },
+          {
+            path: 'search',
+            component: SearchCashPaymentComponent,
           }
         ]
       },
