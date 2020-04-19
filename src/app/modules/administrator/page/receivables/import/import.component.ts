@@ -1,9 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ImportPaymentsService} from '../../../../../data/service/receivables/import-payments.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {throwError} from 'rxjs';
 import {Transaction} from '../../../../../data/model/receivables/transaction';
-import {catchError} from 'rxjs/operators';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
@@ -35,13 +33,13 @@ export class ImportComponent implements OnInit {
               private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.fb.group({
       transfers_input_file: null
     });
   }
 
-  onFileChange(event): void {
+  public onFileChange(event): void {
     console.log('Input file changed');
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -55,7 +53,12 @@ export class ImportComponent implements OnInit {
     }
   }
 
-  clearFile(): void {
+  public clearFileWithInfoToUser(): void {
+    this.clearFile();
+    this.snackMessageHandlingService.info('Plik został usunięty');
+  }
+
+  public clearFile(): void {
     console.log('Clearing file');
     this.markFileAsUnloaded();
     this.resetInput();
@@ -63,7 +66,7 @@ export class ImportComponent implements OnInit {
     this.clearDataTable();
   }
 
-  loadTransactionsForVerification(): void {
+  public loadTransactionsForVerification(): void {
     console.log('Sending input file to REST API (Checking what transactions are stored in file)');
     const formData = this.prepareFormData();
     this.importPaymentsService.checkTransactionsFromCsvFile(formData).subscribe(
@@ -83,7 +86,7 @@ export class ImportComponent implements OnInit {
     this.inputNotVerified = false; // We assume that user reads table and accepts it
   }
 
-  saveTransactionsInDatabase(): void {
+  public saveTransactionsInDatabase(): void {
     console.log('Sending input file to REST API (Saving list of transactions)');
     const formData = this.prepareFormData();
     this.importPaymentsService.importTransactions(formData).subscribe(

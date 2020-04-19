@@ -26,8 +26,8 @@
         </div>
         <div class="row" [hidden]="!fileName">
           <div class="col">
-            <button mat-raised-button color="primary" type="button" [disabled]="unloaded" (click)="clearFile()">Wyczyść
-              plik
+            <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
+                    (click)="clearFileWithInfoToUser()">Wyczyść plik
             </button>
           </div>
         </div>
@@ -50,7 +50,8 @@
         </div>
         <div class="row" [hidden]="!fileName">
           <div class="col">
-            <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified">Wyślij
+            <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified">
+              Wyślij
             </button>
           </div>
         </div>
