@@ -11,6 +11,7 @@ import {AccountsComponent} from './page/accounts/accounts.component';
 import {AccountListComponent} from './page/accounts/account-list/account-list.component';
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
+import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
         component: MealComponent,
       },
       {
+        path: 'dayOff',
+        component: DayOffWorkComponent,
+      },
+      {
         path: 'accounts',
         component: AccountsComponent,
         children: [
@@ -55,12 +60,12 @@ const routes: Routes = [
             component: AssignChildrenComponent,
           },
 
-          ]
-        },
-        {
-          path: 'actuator',
-          component: ActuatorComponent,
-        }
+        ]
+      },
+      {
+        path: 'actuator',
+        component: ActuatorComponent,
+      }
 
     ]
   }

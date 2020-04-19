@@ -56,6 +56,7 @@ import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material
 import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
+import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
     ChartComponent,
     MetricsComponent,
     AdministratorNavigationMenuComponent,
-    AssignChildrenComponent
+    AssignChildrenComponent,
+    DayOffWorkComponent
   ],
 
 
