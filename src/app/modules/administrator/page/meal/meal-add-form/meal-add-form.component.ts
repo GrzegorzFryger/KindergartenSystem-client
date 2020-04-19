@@ -8,6 +8,7 @@ import {AccountService} from '../../../../../data/service/users/account.service'
 import {ReplaySubject, Subject} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 import {MatSelect} from '@angular/material/select';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-meal-add-form',
@@ -40,6 +41,8 @@ export class MealAddFormComponent implements OnInit {
       mealTypeSelect: [''],
       mealDietSelect: [''],
       childSelect: [''],
+      dateTo: [''],
+      dateFrom: [''],
     });
   }
 
@@ -64,6 +67,8 @@ export class MealAddFormComponent implements OnInit {
   }
 
   addMeal() {
+    this.mealToAdd.mealToDate = new DatePipe('en-US').transform(this.mealToAdd.mealToDate, 'yyyy-MM-dd');
+    this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
     console.log(this.mealToAdd);
   }
 

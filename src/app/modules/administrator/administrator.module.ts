@@ -39,6 +39,8 @@ import {ChartComponent} from './page/actuator/chart/chart.component';
 import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
 import {MealAddFormComponent} from './page/meal/meal-add-form/meal-add-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -87,7 +89,9 @@ import {MealAddFormComponent} from './page/meal/meal-add-form/meal-add-form.comp
     MatDividerModule,
     MatTabsModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   bootstrap: [],
   providers: [
