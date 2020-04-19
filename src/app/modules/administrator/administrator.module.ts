@@ -32,13 +32,13 @@ import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-c
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ActuatorComponent } from './page/actuator/actuator.component';
-import { ServicesStatusComponent } from './page/actuator/services-status/services-status.component';
-import { HttpTraceComponent } from './page/actuator/http-trace/http-trace.component';
-import { ChartComponent } from './page/actuator/chart/chart.component';
-import { MetricsComponent } from './page/actuator/metrics/metrics.component';
-import { AdministratorNavigationMenuComponent } from './component/administrator-navigation-menu/administrator-navigation-menu.component';
-import { MealAddFormComponent } from './page/meal/meal-add-form/meal-add-form.component';
+import {ActuatorComponent} from './page/actuator/actuator.component';
+import {ServicesStatusComponent} from './page/actuator/services-status/services-status.component';
+import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.component';
+import {ChartComponent} from './page/actuator/chart/chart.component';
+import {MetricsComponent} from './page/actuator/metrics/metrics.component';
+import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {MealAddFormComponent} from './page/meal/meal-add-form/meal-add-form.component';
 
 
 @NgModule({
@@ -59,39 +59,39 @@ import { MealAddFormComponent } from './page/meal/meal-add-form/meal-add-form.co
     ChartComponent,
     MetricsComponent,
     AdministratorNavigationMenuComponent,
-    MealAddFormComponent
+    MealAddFormComponent,
   ],
 
 
-    imports: [
-        CommonModule,
-        AdministratorRoutingModule,
-        FormsModule,
-        MatCardModule,
-        SharedModule,
-        MatCardModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatTableModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatTreeModule,
-        MatPaginatorModule,
-        MatSliderModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSortModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatTabsModule,
-        MatChipsModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    CommonModule,
+    AdministratorRoutingModule,
+    FormsModule,
+    MatCardModule,
+    SharedModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatTreeModule,
+    MatPaginatorModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSortModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatTooltipModule
+  ],
   bootstrap: [],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     DatePipe
   ]
 })

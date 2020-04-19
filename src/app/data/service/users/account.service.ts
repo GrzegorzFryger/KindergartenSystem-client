@@ -5,6 +5,7 @@ import {Account} from '../../model/users/account';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
+import {Child} from '../../model/users/child';
 
 
 @Injectable({
@@ -26,6 +27,10 @@ export class AccountService {
     return this.http.get<Account>(environment.apiUrls.user, {params}).pipe(map(resp => {
       return resp;
     }));
+  }
+
+  getAllChildren(): Observable<Array<Child>> {
+    return this.http.get<Array<Child>>(environment.apiUrls.account.getAllChildren);
   }
 
 

@@ -91,7 +91,8 @@ export const environment = {
 
     },
     account: {
-      getChildById: accountUrl + 'child/'
+      getChildById: accountUrl + 'child/',
+      getAllChildren: accountUrl + 'children'
     },
     actuator: {
       getHealth: actuatorUrl + 'health',

@@ -36,8 +36,22 @@
                     </mat-select>
                   </mat-form-field>
 
+                  <mat-form-field>
+                    <mat-label>Dziecko</mat-label>
+                    <mat-select required formControlName="childSelect" [(ngModel)]="mealToAdd.childID">
+                      <mat-option  *ngFor="let child of children" [value]="child.id">
+                        {{child.name}} {{child.surname}} ({{child.pesel}})
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+
+
 
                 </form>
+
+
+
               </div>
 
               <div class="clear"></div>
