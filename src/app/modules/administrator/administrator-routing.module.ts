@@ -1,4 +1,3 @@
-import {AddCashPaymentComponent} from './page/receivables/add-cash-payment/add-cash-payment.component';
 import {ImportComponent} from './page/receivables/import/import.component';
 import {AdministratorComponent} from './administrator.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
@@ -11,6 +10,7 @@ import {AccountsComponent} from './page/accounts/accounts.component';
 import {AccountListComponent} from './page/accounts/account-list/account-list.component';
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
+import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
 
 
 const routes: Routes = [
@@ -19,12 +19,14 @@ const routes: Routes = [
     component: AdministratorComponent,
     children: [
       {
-        path: 'add-cash-payment',
-        component: AddCashPaymentComponent,
-      },
-      {
         path: 'cash-payments',
         component: CashPaymentsComponent,
+        children: [
+          {
+            path: 'add',
+            component: AddCashPaymentComponent,
+          }
+        ]
       },
       {
         path: 'transactions',
@@ -54,13 +56,12 @@ const routes: Routes = [
             path: 'assign-children',
             component: AssignChildrenComponent,
           },
-
-          ]
-        },
-        {
-          path: 'actuator',
-          component: ActuatorComponent,
-        }
+        ]
+      },
+      {
+        path: 'actuator',
+        component: ActuatorComponent,
+      }
 
     ]
   }
