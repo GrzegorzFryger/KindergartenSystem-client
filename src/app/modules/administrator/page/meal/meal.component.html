@@ -65,9 +65,13 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button (click)="openDialog()" color="primary">Dodaj kolejny</button>
+        <button mat-button (click)="openAddMealFormM()" color="primary">Dodaj kolejny</button>
       </mat-card-actions>
     </mat-card>
+  </div>
+
+  <div *ngIf="openAddMealForm">
+    <app-meal-add-form></app-meal-add-form>
   </div>
 
 

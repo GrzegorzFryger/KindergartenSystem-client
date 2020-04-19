@@ -33,6 +33,7 @@ export class MealComponent implements OnInit {
   userCredentials: UserCredentials;
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
+  openAddMealForm = true;
 
   animal: string;
   name: string;
@@ -68,6 +69,10 @@ export class MealComponent implements OnInit {
       console.log('The dialog was closed');
       this.animal = result;
     });
+  }
+
+  openAddMealFormM() {
+    this.openAddMealForm = !this.openAddMealForm;
   }
 
   openChildDetails(childID: string): void {
