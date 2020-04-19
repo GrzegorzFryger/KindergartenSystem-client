@@ -38,6 +38,7 @@ import { HttpTraceComponent } from './page/actuator/http-trace/http-trace.compon
 import { ChartComponent } from './page/actuator/chart/chart.component';
 import { MetricsComponent } from './page/actuator/metrics/metrics.component';
 import { AdministratorNavigationMenuComponent } from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import { MealAddFormComponent } from './page/meal/meal-add-form/meal-add-form.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AdministratorNavigationMenuComponent } from './component/administrator-
     HttpTraceComponent,
     ChartComponent,
     MetricsComponent,
-    AdministratorNavigationMenuComponent
+    AdministratorNavigationMenuComponent,
+    MealAddFormComponent
   ],
 
 
