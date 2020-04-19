@@ -17,6 +17,7 @@ export class MealPriceComponent implements OnInit {
   editingMealPrice = false;
   editedMealPrice;
   mealPriceAvailableToAdd = [];
+  addedMealPrice: MealPrice = new MealPrice();
   addingMealPrice = false;
 
   constructor(private http: HttpClient, private mealService: MealService) {
@@ -41,9 +42,13 @@ export class MealPriceComponent implements OnInit {
     this.addingMealPrice = !this.addingMealPrice;
   }
 
-  saveMealPrice(mealType: string, mealPrice: number) {
+  saveMealPrice() {
+    const mealType = this.addedMealPrice.mealType;
+    const mealPrice = this.addedMealPrice.mealPrice;
     this.mealService.addMealPrice(mealType, mealPrice).subscribe(resp => {
       this.getAllMealPrice();
+      this.openAddViewMealPrice();
+      this.getAvailableMealPrice();
     });
   }
 
@@ -60,6 +65,7 @@ export class MealPriceComponent implements OnInit {
   async deleteMealPrice(id: number) {
     await this.mealService.deleteMealPriceById(id).subscribe(resp => {
       this.getAllMealPrice();
+      this.getAvailableMealPrice();
     });
   }
 

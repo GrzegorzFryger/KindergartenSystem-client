@@ -60,7 +60,7 @@
             <div class="col-3 offset-2">
               <mat-form-field>
                 <mat-label>Typ</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="addedMealPrice.mealType">
                   <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type" >
                     {{type}}
                   </mat-option>
@@ -70,13 +70,13 @@
 
             <div class="col-2">
               <mat-form-field class="mealPrice-input" style="background: #ffffff">
-                <input  matInput >
+                <input (input)="addedMealPrice.mealPrice = $event.target.value"  matInput >
                 <span matSuffix>zł</span>
               </mat-form-field>
             </div>
 
             <div class="col-4 addMealPrice-buttons">
-              <button mat-button color="primary">zapisz</button>
+              <button mat-button color="primary" (click)="saveMealPrice()">zapisz</button>
               <button mat-button color="primary" (click)="openAddViewMealPrice()">anuluj</button>
             </div>
 
