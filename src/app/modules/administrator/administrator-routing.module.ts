@@ -15,6 +15,7 @@ import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delet
 import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,10 @@ const routes: Routes = [
           {
             path: 'import',
             component: ImportComponent,
+          },
+          {
+            path: 'search',
+            component: SearchTransactionComponent,
           },
         ]
       },
