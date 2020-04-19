@@ -12,6 +12,7 @@ import {AccountListComponent} from './page/accounts/account-list/account-list.co
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
+import {AbsenceComponent} from './page/calendar/absence/absence.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,10 @@ const routes: Routes = [
       {
         path: 'dayOff',
         component: DayOffWorkComponent,
+      },
+      {
+        path: 'absence',
+        component: AbsenceComponent,
       },
       {
         path: 'accounts',

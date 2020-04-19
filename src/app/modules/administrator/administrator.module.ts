@@ -57,6 +57,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
+import { AbsenceComponent } from './page/calendar/absence/absence.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.c
     MetricsComponent,
     AdministratorNavigationMenuComponent,
     AssignChildrenComponent,
-    DayOffWorkComponent
+    DayOffWorkComponent,
+    AbsenceComponent
   ],
 
 

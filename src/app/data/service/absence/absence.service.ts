@@ -22,7 +22,7 @@ export class AbsenceService {
     return this.http.post<Absence>(environment.apiUrls.calendar.createAbsence, absence);
   }
 
-  public createAbsences(absenceRange: AbsenceRange ): Observable<AbsenceRange> {
+  public createAbsences(absenceRange: AbsenceRange): Observable<AbsenceRange> {
     return this.http.post<AbsenceRange>(environment.apiUrls.calendar.createAbsences, absenceRange);
   }
 
@@ -40,6 +40,10 @@ export class AbsenceService {
 
   public getAllAbsencesByDate(date: string): Observable<Array<Absence>> {
     return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesByDate + `${date}`);
+  }
+
+  public getAllAbsencesBetweenDates(startDate: string, endDate: string): Observable<Array<Absence>> {
+    return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesBetweenDates + startDate + '/' + endDate);
   }
 
   public getAllAbsencesForChildBetweenDates(childId: string, startDate: string, endDate: string): Observable<Array<Absence>> {
