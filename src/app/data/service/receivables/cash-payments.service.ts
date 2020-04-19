@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
-import { CashPayment } from './../../model/receivables/cash-payment';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/app/core/environment.dev';
+import {Observable} from 'rxjs';
+import {CashPayment} from './../../model/receivables/cash-payment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/app/core/environment.dev';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,10 @@ export class CashPaymentsService {
 
   }
 
-  createCashPayment() {
-
+  createCashPayment(payment: CashPayment) {
+    return this.http.post<any>(
+      environment.apiUrls.receivables.createCashPayment, payment
+    );
   }
 
   updateCashPayment() {

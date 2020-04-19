@@ -3,6 +3,7 @@ import { environment } from 'src/app/core/environment.dev';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Balance } from '../../model/finances/balance';
+import {AccountNumber} from '../../model/finances/account-number';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class BalanceService {
   getSumOfBalancesForAllChildren(guardianId: string): Observable<Balance> {
     return this.http.get<Balance>(
       environment.apiUrls.finances.getSumOfBalancesForAllChildren + `${guardianId}`
+    );
+  }
+
+  getAccountNumberForChild(childId: string): Observable<AccountNumber> {
+    return this.http.get<AccountNumber>(
+      environment.apiUrls.finances.getAccountNumberForChild + `${childId}`
     );
   }
 }

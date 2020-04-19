@@ -4,13 +4,11 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Transaction} from '../../../../../data/model/receivables/transaction';
 import {MatTableDataSource} from '@angular/material/table';
-import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
-import { ChildService } from 'src/app/data/service/accounts/child.service';
-import { Guardian } from 'src/app/data/model/accounts/guardian';
+import {ChildService} from 'src/app/data/service/accounts/child.service';
+import {Guardian} from 'src/app/data/model/accounts/guardian';
 
 @Component({
   selector: 'app-transactions',
@@ -57,10 +55,13 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     const transactionsToBeAssigned = this.unassignedTransactions.filter((transaction: Transaction) => {
       return transaction.isAssigned === true;
     });
+
     transactionsToBeAssigned.forEach(obj => {
       delete obj.isAssigned;
       this.assignTransaction(obj, this.selectedChildId, this.selectedGuardianId);
     });
+
+    this.snackMessageHandlingService.success('Transakcje zostały przypisane pomyślnie');
     this.reloadTransactionData();
   }
 
@@ -72,10 +73,13 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         console.log(resp);
         this.setChildDataToTable(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to get children list from REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy dzieci');
+        console.log(error);
+      },
+      () => {
+        // ON COMPLETE
+      }
     );
   }
 
@@ -86,10 +90,13 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         console.log(resp);
         this.setGuardianDataToTable(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to get guardian list for selected child from REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
+        console.log(error);
+      },
+      () => {
+        // ON COMPLETE
+      }
     );
   }
 
@@ -110,17 +117,23 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     console.log('Amount of selected transactions: ' + this.amountOfSelectedTranactions);
   }
 
-  private assignTransaction(transaction: Transaction, childId: string, guardianId: string): void {
+  private assignTransaction(transaction: Transaction, childId: string, guardianId: string): boolean {
     console.log('Assigning transaction: ' + transaction.id + ' to: ' + childId + ' - ' + guardianId);
     this.transactionsService.assignTransactionToChild(transaction, childId, guardianId).subscribe(
       resp => {
         console.log(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to send transaction mapping to REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z przypisaniem transakcji do dziecka');
+        console.log(error);
+        return false;
+      },
+      () => {
+        this.resetChildAndGuardianState();
+        // ON COMPLETE
+      }
     );
+    return true;
   }
 
   private loadDataAboutUnassignedTransactions(): void {
@@ -133,10 +146,13 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         console.log(this.unassignedTransactions);
         this.setTransactionDataToTable(resp);
       },
-      catchError(err => {
-        this.snackMessageHandlingService.error('Failed to retrieve unassigned transaction list from REST API');
-        return throwError(err);
-      })
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy transakcji');
+        console.log(error);
+      },
+      () => {
+        // ON COMPLETE
+      }
     );
   }
 
