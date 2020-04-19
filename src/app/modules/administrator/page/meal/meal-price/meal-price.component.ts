@@ -14,9 +14,10 @@ export class MealPriceComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'mealType', 'mealPrice', 'action'];
   dataSource: Array<MealPrice>;
-  editingMeal = false;
+  editingMealPrice = false;
   editedMealPrice;
   mealPriceAvailableToAdd = [];
+  addingMealPrice = false;
 
   constructor(private http: HttpClient, private mealService: MealService) {
   }
@@ -32,11 +33,15 @@ export class MealPriceComponent implements OnInit {
     });
   }
 
-  editMeal() {
-    this.editingMeal = true;
+  editMealPrice() {
+    this.editingMealPrice = true;
   }
 
-  addMealPrice(mealType: string, mealPrice: number) {
+  openAddViewMealPrice() {
+    this.addingMealPrice = !this.addingMealPrice;
+  }
+
+  saveMealPrice(mealType: string, mealPrice: number) {
     this.mealService.addMealPrice(mealType, mealPrice).subscribe(resp => {
       this.getAllMealPrice();
     });
@@ -47,7 +52,7 @@ export class MealPriceComponent implements OnInit {
       resp.mealPrice = this.editedMealPrice;
       this.mealService.updateMealPrice(resp).subscribe(re => {
         this.getAllMealPrice();
-        this.editingMeal = false;
+        this.editingMealPrice = false;
       });
     });
   }

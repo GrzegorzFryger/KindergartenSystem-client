@@ -22,10 +22,10 @@
           <ng-container matColumnDef="mealPrice">
             <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
             <div *matCellDef="let element">
-              <div *ngIf="!editingMeal">
+              <div *ngIf="!editingMealPrice">
                 <mat-cell> {{element.mealPrice}} zł</mat-cell>
               </div>
-              <div *ngIf="editingMeal">
+              <div *ngIf="editingMealPrice">
                 <mat-form-field class="mealPrice-input" style="background: #ffffff">
                   <input [value]="element.mealPrice" (input)="editedMealPrice = $event.target.value" matInput >
                   <span matSuffix>zł</span>
@@ -37,11 +37,11 @@
           <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <div *ngIf="!editingMeal">
-                <mat-icon (click)="editMeal()">edit</mat-icon>
+              <div *ngIf="!editingMealPrice">
+                <mat-icon (click)="editMealPrice()">edit</mat-icon>
                 <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
               </div>
-              <div *ngIf="editingMeal" class="mealPrice-saveButton">
+              <div *ngIf="editingMealPrice" class="mealPrice-saveButton">
                 <button mat-stroked-button (click)="uploadMealPrice(element.id)" color="primary">Zapisz</button>
               </div>
             </mat-cell>
@@ -53,7 +53,7 @@
       </div>
 
 
-      <div class="addMealPrice-container">
+      <div class="addMealPrice-container" *ngIf="addingMealPrice">
         <div class="container">
           <div class="row">
 
@@ -88,7 +88,7 @@
 
     </mat-card-content>
     <mat-card-actions *ngIf="mealPriceAvailableToAdd.length > 0">
-      <button mat-button color="primary">Dodaj</button>
+      <button mat-button color="primary" (click)="openAddViewMealPrice()">Dodaj</button>
     </mat-card-actions>
   </mat-card>
 </div>
