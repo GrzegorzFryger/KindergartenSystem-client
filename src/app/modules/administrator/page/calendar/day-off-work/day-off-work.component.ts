@@ -60,6 +60,10 @@ export class DayOffWorkComponent implements OnInit {
   onFilter(submittedForm): void {
     this.dateFrom = submittedForm.value.dateFrom;
     this.dateTo = submittedForm.value.dateTo;
+    this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
+      this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(this.dateFrom) &&
+        new Date(m.date) <= new Date(this.dateTo));
+    });
   }
 
 }
