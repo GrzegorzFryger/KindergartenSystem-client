@@ -1,9 +1,121 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Szukanie transakcji</mat-card-title>
+    <mat-card-title>Szukanie przelewów</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <br><br>
+        <p><b>Wyszukaj dziecko</b></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Imię</mat-label>
+          <input matInput [(ngModel)]="childName" placeholder="Na przykład: Jan">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput [(ngModel)]="childSurname" placeholder="Na przykład: Kowalski">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-table [dataSource]="childDataSource" matSort
+                   matSortDirection="asc" matSortActive="surname">
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="pesel">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> PESEL</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dateOfBirth">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Data urodzenia</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.dateOfBirth}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="isSelected">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+            <mat-cell
+              *matCellDef="let child">
+              <mat-radio-button name="child_selection"
+                                (click)="selectChild(child.id)"></mat-radio-button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary" type="button"
+                (click)="findChildren()">Szukaj
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br><br>
+      </div>
+    </div>
+    <div class="row" [hidden]="!selectedChildId || amountOfTransactions <= 0">
+      <div class="col">
+        <mat-table [dataSource]="transactionDataSource" matSort
+                   matSortDirection="desc" matSortActive="transactionDate">
+
+          <ng-container matColumnDef="transactionDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
+            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionDate}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="contractorDetails">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.contractorDetails}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.title}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="transactionAmount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota</mat-header-cell>
+            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionAmount}} {{cashPayment.transactionCurrency}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="transactionColumnsToDisplay"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: transactionColumnsToDisplay;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
 
   </mat-card-content>
 </mat-card>

@@ -50,7 +50,7 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   public findChildren(): void {
     console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
-    this.resetChildAndGuardianState();
+    this.resetChildState();
     this.childService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
       resp => {
         console.log(resp);
@@ -86,7 +86,7 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private resetChildAndGuardianState(): void {
+  private resetChildState(): void {
     this.childDataSource.data = [];  // Remove all found children when performing new children search
     this.selectedChildId = ''; // Reset state of selected child
   }
