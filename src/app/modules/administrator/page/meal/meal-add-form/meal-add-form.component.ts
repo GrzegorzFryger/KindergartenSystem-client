@@ -9,6 +9,7 @@ import {ReplaySubject, Subject} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 import {MatSelect} from '@angular/material/select';
 import {DatePipe} from '@angular/common';
+import {MealComponent} from '../meal.component';
 
 @Component({
   selector: 'app-meal-add-form',
@@ -28,7 +29,8 @@ export class MealAddFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private mealService: MealService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private mealComponent: MealComponent) {
   }
 
   ngOnInit(): void {
@@ -69,7 +71,11 @@ export class MealAddFormComponent implements OnInit {
   addMeal() {
     this.mealToAdd.mealToDate = new DatePipe('en-US').transform(this.mealToAdd.mealToDate, 'yyyy-MM-dd');
     this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
-    console.log(this.mealToAdd);
+
+    this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
+      this.mealComponent.getAllMeals();
+      this.mealComponent.openAddMealForm = false;
+    });
   }
 
 }

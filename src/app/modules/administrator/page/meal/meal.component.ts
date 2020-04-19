@@ -51,10 +51,12 @@ export class MealComponent implements OnInit {
     this.children = this.guardianService.findAllChildren(this.guardianService.userId);
     console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
+    this.getAllMeals();
+  }
 
+  getAllMeals() {
     this.mealService.getAllMeals().subscribe(resp => {
       this.meals = resp;
-      console.log(resp);
     });
   }
 

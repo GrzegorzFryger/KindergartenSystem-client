@@ -76,4 +76,8 @@ export class MealService {
   addMealPrice(mealTypeIn: string, mealPriceIn: number): Observable<MealPrice> {
     return this.http.post<MealPrice>(environment.apiUrls.meals.addMealPrice, {mealType: mealTypeIn, mealPrice: mealPriceIn});
   }
+
+  addMeal(mealToAdd: Meal): Observable<Meal> {
+    return this.http.post<Meal>(environment.apiUrls.meals.addMeal, mealToAdd);
+  }
 }
