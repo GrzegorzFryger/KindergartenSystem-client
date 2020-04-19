@@ -55,6 +55,10 @@ export class MealAddFormComponent implements OnInit {
     });
   }
 
+  closeAddMealForm() {
+    this.mealComponent.openAddMealForm = false;
+  }
+
 
   getAllMealDiets() {
     this.mealService.getDietType().subscribe(resp => {
