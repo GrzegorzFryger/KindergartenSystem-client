@@ -77,7 +77,7 @@
 
             <div class="col-4 addMealPrice-buttons">
               <button mat-button color="primary">zapisz</button>
-              <button mat-button color="primary">anuluj</button>
+              <button mat-button color="primary" (click)="openAddViewMealPrice()">anuluj</button>
             </div>
 
 
@@ -87,7 +87,7 @@
       </div>
 
     </mat-card-content>
-    <mat-card-actions *ngIf="mealPriceAvailableToAdd.length > 0">
+    <mat-card-actions *ngIf="mealPriceAvailableToAdd.length > 0 && !addingMealPrice">
       <button mat-button color="primary" (click)="openAddViewMealPrice()">Dodaj</button>
     </mat-card-actions>
   </mat-card>
