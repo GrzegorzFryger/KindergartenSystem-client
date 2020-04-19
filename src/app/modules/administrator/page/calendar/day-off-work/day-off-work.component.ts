@@ -4,6 +4,7 @@ import {DayOffWork} from '../../../../../data/model/absence/day-off-work';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-day-off-work',
@@ -20,8 +21,10 @@ export class DayOffWorkComponent implements OnInit {
   public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
 
   dayOffWork: DayOffWork;
+  dateFrom: Date;
+  dateTo: Date;
 
-  constructor(private dayOffWorkService: DayOffWorkService) {
+  constructor(private dayOffWorkService: DayOffWorkService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -52,6 +55,11 @@ export class DayOffWorkComponent implements OnInit {
       this.dataSource.paginator = this.paginator.toArray()[0];
       this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
+  }
+
+  onFilter(submittedForm): void {
+    this.dateFrom = submittedForm.value.dateFrom;
+    this.dateTo = submittedForm.value.dateTo;
   }
 
 }

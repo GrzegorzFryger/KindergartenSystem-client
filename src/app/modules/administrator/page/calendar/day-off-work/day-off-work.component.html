@@ -6,15 +6,16 @@
       </div>
 
       <div class="row">
-        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <form (ngSubmit)="onSubmit(addForm)" #addForm="ngForm">
           <div class="row">
             <div class="col">
               <mat-form-field appearance="standard">
                 <mat-label>Podaj datę</mat-label>
-                <input matInput [matDatepicker]="myDatepicker" placeholder="Data" name="date" class="form-control"
+                <input matInput [matDatepicker]="addDayOffDatepicker" placeholder="Data" name="date"
+                       class="form-control"
                        ngModel>
-                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepicker></mat-datepicker>
+                <mat-datepicker-toggle matSuffix [for]="addDayOffDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #addDayOffDatepicker></mat-datepicker>
               </mat-form-field>
             </div>
           </div>
@@ -51,6 +52,31 @@
       <div class="row">
         <h3>Dni wolne</h3>
       </div>
+      <form (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
+        <div class="row">
+
+          <div class="col">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę od</mat-label>
+              <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom" class="form-control" ngModel>
+              <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę do</mat-label>
+              <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo" class="form-control" ngModel>
+              <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateSortToDatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
+          </div>
+        </div>
+      </form>
+
       <div class="row">
         <div class="col">
           <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
