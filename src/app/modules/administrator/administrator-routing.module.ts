@@ -1,6 +1,6 @@
-import {ImportComponent} from './page/receivables/import/import.component';
+import {ImportComponent} from './page/receivables/transactions/import/import.component';
 import {AdministratorComponent} from './administrator.component';
-import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -14,6 +14,7 @@ import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash
 import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delete-cash-payment/delete-cash-payment.component';
 import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 
 
 const routes: Routes = [
@@ -46,10 +47,16 @@ const routes: Routes = [
       {
         path: 'transactions',
         component: TransactionsComponent,
-      },
-      {
-        path: 'import',
-        component: ImportComponent,
+        children: [
+          {
+            path: 'assign',
+            component: AssignTransactionsComponent,
+          },
+          {
+            path: 'import',
+            component: ImportComponent,
+          },
+        ]
       },
       {
         path: 'meal',

@@ -25,8 +25,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
-import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
-import {ImportComponent} from './page/receivables/import/import.component';
+import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
+import {ImportComponent} from './page/receivables/transactions/import/import.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -58,13 +58,14 @@ import {AssignChildrenComponent} from './page/accounts/assign-children/assign-ch
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
 import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delete-cash-payment/delete-cash-payment.component';
 import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
-import { SearchCashPaymentComponent } from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 
 @NgModule({
   declarations: [
     AdministratorComponent,
     CashPaymentsComponent,
-    TransactionsComponent,
+    AssignTransactionsComponent,
     ImportComponent,
     MealPriceComponent,
     MealComponent,
@@ -92,7 +93,8 @@ import { SearchCashPaymentComponent } from './page/receivables/cash-payments/sea
     AddCashPaymentComponent,
     DeleteCashPaymentComponent,
     EditCashPaymentComponent,
-    SearchCashPaymentComponent
+    SearchCashPaymentComponent,
+    TransactionsComponent
   ],
 
 
