@@ -71,6 +71,16 @@
             </div>
           </div>
 
+          <div class="inline">
+            <div class="common-finance-container">
+              Numer konta:&nbsp;
+            </div>
+            <div class="common-finance-container">
+              <b>{{accountNumber}} </b>
+              <b *ngIf="!accountNumber">Nie znaleziono konta do przelewów </b>
+            </div>
+          </div>
+
           <div class="finance-info">
             <mat-accordion>
               <mat-expansion-panel class="mat-elevation-z0">

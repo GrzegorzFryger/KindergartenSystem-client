@@ -81,7 +81,8 @@ export const environment = {
       // Finances Controller
       getBalance: financesUrl + 'balance/',
       getBalancesForAllChildren: financesUrl + 'balance/children/',
-      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardian/'
+      getSumOfBalancesForAllChildren: financesUrl + 'balance/guardian/',
+      getAccountNumberForChild: financesUrl + 'accountNumber/'
     },
     calendar: {
       // Absence Controller
