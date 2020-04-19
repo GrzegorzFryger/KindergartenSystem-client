@@ -1,0 +1,76 @@
+.mat-card {
+  padding: 0;
+  margin-top: 20px;
+  border-radius: 10px 10px 10px 10px;
+  width: 98%;
+
+  .mat-card-content {
+    padding: 16px;
+    width: 99%;
+
+    .cardContent {
+
+      .mat-icon {
+        font-size: 22px;
+        padding-left: 3px;
+        color: #606FEE;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .close-cross {
+    float:right;
+    margin-top: -65px;
+    color: #606FEE;
+    .mat-icon {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+
+  .mat-card-actions {
+    padding: 0 21px 20px 16px;
+    float: right;
+
+    .mat-button {
+      background-color: #EDEEF4;
+      color: #606FEE;
+    }
+  }
+}
+
+.childDetailsCardContent {
+
+  .childImage {
+    float: left;
+    text-align: center;
+  }
+
+  .tabContent {
+    margin-top: 20px;
+
+    span {
+      font-weight: 400;
+    }
+
+    .mat-divider {
+      width: 50%;
+      margin-left: 20px;
+      margin-top: 10px;
+
+    }
+  }
+}
+
+.mealCardHeader {
+  background-color: #EDEEF4;
+  padding: -10px;
+  border-radius: 10px 10px 0 0;
+
+
+  .mat-card-title {
+    color: #606FEE;
+    padding: 16px;
+  }
+}
