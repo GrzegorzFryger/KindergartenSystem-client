@@ -23,7 +23,7 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  openInportDialog() {
+  openImportDialog() {
     const dialogRef = this.dialog.open(ImportComponent, {
       width: '900px',
      });
