@@ -70,24 +70,45 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public deleteCashPayment(cashPaymentId: string): void {
+  public deleteCashPayment(cashPaymentId: number): void {
     console.log('Attempting to remove cash payment with id: ' + cashPaymentId);
-    this.openDialog();
+    this.openRemovalDialog('Czy na pewno chcesz usunąć tę płatność?', cashPaymentId);
   }
 
   public editCashPayment(cashPaymentId: string): void {
     console.log('Attempting to edit cash payment with id: ' + cashPaymentId);
   }
 
-  openDialog(): void {
-    const data = new YesNoDialogData('Czy na pewno chcesz usunąć tę płatność?');
+  private openRemovalDialog(question: string, cashPaymentId: number): void {
+    const data = new YesNoDialogData(question);
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
       data: {data}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed with answer: ' + result.answer);
-    });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+        this.removeCashPayment(result.answer, cashPaymentId);
+      }
+    );
+  }
+
+  private removeCashPayment(userConfirmation: boolean, cashPaymentId: number) {
+    if (userConfirmation) {
+      this.cashPaymentsService.deleteCashPayment(cashPaymentId).subscribe(
+        resp => {
+          this.snackMessageHandlingService.success('Płatność została usunięta');
+          this.filterCashPayments(cashPaymentId);
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem płatności');
+        },
+        () => {
+          // ON COMPLETE
+        }
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
   }
 
   private findAllCashPayments(): void {
@@ -106,6 +127,14 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
       },
       () => {
         // ON COMPLETE
+      }
+    );
+  }
+
+  private filterCashPayments(removedCashPaymentId: number) {
+    this.cashPaymentsDataSource.data = this.cashPaymentsDataSource.data.filter(
+      cashPayment => {
+        return cashPayment.id !== removedCashPaymentId; // Removed cash payment should not be visible in list
       }
     );
   }
