@@ -1,122 +1,97 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Import przelewów z pliku .csv</mat-card-title>
-  </mat-card-header>
+<div class="import-dial-container">
+  <h2>Import przelewów z pliku .csv</h2>
 
-  <mat-card-content>
-    <div class="container-fluid">
-      <form [formGroup]="form" (ngSubmit)="saveTransactionsInDatabase()">
-        <div class="row">
-          <div class="col">
-            <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">
-              Wybierz plik
-            </button>
-            <br><br>
-            Nazwa pliku: {{ fileName }}
-          </div>
-        </div>
-        <div class="row" [hidden]="!fileName">
-          <div class="col">
-            <div class="col">
-              <input hidden type="file" id="transfers_input_file" (change)="onFileChange($event)"
-                     #fileInput>
-            </div>
-            <br><br>
-          </div>
-        </div>
-        <div class="row" [hidden]="!fileName">
-          <div class="col">
-            <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
-                    (click)="clearFileWithInfoToUser()">Wyczyść plik
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <br><br>
-          </div>
-        </div>
-        <div class="row" [hidden]="!fileName">
-          <div class="col">
-            <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
-                    (click)="loadTransactionsForVerification()">Załaduj plik
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <br><br>
-          </div>
-        </div>
-        <div class="row" [hidden]="!fileName">
-          <div class="col">
-            <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified">
-              Wyślij
-            </button>
-          </div>
-        </div>
-      </form>
+  <div class="button-select-container">
+    <form [formGroup]="form">
+      <input hidden type="file" id="transfers_input_file" (change)="onFileChange($event)"
+             #fileInput>
+    </form>
+    <div class="button-item">
+      <button [textContent]="fileName" (click)="fileInput.click()"
+              type="button" mat-raised-button [color]="loaded ? undefined : 'primary'">
+      </button>
     </div>
-    <br><br>
-    <mat-card [hidden]="!fileName">
-      <div class="row">
-        <div class="col">
-          <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate"
-                     matSortDirection="desc">
-            <ng-container matColumnDef="transactionDate">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate}} </mat-cell>
-            </ng-container>
 
-            <ng-container matColumnDef="bookingDate">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Data księgowania</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.bookingDate}} </mat-cell>
-            </ng-container>
+    <div *ngIf="loaded" class="button-item">
+      <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
+              (click)="clearFileWithInfoToUser()">Wyczyść plik
+      </button>
+    </div>
+    <div *ngIf="loaded" class="button-item">
+      <button mat-raised-button color="primary" type="button" [disabled]="unloaded"
+              (click)="loadTransactionsForVerification()">Załaduj plik
+      </button>
+    </div>
+  </div>
 
-            <ng-container matColumnDef="contractorDetails">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.contractorDetails}} </mat-cell>
-            </ng-container>
+  <ng-container *ngIf="fileName">
+    <p>List załadowanych transakcji:</p>
+    <div class="table">
+      <mat-table [dataSource]="dataSource" matSort matSortActive="transactionDate"
+                 matSortDirection="desc">
+        <ng-container matColumnDef="transactionDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="title">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.title}} </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="bookingDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Data księgowania</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.bookingDate}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="accountNumber">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Numer konta</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.accountNumber}} </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="contractorDetails">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.contractorDetails}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="bankName">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa banku</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.bankName}} </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.title}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="details">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="accountNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Numer konta</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.accountNumber}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="transactionNumber">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Numer transakcji</mat-header-cell>
-              <mat-cell *matCellDef="let transaction"> {{transaction.transactionNumber}} </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="bankName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa banku</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.bankName}} </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="transactionAmount">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
-              <mat-cell
-                *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
-              </mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="details">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>
+        </ng-container>
 
-            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-          </mat-table>
+        <ng-container matColumnDef="transactionNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Numer transakcji</mat-header-cell>
+          <mat-cell *matCellDef="let transaction"> {{transaction.transactionNumber}} </mat-cell>
+        </ng-container>
 
-          <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
-        </div>
-      </div>
-    </mat-card>
-  </mat-card-content>
-</mat-card>
+        <ng-container matColumnDef="transactionAmount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
+          <mat-cell
+            *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!inputNotVerified">
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit" [disabled]="inputNotVerified" (click)="saveTransactionsInDatabase()">
+        Wyślij
+      </button>
+    </div>
+  </ng-container>
+
+
+
+</div>
