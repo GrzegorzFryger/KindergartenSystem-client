@@ -13,11 +13,12 @@ export class CashPaymentsService {
 
   }
 
-  getAllCashPayments(): Observable<Array<CashPayment>> {
+  getAllCashPaymentsForChild(childId: string): Observable<Array<CashPayment>> {
     return this.http.get<Array<CashPayment>>(
-      environment.apiUrls.receivables.getAllIncomingPaymentsForChild
+      environment.apiUrls.receivables.getAllCashPaymentsForChild + `${childId}`
     );
   }
+
 
   getCashPayment(id: number): Observable<CashPayment> {
     return this.http.get<CashPayment>(

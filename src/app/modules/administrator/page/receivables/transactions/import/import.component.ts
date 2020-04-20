@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ImportPaymentsService} from '../../../../../data/service/receivables/import-payments.service';
+import {ImportPaymentsService} from '../../../../../../data/service/receivables/import-payments.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Transaction} from '../../../../../data/model/receivables/transaction';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {Transaction} from '../../../../../../data/model/receivables/transaction';
+import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';

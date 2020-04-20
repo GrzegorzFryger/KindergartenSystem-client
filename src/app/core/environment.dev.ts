@@ -65,6 +65,7 @@ export const environment = {
 
       // CashPayment Controller
       getAllCashPayments: receivablesUrl + 'cash-payments',
+      getAllCashPaymentsForChild: receivablesUrl + 'cash-payments/child/',
       getCashPayment: receivablesUrl + 'cash-payments/',
       deleteCashPayment: receivablesUrl + 'cash-payments/',
       createCashPayment: receivablesUrl + 'cash-payments',
@@ -72,6 +73,7 @@ export const environment = {
 
       // Transactions Controller
       getAllUnassignedTransactions: receivablesUrl + 'transactions',
+      getAllTransactionsForChild: receivablesUrl + 'transactions/child/',
       assignTransactionToChild: receivablesUrl + 'transactions/assign/',
       getTransaction: receivablesUrl + 'transactions/',
       deleteTransaction: receivablesUrl + 'transactions/',

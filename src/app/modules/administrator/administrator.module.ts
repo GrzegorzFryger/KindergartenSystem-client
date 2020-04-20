@@ -25,8 +25,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
-import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
-import {ImportComponent} from './page/receivables/import/import.component';
+import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
+import {ImportComponent} from './page/receivables/transactions/import/import.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -55,13 +55,18 @@ import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material
 import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
-import { AddCashPaymentComponent } from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
+import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
+import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delete-cash-payment/delete-cash-payment.component';
+import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
+import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import { SearchTransactionComponent } from './page/receivables/transactions/search-transaction/search-transaction.component';
 
 @NgModule({
   declarations: [
     AdministratorComponent,
     CashPaymentsComponent,
-    TransactionsComponent,
+    AssignTransactionsComponent,
     ImportComponent,
     MealPriceComponent,
     MealComponent,
@@ -86,7 +91,12 @@ import { AddCashPaymentComponent } from './page/receivables/cash-payments/add-ca
     MetricsComponent,
     AdministratorNavigationMenuComponent,
     AssignChildrenComponent,
-    AddCashPaymentComponent
+    AddCashPaymentComponent,
+    DeleteCashPaymentComponent,
+    EditCashPaymentComponent,
+    SearchCashPaymentComponent,
+    TransactionsComponent,
+    SearchTransactionComponent
   ],
 
 
@@ -124,10 +134,10 @@ import { AddCashPaymentComponent } from './page/receivables/cash-payments/add-ca
   ],
   bootstrap: [],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
-    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
-    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
+    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
+    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     DatePipe,
     MatCheckboxModule
   ]
