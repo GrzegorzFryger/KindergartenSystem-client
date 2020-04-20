@@ -1,38 +1,28 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Przelewy</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <button routerLink="/administrator/transactions/assign" mat-raised-button color="primary">
-            Przypisz przelwy
-          </button>
-        </div>
-        <div class="col">
-          <button routerLink="/administrator/transactions/import" mat-raised-button color="primary">
-            Import przelewów
-          </button>
-        </div>
+<div class="transactions-container">
+  <ng-container *ngIf="isSelected">
+    <div class="transactions-options">
+      <div class="transaction-options-container">
+        <mat-card matRipple routerLink="/administrator/transactions/import" class="transaction-option-card">
+          <h2> Przypisz przelwy</h2>
+        </mat-card>
+        <mat-card (click)="openInportDialog()" class="transaction-option-card">
+          <h2> Import przelewów</h2>
+        </mat-card>
+        <mat-card class="transaction-option-card">
+          <h2> Szukaj przelewów</h2>
+        </mat-card>
       </div>
-      <div class="row">
-        <div class="col">
-          <br><br>
+    </div>
+    <div class="transactions-info">
+      <div class="transactions-info-container">
+        <div class="chart">
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <button routerLink="/administrator/transactions/search" mat-raised-button color="primary">
-            Szukaj przelewów
-          </button>
-        </div>
-        <div class="col">
-
+        <div class="history">
+          <p>Historia przelewów: </p>
+          <app-transaction-list></app-transaction-list>
         </div>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
-<router-outlet></router-outlet>
+  </ng-container>
+  <router-outlet></router-outlet>
+</div>
