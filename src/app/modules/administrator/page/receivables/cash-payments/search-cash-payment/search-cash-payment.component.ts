@@ -7,6 +7,9 @@ import {ChildService} from '../../../../../../data/service/accounts/child.servic
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {CashPaymentsService} from '../../../../../../data/service/receivables/cash-payments.service';
+import {MatDialog} from '@angular/material/dialog';
+import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 
 @Component({
   selector: 'app-search-cash-payment',
@@ -31,7 +34,8 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   constructor(private childService: ChildService,
               private cashPaymentsService: CashPaymentsService,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -68,10 +72,22 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   public deleteCashPayment(cashPaymentId: string): void {
     console.log('Attempting to remove cash payment with id: ' + cashPaymentId);
+    this.openDialog();
   }
 
   public editCashPayment(cashPaymentId: string): void {
     console.log('Attempting to edit cash payment with id: ' + cashPaymentId);
+  }
+
+  openDialog(): void {
+    const data = new YesNoDialogData('Czy na pewno chcesz usunąć tę płatność?');
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed with answer: ' + result.answer);
+    });
   }
 
   private findAllCashPayments(): void {
