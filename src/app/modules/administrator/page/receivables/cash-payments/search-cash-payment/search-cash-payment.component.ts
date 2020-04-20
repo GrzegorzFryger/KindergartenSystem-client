@@ -22,7 +22,7 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
   public cashPaymentsDataSource: MatTableDataSource<CashPayment> = new MatTableDataSource();
 
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
-  public cashPaymentsColumnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'transactionAmount'];
+  public cashPaymentsColumnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'transactionAmount', 'action'];
 
   public childName = '';
   public childSurname = '';
@@ -64,6 +64,14 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
         // ON COMPLETE
       }
     );
+  }
+
+  public deleteCashPayment(cashPaymentId: string): void {
+    console.log('Attempting to remove cash payment with id: ' + cashPaymentId);
+  }
+
+  public editCashPayment(cashPaymentId: string): void {
+    console.log('Attempting to edit cash payment with id: ' + cashPaymentId);
   }
 
   private findAllCashPayments(): void {
