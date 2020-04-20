@@ -49,7 +49,7 @@ import {ChartsModule} from 'ng2-charts';
 import {ChildProfileComponent} from './page/accounts/account-list/profiles/child-profile/child-profile.component';
 import {ChildFormComponent} from './page/accounts/account-form/child-form/child-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -60,7 +60,8 @@ import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delet
 import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
-import { SearchTransactionComponent } from './page/receivables/transactions/search-transaction/search-transaction.component';
+import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
+import {TransactionListComponent} from './page/receivables/transactions/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { SearchTransactionComponent } from './page/receivables/transactions/sear
     EditCashPaymentComponent,
     SearchCashPaymentComponent,
     TransactionsComponent,
-    SearchTransactionComponent
+    SearchTransactionComponent,
+    TransactionListComponent
   ],
 
 
@@ -131,6 +133,7 @@ import { SearchTransactionComponent } from './page/receivables/transactions/sear
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
+    MatRippleModule,
   ],
   bootstrap: [],
   providers: [

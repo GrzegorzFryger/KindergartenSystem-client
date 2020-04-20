@@ -6,6 +6,11 @@ import {SnackMessageHandlingService} from '../../../../../../core/snack-message-
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatDialogRef} from '@angular/material/dialog';
+
+const BUTTON_TEXT_CONTENT = 'Wybierz plik ';
+const BUTTON_TEXT_CONTENT_SELECTED = 'Wybrano ';
+
 
 @Component({
   selector: 'app-import',
@@ -14,7 +19,7 @@ import {MatSort} from '@angular/material/sort';
 })
 export class ImportComponent implements OnInit {
   public form: FormGroup;
-  public fileName: string;
+  public fileName = BUTTON_TEXT_CONTENT;
   public unloaded = true;
   public loaded = false;
   public inputNotVerified = true;
@@ -30,7 +35,8 @@ export class ImportComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private importPaymentsService: ImportPaymentsService,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private dialogRef: MatDialogRef<ImportComponent>) {
   }
 
   public ngOnInit(): void {
@@ -47,7 +53,8 @@ export class ImportComponent implements OnInit {
 
       if (file.name.endsWith('.csv')) {
         this.form.get('transfers_input_file').setValue(file);
-        this.fileName = file.name;
+        this.fileName = BUTTON_TEXT_CONTENT_SELECTED + file.name;
+
         this.markFileAsLoaded();
       }
     }
@@ -100,6 +107,7 @@ export class ImportComponent implements OnInit {
       () => {
         this.snackMessageHandlingService.success('Transakcje zostały zapisane');
         this.clearFile();
+        this.dialogRef.close();
       }
     );
   }
@@ -122,7 +130,7 @@ export class ImportComponent implements OnInit {
   }
 
   private resetInput(): void {
-    this.fileName = '';
+    this.fileName = BUTTON_TEXT_CONTENT;
     this.fileInput.nativeElement.value = '';
   }
 
