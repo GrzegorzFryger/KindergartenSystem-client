@@ -54,7 +54,7 @@ export class ChildProfileComponent implements OnInit {
     this.childService.updateChild(childToUpdate).subscribe(child => {
       this.formOutput.form.reset();
       this.snackMessageHandlingService.error('Utworzono pomyślnie');
-      this.child = child;
+      this.inputData.child = child;
       setTimeout(() => this.isEditCardOpen = false);
     });
   }

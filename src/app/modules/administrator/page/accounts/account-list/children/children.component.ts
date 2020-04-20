@@ -23,6 +23,7 @@ export class ChildrenComponent implements OnInit {
   columnsToDisplay: string[] = ['name', 'surname', 'pesel', 'gender'];
   selectionObservable: Observable<SelectionChange<Child>>;
   selection = new SelectionModel<Child>(true, []);
+
   childCardIsOpen: boolean;
   dataToChildProfile: { child: Child, mode: string };
 

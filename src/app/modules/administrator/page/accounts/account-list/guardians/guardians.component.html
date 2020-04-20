@@ -38,6 +38,18 @@
               <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Wybierz Rodzica</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <div class="center">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)" >
+                  </mat-checkbox>
+                </div>
+              </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
             <mat-row *matRowDef="let row, let guardian; columns: columnsToDisplay;"
                      (click)="selectGuardian(guardian)">
