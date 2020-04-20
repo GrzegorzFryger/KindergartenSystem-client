@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Guardian} from '../../../../../../data/model/accounts/guardian';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
@@ -6,6 +6,7 @@ import {GuardianService} from '../../../../../../data/service/accounts/guardian.
 import {InputPerson, PersonType} from '../../../../../../data/model/accounts/input-person';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {SelectionChange, SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-guardians',
@@ -16,8 +17,14 @@ import {MatSort} from '@angular/material/sort';
 export class GuardiansComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @Output() checkedGuardianEvent: EventEmitter<Array<Guardian>>;
+  @Input() mode: string;
+
   dataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
-  columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email', 'status'];
+  columnsToDisplay: string[] = ['name', 'surname', 'phone', 'email'];
+  selectionObservable: Observable<SelectionChange<Guardian>>;
+  selection = new SelectionModel<Guardian>(true, []);
+
   personDetailCardOpen: boolean;
   personToDisplay: InputPerson;
 
@@ -27,9 +34,13 @@ export class GuardiansComponent implements OnInit {
   constructor(private guardianService: GuardianService) {
     this.guardians = this.guardianService.getAllGuardian();
     this.personFormInitial = new Guardian();
+    this.checkedGuardianEvent = new EventEmitter<Array<Guardian>>();
+    this.selectionObservable = this.selection.changed.asObservable();
   }
 
   ngOnInit(): void {
+    this.onComponentMode();
+
     this.dataSource.paginator = this.paginator;
     this.guardians.subscribe(guardians => {
       this.dataSource.data = guardians;
@@ -37,6 +48,10 @@ export class GuardiansComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
     });
+
+    this.selectionObservable.subscribe((selections) =>
+      this.checkedGuardianEvent.emit(selections.source.selected)
+    );
   }
 
   applyFilter($event: KeyboardEvent) {
@@ -49,8 +64,15 @@ export class GuardiansComponent implements OnInit {
     this.personToDisplay = {type: PersonType.Guardian, data: guardian};
   }
 
-  receiveDataFromPersonDetail(event: {closeProfileCard: boolean}) {
+  receiveDataFromPersonDetail(event: { closeProfileCard: boolean }) {
     this.personDetailCardOpen = !event.closeProfileCard;
   }
 
+  private onComponentMode() {
+    if (this.mode === 'read') {
+      this.columnsToDisplay.push('select');
+    } else {
+      this.columnsToDisplay.push('status');
+    }
+  }
 }

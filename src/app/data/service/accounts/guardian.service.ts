@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/accounts/child';
 import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
@@ -27,11 +27,11 @@ export class GuardianService {
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
     return this.http.get<Array<Child>>(environment.apiUrls.account.guardian.findAllGuardianChildren + `${userId}` + '/children')
-    .pipe(
-      catchError(err => {
-        this.errorHandlingService.error(CHILD_NOT_FOUND_MESSAGE);
-        return throwError(err);
-      }));
+      .pipe(
+        catchError(err => {
+          this.errorHandlingService.error(CHILD_NOT_FOUND_MESSAGE);
+          return throwError(err);
+        }));
   }
 
   public getChildById(childID: string): Observable<Child> {
@@ -57,4 +57,9 @@ export class GuardianService {
   public updateGuardian(guardian: Guardian): Observable<Guardian> {
     return this.http.put<Guardian>(environment.apiUrls.account.guardian.update, guardian);
   }
+
+  public appendChildToGuardian( appendChild: {childId: Array<string>, guardianId: Array<string>}): Observable<Array<Guardian>> {
+    return this.http.post<Array<Guardian>>(environment.apiUrls.account.guardian.appendChild, appendChild);
+  }
+
 }
