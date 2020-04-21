@@ -190,6 +190,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     cashPayment.transactionAmount = this.form.get('transactionAmount').value;
     cashPayment.transactionCurrency = this.form.get('transactionCurrency').value;
     cashPayment.title = this.form.get('title').value;
+    delete cashPayment.isEdited;
     return cashPayment;
   }
 

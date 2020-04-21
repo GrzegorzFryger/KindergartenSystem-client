@@ -24,10 +24,8 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  openImportDialog() {
-    const dialogRef = this.dialog.open(ImportComponent, {
-      width: '900px',
-     });
+  openImportDialog(): void {
+    const dialogRef = this.dialog.open(ImportComponent, {});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

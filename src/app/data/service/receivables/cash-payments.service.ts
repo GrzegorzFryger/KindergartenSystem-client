@@ -19,6 +19,11 @@ export class CashPaymentsService {
     );
   }
 
+  getAllCashPaymentsFromPastMonth(): Observable<Array<CashPayment>> {
+    return this.http.get<Array<CashPayment>>(
+      environment.apiUrls.receivables.getAllCashPaymentsFromPastMonth
+    );
+  }
 
   getCashPayment(id: number): Observable<CashPayment> {
     return this.http.get<CashPayment>(
@@ -38,7 +43,9 @@ export class CashPaymentsService {
     );
   }
 
-  updateCashPayment() {
-
+  updateCashPayment(payment: CashPayment) {
+    return this.http.put<any>(
+      environment.apiUrls.receivables.updateCashPayment, payment
+    );
   }
 }

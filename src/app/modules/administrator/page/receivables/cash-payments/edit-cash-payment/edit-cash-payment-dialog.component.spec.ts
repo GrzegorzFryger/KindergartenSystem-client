@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditCashPaymentComponent } from './edit-cash-payment.component';
+import { EditCashPaymentDialogComponent } from './edit-cash-payment-dialog.component';
 
 describe('EditCashPaymentComponent', () => {
-  let component: EditCashPaymentComponent;
-  let fixture: ComponentFixture<EditCashPaymentComponent>;
+  let component: EditCashPaymentDialogComponent;
+  let fixture: ComponentFixture<EditCashPaymentDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCashPaymentComponent ]
+      declarations: [ EditCashPaymentDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditCashPaymentComponent);
+    fixture = TestBed.createComponent(EditCashPaymentDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
