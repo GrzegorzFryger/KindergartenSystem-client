@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Child} from '../../../../../../../data/model/accounts/child';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-children-list',
@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./children-list.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ChildrenListComponent implements OnInit {
+export class ChildrenListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() dataSource: { children: Observable<Array<Child>>, columnToDisplay: Array<string> };
@@ -19,6 +19,7 @@ export class ChildrenListComponent implements OnInit {
 
   public childDataSource: MatTableDataSource<Child>;
   public childColumnsToDisplay: string[];
+  private dataSub: Subscription;
 
   constructor() {
     this.childDataSource = new MatTableDataSource();
@@ -26,7 +27,7 @@ export class ChildrenListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.children.subscribe(children => {
+    this.dataSub = this.dataSource.children.subscribe(children => {
       if (children) {
         this.childDataSource.data = children;
         this.childColumnsToDisplay = this.dataSource.columnToDisplay;
@@ -45,5 +46,9 @@ export class ChildrenListComponent implements OnInit {
   applyFilter(event: KeyboardEvent) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.childDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  ngOnDestroy(): void {
+    this.dataSub.unsubscribe();
   }
 }
