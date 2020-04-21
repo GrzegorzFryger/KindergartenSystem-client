@@ -13,10 +13,11 @@ import {InfoComponent} from './snack-message-handling/info/info.component';
 import {SuccessComponent} from './snack-message-handling/success/success.component';
 import {WarningComponent} from './snack-message-handling/warning/warning.component';
 import {MatIconModule} from '@angular/material/icon';
+import { YesNoDialogComponent } from './dialog/yes-no-dialog/yes-no-dialog.component';
 
 
 @NgModule({
-  declarations: [ErrorComponent, InfoComponent, SuccessComponent, WarningComponent],
+  declarations: [ErrorComponent, InfoComponent, SuccessComponent, WarningComponent, YesNoDialogComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

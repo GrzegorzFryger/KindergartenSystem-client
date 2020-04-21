@@ -26,8 +26,10 @@ export class CashPaymentsService {
     );
   }
 
-  deleteCashPayment() {
-
+  deleteCashPayment(id: number) {
+    return this.http.delete(
+      environment.apiUrls.receivables.deleteCashPayment + `${id}`
+    );
   }
 
   createCashPayment(payment: CashPayment) {

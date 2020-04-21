@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteCashPaymentComponent } from './delete-cash-payment.component';
+import { YesNoDialogComponent } from './yes-no-dialog.component';
 
-describe('ManageCashPaymentComponent', () => {
-  let component: DeleteCashPaymentComponent;
-  let fixture: ComponentFixture<DeleteCashPaymentComponent>;
+describe('YesNoDialogComponent', () => {
+  let component: YesNoDialogComponent;
+  let fixture: ComponentFixture<YesNoDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteCashPaymentComponent ]
+      declarations: [ YesNoDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteCashPaymentComponent);
+    fixture = TestBed.createComponent(YesNoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
