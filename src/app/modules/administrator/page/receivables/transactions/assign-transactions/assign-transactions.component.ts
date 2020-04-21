@@ -27,7 +27,7 @@ export class AssignTransactionsComponent implements OnInit {
   public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
   public transactionOutput: { transactions: Observable<Array<Transaction>>, columnToDisplay: Array<string> };
   private transactionSub: ReplaySubject<Array<Transaction>>;
-  public childrenOutput: { children: Observable<Array<Child>>, columnToDisplay: Array<string> };
+  public childrenOutput: { children: Observable<Array<Child>>, columnToDisplay: Array<string>, filterPredicate: (data: Child, filter: string) => boolean };
   private childrenSub: ReplaySubject<Array<Child>>;
   public guardianOutput: { guardians: Observable<Array<Guardian>>, columnToDisplay: Array<string> };
   private guardianSub: ReplaySubject<Array<Guardian>>;
@@ -45,7 +45,11 @@ export class AssignTransactionsComponent implements OnInit {
     this.transactionSub = new ReplaySubject<Array<Transaction>>();
     this.childrenSub = new ReplaySubject<Array<Child>>();
     this.guardianSub = new ReplaySubject<Array<Guardian>>();
-    this.childrenOutput = {children: this.childrenSub.asObservable(), columnToDisplay: this.childColumnsToDisplay};
+    this.childrenOutput = {
+      children: this.childrenSub.asObservable(),
+      columnToDisplay: this.childColumnsToDisplay,
+      filterPredicate: this.nameSurnameFilterPredicate
+    };
     this.transactionOutput = {transactions: this.transactionSub.asObservable(), columnToDisplay: this.transactionColumnsToDisplay};
     this.guardianOutput = {guardians: this.guardianSub.asObservable(), columnToDisplay: this.guardianColumnsToDisplay};
   }
@@ -133,4 +137,14 @@ export class AssignTransactionsComponent implements OnInit {
       }
     );
   }
+
+  private nameSurnameFilterPredicate = (data, filter) => {
+    let value = filter.trim().toLowerCase().split(' ');
+    if (value.length > 1) {
+      return data.name.toLowerCase().includes(value[0]) && data.surname.toLowerCase().includes(value[1]);
+    } else {
+      return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
+        data.pesel.toLowerCase().includes(filter);
+    }
+  };
 }
