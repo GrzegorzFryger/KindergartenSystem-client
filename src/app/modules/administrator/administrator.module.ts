@@ -135,7 +135,7 @@ import {TransactionListComponent} from './page/receivables/transactions/search-t
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
-    MatRippleModule,
+    MatRippleModule
   ],
   bootstrap: [],
   providers: [

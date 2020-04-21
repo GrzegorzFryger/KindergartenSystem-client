@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Child} from '../../../../../../../data/model/accounts/child';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
@@ -8,10 +8,11 @@ import {Observable} from 'rxjs';
 @Component({
   selector: 'app-children-list',
   templateUrl: './children-list.component.html',
-  styleUrls: ['./children-list.component.scss']
+  styleUrls: ['./children-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChildrenListComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() dataSource: { children: Observable<Array<Child>>, columnToDisplay: Array<string> };
   @Output() outputDataEmitter: EventEmitter<{ selected: string }>;

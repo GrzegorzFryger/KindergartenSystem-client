@@ -1,5 +1,13 @@
 <div class="table-container">
   <div class="table-item">
+
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj przelew">
+      </mat-form-field>
+    </div>
+
     <mat-table [dataSource]="transactionDataSource" matSort
                matSortDirection="desc" matSortActive="transactionDate">
 
