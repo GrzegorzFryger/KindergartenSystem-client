@@ -1,0 +1,72 @@
+<div class="table-container">
+  <div class="table-item">
+
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj przelew">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="transactionDataSource" matSort
+               matSortDirection="desc" matSortActive="transactionDate">
+
+      <ng-container matColumnDef="transactionDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="bookingDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data księgowania</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.bookingDate}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="contractorDetails">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.contractorDetails}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="transactionNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Numer transakcji</mat-header-cell>
+        <mat-cell *matCellDef="let transaction"> {{transaction.transactionNumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="transactionAmount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
+        <mat-cell
+          *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Wybierz dziecko</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="center">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)" >
+            </mat-checkbox>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="transactionColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: transactionColumnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+
+
+
