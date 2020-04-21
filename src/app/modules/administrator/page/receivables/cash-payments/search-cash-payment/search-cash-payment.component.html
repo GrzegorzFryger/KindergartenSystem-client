@@ -110,6 +110,18 @@
             <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionAmount}} {{cashPayment.transactionCurrency}}</mat-cell>
           </ng-container>
 
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Akcja</mat-header-cell>
+            <mat-cell *matCellDef="let cashPayment">
+              <button mat-icon-button (click)="deleteCashPayment(cashPayment.id)">
+                <mat-icon class="red-icon">delete</mat-icon>
+              </button>
+              <button mat-icon-button (click)="editCashPayment(cashPayment.id)">
+                <mat-icon class="blue-icon">edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="cashPaymentsColumnsToDisplay"></mat-header-row>
           <mat-row *matRowDef="let row; columns: cashPaymentsColumnsToDisplay;"></mat-row>
         </mat-table>

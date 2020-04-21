@@ -1,4 +1,5 @@
 export class CashPayment {
+  id: number;
   transactionDate: Date;
   contractorDetails: string;
   title: string;

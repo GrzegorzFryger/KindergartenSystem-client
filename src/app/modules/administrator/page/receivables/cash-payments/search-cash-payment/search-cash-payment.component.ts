@@ -7,6 +7,9 @@ import {ChildService} from '../../../../../../data/service/accounts/child.servic
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {CashPaymentsService} from '../../../../../../data/service/receivables/cash-payments.service';
+import {MatDialog} from '@angular/material/dialog';
+import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 
 @Component({
   selector: 'app-search-cash-payment',
@@ -22,7 +25,7 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
   public cashPaymentsDataSource: MatTableDataSource<CashPayment> = new MatTableDataSource();
 
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
-  public cashPaymentsColumnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'transactionAmount'];
+  public cashPaymentsColumnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'transactionAmount', 'action'];
 
   public childName = '';
   public childSurname = '';
@@ -31,7 +34,8 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   constructor(private childService: ChildService,
               private cashPaymentsService: CashPaymentsService,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -66,6 +70,47 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
     );
   }
 
+  public deleteCashPayment(cashPaymentId: number): void {
+    console.log('Attempting to remove cash payment with id: ' + cashPaymentId);
+    this.openRemovalDialog('Czy na pewno chcesz usunąć tę płatność?', cashPaymentId);
+  }
+
+  public editCashPayment(cashPaymentId: string): void {
+    console.log('Attempting to edit cash payment with id: ' + cashPaymentId);
+  }
+
+  private openRemovalDialog(question: string, cashPaymentId: number): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+        this.removeCashPayment(result.answer, cashPaymentId);
+      }
+    );
+  }
+
+  private removeCashPayment(userConfirmation: boolean, cashPaymentId: number) {
+    if (userConfirmation) {
+      this.cashPaymentsService.deleteCashPayment(cashPaymentId).subscribe(
+        resp => {
+          this.snackMessageHandlingService.success('Płatność została usunięta');
+          this.filterCashPayments(cashPaymentId);
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem płatności');
+        },
+        () => {
+          // ON COMPLETE
+        }
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
+  }
+
   private findAllCashPayments(): void {
     this.cashPaymentsService.getAllCashPaymentsForChild(this.selectedChildId).subscribe(
       resp => {
@@ -82,6 +127,14 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
       },
       () => {
         // ON COMPLETE
+      }
+    );
+  }
+
+  private filterCashPayments(removedCashPaymentId: number) {
+    this.cashPaymentsDataSource.data = this.cashPaymentsDataSource.data.filter(
+      cashPayment => {
+        return cashPayment.id !== removedCashPaymentId; // Removed cash payment should not be visible in list
       }
     );
   }
