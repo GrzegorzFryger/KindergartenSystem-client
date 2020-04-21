@@ -1,0 +1,48 @@
+<div class="table-container">
+
+  <div class="table-item">
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj dzecko">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="childDataSource" matSort
+               matSortDirection="asc" matSortActive="surname">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="pesel">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> PESEL</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data urodzenia</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.dateOfBirth}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="isSelected">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+        <mat-cell
+          *matCellDef="let child">
+          <mat-radio-button name="child_selection"
+                            (click)="selectChild(child.id)"></mat-radio-button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="childColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: childColumnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[10, 25,50]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

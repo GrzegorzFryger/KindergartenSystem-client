@@ -1,0 +1,14 @@
+.table-container {
+  display: flex;
+
+  .table-item {
+    .mat-table {
+      .mat-row {
+        &:hover {
+          background-color: #bec9f4;
+        }
+      }
+    }
+  }
+
+}

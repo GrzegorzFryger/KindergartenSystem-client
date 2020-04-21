@@ -1,0 +1,23 @@
+.table-container {
+  display: flex;
+
+  .table-item {
+
+    .search {
+      .mat-form-field {
+        .mat-form-field-flex {
+          background-color: white;
+        }
+      }
+    }
+
+    .mat-table {
+      .mat-row {
+        &:hover {
+          background-color: #bec9f4;
+        }
+      }
+    }
+  }
+
+}

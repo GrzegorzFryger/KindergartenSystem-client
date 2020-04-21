@@ -61,7 +61,8 @@ import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-ca
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
-import {TransactionListComponent} from './page/receivables/transactions/transaction-list/transaction-list.component';
+import {ChildrenListComponent} from './page/receivables/transactions/search-transaction/children-list/children-list.component';
+import {TransactionListComponent} from './page/receivables/transactions/search-transaction/transaction-list/transaction-list.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import {TransactionListComponent} from './page/receivables/transactions/transact
     SearchCashPaymentComponent,
     TransactionsComponent,
     SearchTransactionComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    ChildrenListComponent
   ],
 
 

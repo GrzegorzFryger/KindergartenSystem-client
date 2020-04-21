@@ -1,0 +1,36 @@
+<div class="table-container">
+  <div class="table-item">
+    <mat-table [dataSource]="transactionDataSource" matSort
+               matSortDirection="desc" matSortActive="transactionDate">
+
+      <ng-container matColumnDef="transactionDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
+        <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionDate}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="contractorDetails">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
+        <mat-cell *matCellDef="let cashPayment"> {{cashPayment.contractorDetails}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let cashPayment"> {{cashPayment.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="transactionAmount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota</mat-header-cell>
+        <mat-cell
+          *matCellDef="let cashPayment"> {{cashPayment.transactionAmount}} {{cashPayment.transactionCurrency}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="transactionColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: transactionColumnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+
+
+
