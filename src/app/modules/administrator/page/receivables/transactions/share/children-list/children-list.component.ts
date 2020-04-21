@@ -14,7 +14,7 @@ import {Observable, Subscription} from 'rxjs';
 export class ChildrenListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @Input() dataSource: { children: Observable<Array<Child>>, columnToDisplay: Array<string> };
+  @Input() dataSource: { children: Observable<Array<Child>>, columnToDisplay: Array<string>, filterPredicate: (data: Child, filter: string) => boolean };
   @Output() outputDataEmitter: EventEmitter<{ selected: string }>;
 
   public childDataSource: MatTableDataSource<Child>;
@@ -34,6 +34,10 @@ export class ChildrenListComponent implements OnInit, OnDestroy {
         this.childDataSource.sort = this.sort;
         this.childDataSource.paginator = this.paginator;
         this.childDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
+
+        if (this.dataSource.filterPredicate) {
+          this.childDataSource.filterPredicate = this.dataSource.filterPredicate;
+        }
       }
     });
   }

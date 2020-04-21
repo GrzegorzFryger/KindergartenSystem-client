@@ -5,6 +5,15 @@
   .table-item {
     flex-basis: 90%;
 
+    .search {
+      .mat-form-field {
+        width: 100%;
+        .mat-form-field-flex {
+          background-color: white;
+        }
+      }
+    }
+
     .mat-table {
       .mat-row {
         &:hover {
@@ -13,5 +22,4 @@
       }
     }
   }
-
 }
