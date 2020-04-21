@@ -1,0 +1,42 @@
+<div class="table-container">
+  <div class="table-item">
+
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj przelew">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="guardianDataSource" matSort
+               matSortDirection="asc" matSortActive="surname">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Imię</mat-header-cell>
+        <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="isSelected">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Wybór</mat-header-cell>
+        <mat-cell
+          *matCellDef="let guardian">
+          <mat-radio-button name="guardian_selection" (click)="selectGuardian(guardian.id)"></mat-radio-button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="guardianColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: guardianColumnsToDisplay;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+
+
+
