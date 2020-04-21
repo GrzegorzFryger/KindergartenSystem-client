@@ -40,6 +40,7 @@ export class ImportComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.dialogRef.updateSize('90%', '60%');
     this.form = this.fb.group({
       transfers_input_file: null
     });
