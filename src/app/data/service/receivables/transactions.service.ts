@@ -25,6 +25,13 @@ export class TransactionsService {
     );
   }
 
+  getAllTransactionsFromPastMonth(): Observable<Array<Transaction>> {
+    return this.http.get<Array<Transaction>>(
+      environment.apiUrls.receivables.getAllTransactionsFromPastMonth
+    );
+  }
+
+
   assignTransactionToChild(transaction: Transaction, childId: string, guardianId: string): Observable<any> {
     // TODO: Change into PUT after fixing issue with CORS
     return this.http.post<any>(
