@@ -11,7 +11,7 @@ import {AccountListComponent} from './page/accounts/account-list/account-list.co
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
-import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
+import {EditCashPaymentDialogComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment-dialog.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
           },
           {
             path: 'edit',
-            component: EditCashPaymentComponent,
+            component: EditCashPaymentDialogComponent,
           },
           {
             path: 'search',

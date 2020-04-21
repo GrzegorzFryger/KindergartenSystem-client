@@ -7,4 +7,5 @@ export class CashPayment {
   transactionCurrency: string;
   childId: string;
   guardianId: string;
+  isEdited: boolean;
 }

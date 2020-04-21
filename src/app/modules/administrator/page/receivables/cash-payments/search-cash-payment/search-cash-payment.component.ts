@@ -10,6 +10,7 @@ import {CashPaymentsService} from '../../../../../../data/service/receivables/ca
 import {MatDialog} from '@angular/material/dialog';
 import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {EditCashPaymentDialogComponent} from '../edit-cash-payment/edit-cash-payment-dialog.component';
 
 @Component({
   selector: 'app-search-cash-payment',
@@ -75,8 +76,9 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
     this.openRemovalDialog('Czy na pewno chcesz usunąć tę płatność?', cashPaymentId);
   }
 
-  public editCashPayment(cashPaymentId: string): void {
-    console.log('Attempting to edit cash payment with id: ' + cashPaymentId);
+  public editCashPayment(cashPayment: CashPayment): void {
+    console.log('Attempting to edit cash payment with id: ' + cashPayment.id);
+    this.openEditCashPaymentDialog(cashPayment);
   }
 
   private openRemovalDialog(question: string, cashPaymentId: number): void {
@@ -89,6 +91,21 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
       result => {
         console.log('The dialog was closed with answer: ' + result.answer);
         this.removeCashPayment(result.answer, cashPaymentId);
+      }
+    );
+  }
+
+  private openEditCashPaymentDialog(data: CashPayment): void {
+    const dialogRef = this.dialog.open(EditCashPaymentDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result.isEdited === true) {
+          delete result.isEdited; // This property won't be needed anymore
+          this.updateCashPayment(result);
+        }
       }
     );
   }
@@ -109,6 +126,10 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
     } else {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
+  }
+
+  private updateCashPayment(cashPayment: CashPayment): void {
+    console.log('Updating cash payment with id: ' + cashPayment.id);
   }
 
   private findAllCashPayments(): void {
