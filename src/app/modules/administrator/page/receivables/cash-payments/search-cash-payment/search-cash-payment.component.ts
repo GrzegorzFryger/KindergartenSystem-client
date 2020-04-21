@@ -130,6 +130,17 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   private updateCashPayment(cashPayment: CashPayment): void {
     console.log('Updating cash payment with id: ' + cashPayment.id);
+    this.cashPaymentsService.updateCashPayment(cashPayment).subscribe(
+      resp => {
+        this.snackMessageHandlingService.success('Płatność została zaktualizowana');
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z aktualizacją płatności');
+      },
+      () => {
+        // ON COMPLETE
+      }
+    );
   }
 
   private findAllCashPayments(): void {

@@ -38,7 +38,9 @@ export class CashPaymentsService {
     );
   }
 
-  updateCashPayment() {
-
+  updateCashPayment(payment: CashPayment) {
+    return this.http.put<any>(
+      environment.apiUrls.receivables.updateCashPayment, payment
+    );
   }
 }
