@@ -25,13 +25,13 @@
             (checkedGuardianEvent)="onSelectedGuardian($event)">
           </app-guardians>
           <div class="button-container">
-            <div>
-              <button mat-raised-button matStepperPrevious [color]="'primary'">Cofnij</button>
-              <button mat-raised-button matStepperNext [color]="'primary'"
-                      [disabled]="selectedGuardians.length === 0">Następny
-              </button>
-            </div>
+          <div>
+            <button mat-raised-button matStepperPrevious [color]="'primary'">Cofnij</button>
+            <button mat-raised-button matStepperNext [color]="'primary'"
+                    [disabled]="selectedGuardians.length === 0">Następny
+            </button>
           </div>
+        </div>
         </div>
       </mat-step>
 

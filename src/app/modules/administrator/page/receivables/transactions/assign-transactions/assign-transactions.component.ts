@@ -1,120 +1,82 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {TransactionsService} from '../../../../../../data/service/receivables/transactions.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Transaction} from '../../../../../../data/model/receivables/transaction';
-import {MatTableDataSource} from '@angular/material/table';
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../../../data/service/accounts/guardian.service';
 import {ChildService} from 'src/app/data/service/accounts/child.service';
 import {Guardian} from 'src/app/data/model/accounts/guardian';
+import {Observable, ReplaySubject} from 'rxjs';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './assign-transactions.component.html',
-  styleUrls: ['./assign-transactions.component.scss']
+  styleUrls: ['./assign-transactions.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class AssignTransactionsComponent implements OnInit, AfterViewInit {
-
+export class AssignTransactionsComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
-  public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details',
-    'transactionNumber', 'transactionAmount', 'isAssigned'];
+  public transactionColumnsToDisplay: string[] = [
+    'transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details', 'transactionNumber', 'transactionAmount', 'select'
+  ];
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
   public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
+  public transactionOutput: { transactions: Observable<Array<Transaction>>, columnToDisplay: Array<string> };
+  private transactionSub: ReplaySubject<Array<Transaction>>;
+  public childrenOutput: { children: Observable<Array<Child>>, columnToDisplay: Array<string>, filterPredicate: (data: Child, filter: string) => boolean };
+  private childrenSub: ReplaySubject<Array<Child>>;
+  public guardianOutput: { guardians: Observable<Array<Guardian>>, columnToDisplay: Array<string> };
+  private guardianSub: ReplaySubject<Array<Guardian>>;
 
-  public unassignedTransactions: Array<Transaction>;
-
-  public transactionDataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
-  public childDataSource: MatTableDataSource<Child> = new MatTableDataSource();
-  public guardianDataSource: MatTableDataSource<Guardian> = new MatTableDataSource();
-
-  public childName = '';
-  public childSurname = '';
-  public selectedChildId = '';
-  public selectedGuardianId = '';
-  public amountOfSelectedTranactions = 0;
+  selectedChild: string;
+  selectedTransactions: Array<Transaction>;
+  selectedGuardian: string;
+  isLinear = true;
 
   constructor(private transactionsService: TransactionsService,
               private childService: ChildService,
               private guardianService: GuardianService,
               private snackMessageHandlingService: SnackMessageHandlingService) {
+    this.selectedTransactions = new Array<Transaction>();
+    this.transactionSub = new ReplaySubject<Array<Transaction>>();
+    this.childrenSub = new ReplaySubject<Array<Child>>();
+    this.guardianSub = new ReplaySubject<Array<Guardian>>();
+    this.childrenOutput = {
+      children: this.childrenSub.asObservable(),
+      columnToDisplay: this.childColumnsToDisplay,
+      filterPredicate: this.nameSurnameFilterPredicate
+    };
+    this.transactionOutput = {transactions: this.transactionSub.asObservable(), columnToDisplay: this.transactionColumnsToDisplay};
+    this.guardianOutput = {guardians: this.guardianSub.asObservable(), columnToDisplay: this.guardianColumnsToDisplay};
   }
 
   ngOnInit(): void {
     this.loadDataAboutUnassignedTransactions();
+    this.findChildren();
   }
 
-  ngAfterViewInit(): void {
-    this.initializeTables();
+  onSelectedTransaction(event: Array<Transaction>) {
+    this.selectedTransactions = event;
+  }
+
+  onSelectChildEvent(event: { selected: string }) {
+    this.findGuardians(event.selected);
+    this.selectedChild = event.selected;
+  }
+
+  onSelectedGuardian(event: { selected: string }) {
+    this.selectedGuardian = event.selected;
   }
 
   public assignTransactions(): void {
-    const transactionsToBeAssigned = this.unassignedTransactions.filter((transaction: Transaction) => {
-      return transaction.isAssigned === true;
+    this.selectedTransactions.forEach(obj => {
+      this.assignTransaction(obj, this.selectedChild, this.selectedGuardian);
     });
-
-    transactionsToBeAssigned.forEach(obj => {
-      delete obj.isAssigned;
-      this.assignTransaction(obj, this.selectedChildId, this.selectedGuardianId);
-    });
-
     this.snackMessageHandlingService.success('Transakcje zostały przypisane pomyślnie');
-    this.reloadTransactionData();
-  }
-
-  public findChildren(): void {
-    console.log('Searching for children with name/surname: ' + this.childName + '/' + this.childSurname);
-    this.resetChildAndGuardianState();
-    this.childService.searchChildrenByFullName(this.childName, this.childSurname).subscribe(
-      resp => {
-        console.log(resp);
-        this.setChildDataToTable(resp);
-      },
-      error => {
-        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy dzieci');
-        console.log(error);
-      },
-      () => {
-        // ON COMPLETE
-      }
-    );
-  }
-
-  public findGuardians(): void {
-    console.log('Searching for guardians for child with id: ' + this.selectedChildId);
-    this.guardianService.findAllGuardians(this.selectedChildId).subscribe(
-      resp => {
-        console.log(resp);
-        this.setGuardianDataToTable(resp);
-      },
-      error => {
-        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
-        console.log(error);
-      },
-      () => {
-        // ON COMPLETE
-      }
-    );
-  }
-
-  public selectChild(childId: string): void {
-    console.log('Selected child: ' + childId);
-    this.selectedChildId = childId;
-    this.selectedGuardianId = ''; // Reset state of selected guardian when selecting new child
-    this.findGuardians();
-  }
-
-  public selectGuardian(guardianId: string): void {
-    console.log('Selected guardian: ' + guardianId);
-    this.selectedGuardianId = guardianId;
-  }
-
-  public onCheckBoxClick(checked: boolean) {
-    checked ? this.amountOfSelectedTranactions += 1 : this.amountOfSelectedTranactions -= 1;
-    console.log('Amount of selected transactions: ' + this.amountOfSelectedTranactions);
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): boolean {
@@ -125,12 +87,9 @@ export class AssignTransactionsComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z przypisaniem transakcji do dziecka');
-        console.log(error);
         return false;
       },
       () => {
-        this.resetChildAndGuardianState();
-        // ON COMPLETE
       }
     );
     return true;
@@ -139,16 +98,10 @@ export class AssignTransactionsComponent implements OnInit, AfterViewInit {
   private loadDataAboutUnassignedTransactions(): void {
     this.transactionsService.getAllUnassignedTransactions().subscribe(
       resp => {
-        this.unassignedTransactions = resp;
-        this.unassignedTransactions.forEach(obj => {
-          obj.isAssigned = false;
-        });
-        console.log(this.unassignedTransactions);
-        this.setTransactionDataToTable(resp);
+        this.transactionSub.next(resp);
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy transakcji');
-        console.log(error);
       },
       () => {
         // ON COMPLETE
@@ -156,51 +109,42 @@ export class AssignTransactionsComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private reloadTransactionData(): void {
-    this.unassignedTransactions = this.unassignedTransactions.filter((transaction: Transaction) => {
-      return transaction.isAssigned === false;
-    });
-    this.transactionDataSource.data = this.unassignedTransactions;
-    this.amountOfSelectedTranactions = 0;
+  private findChildren(): void {
+    this.childService.getAllChildren().subscribe(
+      resp => {
+        this.childrenSub.next(resp);
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy dzieci');
+      },
+      () => {
+        // ON COMPLETE
+      }
+    );
   }
 
-  private setTransactionDataToTable(incomingPayment: Array<Transaction>): void {
-    this.transactionDataSource.data = incomingPayment;
+  private findGuardians(selected: string): void {
+    this.guardianService.findAllGuardians(selected).subscribe(
+      resp => {
+        console.log(resp);
+        this.guardianSub.next(resp);
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy rodziców');
+      },
+      () => {
+        // ON COMPLETE
+      }
+    );
   }
 
-  private setChildDataToTable(children: Array<Child>): void {
-    this.childDataSource.data = children;
-  }
-
-  private setGuardianDataToTable(guardians: Array<Guardian>): void {
-    this.guardianDataSource.data = guardians;
-  }
-
-  private resetChildAndGuardianState(): void {
-    this.guardianDataSource.data = []; // Remove all found guardians when performing new children search
-    this.childDataSource.data = [];  // Remove all found children when performing new children search
-    this.selectedGuardianId = ''; // Reset state of selected guardian
-    this.selectedChildId = ''; // Reset state of selected child
-  }
-
-  private initializeTables(): void {
-    this.transactionDataSource.data = [];
-    this.transactionDataSource.sort = this.sort.toArray()[0];
-    this.transactionDataSource.paginator = this.paginator.toArray()[0];
-    // TODO Change it into better solution (more global)
-    this.transactionDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
-
-    this.childDataSource.data = [];
-    this.childDataSource.sort = this.sort.toArray()[1];
-    this.childDataSource.paginator = this.paginator.toArray()[1];
-    // TODO Change it into better solution (more global)
-    this.childDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
-
-    this.guardianDataSource.data = [];
-    this.guardianDataSource.sort = this.sort.toArray()[2];
-    this.guardianDataSource.paginator = this.paginator.toArray()[2];
-    // TODO Change it into better solution (more global)
-    this.guardianDataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
-  }
-
+  private nameSurnameFilterPredicate = (data, filter) => {
+    let value = filter.trim().toLowerCase().split(' ');
+    if (value.length > 1) {
+      return data.name.toLowerCase().includes(value[0]) && data.surname.toLowerCase().includes(value[1]);
+    } else {
+      return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
+        data.pesel.toLowerCase().includes(filter);
+    }
+  };
 }
