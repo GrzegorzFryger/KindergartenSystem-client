@@ -1,11 +1,9 @@
-<h2>Przypisywanie przelewów</h2>
-
 <div class="assign-transactions-container">
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step>
       <ng-template matStepLabel>Wybierz przelew</ng-template>
       <ng-container>
-        <p>Wybierz przelewy</p>
+
         <app-transaction-list [dataSource]="transactionOutput" (checkedTransactionEvent)="onSelectedTransaction($event)"
         ></app-transaction-list>
       </ng-container>
@@ -22,7 +20,7 @@
     <mat-step>
       <ng-template matStepLabel>Wybierz dzieci</ng-template>
       <ng-container *ngIf="selectedTransactions?.length > 0">
-        <p>Wyszukaj dziecko</p>
+
         <app-children-list
           [dataSource]="childrenOutput" (outputDataEmitter)="onSelectChildEvent($event)">
         </app-children-list>
@@ -40,7 +38,7 @@
     <mat-step>
       <ng-template matStepLabel>Wybierz rodzica</ng-template>
       <ng-container *ngIf="(guardianOutput.guardians | async)?.length > 0">
-        <p>Wyszukaj rodzica</p>
+
         <app-guardian-list [dataSource]="guardianOutput"
                            (checkedGuardiansEvent)="onSelectedGuardian($event)">
         </app-guardian-list>

@@ -25,6 +25,7 @@
   }
 
   .transactions-options {
+    flex-shrink: 0;
     flex-basis: 30%;
     margin-bottom: 16px;
 
@@ -34,10 +35,9 @@
       justify-content: space-around;
 
       .transaction-option-card {
-        cursor: pointer;
         flex-basis: 25%;
         height: 80%;
-
+        cursor: pointer;
         background-image: url("../../../../../../assets/images/back-small2.png");
         background-repeat: no-repeat;
         background-size: 100%;

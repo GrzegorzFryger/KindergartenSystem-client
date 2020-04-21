@@ -1,8 +1,9 @@
+
 <div class="account-list-container">
   <ng-container *ngIf="!personDetailCardOpen">
     <div [ngClass]="{'move': personDetailCardOpen }" class="table-container">
-      <h2>Lista pracowników</h2>
       <div class="flex">
+        <h2>Lista pracowników</h2>
         <div class="search">
           <mat-form-field>
             <mat-label>Szukaj</mat-label>
@@ -43,8 +44,8 @@
             </mat-row>
           </mat-table>
         </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   </ng-container>
 
