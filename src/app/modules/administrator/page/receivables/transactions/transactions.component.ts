@@ -9,7 +9,8 @@ import {ImportComponent} from './import/import.component';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
-  isSelected: boolean;
+
+  public isSelected: boolean;
 
   constructor(private router: Router,
               public dialog: MatDialog) {

@@ -56,7 +56,6 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
-import {DeleteCashPaymentComponent} from './page/receivables/cash-payments/delete-cash-payment/delete-cash-payment.component';
 import {EditCashPaymentComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
@@ -94,7 +93,6 @@ import {TransactionListComponent} from './page/receivables/transactions/search-t
     AdministratorNavigationMenuComponent,
     AssignChildrenComponent,
     AddCashPaymentComponent,
-    DeleteCashPaymentComponent,
     EditCashPaymentComponent,
     SearchCashPaymentComponent,
     TransactionsComponent,
