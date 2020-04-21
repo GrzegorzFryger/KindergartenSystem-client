@@ -1,3 +1,17 @@
-.full-width {
-  width: 100%;
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .children-search-item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 8px;
+  }
+
+  .transaction-result-item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 8px;
+  }
 }
