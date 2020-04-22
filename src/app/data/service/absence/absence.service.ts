@@ -30,8 +30,8 @@ export class AbsenceService {
     return this.http.put<Absence>(environment.apiUrls.calendar.updateAbsence, absence);
   }
 
-  public deleteAbsence(id: string): void {
-    this.http.delete<Absence>(environment.apiUrls.calendar.deleteAbsence);
+  public deleteAbsence(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrls.calendar.deleteAbsence + id);
   }
 
   public getAllAbsencesByChildId(childId: string): Observable<Array<Absence>> {

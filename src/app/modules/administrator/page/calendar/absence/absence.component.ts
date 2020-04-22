@@ -18,7 +18,7 @@ export class AbsenceComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Absence> = new MatTableDataSource();
 
-  public columnsToDisplay: string[] = ['childId', 'date', 'reason'];
+  public columnsToDisplay: string[] = ['childId', 'date', 'reason', 'actions'];
   endDate: string;
   startDate: string;
 
@@ -29,8 +29,18 @@ export class AbsenceComponent implements OnInit {
   }
 
   onSubmit(submittedForm) {
-    this.startDate = this.datePipe.transform(submittedForm.value.startDate, 'yyyy-MM-dd');
-    this.endDate = this.datePipe.transform(submittedForm.value.endDate, 'yyyy-MM-dd');
+    this.getAllAbsencesBetweenDates(submittedForm.value.startDate, submittedForm.value.endDate);
+  }
+
+  removeAbsence(id: string): void {
+    this.absenceService.deleteAbsence(id).subscribe(resp => {
+      this.getAllAbsencesBetweenDates(this.startDate, this.endDate);
+    });
+  }
+
+  getAllAbsencesBetweenDates(startDate: string, endDate: string) {
+    this.startDate = this.datePipe.transform(startDate, 'yyyy-MM-dd');
+    this.endDate = this.datePipe.transform(endDate, 'yyyy-MM-dd');
     this.absenceService.getAllAbsencesBetweenDates(this.startDate, this.endDate).subscribe(resp => {
       this.dataSource.data = resp;
       this.dataSource.sort = this.sort.toArray()[0];
@@ -38,5 +48,4 @@ export class AbsenceComponent implements OnInit {
       this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
   }
-
 }
