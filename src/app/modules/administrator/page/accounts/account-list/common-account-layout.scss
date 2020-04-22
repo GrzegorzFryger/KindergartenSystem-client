@@ -13,12 +13,10 @@
     margin: 8px 0 8px 0;
     padding: 16px 8px 16px 8px;
 
-
     .flex {
       display: flex;
       flex-direction: column;
       justify-content: center;
-
 
       .search {
         flex-shrink: 1;
@@ -46,7 +44,7 @@
         .mat-table {
           .mat-row {
             &:hover {
-              background-color: rgb(240, 187, 218);
+              background-color: #bec9f4;
               cursor: pointer;
             }
           }

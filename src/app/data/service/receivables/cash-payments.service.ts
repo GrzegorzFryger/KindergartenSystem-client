@@ -13,9 +13,15 @@ export class CashPaymentsService {
 
   }
 
-  getAllCashPayments(): Observable<Array<CashPayment>> {
+  getAllCashPaymentsForChild(childId: string): Observable<Array<CashPayment>> {
     return this.http.get<Array<CashPayment>>(
-      environment.apiUrls.receivables.getAllIncomingPaymentsForChild
+      environment.apiUrls.receivables.getAllCashPaymentsForChild + `${childId}`
+    );
+  }
+
+  getAllCashPaymentsFromPastMonth(): Observable<Array<CashPayment>> {
+    return this.http.get<Array<CashPayment>>(
+      environment.apiUrls.receivables.getAllCashPaymentsFromPastMonth
     );
   }
 
@@ -25,8 +31,10 @@ export class CashPaymentsService {
     );
   }
 
-  deleteCashPayment() {
-
+  deleteCashPayment(id: number) {
+    return this.http.delete(
+      environment.apiUrls.receivables.deleteCashPayment + `${id}`
+    );
   }
 
   createCashPayment(payment: CashPayment) {
@@ -35,7 +43,9 @@ export class CashPaymentsService {
     );
   }
 
-  updateCashPayment() {
-
+  updateCashPayment(payment: CashPayment) {
+    return this.http.put<any>(
+      environment.apiUrls.receivables.updateCashPayment, payment
+    );
   }
 }

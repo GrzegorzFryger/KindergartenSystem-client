@@ -25,8 +25,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
-import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
-import {ImportComponent} from './page/receivables/import/import.component';
+import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
+import {ImportComponent} from './page/receivables/transactions/import/import.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -49,15 +49,22 @@ import {ChartsModule} from 'ng2-charts';
 import {ChildProfileComponent} from './page/accounts/account-list/profiles/child-profile/child-profile.component';
 import {ChildFormComponent} from './page/accounts/account-form/child-form/child-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
-import { AddCashPaymentComponent } from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
 import { DayOffWorkComponent } from './page/calendar/day-off-work/day-off-work.component';
 import { AbsenceComponent } from './page/calendar/absence/absence.component';
+import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
+import {EditCashPaymentDialogComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment-dialog.component';
+import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
+import {ChildrenListComponent} from './page/receivables/transactions/share/children-list/children-list.component';
+import {TransactionListComponent} from './page/receivables/transactions/share/transaction-list/transaction-list.component';
+import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +72,7 @@ import { AbsenceComponent } from './page/calendar/absence/absence.component';
     CashPaymentsComponent,
     TransactionsComponent,
     AddCashPaymentComponent,
+    AssignTransactionsComponent,
     ImportComponent,
     MealPriceComponent,
     MealComponent,
@@ -90,6 +98,13 @@ import { AbsenceComponent } from './page/calendar/absence/absence.component';
     AdministratorNavigationMenuComponent,
     AssignChildrenComponent,
     AddCashPaymentComponent,
+    EditCashPaymentDialogComponent,
+    SearchCashPaymentComponent,
+    TransactionsComponent,
+    SearchTransactionComponent,
+    TransactionListComponent,
+    ChildrenListComponent,
+    GuardianListComponent,
     DayOffWorkComponent,
     AbsenceComponent
   ],
@@ -126,13 +141,14 @@ import { AbsenceComponent } from './page/calendar/absence/absence.component';
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
+    MatRippleModule
   ],
   bootstrap: [],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
     {provide: MAT_DATE_LOCALE, useValue: environment.locale},
-    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
-    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { color: 'primary' }},
+    {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
+    {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     DatePipe,
     MatCheckboxModule
   ]

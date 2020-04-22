@@ -1,6 +1,6 @@
-import {ImportComponent} from './page/receivables/import/import.component';
+import {ImportComponent} from './page/receivables/transactions/import/import.component';
 import {AdministratorComponent} from './administrator.component';
-import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -11,6 +11,10 @@ import {AccountListComponent} from './page/accounts/account-list/account-list.co
 import {AccountCreateComponent} from './page/accounts/account-create/account-create.component';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
+import {EditCashPaymentDialogComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment-dialog.component';
+import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
+import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
+import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 
@@ -27,16 +31,34 @@ const routes: Routes = [
           {
             path: 'add',
             component: AddCashPaymentComponent,
+          },
+          {
+            path: 'edit',
+            component: EditCashPaymentDialogComponent,
+          },
+          {
+            path: 'search',
+            component: SearchCashPaymentComponent,
           }
         ]
       },
       {
         path: 'transactions',
         component: TransactionsComponent,
-      },
-      {
-        path: 'import',
-        component: ImportComponent,
+        children: [
+          {
+            path: 'assign',
+            component: AssignTransactionsComponent,
+          },
+          {
+            path: 'import',
+            component: ImportComponent,
+          },
+          {
+            path: 'search',
+            component: SearchTransactionComponent,
+          },
+        ]
       },
       {
         path: 'meal',

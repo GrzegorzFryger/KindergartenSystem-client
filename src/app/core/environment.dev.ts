@@ -35,7 +35,8 @@ export const environment = {
         count: accountUrl + 'guardians/count',
         create: accountUrl + 'guardian',
         update: accountUrl + 'guardian',
-        findAllGuardians: accountUrl + 'guardians/search/'
+        findAllGuardians: accountUrl + 'guardians/search/',
+        appendChild: accountUrl + 'guardian/append-child'
       },
       employee: {
         employees: accountUrl + 'employees',
@@ -64,6 +65,8 @@ export const environment = {
 
       // CashPayment Controller
       getAllCashPayments: receivablesUrl + 'cash-payments',
+      getAllCashPaymentsForChild: receivablesUrl + 'cash-payments/child/',
+      getAllCashPaymentsFromPastMonth: receivablesUrl + 'cash-payments/past-month',
       getCashPayment: receivablesUrl + 'cash-payments/',
       deleteCashPayment: receivablesUrl + 'cash-payments/',
       createCashPayment: receivablesUrl + 'cash-payments',
@@ -71,6 +74,8 @@ export const environment = {
 
       // Transactions Controller
       getAllUnassignedTransactions: receivablesUrl + 'transactions',
+      getAllTransactionsForChild: receivablesUrl + 'transactions/child/',
+      getAllTransactionsFromPastMonth: receivablesUrl + 'transactions/past-month',
       assignTransactionToChild: receivablesUrl + 'transactions/assign/',
       getTransaction: receivablesUrl + 'transactions/',
       deleteTransaction: receivablesUrl + 'transactions/',
