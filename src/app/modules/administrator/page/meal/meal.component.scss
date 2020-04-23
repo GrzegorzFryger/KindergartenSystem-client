@@ -2,7 +2,7 @@
   padding: 0;
   margin-top: 20px;
   border-radius: 10px 10px 10px 10px;
-  width: 100%;
+  width: 98%;
 
   .mat-card-content {
     padding: 16px;
@@ -19,6 +19,15 @@
     }
   }
 
+  .close-cross {
+    float:right;
+    margin-top: -65px;
+    color: #606FEE;
+    .mat-icon {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
 
   .mat-card-actions {
     padding: 0 21px 20px 16px;
@@ -252,5 +261,19 @@ md-tab-group {
 
   .dateValue{
     top: 50%;
+  }
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.edit-meal-checkbox {
+  margin-left: -20px;
+}
+
+mat-cell {
+  span {
+  margin-left: 10px;
   }
 }

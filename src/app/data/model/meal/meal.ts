@@ -11,5 +11,6 @@ export class Meal {
   mealFromDate: string;
   mealToDate: string;
   nutritionalNotesList: Array<NutritionalNotes>;
+  isMealCheck: boolean;
 }
 

@@ -21,14 +21,29 @@
 
           <ng-container matColumnDef="mealPrice">
             <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł </mat-cell>
+            <div *matCellDef="let element">
+              <div *ngIf="!editingMealPrice">
+                <mat-cell> {{element.mealPrice}} zł</mat-cell>
+              </div>
+              <div *ngIf="editingMealPrice">
+                <mat-form-field class="mealPrice-input" style="background: #ffffff">
+                  <input [value]="element.mealPrice" (input)="editedMealPrice = $event.target.value" matInput >
+                  <span matSuffix>zł</span>
+                </mat-form-field>
+              </div>
+            </div>
           </ng-container>
 
           <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
             <mat-cell *matCellDef="let element">
-              <mat-icon>edit</mat-icon>
-              <mat-icon>delete_outline</mat-icon>
+              <div *ngIf="!editingMealPrice">
+                <mat-icon (click)="editMealPrice()">edit</mat-icon>
+                <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
+              </div>
+              <div *ngIf="editingMealPrice" class="mealPrice-saveButton">
+                <button mat-stroked-button (click)="uploadMealPrice(element.id)" color="primary">Zapisz</button>
+              </div>
             </mat-cell>
           </ng-container>
 
@@ -37,10 +52,43 @@
         </mat-table>
       </div>
 
+
+      <div class="addMealPrice-container" *ngIf="addingMealPrice">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-3 offset-2">
+              <mat-form-field>
+                <mat-label>Typ</mat-label>
+                <mat-select [(ngModel)]="addedMealPrice.mealType">
+                  <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type" >
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-2">
+              <mat-form-field class="mealPrice-input" style="background: #ffffff">
+                <input (input)="addedMealPrice.mealPrice = $event.target.value"  matInput >
+                <span matSuffix>zł</span>
+              </mat-form-field>
+            </div>
+
+            <div class="col-4 addMealPrice-buttons">
+              <button mat-button color="primary" (click)="saveMealPrice()">zapisz</button>
+              <button mat-button color="primary" (click)="openAddViewMealPrice()">anuluj</button>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+    <mat-card-actions *ngIf="mealPriceAvailableToAdd.length > 0 && !addingMealPrice">
+      <button mat-button color="primary" (click)="openAddViewMealPrice()">Dodaj</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -36,6 +36,7 @@ import {HttpTraceComponent} from './page/actuator/http-trace/http-trace.componen
 import {ChartComponent} from './page/actuator/chart/chart.component';
 import {MetricsComponent} from './page/actuator/metrics/metrics.component';
 import {AdministratorNavigationMenuComponent} from './component/administrator-navigation-menu/administrator-navigation-menu.component';
+import {MealAddFormComponent} from './page/meal/meal-add-form/meal-add-form.component';
 import {AccountsComponent} from './page/accounts/accounts.component';
 import {ProfileComponent} from './page/accounts/account-list/profiles/person-profile/profile.component';
 import {GuardiansComponent} from './page/accounts/account-list/guardians/guardians.component';
@@ -92,6 +93,7 @@ import {GuardianListComponent} from './page/receivables/transactions/share/guard
     ChartComponent,
     MetricsComponent,
     AdministratorNavigationMenuComponent,
+    MealAddFormComponent,
     AssignChildrenComponent,
     AddCashPaymentComponent,
     EditCashPaymentDialogComponent,
