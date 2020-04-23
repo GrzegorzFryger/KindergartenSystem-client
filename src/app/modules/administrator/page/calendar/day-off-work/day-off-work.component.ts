@@ -53,7 +53,7 @@ export class DayOffWorkComponent implements OnInit {
       this.dataSource.data = resp;
       this.dataSource.sort = this.sort.toArray()[0];
       this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
+      this.dataSource.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
     });
   }
 
