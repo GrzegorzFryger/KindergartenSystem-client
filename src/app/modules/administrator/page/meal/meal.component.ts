@@ -10,6 +10,7 @@ import {GuardianService} from '../../../../data/service/accounts/guardian.servic
 import {MealService} from '../../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 
 export interface DialogData {
@@ -34,7 +35,6 @@ export class MealComponent implements OnInit {
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
   openAddMealForm = false;
-  isAnyMealChecked: boolean;
   selectedMealId: Array<number> = [];
 
   animal: string;
@@ -46,7 +46,8 @@ export class MealComponent implements OnInit {
               private guardianService: GuardianService,
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
-              private mealService: MealService) {
+              private mealService: MealService,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -139,11 +140,23 @@ export class MealComponent implements OnInit {
   selectedMeals(id: number) {
     if ( this.selectedMealId.includes(id)) {
       this.selectedMealId.splice(this.selectedMealId.indexOf(id, 1));
-      console.log(this.selectedMealId);
     } else {
-      console.log('dodaje ' + id);
       this.selectedMealId.push(id);
     }
+  }
+
+  invokeMeals() {
+    this.selectedMealId.forEach(u => {
+      this.mealService.invokeMeal(u).subscribe(reps => {
+        this.snackMessageHandlingService.success('Operacja zakończona sukcesem');
+        this.getAllMeals();
+        this.selectedMealId = [];
+      }, err => {
+        this.snackMessageHandlingService.error('Coś poszło nie tak');
+      });
+
+    });
+
   }
 }
 
