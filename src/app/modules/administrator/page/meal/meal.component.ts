@@ -25,7 +25,7 @@ export interface DialogData {
 })
 export class MealComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
+  displayedColumns: string[] = ['select', 'id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   meals: Array<Meal>;
   openChildDetailsTable = false;
   openNutritionalNotes = false;
@@ -33,7 +33,8 @@ export class MealComponent implements OnInit {
   userCredentials: UserCredentials;
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
-  openAddMealForm = true;
+  openAddMealForm = false;
+  checkedMeal: any;
 
   animal: string;
   name: string;
