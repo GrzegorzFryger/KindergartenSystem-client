@@ -9,6 +9,7 @@ import {MealComponent} from '../meal.component';
 import {Child} from '../../../../../data/model/accounts/child';
 import {AccountService} from '../../../../../data/service/accounts/account.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {ChildService} from '../../../../../data/service/accounts/child.service';
 
 @Component({
   selector: 'app-meal-add-form',
@@ -28,7 +29,7 @@ export class MealAddFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private mealService: MealService,
-              private accountService: AccountService,
+              private childService: ChildService,
               private mealComponent: MealComponent,
               private snackMessageHandlingService: SnackMessageHandlingService) {
   }
@@ -67,7 +68,7 @@ export class MealAddFormComponent implements OnInit {
   }
 
   getAllKids() {
-    this.accountService.getAllChildren().subscribe(resp => {
+    this.childService.getAllChildren().subscribe(resp => {
       this.children = resp;
     });
   }

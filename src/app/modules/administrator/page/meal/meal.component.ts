@@ -135,6 +135,13 @@ export class MealComponent implements OnInit {
   closeNutritionalNotes() {
     this.openNutritionalNotes = false;
   }
+
+  onlyOneCanByChecked() {
+    this.meals.forEach(u => {
+
+
+    });
+  }
 }
 
 

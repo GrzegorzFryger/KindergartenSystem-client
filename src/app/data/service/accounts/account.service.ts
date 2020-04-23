@@ -30,9 +30,6 @@ export class AccountService {
     }));
   }
 
-  getAllChildren(): Observable<Array<Child>> {
-    return this.http.get<Array<Child>>(environment.apiUrls.account.child.children);
-  }
 
 
 }

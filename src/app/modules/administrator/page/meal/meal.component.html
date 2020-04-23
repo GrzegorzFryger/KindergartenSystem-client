@@ -14,11 +14,12 @@
             <ng-container matColumnDef="select">
               <mat-header-cell *matHeaderCellDef>
                 <mat-checkbox [disabled]="true"
-                [indeterminate]="true">
+                          [indeterminate]="true">
                 </mat-checkbox>
               </mat-header-cell>
-              <mat-cell *matCellDef="let row">
-                <mat-checkbox >
+              <mat-cell *matCellDef="let element">
+                <mat-checkbox [(ngModel)]="element.isMealCheck"
+                              (change)="onlyOneCanByChecked()">
                 </mat-checkbox>
               </mat-cell>
             </ng-container>
