@@ -11,9 +11,16 @@
           <mat-table #table [dataSource]="meals">
 
 
+
+
             <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+              <mat-cell *matCellDef="let element">
+                <div class="edit-meal-checkbox">
+                  <mat-checkbox></mat-checkbox>
+                </div>
+                <span>{{element.id}}</span>
+              </mat-cell>
             </ng-container>
 
 
