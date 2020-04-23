@@ -1,0 +1,63 @@
+<h2 class="center" mat-dialog-title>Edytuj płatność gotówkową</h2>
+<div mat-dialog-content class="center">
+
+</div>
+<div mat-dialog-actions>
+  <div class="container-fluid">
+    <form class="form-layout-container container-fluid" [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Data transakcji</mat-label>
+            <input matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
+            <mat-error>Data w poprawnym formacie jest wymagana</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="transactionDate"></mat-datepicker-toggle>
+            <mat-datepicker #transactionDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Wpłacający</mat-label>
+            <input matInput formControlName="contractorDetails">
+            <mat-error>Dane wpłacającego są wymagane (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Tytuł</mat-label>
+            <input matInput formControlName="title">
+            <mat-error>Tytuł jest wymagany (co najmniej 14 znaków)</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Kwota (PLN)</mat-label>
+            <input matInput formControlName="transactionAmount">
+            <mat-error>Kwota jest wymagana (minimum: 1)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <br>
+        </div>
+      </div>
+      <div class="row" class="center">
+        <div class="col">
+          <button mat-raised-button class="mat-button-yes" [disabled]="!form.valid" (click)="yesClick()">
+            Zawtwierdź
+          </button>
+        </div>
+        <div class="col">
+          <button mat-raised-button class="mat-button-no" (click)="noClick()">
+            Anuluj
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 export class CashPayment {
+  id: number;
   transactionDate: Date;
   contractorDetails: string;
   title: string;
@@ -6,4 +7,5 @@ export class CashPayment {
   transactionCurrency: string;
   childId: string;
   guardianId: string;
+  isEdited: boolean;
 }

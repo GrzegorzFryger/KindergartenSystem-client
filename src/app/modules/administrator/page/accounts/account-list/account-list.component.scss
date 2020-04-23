@@ -1,0 +1,20 @@
+.d-flex {
+  height: 100%;
+  justify-content: start;
+
+  .mat-tab-group {
+    width: 100%;
+
+    .mat-tab-label-content {
+      span {
+        margin-left: 8px;
+      }
+    }
+
+    .mat-tab-body-wrapper {
+      padding: 16px 8px 16px 8px;
+      height: 100%;
+
+    }
+  }
+}

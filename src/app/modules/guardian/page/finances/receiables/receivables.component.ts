@@ -1,6 +1,6 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {IncomingPaymentsService} from '../../../../../data/service/receivables/incoming-payments.service';
-import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
 import {throwError} from 'rxjs';
@@ -8,11 +8,11 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
 import {catchError, map} from 'rxjs/operators';
-import {AccountService} from '../../../../../data/service/users/account.service';
+import {AccountService} from '../../../../../data/service/accounts/account.service';
 import {TransactionMapping} from '../../../../../data/model/receivables/transaction-mapping';
-import {Child} from '../../../../../data/model/users/child';
-import {Account} from '../../../../../data/model/users/account';
-import {GuardianService} from '../../../../../data/service/users/guardian.service';
+import {Child} from '../../../../../data/model/accounts/child';
+import {Account} from '../../../../../data/model/accounts/account';
+import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
 import {TransactionMappingService} from '../../../../../data/service/receivables/transaction-mapping.service';
 
 const ERROR_MESSAGE = 'Receivables component failed to perform operation';
@@ -35,7 +35,7 @@ export class ReceivablesComponent implements OnInit {
 
   constructor(private incomingPaymentsService: IncomingPaymentsService,
               private userService: AccountService,
-              private snackErrorHandlingService: SnackErrorHandlingService,
+              private snackMessageHandlingService: SnackMessageHandlingService,
               private guardianService: GuardianService,
               private transactionMappingService: TransactionMappingService) {
   }
@@ -46,7 +46,7 @@ export class ReceivablesComponent implements OnInit {
           this.setUpDataTable(resp);
         },
         catchError(err => {
-          this.snackErrorHandlingService.openSnackBar('Failed to find user');
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem przelewów');
           return throwError(err);
         }));
 
@@ -60,7 +60,7 @@ export class ReceivablesComponent implements OnInit {
     });
   }
 
-  applyFilter($event: KeyboardEvent) {
+  applyFilter(event: KeyboardEvent) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -85,7 +85,7 @@ export class ReceivablesComponent implements OnInit {
     .getAllPaymentMappingsForGuardian(u.id)
     .pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        this.snackMessageHandlingService.error(ERROR_MESSAGE);
         return throwError(err);
       }),
       map(response => {

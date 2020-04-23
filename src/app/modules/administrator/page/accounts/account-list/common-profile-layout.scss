@@ -1,0 +1,124 @@
+.profile-layout-container {
+  display: flex;
+  justify-content: center;
+
+  .profile-card-layout {
+    display: flex;
+    flex-direction: column;
+
+    .mat-card-content {
+      flex-shrink: 1;
+
+      .profile-content-container {
+        display: flex;
+        flex-direction: column;
+
+        .header-item {
+          .header {
+            .center {
+              display: flex;
+              justify-content: center;
+              margin-bottom: 8px;
+            }
+          }
+        }
+
+        .profile-data-item {
+          margin-top: 8px;
+
+          p {
+            margin-bottom: 0;
+          }
+
+          .d-flex {
+            padding: 16px;
+            flex-wrap: wrap;
+
+            .item {
+              margin-bottom: 8px;
+              flex-basis: 50%;
+
+              .item-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .label {
+                  color: #bdc3c7;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mat-card-footer {
+      flex-grow: 1;
+    }
+  }
+
+  .profile-edit-card {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .mat-card-content {
+      flex-shrink: 0;
+
+     .d-flex {
+       justify-content: center;
+
+       .form-layout-container {
+
+         .section {
+           margin-left: 16px;
+
+           .mat-form-field {
+             margin-right: 16px;
+           }
+         }
+       }
+     }
+    }
+
+    .mat-card-footer {
+      flex-grow: 1;
+    }
+  }
+}
+
+.footer-container {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  .button {
+    padding: 8px;
+  }
+}
+
+.margin-child {
+  margin-right: 8px;
+}
+
+.padding-8 {
+  padding: 8px !important;
+}
+
+.resize {
+  animation: fade-card 500ms forwards;
+  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+@keyframes fade-card {
+  0% {
+  }
+
+  100% {
+    transform: translate3d(-30%, 0px, 0px);
+  }
+}
+

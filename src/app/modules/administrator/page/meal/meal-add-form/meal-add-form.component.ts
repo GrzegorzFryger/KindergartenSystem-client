@@ -3,13 +3,11 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MealService} from '../../../../../data/service/meal/meal.service';
 import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
 import {Meal} from '../../../../../data/model/meal/meal';
-import {Child} from '../../../../../data/model/users/child';
-import {AccountService} from '../../../../../data/service/users/account.service';
-import {ReplaySubject, Subject} from 'rxjs';
-import {take, takeUntil} from 'rxjs/operators';
 import {MatSelect} from '@angular/material/select';
 import {DatePipe} from '@angular/common';
 import {MealComponent} from '../meal.component';
+import {Child} from '../../../../../data/model/accounts/child';
+import {AccountService} from '../../../../../data/service/accounts/account.service';
 
 @Component({
   selector: 'app-meal-add-form',

@@ -71,6 +71,16 @@
             </div>
           </div>
 
+          <div class="inline">
+            <div class="common-finance-container">
+              Numer konta:&nbsp;
+            </div>
+            <div class="common-finance-container">
+              <b>{{accountNumber}} </b>
+              <b *ngIf="!accountNumber">Nie znaleziono konta do przelewów </b>
+            </div>
+          </div>
+
           <div class="finance-info">
             <mat-accordion>
               <mat-expansion-panel class="mat-elevation-z0">
@@ -79,7 +89,7 @@
                 </mat-expansion-panel-header>
 
                 <div class="mat-expansion-panel-container">
-                  <div class="item">
+                  <div class="table-container">
                     <div class="item-container">
                       <div class="header">
                         Saldo:
@@ -89,7 +99,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="item">
+                  <div class="table-container">
                     <div class="item-container">
                       <div class="header">
                         Wpłaty:
@@ -99,7 +109,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="item">
+                  <div class="table-container">
                     <div class="item-container">
                       <div class="header">
                         Należności:

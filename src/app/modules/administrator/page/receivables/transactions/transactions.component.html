@@ -1,10 +1,28 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Zarządzanie przelewami</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-
-  </mat-card-content>
-</mat-card>
-
+<div class="transactions-container">
+  <ng-container *ngIf="isSelected">
+    <div class="transactions-options">
+      <div class="transaction-options-container">
+        <mat-card matRipple routerLink="/administrator/transactions/assign" class="transaction-option-card">
+          <h2> Przypisz przelwy</h2>
+        </mat-card>
+        <mat-card (click)="openImportDialog()" class="transaction-option-card">
+          <h2> Import przelewów</h2>
+        </mat-card>
+        <mat-card matRipple routerLink="/administrator/transactions/search" class="transaction-option-card">
+          <h2> Szukaj przelewów</h2>
+        </mat-card>
+      </div>
+    </div>
+    <div class="transactions-info">
+      <div class="transactions-info-container">
+        <div class="chart">
+        </div>
+        <div class="history">
+          <p>Historia przelewów z ostnich 30 dni: </p>
+          <app-transaction-list [dataSource]="transactionOutput" ></app-transaction-list>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <router-outlet></router-outlet>
+</div>

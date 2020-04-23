@@ -3,14 +3,13 @@ import {Observable} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Child} from '../../../../data/model/users/child';
-import {GuardianService} from '../../../../data/service/users/guardian.service';
-import {UserCredentials} from '../../../../data/model/users/user-credentials';
+import {Child} from '../../../../data/model/accounts/child';
+import {GuardianService} from '../../../../data/service/accounts/guardian.service';
+import {UserCredentials} from '../../../../data/model/accounts/user-credentials';
 import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
-
 
 
 export interface DialogData {
@@ -49,7 +48,7 @@ export class MealComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.children = this.guardianService.findAllChildren(this.guardianService.userId);
+    this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
     console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
 

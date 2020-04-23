@@ -1,0 +1,23 @@
+
+.import-dial-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .button-select-container {
+    display: flex;
+    margin-bottom: 16px;
+
+    .button-item {
+      margin: 0 8px 0 8px;
+    }
+  }
+
+  .table {
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

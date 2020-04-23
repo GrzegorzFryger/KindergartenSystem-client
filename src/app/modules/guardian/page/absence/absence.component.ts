@@ -3,13 +3,13 @@ import {Absence} from '../../../../data/model/absence/absence';
 import {DayOffWork} from '../../../../data/model/absence/day-off-work';
 import {DayOffWorkService} from '../../../../data/service/absence/day-off-work.service';
 import {AbsenceService} from '../../../../data/service/absence/absence.service';
-import {Child} from '../../../../data/model/users/child';
+import {Child} from '../../../../data/model/accounts/child';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {Observable} from 'rxjs';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {AbsenceDialogComponent} from './absence-dialog/absence-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {SnackErrorHandlingService} from '../../../../core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-absence',
@@ -46,7 +46,7 @@ export class AbsenceComponent implements OnInit {
               private absenceService: AbsenceService,
               private selectedChildService: SelectedChildService,
               public dialog: MatDialog,
-              private  snackErrorHandlingService: SnackErrorHandlingService) {
+              private  snackErrorHandlingService: SnackMessageHandlingService) {
     this.selectedChild = selectedChildService.selectedChild;
     this.daysEvents = new Array<string>();
   }
@@ -102,14 +102,14 @@ export class AbsenceComponent implements OnInit {
     const sub = dialogRef.componentInstance.formResponse.subscribe(res => {
       this.dialog.closeAll();
       this.absenceService.createAbsences(res).subscribe(
-        absence => {
+        () => {
         },
-        error => {
-          this.snackErrorHandlingService.openSnackBar('can not add absence');
+        () => {
+          this.snackErrorHandlingService.error('can not add absence');
         });
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       sub.unsubscribe();
       console.log('The dialog was closed');
     });

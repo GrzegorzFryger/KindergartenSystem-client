@@ -1,0 +1,75 @@
+<div class="assign-transactions-container">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Wybierz przelew</ng-template>
+      <ng-container>
+
+        <app-transaction-list [dataSource]="transactionOutput" (checkedTransactionEvent)="onSelectedTransaction($event)"
+        ></app-transaction-list>
+      </ng-container>
+      <div class="button-container">
+        <div>
+          <button mat-raised-button matStepperNext [color]="'primary'"
+                  [disabled]="!(selectedTransactions?.length > 0)">
+            Następny
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Wybierz dzieci</ng-template>
+      <ng-container *ngIf="selectedTransactions?.length > 0">
+
+        <app-children-list
+          [dataSource]="childrenOutput" (outputDataEmitter)="onSelectChildEvent($event)">
+        </app-children-list>
+      </ng-container>
+      <div class="button-container">
+        <div>
+          <button mat-raised-button matStepperPrevious [color]="'primary'">Cofnij</button>
+          <button mat-raised-button matStepperNext [color]="'primary'"
+                  [disabled]="!((guardianOutput.guardians | async)?.length > 0)" >Następny
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Wybierz rodzica</ng-template>
+      <ng-container *ngIf="(guardianOutput.guardians | async)?.length > 0">
+
+        <app-guardian-list [dataSource]="guardianOutput"
+                           (checkedGuardiansEvent)="onSelectedGuardian($event)">
+        </app-guardian-list>
+      </ng-container>
+      <div class="button-container">
+        <div>
+          <button mat-raised-button matStepperPrevious [color]="'primary'">Cofnij</button>
+          <button mat-raised-button matStepperNext [color]="'primary'"
+                  [disabled]="!selectedGuardian" >Następny
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Zakończ</ng-template>
+
+      <!--    <div class="button-container">-->
+      <!--      <div>-->
+      <!--        <div class="row" [hidden]="!selectedChildId || amountOfSelectedTranactions <= 0">-->
+      <!--          <div class="col">-->
+      <!--            <button mat-raised-button color="primary" type="button"-->
+      <!--                    (click)="assignTransactions()" [disabled]="selectedGuardianId === '' ||-->
+      <!--                  amountOfSelectedTranactions === 0 || selectedChildId === ''">Przypisz transakcje-->
+      <!--            </button>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--    </div>-->
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>

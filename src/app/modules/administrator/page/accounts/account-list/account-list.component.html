@@ -1,0 +1,40 @@
+<div class="d-flex">
+  <mat-tab-group [selectedIndex]="selected.value"
+                 (selectedIndexChange)="selected.setValue($event)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="../../../assets/images/tata.png"
+             height="30"
+             width="30"
+             class="img-fluid"/>
+        <span>Rodzice</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <app-guardians></app-guardians>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="../../../../../assets/images/teacher.png"
+             height="30"
+             width="30"
+             class="img-fluid"
+             alt="image-cover"/>
+        <span>Pracownicy</span>
+      </ng-template>
+      <app-employees></app-employees>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img src="../../../../../assets/images/teacher.png"
+             height="30" width="30"
+             class="img-fluid"
+             alt="image-cover"/>
+        <span>Dzieci</span>
+      </ng-template>
+      <ng-template matTabContent>
+        <app-children></app-children>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

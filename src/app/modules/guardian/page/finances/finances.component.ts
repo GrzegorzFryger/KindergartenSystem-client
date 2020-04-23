@@ -2,16 +2,14 @@ import {TransactionMappingService} from '../../../../data/service/receivables/tr
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError, zip} from 'rxjs';
-import {SnackErrorHandlingService} from 'src/app/core/snack-error-handling/snack-error-handling.service';
+import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
 import {TransactionMapping} from 'src/app/data/model/receivables/transaction-mapping';
-import {AccountService} from '../../../../data/service/users/account.service';
-import {Account} from '../../../../data/model/users/account';
-import {Child} from '../../../../data/model/users/child';
-import {GuardianService} from '../../../../data/service/users/guardian.service';
-
-const ERROR_MESSAGE = 'Finances component failed to perform operation';
+import {AccountService} from '../../../../data/service/accounts/account.service';
+import {Account} from '../../../../data/model/accounts/account';
+import {Child} from '../../../../data/model/accounts/child';
+import {GuardianService} from '../../../../data/service/accounts/guardian.service';
 
 interface UserMapping {
   name: string;
@@ -31,12 +29,14 @@ export class FinancesComponent implements OnInit {
   public balancesForAllChildren: Array<Balance> = new Array<Balance>();
   public transactionMappings: Array<TransactionMapping> = new Array<TransactionMapping>();
   public children: Array<Child> = new Array<Child>();
+
+  public accountNumber: string;
   private isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
               private userService: AccountService,
-              private snackErrorHandlingService: SnackErrorHandlingService,
+              private snackMessageHandlingService: SnackMessageHandlingService,
               private guardianService: GuardianService) {
   }
 
@@ -46,6 +46,20 @@ export class FinancesComponent implements OnInit {
       this.guardianService.children.subscribe(resp => {
           this.forkResources(u);
           this.children = resp;
+        }
+      );
+
+      // Here we should use child id instead - but backend won't even use it
+      // As for now it returns same account number regardless of id that you provide
+      this.balanceService.getAccountNumberForChild(u.id).subscribe(
+        resp => {
+          this.accountNumber = resp.accountNumber;
+        },
+        error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z pobraniem numeru konta dla dziecka');
+        },
+        () => {
+          // ON COMPLETE
         }
       );
     });
@@ -71,23 +85,23 @@ export class FinancesComponent implements OnInit {
 
   private initializeSumOfAllBalances(u: Account) {
     this.sumOfBalancesForAllChildren = this.balanceService
-      .getSumOfBalancesForAllChildren(u.id)
-      .pipe(
-        catchError(err => {
-          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-          return throwError(err);
-        }),
-        map(response => {
-          this.isBalancePositive = response.balance >= 0;
-          return response;
-        })
-      );
+    .getSumOfBalancesForAllChildren(u.id)
+    .pipe(
+      catchError(err => {
+        this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem salda');
+        return throwError(err);
+      }),
+      map(response => {
+        this.isBalancePositive = response.balance >= 0;
+        return response;
+      })
+    );
   }
 
   private initializeBalancesForAllChildren(u: Account) {
     return this.balanceService.getBalancesForAllChildren(u.id).pipe(
       catchError(err => {
-        this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
+        this.snackMessageHandlingService.error('Wystapił problem z załadowaniem salda dzieci');
         return throwError(err);
       }),
       map(response => {
@@ -98,16 +112,16 @@ export class FinancesComponent implements OnInit {
 
   private initializeTransactionMappings(u: Account) {
     return this.transactionMappingService
-      .getAllPaymentMappingsForGuardian(u.id)
-      .pipe(
-        catchError(err => {
-          this.snackErrorHandlingService.openSnackBar(ERROR_MESSAGE);
-          return throwError(err);
-        }),
-        map(response => {
-          return response;
-        })
-      );
+    .getAllPaymentMappingsForGuardian(u.id)
+    .pipe(
+      catchError(err => {
+        this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem danych do przelewu');
+        return throwError(err);
+      }),
+      map(response => {
+        return response;
+      })
+    );
   }
 
 }

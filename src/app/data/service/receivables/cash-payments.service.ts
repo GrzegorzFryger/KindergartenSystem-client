@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
-import { CashPayment } from './../../model/receivables/cash-payment';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/app/core/environment.dev';
+import {Observable} from 'rxjs';
+import {CashPayment} from './../../model/receivables/cash-payment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/app/core/environment.dev';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,15 @@ export class CashPaymentsService {
 
   }
 
-  getAllCashPayments(): Observable<Array<CashPayment>> {
+  getAllCashPaymentsForChild(childId: string): Observable<Array<CashPayment>> {
     return this.http.get<Array<CashPayment>>(
-      environment.apiUrls.receivables.getAllIncomingPaymentsForChild
+      environment.apiUrls.receivables.getAllCashPaymentsForChild + `${childId}`
+    );
+  }
+
+  getAllCashPaymentsFromPastMonth(): Observable<Array<CashPayment>> {
+    return this.http.get<Array<CashPayment>>(
+      environment.apiUrls.receivables.getAllCashPaymentsFromPastMonth
     );
   }
 
@@ -25,15 +31,21 @@ export class CashPaymentsService {
     );
   }
 
-  deleteCashPayment() {
-
+  deleteCashPayment(id: number) {
+    return this.http.delete(
+      environment.apiUrls.receivables.deleteCashPayment + `${id}`
+    );
   }
 
-  createCashPayment() {
-
+  createCashPayment(payment: CashPayment) {
+    return this.http.post<any>(
+      environment.apiUrls.receivables.createCashPayment, payment
+    );
   }
 
-  updateCashPayment() {
-
+  updateCashPayment(payment: CashPayment) {
+    return this.http.put<any>(
+      environment.apiUrls.receivables.updateCashPayment, payment
+    );
   }
 }

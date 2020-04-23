@@ -1,0 +1,73 @@
+<div class="account-list-container">
+  <ng-container *ngIf="!personDetailCardOpen">
+    <div [ngClass]="{'move' : personDetailCardOpen}" class="table-container">
+      <h2>Lista rodziców</h2>
+      <div class="flex">
+        <div class="search">
+          <mat-form-field>
+            <mat-label>Szukaj</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj rodzica">
+          </mat-form-field>
+        </div>
+        <div class="table">
+
+          <mat-table [dataSource]="dataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.phone}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+              <mat-cell
+                *matCellDef="let guardian"> {{guardian.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
+              <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Wybierz Rodzica</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <div class="center">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)" >
+                  </mat-checkbox>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row, let guardian; columns: columnsToDisplay;"
+                     (click)="selectGuardian(guardian)">
+            </mat-row>
+          </mat-table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template [ngIf]="personDetailCardOpen">
+    <div [ngClass]="{'move2' : personDetailCardOpen}" class="person-container">
+      <app-profile [personData]="personToDisplay"
+                   (profileOutputEmitter)="receiveDataFromPersonDetail($event)">
+
+      </app-profile>
+    </div>
+  </ng-template>
+</div>
+
