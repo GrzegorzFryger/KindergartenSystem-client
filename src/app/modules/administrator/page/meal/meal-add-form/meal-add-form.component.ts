@@ -8,6 +8,7 @@ import {DatePipe} from '@angular/common';
 import {MealComponent} from '../meal.component';
 import {Child} from '../../../../../data/model/accounts/child';
 import {AccountService} from '../../../../../data/service/accounts/account.service';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-meal-add-form',
@@ -28,7 +29,8 @@ export class MealAddFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private mealService: MealService,
               private accountService: AccountService,
-              private mealComponent: MealComponent) {
+              private mealComponent: MealComponent,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -77,6 +79,7 @@ export class MealAddFormComponent implements OnInit {
     this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
       this.mealComponent.getAllMeals();
       this.mealComponent.openAddMealForm = false;
+      this.snackMessageHandlingService.success('Posiłek dodany');
     });
   }
 
