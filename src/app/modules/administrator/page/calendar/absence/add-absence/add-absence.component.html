@@ -1,0 +1,22 @@
+<div class ="row">
+  <div class="col">
+    <mat-table [dataSource]="dataSourceChild" matSort matSortActive="date" matSortDirection="desc">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="pesel">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

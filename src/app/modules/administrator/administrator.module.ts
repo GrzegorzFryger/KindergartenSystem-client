@@ -66,6 +66,7 @@ import {ChildrenListComponent} from './page/receivables/transactions/share/child
 import {TransactionListComponent} from './page/receivables/transactions/share/transaction-list/transaction-list.component';
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
 import { FindByDateComponent } from './page/calendar/absence/find-by-date/find-by-date.component';
+import { AddAbsenceComponent } from './page/calendar/absence/add-absence/add-absence.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { FindByDateComponent } from './page/calendar/absence/find-by-date/find-b
     GuardianListComponent,
     DayOffWorkComponent,
     AbsenceComponent,
-    FindByDateComponent
+    FindByDateComponent,
+    AddAbsenceComponent
   ],
 
 
