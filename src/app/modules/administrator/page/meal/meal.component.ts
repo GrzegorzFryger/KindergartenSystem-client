@@ -34,7 +34,8 @@ export class MealComponent implements OnInit {
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
   openAddMealForm = false;
-  checkedMeal: any;
+  isAnyMealChecked: boolean;
+  selectedMealId: Array<number> = [];
 
   animal: string;
   name: string;
@@ -89,7 +90,6 @@ export class MealComponent implements OnInit {
     }
 
 
-
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
     });
@@ -136,11 +136,14 @@ export class MealComponent implements OnInit {
     this.openNutritionalNotes = false;
   }
 
-  onlyOneCanByChecked() {
-    this.meals.forEach(u => {
-
-
-    });
+  selectedMeals(id: number) {
+    if ( this.selectedMealId.includes(id)) {
+      this.selectedMealId.splice(this.selectedMealId.indexOf(id, 1));
+      console.log(this.selectedMealId);
+    } else {
+      console.log('dodaje ' + id);
+      this.selectedMealId.push(id);
+    }
   }
 }
 
