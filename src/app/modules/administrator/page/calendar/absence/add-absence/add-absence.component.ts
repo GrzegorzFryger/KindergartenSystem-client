@@ -1,7 +1,6 @@
 import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Child} from '../../../../../../data/model/accounts/child';
 import {ChildService} from '../../../../../../data/service/accounts/child.service';
-import {Absence} from '../../../../../../data/model/absence/absence';
 import {AbsenceService} from '../../../../../../data/service/absence/absence.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -35,6 +34,15 @@ export class AddAbsenceComponent implements OnInit {
       this.dataSourceChild.paginator = this.paginator;
       this.dataSourceChild.paginator._intl.itemsPerPageLabel = 'Ilość rekordów na stronę';
     });
+  }
+
+  filterChildren($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.dataSourceChild.filter = filterValue.trim().toLowerCase();
+  }
+
+  onSubmit(submittedForm) {
+
   }
 
 }

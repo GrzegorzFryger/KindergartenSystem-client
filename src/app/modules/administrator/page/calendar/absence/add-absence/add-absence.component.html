@@ -1,4 +1,49 @@
-<div class ="row">
+<div class="row">
+  <form (ngSubmit)="onSubmit(addAbsenceForm)" #addAbsenceForm="ngForm">
+    <table>
+      <tr>
+        <td>
+          <div class="col">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę od</mat-label>
+              <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
+                     class="form-control" ngModel>
+              <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="col">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę do</mat-label>
+              <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
+                     class="form-control" ngModel>
+              <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateSortToDatepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div class="col">
+            <button mat-stroked-button class="btn-primary" type="submit">Dodaj</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="col">
+            <mat-form-field appearance="standard">
+              <mat-label>Znajdź</mat-label>
+              <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
+            </mat-form-field>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="row">
   <div class="col">
     <mat-table [dataSource]="dataSourceChild" matSort matSortActive="date" matSortDirection="desc">
       <ng-container matColumnDef="name">
