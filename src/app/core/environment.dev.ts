@@ -115,7 +115,16 @@ export const environment = {
       getAllMeals: mealUrl,
       deleteNN: mealUrl + '/nn/delete',
       addNN: mealUrl + '/nn',
+      updateMealPrice: mealUrl + '/price',
+      getMealPriceById: mealUrl + '/price/',
+      deleteMealPriceById: mealUrl + '/price/',
+      getAvailableMealPrice: mealUrl + '/price/notSet',
+      addMealPrice: mealUrl + '/price',
+      addMeal: mealUrl
+
+
     },
+
     actuator: {
       getHealth: actuatorUrl + 'health',
       getHttpTrace: actuatorUrl + 'httptrace',

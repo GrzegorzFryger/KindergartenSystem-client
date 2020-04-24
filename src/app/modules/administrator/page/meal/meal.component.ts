@@ -25,7 +25,7 @@ export interface DialogData {
 })
 export class MealComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
+  displayedColumns: string[] = ['select', 'id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   meals: Array<Meal>;
   openChildDetailsTable = false;
   openNutritionalNotes = false;
@@ -33,6 +33,8 @@ export class MealComponent implements OnInit {
   userCredentials: UserCredentials;
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
+  openAddMealForm = false;
+  checkedMeal: any;
 
   animal: string;
   name: string;
@@ -50,10 +52,12 @@ export class MealComponent implements OnInit {
     this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
     console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
+    this.getAllMeals();
+  }
 
+  getAllMeals() {
     this.mealService.getAllMeals().subscribe(resp => {
       this.meals = resp;
-      console.log(resp);
     });
   }
 
@@ -70,6 +74,10 @@ export class MealComponent implements OnInit {
     });
   }
 
+  openAddMealFormM() {
+    this.openAddMealForm = !this.openAddMealForm;
+  }
+
   openChildDetails(childID: string): void {
 
     if (this.openNutritionalNotes) {
@@ -79,6 +87,7 @@ export class MealComponent implements OnInit {
     if (!this.openChildDetailsTable) {
       this.openChildDetailsTable = !this.openChildDetailsTable;
     }
+
 
 
     this.guardianService.getChildById(childID).subscribe(resp => {
@@ -116,6 +125,21 @@ export class MealComponent implements OnInit {
   addNN(nnValue: string) {
     this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
+    });
+  }
+
+  closeChildDetails() {
+    this.openChildDetailsTable = false;
+  }
+
+  closeNutritionalNotes() {
+    this.openNutritionalNotes = false;
+  }
+
+  onlyOneCanByChecked() {
+    this.meals.forEach(u => {
+
+
     });
   }
 }
