@@ -54,8 +54,8 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
         <mat-cell *matCellDef="let absence">
-          <button mat-stroked-button (click)="removeAbsence(absence.id)">Usuń</button>
           <button mat-stroked-button>Edytuj</button>
+          <button mat-stroked-button class="mat-warn" (click)="removeAbsence(absence.id)">Usuń</button>
         </mat-cell>
       </ng-container>
 

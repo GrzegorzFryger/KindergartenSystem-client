@@ -122,8 +122,8 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
               <mat-cell *matCellDef="let dayOffWork">
-                <button mat-stroked-button (click)="removeDayOff(dayOffWork.id)">Usuń</button>
                 <button mat-stroked-button>Edytuj</button>
+                <button mat-stroked-button class="mat-warn" (click)="removeDayOff(dayOffWork.id)">Usuń</button>
               </mat-cell>
             </ng-container>
 
