@@ -137,11 +137,13 @@ export class MealComponent implements OnInit {
     this.openNutritionalNotes = false;
   }
 
-  selectedMeals(id: number) {
-    if ( this.selectedMealId.includes(id)) {
+  selectedMeals(id: number, mealStatus: string) {
+    if (this.selectedMealId.includes(id)) {
       this.selectedMealId.splice(this.selectedMealId.indexOf(id, 1));
     } else {
-      this.selectedMealId.push(id);
+      if (mealStatus === 'ACTIVE') {
+        this.selectedMealId.push(id);
+      }
     }
   }
 
