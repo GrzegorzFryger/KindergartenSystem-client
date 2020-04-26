@@ -10,6 +10,7 @@ import {Meal} from '../../../../data/model/meal/meal';
 import {MealService} from '../../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 
 export interface DialogData {
@@ -25,7 +26,7 @@ export interface DialogData {
 })
 export class MealComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
+  displayedColumns: string[] = ['select', 'id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   meals: Array<Meal>;
   openChildDetailsTable = false;
   userCredentials: UserCredentials;
@@ -33,19 +34,17 @@ export class MealComponent implements OnInit {
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
   openNutritionalNotes = false;
-  openAddMealForm = true;
-
-
-  animal: string;
-  name: string;
+  openAddMealForm = false;
 
   public children: Observable<Array<Child>>;
+  private selectedMealId: Array<number> = [];
 
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
-              private mealService: MealService) {
+              private mealService: MealService,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -62,17 +61,6 @@ export class MealComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
 
   openChildDetails(childID: string): void {
     this.openChildDetailsTable = !this.openChildDetailsTable;
@@ -112,6 +100,30 @@ export class MealComponent implements OnInit {
 
   openAddMealFormM() {
     this.openAddMealForm = !this.openAddMealForm;
+  }
+
+  selectedMeals(id: number, mealStatus: string) {
+    if (this.selectedMealId.includes(id)) {
+      this.selectedMealId.splice(this.selectedMealId.indexOf(id, 1));
+    } else {
+      if (mealStatus === 'ACTIVE') {
+        this.selectedMealId.push(id);
+      }
+    }
+  }
+
+  invokeMeals() {
+    this.selectedMealId.forEach(u => {
+      this.mealService.invokeMeal(u).subscribe(reps => {
+        this.snackMessageHandlingService.success('Operacja zakończona sukcesem');
+        this.getAllMeals();
+        this.selectedMealId = [];
+      }, err => {
+        this.snackMessageHandlingService.error('Coś poszło nie tak');
+      });
+
+    });
+
   }
 
 

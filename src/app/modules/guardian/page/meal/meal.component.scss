@@ -28,6 +28,10 @@
       background-color: #EDEEF4;
       color: #606FEE;
     }
+
+    .invoke-meal-button {
+      background-color: #f1c40f ;
+    }
   }
 }
 
@@ -252,5 +256,21 @@ md-tab-group {
 
   .dateValue{
     top: 50%;
+  }
+}
+
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.edit-meal-checkbox {
+  margin-left: -20px;
+}
+
+
+mat-cell {
+  span {
+    margin-left: 10px;
   }
 }

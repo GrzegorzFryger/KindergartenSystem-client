@@ -10,6 +10,19 @@
 
           <mat-table #table [dataSource]="meals">
 
+            <ng-container matColumnDef="select">
+              <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox [disabled]="true"
+                              [indeterminate]="true">
+                </mat-checkbox>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <mat-checkbox [(ngModel)]="element.isMealCheck"
+                              (change)="selectedMeals(element.id, element.mealStatus)">
+                </mat-checkbox>
+              </mat-cell>
+            </ng-container>
+
 
             <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
@@ -64,6 +77,11 @@
       </mat-card-content>
 
       <mat-card-actions>
+        <button *ngIf="selectedMealId?.length != 0"
+                mat-button class="invoke-meal-button"
+                (click)="invokeMeals()"
+                color="primary">Zrezygnuj</button>
+
         <button mat-button (click)="openAddMealFormM()"
                 color="primary">Dodaj kolejny</button>
       </mat-card-actions>
