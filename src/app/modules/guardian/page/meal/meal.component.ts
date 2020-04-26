@@ -60,10 +60,16 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
 
+    this.selectedChildService.selectedChild.subscribe((child: Child) => {
+      this.selectedChild = child;
+      this.getAllMealsForChild();
+    });
+
 
   }
 
   getAllMealsForChild() {
+
     if (this.selectedChild != null) {
       const childId = this.selectedChild.id;
       this.mealService.getAllMealsForChild(childId).subscribe(resp => {
@@ -127,7 +133,7 @@ export class MealComponent implements OnInit {
     this.selectedMealId.forEach(u => {
       this.mealService.invokeMeal(u).subscribe(reps => {
         this.snackMessageHandlingService.success('Operacja zakończona sukcesem');
-        this.getAllMeals();
+        this.getAllMealsForChild();
         this.selectedMealId = [];
       }, err => {
         this.snackMessageHandlingService.error('Coś poszło nie tak');
