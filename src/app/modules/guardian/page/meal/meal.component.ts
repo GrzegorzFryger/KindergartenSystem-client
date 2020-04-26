@@ -59,11 +59,12 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
 
-    this.getAllMeals();
+    this.getAllMealsForChild();
   }
 
-  getAllMeals() {
-    this.mealService.getAllMeals().subscribe(resp => {
+  getAllMealsForChild() {
+    const childId = this.selectedChild.id;
+    this.mealService.getAllMealsForChild(childId).subscribe(resp => {
       this.meals = resp;
     });
   }
