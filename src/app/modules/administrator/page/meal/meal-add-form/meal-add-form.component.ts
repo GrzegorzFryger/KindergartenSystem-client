@@ -23,6 +23,8 @@ export class MealAddFormComponent implements OnInit {
   mealDiets: Array<MealDictionary>;
   children: Array<Child> = [];
   mealToAdd: Meal = new Meal();
+  minDateToOrder = new Date();
+  maxDateToOrder = new Date();
 
 
   @ViewChild('singleSelect') singleSelect: MatSelect;
@@ -38,6 +40,9 @@ export class MealAddFormComponent implements OnInit {
     this.getAllMealTypes();
     this.getAllMealDiets();
     this.getAllKids();
+
+    this.minDateToOrder.setDate(this.minDateToOrder.getDate() + 1);
+    this.maxDateToOrder.setDate(this.minDateToOrder.getDate() + 1);
 
 
     this.addMealForm = this.formBuilder.group({

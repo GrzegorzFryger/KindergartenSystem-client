@@ -49,14 +49,18 @@
 
                     <mat-form-field>
                       <mat-label>Od kiedy posiłek</mat-label>
-                      <input matInput formControlName="dateFrom" [(ngModel)]="mealToAdd.mealFromDate" [matDatepicker]="dataFrom">
+                      <input matInput
+                             [min]="minDateToOrder" formControlName="dateFrom"
+                             [(ngModel)]="mealToAdd.mealFromDate" [matDatepicker]="dataFrom">
                       <mat-datepicker-toggle matSuffix [for]="dataFrom"></mat-datepicker-toggle>
                       <mat-datepicker #dataFrom></mat-datepicker>
                     </mat-form-field>
 
                     <mat-form-field>
                       <mat-label>Do kiedy posiłek</mat-label>
-                      <input matInput formControlName="dateTo" [(ngModel)]="mealToAdd.mealToDate" [matDatepicker]="dateTo">
+                      <input matInput formControlName="dateTo"
+                             [min]="maxDateToOrder"
+                             [(ngModel)]="mealToAdd.mealToDate" [matDatepicker]="dateTo">
                       <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
                       <mat-datepicker #dateTo></mat-datepicker>
                     </mat-form-field>

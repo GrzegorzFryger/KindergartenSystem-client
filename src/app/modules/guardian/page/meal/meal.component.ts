@@ -33,6 +33,7 @@ export class MealComponent implements OnInit {
   selectedNutritionalNotes: Array<NutritionalNotes> = [];
   selectedMeal: Meal;
   openNutritionalNotes = false;
+  openAddMealForm = true;
 
 
   animal: string;
@@ -105,6 +106,10 @@ export class MealComponent implements OnInit {
     this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
     });
+  }
+
+  openAddMealFormM() {
+    this.openAddMealForm = !this.openAddMealForm;
   }
 
 
