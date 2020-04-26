@@ -51,6 +51,7 @@ export class MealComponent implements OnInit {
               private selectedChildService: SelectedChildService) {
     selectedChildService.selectedChild.subscribe((child: Child) => {
       this.selectedChild = child;
+      this.getAllMealsForChild();
     });
   }
 
@@ -59,14 +60,16 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
 
-    this.getAllMealsForChild();
+
   }
 
   getAllMealsForChild() {
-    const childId = this.selectedChild.id;
-    this.mealService.getAllMealsForChild(childId).subscribe(resp => {
-      this.meals = resp;
-    });
+    if (this.selectedChild != null) {
+      const childId = this.selectedChild.id;
+      this.mealService.getAllMealsForChild(childId).subscribe(resp => {
+        this.meals = resp;
+      });
+    }
   }
 
 
