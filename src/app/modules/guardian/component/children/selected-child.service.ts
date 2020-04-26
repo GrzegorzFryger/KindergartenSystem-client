@@ -6,6 +6,7 @@ import {Child} from '../../../../data/model/accounts/child';
 export class SelectedChildService {
   private selectedChildSub: Subject<Child>;
   selectedChild: Observable<Child>;
+  selectedChildValue: Child;
 
   constructor() {
     this.selectedChildSub = new Subject<Child>();
@@ -14,6 +15,10 @@ export class SelectedChildService {
 
   changeChild(currentChild: Child) {
     this.selectedChildSub.next(currentChild);
+
+    this.selectedChild.subscribe(resp => {
+      this.selectedChildValue = resp;
+    });
   }
 
 }

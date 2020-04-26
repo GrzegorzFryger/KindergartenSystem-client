@@ -11,6 +11,7 @@ import {MealService} from '../../../../data/service/meal/meal.service';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
+import {SelectedChildService} from '../../component/children/selected-child.service';
 
 
 export interface DialogData {
@@ -35,6 +36,8 @@ export class MealComponent implements OnInit {
   selectedMeal: Meal;
   openNutritionalNotes = false;
   openAddMealForm = false;
+  selectedChild: Child;
+
 
   public children: Observable<Array<Child>>;
   private selectedMealId: Array<number> = [];
@@ -44,13 +47,17 @@ export class MealComponent implements OnInit {
               public dialog: MatDialog,
               private authenticationService: AuthenticationService,
               private mealService: MealService,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private selectedChildService: SelectedChildService) {
+    selectedChildService.selectedChild.subscribe((child: Child) => {
+      this.selectedChild = child;
+    });
   }
 
   ngOnInit(): void {
     this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
-    console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
+
 
     this.getAllMeals();
   }
