@@ -1,1 +1,93 @@
-<p>meal-add-form-guardian works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+
+
+      <mat-card class="childDetailsCardContent">
+        <mat-card-header class="mealCardHeader">
+          <mat-card-title>Dodaj posiłek</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="close-cross" (click)="closeAddMealForm()" style="">
+            <mat-icon matTooltip="Zamknij">close</mat-icon>
+          </div>
+          <div class="cardContent">
+
+            <div class="container">
+              <div class="row">
+
+                <form [formGroup]="addMealForm">
+
+                  <mat-form-field>
+                    <mat-label>Rodział posiłku</mat-label>
+                    <mat-select required formControlName="mealTypeSelect" [(ngModel)]="mealToAdd.mealType">
+                      <mat-option *ngFor="let mealType of mealTypes" [value]="mealType.value">
+                        {{mealType.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Rodział diety</mat-label>
+                    <mat-select required formControlName="mealDietSelect" [(ngModel)]="mealToAdd.dietType">
+                      <mat-option *ngFor="let diet of mealDiets" [value]="diet.value">
+                        {{diet.description}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Dziecko</mat-label>
+                    <mat-select required formControlName="childSelect" [(ngModel)]="mealToAdd.childID">
+                      <mat-option *ngFor="let child of children" [value]="child.id">
+                        {{child.name}} {{child.surname}} ({{child.pesel}})
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div class="data-pickers-meal">
+
+                    <mat-form-field>
+                      <mat-label>Od kiedy posiłek</mat-label>
+                      <input matInput
+                             [min]="minDateToOrder" formControlName="dateFrom"
+                             [(ngModel)]="mealToAdd.mealFromDate" [matDatepicker]="dataFrom">
+                      <mat-datepicker-toggle matSuffix [for]="dataFrom"></mat-datepicker-toggle>
+                      <mat-datepicker #dataFrom></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                      <mat-label>Do kiedy posiłek</mat-label>
+                      <input matInput formControlName="dateTo"
+                             [min]="maxDateToOrder"
+                             [(ngModel)]="mealToAdd.mealToDate" [matDatepicker]="dateTo">
+                      <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+                      <mat-datepicker #dateTo></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+
+                </form>
+
+
+              </div>
+
+              <div class="clear"></div>
+              <div class="row">
+
+                <div class="submit_button">
+                  <button [disabled]="!addMealForm.valid" (click)="addMeal()" mat-button>Dodaj</button>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+  </div>
+</div>

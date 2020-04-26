@@ -53,12 +53,14 @@ export class MealComponent implements OnInit {
     console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
 
-    this.mealService.getAllMeals().subscribe(resp => {
-      this.meals = resp;
-      console.log(resp);
-    });
+    this.getAllMeals();
   }
 
+  getAllMeals() {
+    this.mealService.getAllMeals().subscribe(resp => {
+      this.meals = resp;
+    });
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
@@ -88,7 +90,7 @@ export class MealComponent implements OnInit {
 
     this.selectedNutritionalNotes.forEach(u => u.fromSelectedMealId = mealID);
     this.selectedNutritionalNotes = this.meals
-      .find( ({ id }) => id === mealID ).nutritionalNotesList;
+      .find(({id}) => id === mealID).nutritionalNotesList;
 
     this.guardianService.getChildById(childID).subscribe(resp => {
       this.childDetails = resp;
