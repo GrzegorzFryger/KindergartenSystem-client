@@ -15,6 +15,8 @@ import {EditCashPaymentDialogComponent} from './page/receivables/cash-payments/e
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
 import {TransactionsComponent} from './page/receivables/transactions/transactions.component';
 import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
+import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
+import {AbsenceComponent} from './page/calendar/absence/absence.component';
 
 
 const routes: Routes = [
@@ -61,6 +63,14 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+      },
+      {
+        path: 'dayOff',
+        component: DayOffWorkComponent,
+      },
+      {
+        path: 'absence',
+        component: AbsenceComponent,
       },
       {
         path: 'accounts',

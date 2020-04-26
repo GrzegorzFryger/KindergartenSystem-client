@@ -56,6 +56,8 @@ import {MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxModule} from '@angular/material
 import {MatStepperModule} from '@angular/material/stepper';
 import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from '@angular/material/radio';
 import {AssignChildrenComponent} from './page/accounts/assign-children/assign-children.component';
+import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
+import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {AddCashPaymentComponent} from './page/receivables/cash-payments/add-cash-payment/add-cash-payment.component';
 import {EditCashPaymentDialogComponent} from './page/receivables/cash-payments/edit-cash-payment/edit-cash-payment-dialog.component';
 import {SearchCashPaymentComponent} from './page/receivables/cash-payments/search-cash-payment/search-cash-payment.component';
@@ -64,11 +66,15 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {ChildrenListComponent} from './page/receivables/transactions/share/children-list/children-list.component';
 import {TransactionListComponent} from './page/receivables/transactions/share/transaction-list/transaction-list.component';
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
+import {FindByDateComponent} from './page/calendar/absence/find-by-date/find-by-date.component';
+import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 
 @NgModule({
   declarations: [
     AdministratorComponent,
     CashPaymentsComponent,
+    TransactionsComponent,
+    AddCashPaymentComponent,
     AssignTransactionsComponent,
     ImportComponent,
     MealPriceComponent,
@@ -102,7 +108,11 @@ import {GuardianListComponent} from './page/receivables/transactions/share/guard
     SearchTransactionComponent,
     TransactionListComponent,
     ChildrenListComponent,
-    GuardianListComponent
+    GuardianListComponent,
+    DayOffWorkComponent,
+    AbsenceComponent,
+    FindByDateComponent,
+    AddAbsenceComponent
   ],
 
 
