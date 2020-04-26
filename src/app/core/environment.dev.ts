@@ -121,7 +121,7 @@ export const environment = {
       addMealPrice: mealUrl + '/price',
       addMeal: mealUrl,
       invokeMeal: mealUrl + '/',
-
+      getAllMealsByChild: mealUrl + '/',
 
     },
 
