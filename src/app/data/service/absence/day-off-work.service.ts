@@ -23,8 +23,8 @@ export class DayOffWorkService {
     return this.http.put<DayOffWork>(environment.apiUrls.calendar.updateDayOffWork, dayOffWork);
   }
 
-  public deleteDayOffWork(id: string): void {
-    this.http.delete<DayOffWork>(environment.apiUrls.calendar.deleteDayOffWork);
+  public deleteDayOffWork(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrls.calendar.deleteDayOffWork + id);
   }
 
   public  findAllDaysOffWork(): Observable<Array<DayOffWork>> {

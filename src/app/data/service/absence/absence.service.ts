@@ -22,7 +22,7 @@ export class AbsenceService {
     return this.http.post<Absence>(environment.apiUrls.calendar.createAbsence, absence);
   }
 
-  public createAbsences(absenceRange: AbsenceRange ): Observable<AbsenceRange> {
+  public createAbsences(absenceRange: AbsenceRange): Observable<AbsenceRange> {
     return this.http.post<AbsenceRange>(environment.apiUrls.calendar.createAbsences, absenceRange);
   }
 
@@ -30,8 +30,8 @@ export class AbsenceService {
     return this.http.put<Absence>(environment.apiUrls.calendar.updateAbsence, absence);
   }
 
-  public deleteAbsence(id: string): void {
-    this.http.delete<Absence>(environment.apiUrls.calendar.deleteAbsence);
+  public deleteAbsence(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrls.calendar.deleteAbsence + id);
   }
 
   public getAllAbsencesByChildId(childId: string): Observable<Array<Absence>> {
@@ -40,6 +40,10 @@ export class AbsenceService {
 
   public getAllAbsencesByDate(date: string): Observable<Array<Absence>> {
     return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesByDate + `${date}`);
+  }
+
+  public getAllAbsencesBetweenDates(startDate: string, endDate: string): Observable<Array<Absence>> {
+    return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesBetweenDates + startDate + '/' + endDate);
   }
 
   public getAllAbsencesForChildBetweenDates(childId: string, startDate: string, endDate: string): Observable<Array<Absence>> {
