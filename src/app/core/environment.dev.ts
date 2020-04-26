@@ -46,7 +46,7 @@ export const environment = {
       },
       child: {
         children: accountUrl + 'children',
-        getChildById: accountUrl + 'children/',
+        getChildById: accountUrl + 'child/',
         count: accountUrl + 'children/count',
         searchChildrenByFullName: accountUrl + 'children/search',
         create: accountUrl + 'child',
