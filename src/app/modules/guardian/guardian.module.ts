@@ -36,6 +36,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {FinanceChartComponent} from './page/finances/finance-chart/finance-chart.component';
 import {ChartsModule} from 'ng2-charts';
 import {NavbarComponent} from './component/navbar/navbar.component';
+import { MealAddFormGuardianComponent } from './page/meal/meal-add-form-guardian/meal-add-form-guardian.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -49,39 +51,41 @@ import {NavbarComponent} from './component/navbar/navbar.component';
     AbsenceComponent,
     AbsenceDialogComponent,
     FinanceChartComponent,
-    NavbarComponent
+    NavbarComponent,
+    MealAddFormGuardianComponent
   ],
 
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedModule,
-    GuardianRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatTreeModule,
-    MatPaginatorModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatStepperModule,
+    imports: [
+        CommonModule,
+        FormsModule,
+        SharedModule,
+        GuardianRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatTreeModule,
+        MatPaginatorModule,
+        MatSliderModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatStepperModule,
 
-    MatExpansionModule,
-    MatDividerModule,
-    MatTabsModule,
-    MatChipsModule,
-    MatTooltipModule,
-    MatSortModule,
-    ChartsModule
-  ],
+        MatExpansionModule,
+        MatDividerModule,
+        MatTabsModule,
+        MatChipsModule,
+        MatTooltipModule,
+        MatSortModule,
+        ChartsModule,
+        MatCheckboxModule
+    ],
 
     exports: [
         MatInputModule,

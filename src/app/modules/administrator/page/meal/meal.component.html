@@ -19,7 +19,7 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <mat-checkbox [(ngModel)]="element.isMealCheck"
-                              (change)="onlyOneCanByChecked()">
+                              (change)="selectedMeals(element.id, element.mealStatus)">
                 </mat-checkbox>
               </mat-cell>
             </ng-container>
@@ -81,7 +81,13 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-button (click)="openAddMealFormM()" color="primary">Dodaj kolejny</button>
+        <button *ngIf="selectedMealId?.length != 0"
+                mat-button class="invoke-meal-button"
+                (click)="invokeMeals()"
+                color="primary">Zrezygnuj</button>
+
+        <button mat-button (click)="openAddMealFormM()"
+                color="primary">Dodaj kolejny</button>
       </mat-card-actions>
     </mat-card>
   </div>

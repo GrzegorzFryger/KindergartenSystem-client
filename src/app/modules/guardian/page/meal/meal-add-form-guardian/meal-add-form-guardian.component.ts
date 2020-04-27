@@ -1,22 +1,22 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {MealService} from '../../../../../data/service/meal/meal.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
+import {Child} from '../../../../../data/model/accounts/child';
 import {Meal} from '../../../../../data/model/meal/meal';
 import {MatSelect} from '@angular/material/select';
-import {DatePipe} from '@angular/common';
+import {MealService} from '../../../../../data/service/meal/meal.service';
 import {MealComponent} from '../meal.component';
-import {Child} from '../../../../../data/model/accounts/child';
-import {AccountService} from '../../../../../data/service/accounts/account.service';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {ChildService} from '../../../../../data/service/accounts/child.service';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {DatePipe} from '@angular/common';
+
 
 @Component({
-  selector: 'app-meal-add-form',
-  templateUrl: './meal-add-form.component.html',
-  styleUrls: ['./meal-add-form.component.scss']
+  selector: 'app-meal-add-form-guardian',
+  templateUrl: './meal-add-form-guardian.component.html',
+  styleUrls: ['./meal-add-form-guardian.component.scss']
 })
-export class MealAddFormComponent implements OnInit {
+export class MealAddFormGuardianComponent implements OnInit {
 
   addMealForm: FormGroup;
   mealTypes: Array<MealDictionary>;
@@ -55,6 +55,8 @@ export class MealAddFormComponent implements OnInit {
   }
 
 
+
+
   getAllMealTypes() {
     this.mealService.getMealType().subscribe(resp => {
       this.mealTypes = resp;
@@ -83,7 +85,7 @@ export class MealAddFormComponent implements OnInit {
     this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
 
     this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
-      this.mealComponent.getAllMeals();
+      this.mealComponent.getAllMealsForChild();
       this.mealComponent.openAddMealForm = false;
       this.snackMessageHandlingService.success('Posiłek dodany');
     });

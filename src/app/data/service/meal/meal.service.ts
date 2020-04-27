@@ -80,4 +80,12 @@ export class MealService {
   addMeal(mealToAdd: Meal): Observable<Meal> {
     return this.http.post<Meal>(environment.apiUrls.meals.addMeal, mealToAdd);
   }
+
+  invokeMeal(mealId: number): Observable<Meal> {
+    return this.http.put<Meal>(environment.apiUrls.meals.invokeMeal + mealId + '/invoke' , null);
+  }
+
+  getAllMealsForChild(childID: string): Observable<Array<Meal>> {
+    return this.http.get<Array<Meal>>(environment.apiUrls.meals.getAllMealsByChild + childID + '/child');
+  }
 }
