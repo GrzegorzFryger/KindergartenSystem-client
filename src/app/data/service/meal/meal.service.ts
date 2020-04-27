@@ -85,7 +85,7 @@ export class MealService {
     return this.http.put<Meal>(environment.apiUrls.meals.invokeMeal + mealId + '/invoke' , null);
   }
 
-  getAllMealsForChild(childID: string) {
+  getAllMealsForChild(childID: string): Observable<Array<Meal>> {
     return this.http.get<Array<Meal>>(environment.apiUrls.meals.getAllMealsByChild + childID + '/child');
   }
 }

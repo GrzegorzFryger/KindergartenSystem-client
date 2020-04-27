@@ -74,7 +74,10 @@ export class MealComponent implements OnInit {
       const childId = this.selectedChild.id;
       this.mealService.getAllMealsForChild(childId).subscribe(resp => {
         this.meals = resp;
-      });
+      }, err => {
+          this.snackMessageHandlingService.error('Coś poszło nie tak');
+        }
+      );
     }
   }
 
