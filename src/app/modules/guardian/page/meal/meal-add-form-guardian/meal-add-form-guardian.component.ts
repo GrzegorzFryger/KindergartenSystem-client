@@ -85,7 +85,7 @@ export class MealAddFormGuardianComponent implements OnInit {
     this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
 
     this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
-      this.mealComponent.getAllMeals();
+      this.mealComponent.getAllMealsForChild();
       this.mealComponent.openAddMealForm = false;
       this.snackMessageHandlingService.success('Posiłek dodany');
     });
