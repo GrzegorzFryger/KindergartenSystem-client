@@ -4,6 +4,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {UserComponent} from './user/user.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {MatCardModule} from '@angular/material/card';
         CommonModule,
         MatButtonModule,
         RouterModule,
-        MatCardModule
+        MatCardModule,
+        MatMenuModule
     ],
   exports: [UserComponent]
 })

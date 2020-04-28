@@ -1,12 +1,18 @@
 <div class="d-flex user">
-  <mat-card>
+  <mat-card [matMenuTriggerFor]="menu">
     <div class="user-container">
       <div class="name">
          {{(user | async)?.name }}  {{(user | async)?.surname }}
       </div>
-      <div class="img">
+      <div class="img" >
         <img src="../../../assets/images/tata.png" height="50" width="50" class="img-fluid"/>
       </div>
+
     </div>
   </mat-card>
+
+  <mat-menu class="user-dropdown-menu" #menu="matMenu" xPosition="before">
+    <button mat-menu-item>Edytuj Konto</button>
+    <button mat-menu-item>Wyloguj</button>
+  </mat-menu>
 </div>
