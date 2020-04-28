@@ -13,6 +13,6 @@
 
   <mat-menu class="user-dropdown-menu" #menu="matMenu" xPosition="before">
     <button mat-menu-item>Edytuj Konto</button>
-    <button mat-menu-item>Wyloguj</button>
+    <button mat-menu-item (click)="logout()">Wyloguj</button>
   </mat-menu>
 </div>
