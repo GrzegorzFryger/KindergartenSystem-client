@@ -40,7 +40,7 @@ export class MealComponent implements OnInit {
 
 
   public children: Observable<Array<Child>>;
-  private selectedMealId: Array<number> = [];
+  selectedMealId: Array<number> = [];
 
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
