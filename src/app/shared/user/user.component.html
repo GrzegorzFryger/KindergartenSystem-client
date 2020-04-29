@@ -13,14 +13,14 @@
 
   <mat-menu class="user-dropdown-menu" #menu="matMenu" xPosition="before">
     <mat-button-toggle-group #group="matButtonToggleGroup">
-      <mat-button-toggle value="left" aria-label="Text align left">
-        <mat-icon>format_align_left</mat-icon>
+      <mat-button-toggle  value="left" matTooltip="Rodzic">
+        <mat-icon  >perm_identity</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="center" aria-label="Text align center">
-        <mat-icon>format_align_center</mat-icon>
+      <mat-button-toggle value="center" matTooltip="Nauczyciel">
+        <mat-icon>school</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="right" aria-label="Text align right">
-        <mat-icon>format_align_right</mat-icon>
+      <mat-button-toggle value="right" matTooltip="Administrator">
+        <mat-icon>supervisor_account</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
 

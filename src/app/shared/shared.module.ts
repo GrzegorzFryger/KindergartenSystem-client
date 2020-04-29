@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatCardModule,
     MatMenuModule,
     MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [UserComponent]
 })
