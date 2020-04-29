@@ -16,18 +16,21 @@
 
       <mat-button-toggle [ngClass]="selectedRole === 'USER' ? 'role-selected' : ''"
                          *ngIf="isUserParent"
+                         (click)="changeRole('USER')"
                          matTooltip="Rodzic">
         <mat-icon>perm_identity</mat-icon>
       </mat-button-toggle>
 
       <mat-button-toggle [ngClass]="selectedRole === 'TEACHER' ? 'role-selected' : ''"
                          *ngIf="isUserTeacher"
+                         (click)="changeRole('TEACHER')"
                          matTooltip="Nauczyciel">
         <mat-icon>school</mat-icon>
       </mat-button-toggle>
 
       <mat-button-toggle [ngClass]="selectedRole === 'ADMINISTRATOR' ? 'role-selected' : ''"
                          *ngIf="isUserAdmin"
+                         (click)="changeRole('ADMINISTRATOR')"
                          matTooltip="Administrator">
         <mat-icon>supervisor_account</mat-icon>
       </mat-button-toggle>

@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   private isUserAdmin = false;
   private isUserTeacher = false;
   private isUserParent = false;
-  private selectedRole: string;
+  private selectedRole;
 
 
   constructor(private userService: AccountService,
@@ -37,9 +37,6 @@ export class UserComponent implements OnInit {
     this.user.subscribe(user => {
       const roles = user.roles;
 
-      if (this.selectedRole == null) {
-        this.selectedRole = user.roles[0].name;
-      }
 
       roles.forEach(u => {
         if (u.name === 'ADMINISTRATOR') {
@@ -53,6 +50,19 @@ export class UserComponent implements OnInit {
         }
       });
     });
+  }
+
+  changeRole(role: string): void {
+    this.selectedRole = role;
+    if (role === 'ADMINISTRATOR') {
+      this.router.navigate([environment.routes.homeUrlAdmin]);
+    }
+    if (role === 'USER') {
+      this.router.navigate([environment.routes.homeUrl]);
+    }
+    if (role === 'TEACHER') {
+      this.router.navigate([environment.routes.homeUrlTeacher]);
+    }
   }
 
 
