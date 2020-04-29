@@ -2,9 +2,9 @@
   <mat-card [matMenuTriggerFor]="menu">
     <div class="user-container">
       <div class="name">
-         {{(user | async)?.name }}  {{(user | async)?.surname }}
+        {{(user | async)?.name }}  {{(user | async)?.surname }}
       </div>
-      <div class="img" >
+      <div class="img">
         <img src="../../../assets/images/tata.png" height="50" width="50" class="img-fluid"/>
       </div>
 
@@ -13,17 +13,26 @@
 
   <mat-menu class="user-dropdown-menu" #menu="matMenu" xPosition="before">
     <mat-button-toggle-group #group="matButtonToggleGroup">
-      <mat-button-toggle  value="left" matTooltip="Rodzic">
-        <mat-icon  >perm_identity</mat-icon>
+
+      <mat-button-toggle [ngClass]="selectedRole === 'USER' ? 'role-selected' : ''"
+                         *ngIf="isUserParent"
+                         matTooltip="Rodzic">
+        <mat-icon>perm_identity</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="center" matTooltip="Nauczyciel">
+
+      <mat-button-toggle [ngClass]="selectedRole === 'TEACHER' ? 'role-selected' : ''"
+                         *ngIf="isUserTeacher"
+                         matTooltip="Nauczyciel">
         <mat-icon>school</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="right" matTooltip="Administrator">
+
+      <mat-button-toggle [ngClass]="selectedRole === 'ADMINISTRATOR' ? 'role-selected' : ''"
+                         *ngIf="isUserAdmin"
+                         matTooltip="Administrator">
         <mat-icon>supervisor_account</mat-icon>
       </mat-button-toggle>
-    </mat-button-toggle-group>
 
+    </mat-button-toggle-group>
 
 
     <button mat-menu-item>Edytuj Konto</button>

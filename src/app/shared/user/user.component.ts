@@ -13,6 +13,11 @@ import {Router} from '@angular/router';
 export class UserComponent implements OnInit {
 
   public user: Observable<Account>;
+  private isUserAdmin = false;
+  private isUserTeacher = false;
+  private isUserParent = false;
+  private selectedRole: string;
+
 
   constructor(private userService: AccountService,
               private router: Router) {
@@ -20,10 +25,35 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.currentUser;
+    this.identifyRoles();
   }
 
-  logout() {
+  logout(): void {
     localStorage.clear();
     this.router.navigate([environment.routes.signInUrl]);
   }
+
+  identifyRoles(): void {
+    this.user.subscribe(user => {
+      const roles = user.roles;
+
+      if (this.selectedRole == null) {
+        this.selectedRole = user.roles[0].name;
+      }
+
+      roles.forEach(u => {
+        if (u.name === 'ADMINISTRATOR') {
+          this.isUserAdmin = true;
+        }
+        if (u.name === 'USER') {
+          this.isUserParent = true;
+        }
+        if (u.name === 'TEACHER') {
+          this.isUserTeacher = true;
+        }
+      });
+    });
+  }
+
+
 }
