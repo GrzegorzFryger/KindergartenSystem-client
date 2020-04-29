@@ -12,6 +12,20 @@
   </mat-card>
 
   <mat-menu class="user-dropdown-menu" #menu="matMenu" xPosition="before">
+    <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle value="left" aria-label="Text align left">
+        <mat-icon>format_align_left</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="center" aria-label="Text align center">
+        <mat-icon>format_align_center</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="right" aria-label="Text align right">
+        <mat-icon>format_align_right</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+
+
     <button mat-menu-item>Edytuj Konto</button>
     <button mat-menu-item (click)="logout()">Wyloguj</button>
   </mat-menu>
