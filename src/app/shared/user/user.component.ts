@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.currentUser;
     this.identifyRoles();
+    this.redirectToProperView();
 
   }
 
@@ -41,6 +42,19 @@ export class UserComponent implements OnInit {
       this.selectedRole = localStorage.getItem('selectedRole');
     }
 
+  }
+
+  redirectToProperView() {
+    const role = localStorage.getItem('selectedRole');
+    if (role === 'ADMINISTRATOR') {
+      this.router.navigate([environment.routes.homeUrlAdmin]);
+    }
+    if (role === 'USER') {
+      this.router.navigate([environment.routes.homeUrl]);
+    }
+    if (role === 'TEACHER') {
+      this.router.navigate([environment.routes.homeUrlTeacher]);
+    }
   }
 
   identifyRoles(): void {
