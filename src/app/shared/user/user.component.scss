@@ -4,7 +4,7 @@
   .mat-card {
     height: 100%;
     max-height: 75px;
-    border-radius: 25px;
+    border-radius:  25px 25px 0 25px;
 
     .user-container {
       display: flex;
@@ -19,8 +19,8 @@
   }
 }
 
-.user-dropdown-menu {
-  margin-right: 50px;
+::ng-deep .mat-menu-panel {
+  margin-top: 2px;
 }
 
 .mat-button-toggle-group {

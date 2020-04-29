@@ -13,10 +13,10 @@ import {Router} from '@angular/router';
 export class UserComponent implements OnInit {
 
   public user: Observable<Account>;
-  private isUserAdmin = false;
-  private isUserTeacher = false;
-  private isUserParent = false;
-  private selectedRole;
+  isUserAdmin = false;
+  isUserTeacher = false;
+  isUserParent = false;
+  selectedRole;
 
 
   constructor(private userService: AccountService,
