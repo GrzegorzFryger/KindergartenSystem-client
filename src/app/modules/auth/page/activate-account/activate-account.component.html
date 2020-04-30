@@ -14,7 +14,7 @@
 
 
           <div class="loginForm">
-            <form [formGroup]="registerForm">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
               <p>
                 <mat-form-field appearance="standard">
                   <mat-label>Token</mat-label>

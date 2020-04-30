@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ActivateAccount} from '../../../../data/model/accounts/activate-account';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {environment} from '../../../../core/environment.dev';
+import {AuthenticationService} from '../../../../core/auth/authentication.service';
+import {Router} from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,7 +27,9 @@ export class ActivateAccountComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   activateAccount: ActivateAccount = new ActivateAccount();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthenticationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,6 +39,14 @@ export class ActivateAccountComponent implements OnInit {
         password: ['', ],
         confirmPassword: [''],
       }, {validator: this.checkPasswords}),
+    });
+  }
+
+  onSubmit(): void {
+    this.authService.activeAccount(this.activateAccount).subscribe(() => {
+      this.router.navigate([environment.routes.signInUrl]);
+    }, error => {
+      console.log(error);
     });
   }
 

@@ -31,6 +31,7 @@ export const environment = {
 
     account: {
       user: accountUrl + 'user',
+      activate: accountUrl + 'activate',
       guardian: {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',
