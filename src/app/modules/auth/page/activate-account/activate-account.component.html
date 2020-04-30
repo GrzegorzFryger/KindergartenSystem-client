@@ -1,1 +1,57 @@
-<p>activate-account works!</p>
+<!--<div class="container-fluid h-100 px-0">-->
+<div class="row justify-content-center align-items-center background-image mx-0">
+  <div class="col-auto">
+    <mat-card class="mat-elevation-z16">
+      <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
+        <mat-card-title>Aktywuj konto w aplikacji</mat-card-title>
+      </div>
+      <mat-card-content>
+        <div class="row justify-content-center align-items-center">
+
+          <div class="loginFormDecorator">
+            <img src="../../../../../assets/images/teacher.png" height="139" width="139"/>
+          </div>
+
+
+          <div class="loginForm">
+            <form [formGroup]="registerForm">
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Token</mat-label>
+                  <label>
+                    <input matInput formControlName="token">
+                  </label>
+                  <mat-error *ngIf="hasError('token', 'required')">Token jest wymagany</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Hasło</mat-label>
+                  <label>
+                    <input matInput type="password" formControlName="password">
+                  </label>
+                  <mat-error *ngIf="hasError('password', 'required')">Hasło jest wymagane</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Potwierdź hasło</mat-label>
+                  <label>
+                    <input matInput type="password" formControlName="passwordRepeat">
+                  </label>
+                  <mat-error *ngIf="hasError('passwordRepeat', 'required')">Powtórzenie hasła jest wymagane</mat-error>
+                </mat-form-field>
+              </p>
+              <div class="row justify-content-center align-items-center button">
+                <button mat-raised-button color="primary">Aktywuj</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
+</div>
+<!--</div>-->

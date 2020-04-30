@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   public hasError = (controlName: string, errorName: string) => {
     return this.loginFrom.controls[controlName].hasError(errorName);
-  };
+  }
 
   ngOnInit(): void {
   }
