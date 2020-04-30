@@ -9,18 +9,26 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ActivateAccountComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
+    this.registerForm = this.formBuilder.group({
       token: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      passwordRepeat: ['', [Validators.required]]
+      pass: this.formBuilder.group({
+        password: ['', Validators.pattern('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&-]).{8,}$')],
+        confirmPassword: [''],
+      }, {validator: this.checkPasswords}),
     });
   }
 
-  public hasError = (controlName: string, errorName: string) => {
-    return this.registerForm.controls[controlName].hasError(errorName);
+
+
+  checkPasswords(group: FormGroup) {
+    const pass = group.controls.password.value;
+    const confirmPass = group.controls.confirmPassword.value;
+
+    return pass === confirmPass ? null : {notSame: true};
   }
 
 }

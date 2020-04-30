@@ -19,31 +19,37 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Token</mat-label>
                   <label>
-                    <input matInput formControlName="token">
+                    <input trim matInput formControlName="token">
                   </label>
-                  <mat-error *ngIf="hasError('token', 'required')">Token jest wymagany</mat-error>
+                  <mat-error>Token jest wymagany</mat-error>
                 </mat-form-field>
               </p>
+
+              <div formGroupName="pass">
               <p>
                 <mat-form-field appearance="standard">
                   <mat-label>Hasło</mat-label>
                   <label>
                     <input matInput type="password" formControlName="password">
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Hasło jest wymagane</mat-error>
+                  <mat-error>Hasło jest wymagane</mat-error>
                 </mat-form-field>
               </p>
+
               <p>
                 <mat-form-field appearance="standard">
                   <mat-label>Potwierdź hasło</mat-label>
                   <label>
-                    <input matInput type="password" formControlName="passwordRepeat">
+                    <input matInput type="password" formControlName="confirmPassword">
                   </label>
-                  <mat-error *ngIf="hasError('passwordRepeat', 'required')">Powtórzenie hasła jest wymagane</mat-error>
+                  <mat-error>Powtórzenie hasła jest wymagane</mat-error>
                 </mat-form-field>
               </p>
+              </div>
+
+
               <div class="row justify-content-center align-items-center button">
-                <button mat-raised-button color="primary">Aktywuj</button>
+                <button [disabled]="!registerForm.valid" mat-raised-button color="primary">Aktywuj</button>
               </div>
             </form>
           </div>
