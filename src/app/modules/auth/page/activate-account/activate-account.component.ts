@@ -41,7 +41,7 @@ export class ActivateAccountComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       pass: this.formBuilder.group({
-        password: ['', ],
+        password: ['', Validators.pattern('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&-]).{8,}$')],
         confirmPassword: [''],
       }, {validator: this.checkPasswords}),
     });
