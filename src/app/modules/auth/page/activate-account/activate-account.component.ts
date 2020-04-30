@@ -4,7 +4,7 @@ import {ActivateAccount} from '../../../../data/model/accounts/activate-account'
 import {ErrorStateMatcher} from '@angular/material/core';
 import {environment} from '../../../../core/environment.dev';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,12 +29,17 @@ export class ActivateAccountComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.activateAccount.token = params.token;
+    });
+
     this.registerForm = this.formBuilder.group({
-      token: ['', [Validators.required]],
       pass: this.formBuilder.group({
         password: ['', ],
         confirmPassword: [''],

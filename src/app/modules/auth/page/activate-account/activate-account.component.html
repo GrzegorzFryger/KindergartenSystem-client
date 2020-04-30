@@ -15,20 +15,6 @@
 
           <div class="loginForm">
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label>Token</mat-label>
-                  <label>
-                    <input
-                      required
-                      matInput
-                      formControlName="token"
-                      [(ngModel)]="activateAccount.token"
-                    >
-                  </label>
-                  <mat-error>Token jest wymagany</mat-error>
-                </mat-form-field>
-              </p>
 
               <div formGroupName="pass">
                 <p>
