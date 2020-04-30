@@ -19,32 +19,38 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Token</mat-label>
                   <label>
-                    <input trim matInput formControlName="token">
+                    <input required matInput formControlName="token">
                   </label>
                   <mat-error>Token jest wymagany</mat-error>
                 </mat-form-field>
               </p>
 
               <div formGroupName="pass">
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label>Hasło</mat-label>
-                  <label>
-                    <input matInput type="password" formControlName="password">
-                  </label>
-                  <mat-error>Hasło jest wymagane</mat-error>
-                </mat-form-field>
-              </p>
+                <p>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Hasło</mat-label>
+                    <label>
+                      <input required matInput type="password" formControlName="password">
+                    </label>
+                    <mat-error
+                      *ngIf="registerForm.get('pass.password').errors && registerForm.get('pass.password').touched">
+                      Hasło jest wymagane
+                    </mat-error>
+                  </mat-form-field>
+                </p>
 
-              <p>
-                <mat-form-field appearance="standard">
-                  <mat-label>Potwierdź hasło</mat-label>
-                  <label>
-                    <input matInput type="password" formControlName="confirmPassword">
-                  </label>
-                  <mat-error>Powtórzenie hasła jest wymagane</mat-error>
-                </mat-form-field>
-              </p>
+                <p>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Potwierdź hasło</mat-label>
+                    <label>
+                      <input required matInput type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                    </label>
+                    <mat-error
+                      *ngIf="registerForm.get('pass').errors && registerForm.get('pass.confirmPassword').touched">
+                      Wpisz takie samo hasło
+                    </mat-error>
+                  </mat-form-field>
+                </p>
               </div>
 
 
