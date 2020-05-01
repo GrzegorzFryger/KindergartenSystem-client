@@ -1,1 +1,75 @@
-<p>activate-account works!</p>
+<!--<div class="container-fluid h-100 px-0">-->
+<div class="row justify-content-center align-items-center background-image mx-0">
+  <div class="col-auto">
+    <mat-card class="mat-elevation-z16">
+      <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
+        <mat-card-title>Aktywuj konto w aplikacji</mat-card-title>
+      </div>
+      <mat-card-content>
+        <div class="row justify-content-center align-items-center">
+
+          <div class="loginFormDecorator">
+            <img src="../../../../../assets/images/teacher.png" height="139" width="139"/>
+          </div>
+
+
+          <div class="loginForm">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+              <div formGroupName="pass">
+                <p>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Hasło</mat-label>
+                    <label>
+                      <input
+                        required
+                        matInput type="password"
+                        formControlName="password"
+                        [(ngModel)]="activateAccount.rawPassword"
+                      >
+                    </label>
+                    <mat-error
+                      *ngIf="registerForm.get('pass.password').errors.required && registerForm.get('pass.password').touched">
+                      Hasło jest wymagane
+                    </mat-error>
+                    <mat-error
+                      *ngIf="registerForm.get('pass.password').errors.pattern && registerForm.get('pass.password').touched">
+                      Hasło nie spełna wymogów bezpieczeństwa
+                    </mat-error>
+                  </mat-form-field>
+                </p>
+
+                <p>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Potwierdź hasło</mat-label>
+                    <label>
+                      <input
+                        required
+                        matInput type="password"
+                        formControlName="confirmPassword"
+                        [errorStateMatcher]="matcher"
+                        [(ngModel)]="activateAccount.repeatRawPassword"
+                      >
+                    </label>
+                    <mat-error
+                      *ngIf="registerForm.get('pass').errors && registerForm.get('pass.confirmPassword').touched">
+                      Wpisz takie samo hasło
+                    </mat-error>
+                  </mat-form-field>
+                </p>
+              </div>
+
+
+              <div class="row justify-content-center align-items-center button">
+                <button [disabled]="!registerForm.valid" mat-raised-button color="primary">Aktywuj</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
+</div>
+<!--</div>-->

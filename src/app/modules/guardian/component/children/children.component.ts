@@ -23,7 +23,7 @@ export class ChildrenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.children.subscribe(children => {
+    this.children?.subscribe(children => {
       this.childrenList = children;
       return children;
     });

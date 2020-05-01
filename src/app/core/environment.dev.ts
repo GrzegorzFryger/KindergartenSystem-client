@@ -18,7 +18,9 @@ export const environment = {
   nameLocalStorageVariableUser: 'currentUser',
   routes: {
     signInUrl: 'auth/login',
-    homeUrl: '/parent'
+    homeUrl: '/parent',
+    homeUrlAdmin: '/administrator',
+    homeUrlTeacher: '/teacher',
   },
   apiUrls: {
     authorization: apiUrl + '/api/authenticate',
@@ -29,6 +31,7 @@ export const environment = {
 
     account: {
       user: accountUrl + 'user',
+      activate: accountUrl + 'activate',
       guardian: {
         findAllGuardianChildren: accountUrl + 'guardians/',
         guardians: accountUrl + 'guardians',

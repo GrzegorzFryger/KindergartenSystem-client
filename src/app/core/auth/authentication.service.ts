@@ -6,6 +6,7 @@ import {environment} from '../environment.dev';
 import {JwtDecodeService} from './jwt-decode.service';
 import {catchError, map} from 'rxjs/operators';
 import {SnackMessageHandlingService} from '../snack-message-handling/snack-message-handling.service';
+import {ActivateAccount} from '../../data/model/accounts/activate-account';
 
 
 const UNAUTHORIZED_MESSAGE = 'Błedne dane logowania';
@@ -67,5 +68,9 @@ export class AuthenticationService {
 
   private set userCredentialsToLocalStore(userCredentials: UserCredentials) {
     localStorage.setItem(environment.nameLocalStorageVariableAuth, JSON.stringify(userCredentials));
+  }
+
+  activeAccount(activateAccount: ActivateAccount): Observable<any> {
+    return this.http.post<ActivateAccount>(environment.apiUrls.account.activate, activateAccount);
   }
 }
