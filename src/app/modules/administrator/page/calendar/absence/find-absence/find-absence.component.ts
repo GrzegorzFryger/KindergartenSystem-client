@@ -7,11 +7,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-find-by-date',
-  templateUrl: './find-by-date.component.html',
-  styleUrls: ['./find-by-date.component.scss']
+  selector: 'app-find-absence',
+  templateUrl: './find-absence.component.html',
+  styleUrls: ['./find-absence.component.scss']
 })
-export class FindByDateComponent implements OnInit {
+export class FindAbsenceComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
