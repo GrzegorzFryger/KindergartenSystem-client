@@ -92,7 +92,7 @@
 
           <ng-container matColumnDef="transactionDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Data transakcji</mat-header-cell>
-            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionDate}} </mat-cell>
+            <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionDate | date:'yyyy-MM-dd'}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="contractorDetails">
