@@ -11,7 +11,7 @@ You can install it via Node.js using following command:
 Above command will install it globally
 * Angular Devkit
 You can install it via Node.js using following command:  
-`npm install --save-dev @angular-devkit/build-angular`  
+`npm install`  
 Above command will install it as dev dependency (so you should run it from repo directory)
 
 ## Development server
