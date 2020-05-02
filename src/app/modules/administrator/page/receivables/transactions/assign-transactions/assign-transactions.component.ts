@@ -1,4 +1,4 @@
-import {Component, OnInit, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {TransactionsService} from '../../../../../../data/service/receivables/transactions.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -9,6 +9,7 @@ import {GuardianService} from '../../../../../../data/service/accounts/guardian.
 import {ChildService} from 'src/app/data/service/accounts/child.service';
 import {Guardian} from 'src/app/data/model/accounts/guardian';
 import {Observable, ReplaySubject} from 'rxjs';
+import {MatStepper} from "@angular/material/stepper";
 
 @Component({
   selector: 'app-transactions',
@@ -19,6 +20,7 @@ import {Observable, ReplaySubject} from 'rxjs';
 export class AssignTransactionsComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+  @ViewChild('stepper') stepper: MatStepper;
 
   public transactionColumnsToDisplay: string[] = [
     'transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details', 'transactionNumber', 'transactionAmount', 'select'
@@ -77,6 +79,7 @@ export class AssignTransactionsComponent implements OnInit {
       this.assignTransaction(obj, this.selectedChild, this.selectedGuardian);
     });
     this.snackMessageHandlingService.success('Transakcje zostały przypisane pomyślnie');
+    this.resetState();
   }
 
   private assignTransaction(transaction: Transaction, childId: string, guardianId: string): boolean {
@@ -147,4 +150,12 @@ export class AssignTransactionsComponent implements OnInit {
         data.pesel.toLowerCase().includes(filter);
     }
   };
+
+  private resetState(): void {
+    this.loadDataAboutUnassignedTransactions();
+    this.selectedTransactions = [];
+    this.selectedChild = '';
+    this.selectedGuardian = '';
+    this.stepper.reset();
+  }
 }
