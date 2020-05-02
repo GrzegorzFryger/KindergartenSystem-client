@@ -1,0 +1,73 @@
+<h2 class="center" mat-dialog-title>Dane do przelewu</h2>
+<div mat-dialog-content class="center">
+
+</div>
+<div mat-dialog-actions>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col label-font">
+        Numer konta:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data-font">
+        {{dialogConfig.data.accountNumber}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col label-font">
+        Tytuł przelewu:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data-font">
+        {{dialogConfig.data.title}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col label-font">
+        Adres:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data-font">
+        {{dialogConfig.data.postalCode}} {{dialogConfig.data.city}}, {{dialogConfig.data.street}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col label-font">
+        Kwota:
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data-font">
+        {{dialogConfig.data.amount}} PLN
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br><br><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <button class="full-width" mat-flat-button (click)="close()">Zamknij okno</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -71,16 +71,6 @@
             </div>
           </div>
 
-          <div class="inline">
-            <div class="common-finance-container">
-              Numer konta:&nbsp;
-            </div>
-            <div class="common-finance-container">
-              <b>{{accountNumber}} </b>
-              <b *ngIf="!accountNumber">Nie znaleziono konta do przelewów </b>
-            </div>
-          </div>
-
           <div class="finance-info">
             <mat-accordion>
               <mat-expansion-panel class="mat-elevation-z0">
@@ -122,7 +112,7 @@
                 </div>
 
                 <div class="button-container">
-                  <button mat-flat-button>Generuj dane do przelewu</button>
+                  <button mat-flat-button (click)="showPaymentData(data.id)">Generuj dane do przelewu</button>
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
