@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AccountService} from '../../data/service/accounts/account.service';
 import {Observable} from 'rxjs';
 import {Account} from '../../data/model/accounts/account';
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterViewInit {
 
   public user: Observable<Account>;
   isUserAdmin = false;
@@ -24,10 +24,13 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit() {
     this.user = this.userService.currentUser;
     this.identifyRoles();
     this.redirectToProperView();
-
   }
 
   logout(): void {
@@ -62,15 +65,20 @@ export class UserComponent implements OnInit {
       const roles = user.roles;
 
       this.showSelectedRole(roles[0].name);
+      localStorage.setItem('selectedRole', roles[0].name);
+      this.redirectToProperView();
 
       roles.forEach(u => {
         if (u.name === 'ADMINISTRATOR') {
           this.isUserAdmin = true;
+          this.isUserParent = true;
+          this.isUserTeacher = true;
         }
         if (u.name === 'USER') {
           this.isUserParent = true;
         }
         if (u.name === 'TEACHER') {
+          this.isUserParent = true;
           this.isUserTeacher = true;
         }
       });
