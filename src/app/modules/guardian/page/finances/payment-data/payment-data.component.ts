@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {PaymentDetails} from "../../../../../data/model/finances/payment-details";
+import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {PaymentDetails} from '../../../../../data/model/finances/payment-details';
 
 @Component({
   selector: 'app-payment-data',
@@ -14,7 +14,7 @@ export class PaymentDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dialogRef.updateSize('40%', '50%');
+    this.dialogRef.updateSize('30%', '60%');
   }
 
   public close(): void {

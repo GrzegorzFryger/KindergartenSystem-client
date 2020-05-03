@@ -91,6 +91,7 @@ export class FinancesComponent implements OnInit {
     paymentDetails.street = this.accountNumber.street;
     paymentDetails.city = this.accountNumber.city;
     paymentDetails.postalCode = this.accountNumber.postalCode;
+    paymentDetails.name = this.accountNumber.name;
     this.openPaymentDetailsDialog(paymentDetails);
   }
 
