@@ -15,7 +15,7 @@
                 <p>Saldo:</p>
               </div>
               <div class="amount">
-                <p> {{ balance?.balance }} PLN</p>
+                <p> {{ balance?.balance | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -26,7 +26,7 @@
                 <p>Wpłaty:</p>
               </div>
               <div class="amount">
-                <p> {{ balance?.receivables }} PLN</p>
+                <p> {{ balance?.receivables | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -37,7 +37,7 @@
                 <p>Należności:</p>
               </div>
               <div class="amount">
-                <p> {{ balance?.liabilities }} PLN</p>
+                <p> {{ balance?.liabilities | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>

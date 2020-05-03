@@ -96,7 +96,7 @@
 
             <ng-container matColumnDef="transactionAmount">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota</mat-header-cell>
-              <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionAmount}} {{cashPayment.transactionCurrency}}</mat-cell>
+              <mat-cell *matCellDef="let cashPayment"> {{cashPayment.transactionAmount | number:'1.2-2'}} {{cashPayment.transactionCurrency}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="action">
