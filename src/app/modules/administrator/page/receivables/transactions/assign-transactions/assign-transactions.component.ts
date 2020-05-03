@@ -9,7 +9,7 @@ import {GuardianService} from '../../../../../../data/service/accounts/guardian.
 import {ChildService} from 'src/app/data/service/accounts/child.service';
 import {Guardian} from 'src/app/data/model/accounts/guardian';
 import {Observable, ReplaySubject} from 'rxjs';
-import {MatStepper} from "@angular/material/stepper";
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-transactions',
@@ -22,17 +22,28 @@ export class AssignTransactionsComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   @ViewChild('stepper') stepper: MatStepper;
 
-  public transactionColumnsToDisplay: string[] = [
-    'transactionDate', 'bookingDate', 'contractorDetails', 'title', 'details', 'transactionNumber', 'transactionAmount', 'select'
-  ];
+  public transactionColumnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title',
+    'details', 'transactionNumber', 'transactionAmount', 'select'];
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
   public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
-  public transactionOutput: { transactions: Observable<Array<Transaction>>, columnToDisplay: Array<string> };
-  private transactionSub: ReplaySubject<Array<Transaction>>;
-  public childrenOutput: { children: Observable<Array<Child>>, columnToDisplay: Array<string>, filterPredicate: (data: Child, filter: string) => boolean };
+
+  public transactionOutput: {
+    transactions: Observable<Array<Transaction>>,
+    columnToDisplay: Array<string>
+  };
+  public childrenOutput: {
+    children: Observable<Array<Child>>,
+    columnToDisplay: Array<string>,
+    filterPredicate: (data: Child, filter: string) => boolean
+  };
+  public guardianOutput: {
+    guardians: Observable<Array<Guardian>>,
+    columnToDisplay: Array<string>
+  };
+
   private childrenSub: ReplaySubject<Array<Child>>;
-  public guardianOutput: { guardians: Observable<Array<Guardian>>, columnToDisplay: Array<string> };
   private guardianSub: ReplaySubject<Array<Guardian>>;
+  private transactionSub: ReplaySubject<Array<Transaction>>;
 
   selectedChild: string;
   selectedTransactions: Array<Transaction>;
@@ -43,17 +54,27 @@ export class AssignTransactionsComponent implements OnInit {
               private childService: ChildService,
               private guardianService: GuardianService,
               private snackMessageHandlingService: SnackMessageHandlingService) {
+
     this.selectedTransactions = new Array<Transaction>();
+
     this.transactionSub = new ReplaySubject<Array<Transaction>>();
     this.childrenSub = new ReplaySubject<Array<Child>>();
     this.guardianSub = new ReplaySubject<Array<Guardian>>();
+
     this.childrenOutput = {
       children: this.childrenSub.asObservable(),
       columnToDisplay: this.childColumnsToDisplay,
       filterPredicate: this.nameSurnameFilterPredicate
     };
-    this.transactionOutput = {transactions: this.transactionSub.asObservable(), columnToDisplay: this.transactionColumnsToDisplay};
-    this.guardianOutput = {guardians: this.guardianSub.asObservable(), columnToDisplay: this.guardianColumnsToDisplay};
+
+    this.transactionOutput = {
+      transactions: this.transactionSub.asObservable(),
+      columnToDisplay: this.transactionColumnsToDisplay
+    };
+    this.guardianOutput = {
+      guardians: this.guardianSub.asObservable(),
+      columnToDisplay: this.guardianColumnsToDisplay
+    };
   }
 
   ngOnInit(): void {
@@ -142,14 +163,14 @@ export class AssignTransactionsComponent implements OnInit {
   }
 
   private nameSurnameFilterPredicate = (data, filter) => {
-    let value = filter.trim().toLowerCase().split(' ');
+    const value = filter.trim().toLowerCase().split(' ');
     if (value.length > 1) {
       return data.name.toLowerCase().includes(value[0]) && data.surname.toLowerCase().includes(value[1]);
     } else {
       return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
         data.pesel.toLowerCase().includes(filter);
     }
-  };
+  }
 
   private resetState(): void {
     this.loadDataAboutUnassignedTransactions();

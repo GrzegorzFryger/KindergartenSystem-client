@@ -12,8 +12,15 @@ import {Child} from '../../../../../../data/model/accounts/child';
   styleUrls: ['./search-transaction.component.scss']
 })
 export class SearchTransactionComponent implements OnInit {
-  public childrenOutput: { children: Observable<Array<Child>>, columnToDisplay: Array<string> };
-  public transactionOutput: { transactions: Observable<Array<Transaction>>, columnToDisplay: Array<string> };
+  public childrenOutput: {
+    children: Observable<Array<Child>>,
+    columnToDisplay: Array<string>,
+    filterPredicate: (data: Child, filter: string) => boolean
+  };
+  public transactionOutput: {
+    transactions: Observable<Array<Transaction>>,
+    columnToDisplay: Array<string>
+  };
 
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
   public transactionColumnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'transactionAmount'];
@@ -27,8 +34,15 @@ export class SearchTransactionComponent implements OnInit {
     this.childrenSub = new ReplaySubject<Array<Child>>();
     this.transactionSub = new ReplaySubject<Array<Transaction>>();
 
-    this.childrenOutput = {children: this.childrenSub.asObservable(), columnToDisplay: this.childColumnsToDisplay};
-    this.transactionOutput = {transactions: this.transactionSub.asObservable(), columnToDisplay: this.transactionColumnsToDisplay};
+    this.childrenOutput = {
+      children: this.childrenSub.asObservable(),
+      columnToDisplay: this.childColumnsToDisplay,
+      filterPredicate: this.nameSurnameFilterPredicate
+    };
+    this.transactionOutput = {
+      transactions: this.transactionSub.asObservable(),
+      columnToDisplay: this.transactionColumnsToDisplay
+    };
   }
 
   ngOnInit(): void {
@@ -53,6 +67,15 @@ export class SearchTransactionComponent implements OnInit {
         this.snackMessageHandlingService.error('Wystąpił problem z pobraniem listy płatności gotówkowych');
       }
     );
+  }
 
+  private nameSurnameFilterPredicate = (data, filter) => {
+    const value = filter.trim().toLowerCase().split(' ');
+    if (value.length > 1) {
+      return data.name.toLowerCase().includes(value[0]) && data.surname.toLowerCase().includes(value[1]);
+    } else {
+      return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
+        data.pesel.toLowerCase().includes(filter);
+    }
   }
 }
