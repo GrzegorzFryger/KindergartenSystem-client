@@ -27,8 +27,8 @@ export class ImportComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public columnsToDisplay: string[] = ['transactionDate', 'bookingDate', 'contractorDetails', 'title', 'accountNumber',
-    'bankName', 'details', 'transactionNumber', 'transactionAmount'];
+  public columnsToDisplay: string[] = ['transactionDate', 'contractorDetails', 'title', 'accountNumber',
+    'bankName', 'transactionNumber', 'transactionAmount'];
   public uploadedTransactions: Array<Transaction>;
 
   public dataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
@@ -40,7 +40,7 @@ export class ImportComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.dialogRef.updateSize('90%', '60%');
+    this.dialogRef.updateSize('100%', '65%');
     this.form = this.fb.group({
       transfers_input_file: null
     });

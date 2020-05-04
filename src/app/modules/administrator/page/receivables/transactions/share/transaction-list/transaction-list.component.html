@@ -43,7 +43,7 @@
       <ng-container matColumnDef="transactionAmount">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
         <mat-cell
-          *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
+          *matCellDef="let transaction"> {{transaction.transactionAmount | number:'1.2-2'}} {{transaction.transactionCurrency}}
         </mat-cell>
       </ng-container>
 

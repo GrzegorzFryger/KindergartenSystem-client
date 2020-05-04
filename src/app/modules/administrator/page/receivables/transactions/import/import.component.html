@@ -34,11 +34,6 @@
           <mat-cell *matCellDef="let transaction"> {{transaction.transactionDate}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="bookingDate">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Data księgowania</mat-header-cell>
-          <mat-cell *matCellDef="let transaction"> {{transaction.bookingDate}} </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="contractorDetails">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Wpłacający</mat-header-cell>
           <mat-cell *matCellDef="let transaction"> {{transaction.contractorDetails}} </mat-cell>
@@ -59,11 +54,6 @@
           <mat-cell *matCellDef="let transaction"> {{transaction.bankName}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="details">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Szczegóły</mat-header-cell>
-          <mat-cell *matCellDef="let transaction"> {{transaction.details}} </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="transactionNumber">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Numer transakcji</mat-header-cell>
           <mat-cell *matCellDef="let transaction"> {{transaction.transactionNumber}} </mat-cell>
@@ -72,7 +62,7 @@
         <ng-container matColumnDef="transactionAmount">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota transakcji</mat-header-cell>
           <mat-cell
-            *matCellDef="let transaction"> {{transaction.transactionAmount}} {{transaction.transactionCurrency}}
+            *matCellDef="let transaction"> {{transaction.transactionAmount | number:'1.2-2'}} {{transaction.transactionCurrency}}
           </mat-cell>
         </ng-container>
 

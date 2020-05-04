@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -12,6 +12,7 @@ import {CashPaymentsService} from '../../../../../../data/service/receivables/ca
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {TransactionMappingService} from '../../../../../../data/service/receivables/transaction-mapping.service';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-add-cash-payment',
@@ -22,6 +23,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+  @ViewChild('stepper') stepper: MatStepper;
 
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'dateOfBirth', 'isSelected'];
   public guardianColumnsToDisplay: string[] = ['name', 'surname', 'isSelected'];
@@ -35,6 +37,8 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
   public selectedGuardianId = '';
 
   public form: FormGroup;
+
+  public isLinear = true;
 
   private CONTRACTOR_DETAILS_FIELD = 'contractorDetails';
   private TRANSACTION_DATE_FIELD = 'transactionDate';
@@ -154,9 +158,12 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
   }
 
   private resetForm(): void {
+    this.stepper.reset();
     this.form.reset();
     this.form.controls[this.TRANSACTION_DATE_FIELD].setValue(new Date());
     this.form.controls[this.CURRENCY_FIELD].setValue(this.CURRENCY);
+    this.childName = '';
+    this.childSurname = '';
   }
 
   private setChildDataToTable(children: Array<Child>): void {
