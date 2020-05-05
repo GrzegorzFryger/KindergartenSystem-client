@@ -64,12 +64,10 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
-        children: [
-          {
-            path: 'order',
-            component: MealOrderComponent
-          }
-        ]
+      },
+      {
+        path: 'order',
+        component: MealOrderComponent,
       },
       {
         path: 'dayOff',
