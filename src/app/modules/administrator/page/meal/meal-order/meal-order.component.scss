@@ -1,4 +1,4 @@
-.container-absence {
+.container-order {
   display: flex;
   flex-direction: row;
 
@@ -6,22 +6,6 @@
     flex-grow: 1;
     flex-shrink: 1;
 
-    .mat-calendar {
-
-      .absence {
-        .mat-calendar-body-cell-content {
-          border-style: solid;
-          border-width: 2px;
-          border-color: #C40F11;
-          border-radius: 100% !important;
-        }
-      }
-
-      .day-off-work {
-        background-color: #F5F5F5;
-        border-radius: 100%;
-      }
-    }
 
     .calendar-more {
 
@@ -47,22 +31,13 @@
             }
           }
         }
+      }
 
-        .legend-container {
-          flex-basis: 40%;
-          margin-top: 16px;
-          background-color: #F5F5F5;
 
-          .legend {
-            display: flex;
-            justify-content: flex-start;
-          }
-        }
-
-        .information-container {
-          flex-basis: 40%;
-          margin-top: 16px;
-          background-color: #F5F5F5;
+      .info-box {
+        .mat-card {
+          background-color: #bec9f4;
+          text-align: center;
         }
       }
     }

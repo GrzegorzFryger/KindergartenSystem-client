@@ -1,4 +1,4 @@
-<div class="container-absence">
+<div class="container-order">
   <mat-card>
     <div class="container-fluid">
       <div class="row">
@@ -16,20 +16,23 @@
         <div class="col calendar-more">
           <div class="d-flex">
             <div class="header-container">
-              <div class="header">
-                <p>{{selectedDate | date}}</p>
+              <div class="header" *ngIf="selectedDate != null">
+                <p> Zamówienia na dzień {{selectedDate | date}}</p>
               </div>
             </div>
-            <div class="legend-container">
-              <div class="legend">
-                <p>Legenda: </p>
-              </div>
+
+            <div class="info-box" *ngIf="selectedDate != null && orderForSelectedDate.length == 0">
+              <mat-card>
+                W wybranym dniu nie zamówiono żadnego posiłku
+              </mat-card>
             </div>
-            <div class="information-container">
-              <div class="address">
-                <p>Infomacje: </p>
-              </div>
+
+            <div class="ordered-meal" *ngFor="let order of orderForSelectedDate">
+                {{order.mealType}} : {{order.mealCount}}
             </div>
+
+
+
           </div>
 
         </div>
