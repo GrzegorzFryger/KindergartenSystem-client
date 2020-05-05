@@ -21,8 +21,8 @@ export class DayOffWorkComponent implements OnInit {
   public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
 
   dayOffWork: DayOffWork;
-  dateFrom: Date;
-  dateTo: Date;
+  dateFrom: Date = null;
+  dateTo: Date = null;
 
   constructor(private dayOffWorkService: DayOffWorkService, private datePipe: DatePipe) {
   }
@@ -33,13 +33,17 @@ export class DayOffWorkComponent implements OnInit {
 
   onSubmit(submittedForm) {
     this.dayOffWork = new DayOffWork();
-    this.dayOffWork.date = submittedForm.value.date;
+    this.dayOffWork.date = this.convertToDate(submittedForm.value.date);
     this.dayOffWork.name = submittedForm.value.name;
     this.dayOffWork.eventType = submittedForm.value.eventType;
     this.dayOffWorkService.createDayOffWork(this.dayOffWork).subscribe(resp =>
       console.log(resp));
     submittedForm.reset();
-    this.getAllDaysOff();
+    if (this.dateFrom == null || this.dateTo == null) {
+      this.getAllDaysOff();
+    } else {
+      this.filterByDate(this.dateFrom, this.dateTo);
+    }
   }
 
   removeDayOff(id: string): void {
@@ -57,12 +61,21 @@ export class DayOffWorkComponent implements OnInit {
     });
   }
 
-  onFilter(submittedForm): void {
+  onFilter(submittedForm?): void {
     this.dateFrom = submittedForm.value.dateFrom;
     this.dateTo = submittedForm.value.dateTo;
+    this.filterByDate(this.dateFrom, this.dateTo);
+
+  }
+
+  convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
+  }
+
+  filterByDate(dateFrom: Date, dateTo: Date) {
     this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
-      this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(this.dateFrom) &&
-        new Date(m.date) <= new Date(this.dateTo));
+      this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(dateFrom) &&
+        new Date(m.date) <= new Date(dateTo));
     });
   }
 
