@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {EditCashPaymentDialogComponent} from '../edit-cash-payment/edit-cash-payment-dialog.component';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-search-cash-payment',
@@ -21,6 +22,7 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+  @ViewChild('stepper') stepper: MatStepper;
 
   public childDataSource: MatTableDataSource<Child> = new MatTableDataSource();
   public cashPaymentsDataSource: MatTableDataSource<CashPayment> = new MatTableDataSource();
@@ -32,6 +34,8 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
   public childSurname = '';
   public selectedChildId = '';
   public amountOfCashPayments = 0;
+
+  public isLinear = true;
 
   constructor(private childService: ChildService,
               private cashPaymentsService: CashPaymentsService,
@@ -79,6 +83,10 @@ export class SearchCashPaymentComponent implements OnInit, AfterViewInit {
   public editCashPayment(cashPayment: CashPayment): void {
     console.log('Attempting to edit cash payment with id: ' + cashPayment.id);
     this.openEditCashPaymentDialog(cashPayment);
+  }
+
+  public resetStepper(): void {
+    this.stepper.reset();
   }
 
   private openRemovalDialog(question: string, cashPaymentId: number): void {
