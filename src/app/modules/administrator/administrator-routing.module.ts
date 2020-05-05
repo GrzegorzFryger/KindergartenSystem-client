@@ -16,6 +16,7 @@ import {TransactionsComponent} from './page/receivables/transactions/transaction
 import {SearchTransactionComponent} from './page/receivables/transactions/search-transaction/search-transaction.component';
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
+import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,12 @@ const routes: Routes = [
       {
         path: 'meal',
         component: MealComponent,
+        children: [
+          {
+            path: 'order',
+            component: MealOrderComponent
+          }
+        ]
       },
       {
         path: 'dayOff',
