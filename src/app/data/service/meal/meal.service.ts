@@ -6,6 +6,7 @@ import {environment} from '../../../core/environment.dev';
 import {MealDictionary} from '../../model/meal/meal-dictionary';
 import {NutritionalNotes} from '../../model/meal/nutritional-notes';
 import {MealPrice} from '../../model/meal/meal-price';
+import {MealOrder} from '../../model/meal/meal-order';
 
 @Injectable({
   providedIn: 'root'
@@ -87,5 +88,9 @@ export class MealService {
 
   getAllMealsForChild(childID: string): Observable<Array<Meal>> {
     return this.http.get<Array<Meal>>(environment.apiUrls.meals.getAllMealsByChild + childID + '/child');
+  }
+
+  getMealBySelectedDate(selectedDate: Observable<Array<MealOrder>>) {
+    return this.http.get<Array<MealOrder>>(environment.apiUrls.meals.getMealBySelectedDate + selectedDate);
   }
 }

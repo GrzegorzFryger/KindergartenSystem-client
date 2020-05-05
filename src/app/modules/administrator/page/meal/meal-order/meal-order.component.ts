@@ -9,6 +9,8 @@ import {AbsenceService} from '../../../../../data/service/absence/absence.servic
 import {SelectedChildService} from '../../../../guardian/component/children/selected-child.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {MealService} from '../../../../../data/service/meal/meal.service';
+import {MealOrder} from '../../../../../data/model/meal/meal-order';
 
 
 @Component({
@@ -21,9 +23,10 @@ export class MealOrderComponent implements OnInit {
   myCalendar: MatCalendar<any>;
   selectedDate: any;
   maxDate: Date = new Date();
+  orderForSelectedDate: Array<MealOrder>;
 
 
-  constructor() {
+  constructor(private mealService: MealService) {
 
   }
 
@@ -31,6 +34,12 @@ export class MealOrderComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  getMealBySelectedDate() {
+    this.mealService.getMealBySelectedDate(this.selectedDate);
+  }
+
+
 
 
 }
