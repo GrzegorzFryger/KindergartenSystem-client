@@ -90,7 +90,7 @@ export class MealService {
     return this.http.get<Array<Meal>>(environment.apiUrls.meals.getAllMealsByChild + childID + '/child');
   }
 
-  getMealBySelectedDate(selectedDate: Observable<Array<MealOrder>>) {
+  getMealBySelectedDate(selectedDate: string) {
     return this.http.get<Array<MealOrder>>(environment.apiUrls.meals.getMealBySelectedDate + selectedDate);
   }
 }

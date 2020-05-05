@@ -1,16 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
-import {DayOffWork} from '../../../../../data/model/absence/day-off-work';
-import {Absence} from '../../../../../data/model/absence/absence';
-import {Observable} from 'rxjs';
-import {Child} from '../../../../../data/model/accounts/child';
-import {DayOffWorkService} from '../../../../../data/service/absence/day-off-work.service';
-import {AbsenceService} from '../../../../../data/service/absence/absence.service';
-import {SelectedChildService} from '../../../../guardian/component/children/selected-child.service';
-import {MatDialog} from '@angular/material/dialog';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {MealService} from '../../../../../data/service/meal/meal.service';
 import {MealOrder} from '../../../../../data/model/meal/meal-order';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -36,7 +28,10 @@ export class MealOrderComponent implements OnInit {
   }
 
   getMealBySelectedDate() {
-    this.mealService.getMealBySelectedDate(this.selectedDate);
+    const orderdate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
+    this.mealService.getMealBySelectedDate(orderdate).subscribe(resp => {
+      this.orderForSelectedDate = resp;
+    });
   }
 
 
