@@ -5,6 +5,9 @@ import {DatePipe} from '@angular/common';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {Child} from '../../../../../../data/model/accounts/child';
+import {ChildService} from '../../../../../../data/service/accounts/child.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-find-absence',
@@ -18,11 +21,15 @@ export class FindAbsenceComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Absence> = new MatTableDataSource();
 
-  public columnsToDisplay: string[] = ['childId', 'date', 'reason', 'actions'];
+  public columnsToDisplay: string[] = ['childName', 'date', 'reason', 'actions'];
   endDate: string;
   startDate: string;
+  childName: string;
+  children: Observable<Array<Child>>;
 
-  constructor(private datePipe: DatePipe, private absenceService: AbsenceService) {
+  constructor(private datePipe: DatePipe, private absenceService: AbsenceService,
+              private childService: ChildService) {
+    this.children = this.childService.getAllChildren();
   }
 
   ngOnInit(): void {
@@ -30,6 +37,7 @@ export class FindAbsenceComponent implements OnInit {
 
   onSubmit(submittedForm) {
     this.getAllAbsencesBetweenDates(submittedForm.value.startDate, submittedForm.value.endDate);
+    console.log(this.children);
   }
 
   removeAbsence(id: string): void {
@@ -49,4 +57,14 @@ export class FindAbsenceComponent implements OnInit {
     });
   }
 
+  getChildNameFromId(childId: string): string {
+    this.children.subscribe(resp => {
+      resp.forEach(child => {
+        if (child.id === childId) {
+          this.childName = child.name + ' ' + child.surname;
+        }
+      });
+    });
+    return this.childName;
+  }
 }

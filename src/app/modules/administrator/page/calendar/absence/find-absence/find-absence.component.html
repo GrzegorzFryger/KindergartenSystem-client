@@ -40,9 +40,9 @@
     <div class="row">
       <div class="col">
         <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
-          <ng-container matColumnDef="childId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{absence.childId}} </mat-cell>
+          <ng-container matColumnDef="childName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię i nazwisko</mat-header-cell>
+            <mat-cell *matCellDef="let absence"> {{getChildNameFromId(absence.childId)}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
