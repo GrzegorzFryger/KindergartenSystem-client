@@ -1,1 +1,44 @@
-<p>meal-order works!</p>
+<div class="container-order">
+  <mat-card>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col">
+                <mat-calendar #calendar [(selected)]="selectedDate" [maxDate]="maxDate"
+                              (click)="getMealBySelectedDate()">
+                </mat-calendar>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col calendar-more">
+          <div class="d-flex">
+            <div class="header-container">
+              <div class="header" *ngIf="selectedDate != null">
+                <p> Zamówienia na dzień {{selectedDate | date}}</p>
+              </div>
+            </div>
+
+            <div class="info-box" *ngIf="selectedDate != null && orderForSelectedDate.length == 0">
+              <mat-card>
+                W wybranym dniu nie zamówiono żadnego posiłku
+              </mat-card>
+            </div>
+
+            <div class="ordered-meal" *ngFor="let order of orderForSelectedDate; last as last">
+               <p> {{order.mealType}} : {{order.mealCount}} </p>
+              <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+            </div>
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+

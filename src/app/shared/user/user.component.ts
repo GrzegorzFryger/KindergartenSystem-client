@@ -65,7 +65,6 @@ export class UserComponent implements OnInit, AfterViewInit {
       const roles = user.roles;
 
       this.showSelectedRole(roles[0].name);
-      localStorage.setItem('selectedRole', roles[0].name);
       this.redirectToProperView();
 
       roles.forEach(u => {
