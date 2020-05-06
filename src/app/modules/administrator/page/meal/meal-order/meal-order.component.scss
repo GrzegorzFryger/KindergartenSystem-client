@@ -40,6 +40,14 @@
           text-align: center;
         }
       }
+
+      .ordered-meal {
+        text-align: center;
+        padding: 10px;
+        .mat-divider {
+          width: 100%;
+        }
+      }
     }
   }
 }
