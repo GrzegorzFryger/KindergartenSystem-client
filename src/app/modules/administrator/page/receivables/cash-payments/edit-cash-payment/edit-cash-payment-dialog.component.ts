@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
-import {DatePipe} from "@angular/common";
+import {DatePipe, DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-edit-cash-payment',
@@ -18,7 +18,8 @@ export class EditCashPaymentDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public dialogConfig: MatDialogConfig<CashPayment>,
               private fb: FormBuilder,
               private validationService: ValidatorsService,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private decimalPipe: DecimalPipe) {
   }
 
   ngOnInit(): void {
@@ -60,7 +61,7 @@ export class EditCashPaymentDialogComponent implements OnInit {
         [Validators.required, Validators.minLength(14)]
       ],
       transactionAmount: [
-        this.dialogConfig.data.transactionAmount,
+        this.decimalPipe.transform(this.dialogConfig.data.transactionAmount, '1.2-2'),
         [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
     });

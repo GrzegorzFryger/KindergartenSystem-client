@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -158,6 +158,7 @@ import { MealOrderComponent } from './page/meal/meal-order/meal-order.component'
     {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     DatePipe,
+    DecimalPipe,
     MatCheckboxModule
   ]
 })
