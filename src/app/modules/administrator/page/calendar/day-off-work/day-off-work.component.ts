@@ -5,6 +5,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {DatePipe} from '@angular/common';
+import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-day-off-work',
@@ -24,7 +28,8 @@ export class DayOffWorkComponent implements OnInit {
   dateFrom: Date = null;
   dateTo: Date = null;
 
-  constructor(private dayOffWorkService: DayOffWorkService, private datePipe: DatePipe) {
+  constructor(private dayOffWorkService: DayOffWorkService, private datePipe: DatePipe,
+              private dialog: MatDialog, private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -46,10 +51,8 @@ export class DayOffWorkComponent implements OnInit {
     }
   }
 
-  removeDayOff(id: string): void {
-    this.dayOffWorkService.deleteDayOffWork(id).subscribe(resp => {
-      this.getAllDaysOff();
-    });
+  public deleteDayOff(dayOffWorkId: string): void {
+    this.openRemovalDialog('Czy na pewno usunąć ten dzień wolny?', dayOffWorkId);
   }
 
   getAllDaysOff(): void {
@@ -77,6 +80,42 @@ export class DayOffWorkComponent implements OnInit {
       this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(dateFrom) &&
         new Date(m.date) <= new Date(dateTo));
     });
+  }
+
+  private removeDayOff(confirmation: boolean, id: string): void {
+    if (confirmation) {
+      this.dayOffWorkService.deleteDayOffWork(id).subscribe(
+        resp => {
+          this.snackMessageHandlingService.success('Dzień wolny został usunięty');
+          if (this.dateFrom == null && this.dateTo == null) {
+            this.getAllDaysOff();
+          } else {
+            this.filterByDate(this.dateFrom, this.dateTo);
+          }
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dnia wolnego');
+        },
+        () => {
+          // ON COMPLETE
+        }
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
+  }
+
+  private openRemovalDialog(question: string, dayOffWorkId: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+        this.removeDayOff(result.answer, dayOffWorkId);
+      }
+    );
   }
 
 }
