@@ -100,7 +100,7 @@
 
           <ng-container matColumnDef="eventType">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
-            <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.eventType}} </mat-cell>
+            <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="actions">

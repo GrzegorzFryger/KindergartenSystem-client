@@ -82,6 +82,23 @@ export class DayOffWorkComponent implements OnInit {
     });
   }
 
+  translateEventType(eventType: string): string {
+    switch (eventType) {
+      case 'HOLIDAY': {
+        return 'Święto';
+        break;
+      }
+      case 'INTERNAL_EVENT': {
+        return 'Wydarzenie wewnętrzne';
+        break;
+      }
+      case 'WEEKEND': {
+        return 'Weekend';
+        break;
+      }
+    }
+  }
+
   private removeDayOff(confirmation: boolean, id: string): void {
     if (confirmation) {
       this.dayOffWorkService.deleteDayOffWork(id).subscribe(
