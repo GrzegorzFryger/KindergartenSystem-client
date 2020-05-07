@@ -22,7 +22,7 @@ export class DayOffWorkComponent implements OnInit {
 
   public dataSource: MatTableDataSource<DayOffWork> = new MatTableDataSource();
 
-  public columnsToDisplay: string[] = ['id', 'date', 'name', 'eventType', 'actions'];
+  public columnsToDisplay: string[] = ['date', 'name', 'eventType', 'actions'];
 
   dayOffWork: DayOffWork;
   dateFrom: Date = null;
