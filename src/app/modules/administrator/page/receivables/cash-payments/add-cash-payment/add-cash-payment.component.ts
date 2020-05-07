@@ -217,7 +217,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       transactionAmount: [
         '',
-        [Validators.required, Validators.min(1), this.validationService.isInteger]
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
       transactionCurrency: [
         this.CURRENCY,

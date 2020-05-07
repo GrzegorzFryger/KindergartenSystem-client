@@ -61,7 +61,7 @@ export class EditCashPaymentDialogComponent implements OnInit {
       ],
       transactionAmount: [
         this.dialogConfig.data.transactionAmount,
-        [Validators.required, Validators.min(1), this.validationService.isInteger]
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
     });
   }
