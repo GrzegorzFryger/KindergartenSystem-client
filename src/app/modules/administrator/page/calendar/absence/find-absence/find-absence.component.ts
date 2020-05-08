@@ -56,15 +56,4 @@ export class FindAbsenceComponent implements OnInit {
       this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
   }
-
-  getChildNameFromId(childId: string): string {
-    this.children.subscribe(resp => {
-      resp.forEach(child => {
-        if (child.id === childId) {
-          this.childName = child.name + ' ' + child.surname;
-        }
-      });
-    });
-    return this.childName;
-  }
 }
