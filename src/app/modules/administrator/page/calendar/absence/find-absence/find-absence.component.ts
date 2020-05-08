@@ -21,7 +21,7 @@ export class FindAbsenceComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Absence> = new MatTableDataSource();
 
-  public columnsToDisplay: string[] = ['childName', 'date', 'reason', 'actions'];
+  public columnsToDisplay: string[] = ['childName', 'childSurname', 'date', 'reason', 'actions'];
   endDate: string;
   startDate: string;
   childName: string;
