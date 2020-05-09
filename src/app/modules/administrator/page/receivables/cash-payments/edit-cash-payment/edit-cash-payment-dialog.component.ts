@@ -32,7 +32,7 @@ export class EditCashPaymentDialogComponent implements OnInit {
     this.dialogConfig.data.isEdited = true;
     this.dialogConfig.data.transactionDate = this.convertToDate(this.form.get('transactionDate').value);
     this.dialogConfig.data.contractorDetails = this.form.get('contractorDetails').value;
-    this.dialogConfig.data.transactionAmount = this.form.get('transactionAmount').value;
+    this.dialogConfig.data.transactionAmount = this.form.get('transactionAmount').value.replace(',', '.');
     this.dialogConfig.data.title = this.form.get('title').value;
     this.dialogRef.close(this.dialogConfig.data);
   }
