@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 function check_if_is_double(value) {
-  const regex = /^\d+(?:\.\d{0,2})$/; // Any number with 2 decimal places
+  const regex = /^\d+(?:,\d{1,2})$/; // Any number with 2 decimal places
   return regex.test(value);
 }
 
