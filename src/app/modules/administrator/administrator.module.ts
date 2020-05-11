@@ -71,6 +71,7 @@ import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absen
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {GroupsComponent} from './page/groups/groups.component';
 import { GroupManagementComponent } from './page/groups/group-management/group-management.component';
+import { AddGroupComponent } from './page/groups/add-group/add-group.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { GroupManagementComponent } from './page/groups/group-management/group-m
     AddAbsenceComponent,
     MealOrderComponent,
     GroupsComponent,
-    GroupManagementComponent
+    GroupManagementComponent,
+    AddGroupComponent
   ],
 
 
