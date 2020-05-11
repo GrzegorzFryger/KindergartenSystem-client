@@ -1,12 +1,12 @@
 <div class="add-group-container">
-  <mat-card-header>
-    <h3>Dodaj grupę</h3>
-  </mat-card-header>
+  <mat-card>
+    <mat-card-header>
+      <h3>Dodaj grupę</h3>
+    </mat-card-header>
 
-  <mat-card-content>
-    <form class="container-fluid" [formGroup]="form">
-      <div class="row">
-        <div class="col">
+    <mat-card-content>
+      <form class="container-fluid" [formGroup]="form">
+        <div class="row">
           <mat-form-field appearance="standard">
             <mat-label>Nazwa grupy</mat-label>
             <input matInput formControlName="groupName">
@@ -14,23 +14,22 @@
           </mat-form-field>
         </div>
 
-        <div class="col">
+        <div class="row">
           <mat-form-field appearance="standard">
             <mat-label>Opis grupy</mat-label>
             <input matInput formControlName="groupDescription">
             <mat-error>Opis jest wymagany (co najmniej 5 znaków)</mat-error>
           </mat-form-field>
         </div>
-      </div>
+        <br>
 
-      <div class="row">
-        <div class="col">
+        <div class="row">
           <button mat-raised-button color="primary" type="button" (click)="addGroup()"
                   [disabled]="!form.valid">
             Dodaj grupę
           </button>
         </div>
-      </div>
-    </form>
-  </mat-card-content>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
