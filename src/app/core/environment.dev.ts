@@ -8,6 +8,7 @@ const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
 const accountUrl = apiUrl + '/api/account/';
 const actuatorUrl = apiUrl + '/actuator/';
+const paymentsUrl = apiUrl + '/api/payments/';
 
 export const environment = {
   production: false,
@@ -127,8 +128,6 @@ export const environment = {
       invokeMeal: mealUrl + '/',
       getAllMealsByChild: mealUrl + '/',
       getMealBySelectedDate: mealUrl + '/order/'
-
-
     },
 
     actuator: {
@@ -136,8 +135,16 @@ export const environment = {
       getHttpTrace: actuatorUrl + 'httptrace',
       getMetrics: actuatorUrl + 'metrics',
       getMetricsDetails: ''
-    }
+    },
 
+    payments: {
+      findAllRecurringPayments: paymentsUrl + 'recurring-payments',
+      findPaymentById: paymentsUrl + 'recurring-payment',
+      createTuition: paymentsUrl + 'recurring-payment/tuition',
+      createOtherPayment: paymentsUrl + 'recurring-payments/other',
+      updatePayment: paymentsUrl + 'recurring-payments',
+      markAsCancelPayment: paymentsUrl + 'recurring-payments/',
+    }
   }
 
 };
