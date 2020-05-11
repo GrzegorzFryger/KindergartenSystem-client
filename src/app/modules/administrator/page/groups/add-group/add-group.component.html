@@ -1,7 +1,36 @@
 <div class="add-group-container">
-  <div class="row">
-    <mat-card-header>
-      <h3>Dodaj grupę</h3>
-    </mat-card-header>
-  </div>
+  <mat-card-header>
+    <h3>Dodaj grupę</h3>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="container-fluid" [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard">
+            <mat-label>Nazwa grupy</mat-label>
+            <input matInput formControlName="groupName">
+            <mat-error>Nazwa grupy jest wymagana (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field appearance="standard">
+            <mat-label>Opis grupy</mat-label>
+            <input matInput formControlName="groupDescription">
+            <mat-error>Opis jest wymagany (co najmniej 5 znaków)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="button" (click)="addGroup()"
+                  [disabled]="!form.valid">
+            Dodaj grupę
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
 </div>
