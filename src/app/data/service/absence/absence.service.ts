@@ -38,6 +38,10 @@ export class AbsenceService {
     return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesByChildId + `${childId}`);
   }
 
+  public getAllAbsences(): Observable<Array<Absence>> {
+    return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsences);
+  }
+
   public getAllAbsencesByDate(date: string): Observable<Array<Absence>> {
     return this.http.get<Array<Absence>>(environment.apiUrls.calendar.getAllAbsencesByDate + `${date}`);
   }
