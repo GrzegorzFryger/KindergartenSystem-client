@@ -1,0 +1,9 @@
+<!--<app-payment-list-->
+<!--  [dataSource]="paymentsOutput"-->
+<!--  (outputDataEmitter)="onSelectPaymentEvent($event)">-->
+<!--</app-payment-list>-->
+
+<app-child-list
+  [dataSource]="childrenOutput"
+  (outputDataEmitter)="onSelectPaymentEvent($event)">
+</app-child-list>
