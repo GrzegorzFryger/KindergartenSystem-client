@@ -70,6 +70,7 @@ import {FindByDateComponent} from './page/calendar/absence/find-by-date/find-by-
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {GroupsComponent} from './page/groups/groups.component';
+import { GroupManagementComponent } from './page/groups/group-management/group-management.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import {GroupsComponent} from './page/groups/groups.component';
     FindByDateComponent,
     AddAbsenceComponent,
     MealOrderComponent,
-    GroupsComponent
+    GroupsComponent,
+    GroupManagementComponent
   ],
 
 

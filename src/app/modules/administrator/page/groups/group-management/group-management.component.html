@@ -1,0 +1,21 @@
+<div class="group-list-container">
+  <div class="row">
+    <div class="col">
+      <mat-table [dataSource]="dataSource" matSort matSortDirection="asc"
+                 matSortActive="name">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa grupy</mat-header-cell>
+          <mat-cell *matCellDef="let group"> {{group.groupName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Opis grupy</mat-header-cell>
+          <mat-cell *matCellDef="let group"> {{group.groupDescription}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

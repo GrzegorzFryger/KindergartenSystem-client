@@ -1,5 +1,5 @@
 export class Group {
   id: number;
-  name: string;
-  description: string;
+  groupName: string;
+  groupDescription: string;
 }
