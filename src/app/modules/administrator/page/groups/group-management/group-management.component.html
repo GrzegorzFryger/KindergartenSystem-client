@@ -7,16 +7,24 @@
     </div>
     <div class="row">
       <div class="col">
-        <mat-table [dataSource]="dataSource" matSort matSortDirection="asc"
-                   matSortActive="name">
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa grupy</mat-header-cell>
+        <mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="desc">
+          <ng-container matColumnDef="groupName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa grupy</mat-header-cell>
             <mat-cell *matCellDef="let group"> {{group.groupName}} </mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Opis grupy</mat-header-cell>
+          <ng-container matColumnDef="groupDescription">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Opis grupy</mat-header-cell>
             <mat-cell *matCellDef="let group"> {{group.groupDescription}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
+            <mat-cell *matCellDef="let group">
+              <button mat-icon-button (click)="deleteGroup(group.id)">
+                <mat-icon class="mat-warn">delete</mat-icon>
+              </button>
+            </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
           <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
