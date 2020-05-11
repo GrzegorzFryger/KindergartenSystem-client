@@ -60,6 +60,11 @@ export class FindAbsenceComponent implements OnInit {
     });
   }
 
+  filterChildren($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   private removeAbsence(confirmation: boolean, id: string): void {
     if (confirmation) {
       this.absenceService.deleteAbsence(id).subscribe(

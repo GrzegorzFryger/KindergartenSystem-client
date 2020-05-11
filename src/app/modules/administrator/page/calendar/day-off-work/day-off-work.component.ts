@@ -67,11 +67,7 @@ export class DayOffWorkComponent implements OnInit {
   onFilter(submittedForm?): void {
     this.dateFrom = submittedForm.value.dateFrom;
     this.dateTo = submittedForm.value.dateTo;
-    if (this.dateFrom == null || this.dateTo == null) {
-      this.getAllDaysOff();
-    } else {
-      this.filterByDate(this.dateFrom, this.dateTo);
-    }
+    this.filterByDate(this.dateFrom, this.dateTo);
   }
 
   convertToDate(date: Date): Date {

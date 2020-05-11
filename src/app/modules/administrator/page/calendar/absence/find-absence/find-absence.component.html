@@ -1,5 +1,10 @@
 <mat-card>
   <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <h3>Znajdź nieobecność</h3>
+      </div>
+    </div>
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="row">
         <table>
@@ -31,6 +36,16 @@
             <td>
               <div class="col">
                 <button mat-stroked-button class="btn-primary" type="submit">Szukaj</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="col">
+                <mat-form-field appearance="standard">
+                  <mat-label>Znajdź dziecko</mat-label>
+                  <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
+                </mat-form-field>
               </div>
             </td>
           </tr>

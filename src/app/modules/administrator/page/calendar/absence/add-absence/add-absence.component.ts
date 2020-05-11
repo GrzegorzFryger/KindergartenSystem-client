@@ -55,15 +55,13 @@ export class AddAbsenceComponent implements OnInit {
     this.dateTo = this.convertToDate(submittedForm.value.dateTo);
     this.reason = submittedForm.value.reason;
 
-    if (this.dateTo == null && this.dateFrom != null) {
-      this.absenceToAdd = new Absence();
-      this.absenceToAdd.date = this.dateFrom;
-      this.absenceToAdd.childId = this.selectedChildId;
-      this.absenceToAdd.reason = this.reason;
-      this.absenceService.createAbsence(this.absenceToAdd).subscribe(resp => {
-        console.log(resp);
-      });
-    }
+    this.absenceToAdd = new Absence();
+    this.absenceToAdd.date = this.dateFrom;
+    this.absenceToAdd.childId = this.selectedChildId;
+    this.absenceToAdd.reason = this.reason;
+    this.absenceService.createAbsence(this.absenceToAdd).subscribe(resp => {
+      console.log(resp);
+    });
     // TODO: implement adding absence range
     submittedForm.reset();
   }
@@ -75,5 +73,7 @@ export class AddAbsenceComponent implements OnInit {
   convertToDate(date: Date): Date {
     return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
+
+
 
 }
