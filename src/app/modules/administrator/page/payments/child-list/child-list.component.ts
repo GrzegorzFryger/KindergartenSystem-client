@@ -16,7 +16,8 @@ export class ChildListComponent implements OnInit, OnDestroy {
   @Input() dataSource: {
     data: Observable<Array<Child>>,
     columnToDisplay: Observable<Array<string>>,
-    filterPredicate: (data: Child, filter: string) => boolean
+    filterPredicate: (data: Child, filter: string) => boolean,
+    select: Observable<any>
   };
   @Output() outputDataEmitter: EventEmitter<{ selected: any }>;
 
@@ -30,9 +31,9 @@ export class ChildListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.dataSub = this.dataSource.data.subscribe(payment => {
-      if (payment) {
-        this.dataSourceToDisplay.data = payment;
+    this.dataSub = this.dataSource.data.subscribe(data => {
+      if (data) {
+        this.dataSourceToDisplay.data = data;
         this.dataSource.columnToDisplay.subscribe(col => {
           this.columnsToDisplay = col;
         });
@@ -45,6 +46,7 @@ export class ChildListComponent implements OnInit, OnDestroy {
         }
       }
     });
+
   }
 
   public onSelect(sel: any): void {

@@ -51,6 +51,7 @@
 
         <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
         <mat-row *matRowDef="let row, let children; columns: columnsToDisplay;"
+                 [ngClass]="{ 'selected': children === (dataSource.select | async) }"
                  (click)="onSelect(children)">
         </mat-row>
       </mat-table>
