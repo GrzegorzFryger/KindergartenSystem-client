@@ -18,6 +18,8 @@ export class PaymentsComponent implements OnInit {
 
   public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'gender', 'dateOfBirth'];
 
+  child: Child;
+
   public paymentsOutput: {
     data: Observable<Array<RecurringPayment>>,
     columnToDisplay: Observable<Array<string>>,
@@ -27,22 +29,25 @@ export class PaymentsComponent implements OnInit {
   public childrenOutput: {
     data: Observable<Array<Child>>,
     columnToDisplay: Observable<Array<string>>,
-    filterPredicate: (data: Child, filter: string) => boolean
+    filterPredicate: (data: Child, filter: string) => boolean,
+    select: Observable<Child>
   };
 
   private paymentsSub: ReplaySubject<Array<RecurringPayment>>;
   private paymentsColumnsSub: BehaviorSubject<Array<string>>;
   private childrenSub: ReplaySubject<Array<Child>>;
   private childrenColumnsSub: BehaviorSubject<Array<string>>;
+  private childrenSelectSub: ReplaySubject<Child>;
 
   constructor(private paymentsService: PaymentsService,
               private childService: ChildService
-              ) {
+  ) {
     this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
     this.paymentsColumnsSub = new BehaviorSubject(this.paymentsColumnsToDisplay);
 
     this.childrenSub = new ReplaySubject<Array<Child>>();
-    this.childrenColumnsSub = new BehaviorSubject(this. childColumnsToDisplay);
+    this.childrenColumnsSub = new BehaviorSubject(this.childColumnsToDisplay);
+    this.childrenSelectSub = new ReplaySubject<Child>();
 
     this.paymentsOutput = {
       data: this.paymentsSub.asObservable(),
@@ -53,7 +58,8 @@ export class PaymentsComponent implements OnInit {
     this.childrenOutput = {
       data: this.childrenSub.asObservable(),
       columnToDisplay: this.childrenColumnsSub.asObservable(),
-      filterPredicate: null
+      filterPredicate: null,
+      select: this.childrenSelectSub.asObservable()
     };
   }
 
@@ -68,7 +74,11 @@ export class PaymentsComponent implements OnInit {
   }
 
   onSelectPaymentEvent($event: { selected: any }) {
-    console.log($event.selected);
+    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !==  'gender'));
+    this.childrenSelectSub.next($event.selected);
+    this.childrenSub.next(new Array<Child>($event.selected));
+
+    this.child = $event.selected;
   }
 }
 
