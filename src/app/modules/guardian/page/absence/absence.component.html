@@ -1,48 +1,84 @@
-<div class="container-absence">
-  <mat-card>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col">
-                <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"
-                              [(selected)]="selectedDate" (selectedChange)="dateChanged() ">
-                </mat-calendar>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="d-flex justify-content-end">
-                  <button mat-stroked-button color="primary" (click)="openDialog()">Zaplanuj nieobecność</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col calendar-more">
-          <div class="d-flex">
-            <div class="header-container">
-              <div class="header">
-                <p>{{selectedDate | date}}</p>
-              </div>
-            </div>
-            <div class="legend-container">
-              <div class="legend">
-                <p>Legenda: </p>
-              </div>
-            </div>
-            <div class="information-container">
-              <div class="address">
-                <p>Infomacje: </p>
-                <p *ngFor="let info of daysEvents"> {{info}}</p>
-              </div>
-            </div>
-          </div>
+<!--<div class="container-absence">-->
+<!--  <mat-card>-->
+<!--    <div class="container-fluid">-->
+<!--      <div class="row">-->
+<!--        <div class="col">-->
+<!--          <div class="container-fluid">-->
+<!--            <div class="row">-->
+<!--              <div class="col">-->
+<!--                <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"-->
+<!--                              [(selected)]="selectedDate" (selectedChange)="dateChanged() ">-->
+<!--                </mat-calendar>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="col">-->
+<!--                <div class="d-flex justify-content-end">-->
+<!--                  <button mat-stroked-button color="primary" (click)="openDialog()">Zaplanuj nieobecność</button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col calendar-more">-->
+<!--          <div class="d-flex">-->
+<!--            <div class="header-container">-->
+<!--              <div class="header">-->
+<!--                <p>{{selectedDate | date}}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="legend-container">-->
+<!--              <div class="legend">-->
+<!--                <p>Legenda: </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="information-container">-->
+<!--              <div class="address">-->
+<!--                <p>Infomacje: </p>-->
+<!--                <p *ngFor="let info of daysEvents"> {{info}}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </mat-card>-->
+<!--</div>-->
+
+<div class="absence-container">
+  <div [ngClass]="{'resize' : resize}" class="absence-item-calendar">
+    <mat-calendar #calendar [dateClass]="dateCssClass" (monthSelected)="monthSelected($event)"
+                  [(selected)]="selectedDate" (selectedChange)="dateChanged() ">
+    </mat-calendar>
+  </div>
+
+  <div *ngIf="resize" class="absence-item-calendar-info">
+    <div #test class="calendar-info-container">
+      <h1 class="day">{{selectedDate | date:'d'}}</h1>
+      <h1 class="month">{{selectedDate | date:'EEEE'}}</h1>
+
+      <ng-container  *ngFor="let item of daysEvents" >
+        <div class="event-day-off">
+          <div class="event-day-off-container">
+            <div class="label">
+
+            </div>
+            <div class="name">
+              {{item}}
+            </div>
+          </div>
         </div>
+      </ng-container>
+
+
+
+      <div class="event-absence">
+
       </div>
-    </div>
-  </mat-card>
-</div>
 
+
+    </div>
+
+  </div>
+</div>
