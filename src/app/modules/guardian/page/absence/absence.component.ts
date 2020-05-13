@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Absence} from '../../../../data/model/absence/absence';
 import {DayOffWork} from '../../../../data/model/absence/day-off-work';
 import {DayOffWorkService} from '../../../../data/service/absence/day-off-work.service';
@@ -18,15 +18,19 @@ import {SnackMessageHandlingService} from '../../../../core/snack-message-handli
   encapsulation: ViewEncapsulation.None
 })
 export class AbsenceComponent implements OnInit {
+
+  @ViewChild('test')
+  private animateThis: ElementRef;
   @ViewChild('calendar')
   myCalendar: MatCalendar<any>;
-  selectedDate: any;
+  selectedDate: Date;
   dayOffWorks: Array<DayOffWork>;
   absences: Array<Absence>;
   daysEvents: Array<string>;
 
   selectedChildId: string;
   selectedChild: Observable<Child>;
+  resize: boolean;
 
   dateCssClass = (d: Date): MatCalendarCellCssClasses => {
     const cssClasses = new Set();
@@ -46,7 +50,9 @@ export class AbsenceComponent implements OnInit {
               private absenceService: AbsenceService,
               private selectedChildService: SelectedChildService,
               public dialog: MatDialog,
-              private  snackErrorHandlingService: SnackMessageHandlingService) {
+              private  snackErrorHandlingService: SnackMessageHandlingService,
+              private render: Renderer2
+  ) {
     this.selectedChild = selectedChildService.selectedChild;
     this.daysEvents = new Array<string>();
   }
@@ -75,6 +81,8 @@ export class AbsenceComponent implements OnInit {
   }
 
   dateChanged() {
+    this.daysEvents = [];
+
     if (this.absences) {
       this.daysEvents = this.absences.filter(absence => {
         const newDate = new Date(absence.date);
@@ -90,6 +98,13 @@ export class AbsenceComponent implements OnInit {
           && newDate.getDate() === this.selectedDate.getDate();
       }).map(absence => absence.name).toString());
     }
+
+    this.resize = true;
+    this.render.addClass(this.animateThis.nativeElement, 'move');
+    setTimeout(() => {
+      this.render.removeClass(this.animateThis.nativeElement, 'move');
+    }, 700);
+
   }
 
   openDialog() {
