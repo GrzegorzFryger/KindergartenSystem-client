@@ -132,7 +132,11 @@ export class AbsenceComponent implements OnInit, OnDestroy {
     }, 900);
   }
 
-  openDialog() {
+  ngOnDestroy(): void {
+    this.childSubscription.unsubscribe();
+  }
+
+  addAbsence() {
     const dialogRef = this.dialog.open(AbsenceDialogComponent, {
       width: '700px',
       height: '550px',
@@ -154,10 +158,5 @@ export class AbsenceComponent implements OnInit, OnDestroy {
       console.log('The dialog was closed');
     });
   }
-
-  ngOnDestroy(): void {
-    this.childSubscription.unsubscribe();
-  }
-
 }
 
