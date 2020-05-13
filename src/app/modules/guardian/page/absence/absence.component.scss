@@ -69,17 +69,26 @@
 //  }
 //}
 
-.absence-container {
+
+
+.absence-calendar-container {
+  background-color: white;
+  border-radius: 24px;
   height: 100%;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
   .absence-item-calendar {
-    flex-basis: 100%;
+    height: 90%;
+    flex-basis: 90%;
   }
 
   .absence-item-calendar-info {
-    flex-basis: 40%;
+    height: 90%;
+    margin-left: 5%;
+    flex-basis: 30%;
 
     .calendar-info-container {
       display: flex;
@@ -89,6 +98,7 @@
       padding-left: 32px;
 
       .event-day-off {
+        margin-top: 16px;
 
         .event-day-off-container {
           margin-top: 16px;
@@ -99,13 +109,18 @@
             padding-top: 8px;
             padding-bottom: 8px;
             flex-basis: 5%;
-            border-left: 3px solid rgb(181, 29, 113) !important;
+            border-left: 3px solid #EE502D !important;
           }
 
           .name {
             padding-top: 8px;
             padding-bottom: 8px;
             flex-basis: 95%;
+            p {
+              margin: 0;
+              font-size: 1.5em ;
+              font-weight: 400;
+            }
           }
         }
       }
@@ -119,13 +134,14 @@
 }
 
 .mat-calendar-body-cell {
-  padding-top: 4% !important;
-  padding-bottom: 4% !important;
+  padding-top: 3.5% !important;
+  padding-bottom: 3.5% !important;
 }
 
 .mat-calendar-body-label {
-  padding-top: 4% !important;
-  padding-bottom: 4% !important;
+  padding-top: 3.5% !important;
+  padding-bottom: 3.5% !important;
+  font-size: 2em !important;
   font-weight: 600 !important
 }
 
@@ -138,7 +154,12 @@
 .mat-calendar-body-selected {
   background-color: unset !important;
   color: unset !important;
-  border: 2px solid rgba(0, 0, 0, 0.5) !important;
+  border: 2px solid #BEC9F4 !important;
+}
+
+.mat-calendar-body-today {
+  color: #F0BBDA !important;
+  border-color: white!important;
 }
 
 .mat-calendar-period-button {
@@ -147,46 +168,52 @@
 }
 
 .resize {
-  flex-basis: 60% !important;
+  animation: resize-calendar 500ms forwards;
 
   .mat-calendar-body-label {
-    width: 7.2857% !important;
-    padding-top: 7.14286% !important;
-    padding-bottom: 7.14286% !important;
+    width: 6% !important;
+    padding-top: 6% !important;
+    padding-bottom: 6% !important;
   }
 
   .mat-calendar-body-cell {
-    width: 7.2857% !important;
-    padding-top: 7.14286% !important;
-    padding-bottom: 7.14286% !important;
+    width: 6% !important;
+    padding-top: 6% !important;
+    padding-bottom: 6% !important;
   }
 
   .mat-calendar-body-cell-content {
-    animation: fade-card 500ms forwards !important;;
+    animation: resize-calendar-cell 500ms forwards !important;;
     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1) !important;;
   }
 }
 
 .day-off-work {
   .mat-calendar-body-cell-content {
-    border-bottom: 2px solid rgb(181, 29, 113) !important;
+    border-bottom: 2px solid #EE502D !important;
   }
 }
 
-.move {
-  .day{
-    animation: fade-in 500ms forwards;
-    animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-  }
+.move-header {
+   .day{
+     animation: fade-in 500ms forwards;
+     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+   }
 
-  .month {
+   .month {
+     animation: fade-in 600ms forwards;
+     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+   }
+ }
 
+.move-description {
+  .event-day-off-container{
     animation: fade-in 700ms forwards;
     animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
   }
 }
 
-@keyframes fade-card {
+@keyframes resize-calendar-cell {
   0% {
     width: 90%
   }
@@ -205,6 +232,16 @@
 
   100% {
     transform: translate3d(0%, 0px, 0px);
+  }
+}
+
+@keyframes resize-calendar  {
+  0% {
+
+  }
+
+  100% {
+    flex-basis: 55%;
   }
 }
 
