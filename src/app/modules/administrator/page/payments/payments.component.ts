@@ -16,7 +16,7 @@ export class PaymentsComponent implements OnInit {
     'childName', 'type', 'select'
   ];
 
-  public childColumnsToDisplay: string[] = ['name', 'surname', 'pesel', 'gender', 'dateOfBirth'];
+  public childColumnsToDisplay: string[] = ['img', 'name', 'surname', 'pesel', 'gender', 'dateOfBirth'];
 
   child: Child;
 
@@ -74,7 +74,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   onSelectPaymentEvent($event: { selected: any }) {
-    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !==  'gender'));
+    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender'));
     this.childrenSelectSub.next($event.selected);
     this.childrenSub.next(new Array<Child>($event.selected));
 
