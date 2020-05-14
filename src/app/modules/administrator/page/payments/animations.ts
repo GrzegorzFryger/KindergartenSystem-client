@@ -21,13 +21,26 @@ export const fadeAnimation = trigger('paymentChildComponent', [
   transition('final=>initial', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
 ]);
 
-export const showHide = trigger('hide', [
-  state('initial', style({
+export const showHide = trigger('show', [
+  state('true', style({
+
+  })),
+  state('false', style({
     display: 'none'
   })),
-  state('final', style({
-  })),
-  transition('initial=>final', animate('0ms')),
-  transition('final=>initial', animate('0ms'))
+  transition('true=>false', animate('0ms')),
+  transition('false=>true', animate('0ms'))
 ]);
+
+export const childHeader = trigger('childHeader', [
+  state('initial', style({
+    transform: 'translate3d(100%, 0px, 0px)'
+  })),
+  state('final', style({
+    transform: 'translate3d(0, 0px, 0px)'
+  })),
+  transition('initial=>final', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')),
+  transition('final=>initial', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
+]);
+
 

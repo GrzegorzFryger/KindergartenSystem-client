@@ -2,12 +2,14 @@
   background-color: white;
   border-radius: 24px;
   display: flex;
+  flex-direction: column;
 
   .children-payments-item {
     flex-basis: 50%;
     .children-payments-item-container {
       display: flex;
       flex-direction: column;
+      padding: 16px;
     }
   }
 }

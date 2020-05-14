@@ -5,14 +5,14 @@ import {RecurringPayment} from '../../../../data/model/payments/recurring-paymen
 import {Child} from '../../../../data/model/accounts/child';
 import {ChildService} from '../../../../data/service/accounts/child.service';
 import {Router} from '@angular/router';
-import {fadeAnimation, fadeAnimation2, showHide} from './animations';
+import {childHeader, fadeAnimation, fadeAnimation2, showHide} from './animations';
 
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [fadeAnimation, fadeAnimation2, showHide]
+  animations: [fadeAnimation, fadeAnimation2, showHide, childHeader]
 })
 export class PaymentsComponent implements OnInit {
   currentState = 'initial';

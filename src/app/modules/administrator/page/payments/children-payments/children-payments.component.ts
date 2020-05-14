@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {fadeAnimation} from '../animations';
 import {Observable} from 'rxjs';
 import {Child} from '../../../../../data/model/accounts/child';
@@ -7,6 +7,7 @@ import {Child} from '../../../../../data/model/accounts/child';
   selector: 'app-children-payments',
   templateUrl: './children-payments.component.html',
   styleUrls: ['./children-payments.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [fadeAnimation]
 })
 export class ChildrenPaymentsComponent implements OnInit {

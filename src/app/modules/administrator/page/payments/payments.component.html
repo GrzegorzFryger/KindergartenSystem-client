@@ -1,12 +1,36 @@
-<div class="payments-container">
-  <div [@paymentTable]="currentState" class="payments-table-item">
-    <app-child-list
-      [dataSource]="childrenOutput"
-      (outputDataEmitter)="onSelectPaymentEvent($event)">
-    </app-child-list>
+<div class="payments-layout-container">
+
+  <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
+    <div class="child-profile-item-container">
+      <div class="fullName-item">
+        <div class="d-flex align-items-center justify-content-center">
+          <h2> {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
+        </div>
+      </div>
+
+      <div class="button-item">
+        <div class="d-flex align-items-center justify-content-around max-height">
+
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div [@hide]="currentState" [@paymentChildComponent]="currentState" class="payments-children-item">
-    <app-children-payments [dataSource]="childSelectOutput"></app-children-payments>
+  <div class="context-item">
+    <div class="payments-container">
+      <div [@paymentTable]="currentState" class="payments-table-item">
+        <app-child-list
+          [dataSource]="childrenOutput"
+          (outputDataEmitter)="onSelectPaymentEvent($event)">
+        </app-child-list>
+      </div>
+
+      <div [@show]="!!(childSelectOutput.data | async)" [@paymentChildComponent]="currentState"
+           class="payments-children-item">
+        <app-children-payments [dataSource]="childSelectOutput"></app-children-payments>
+      </div>
+
+    </div>
   </div>
 </div>
