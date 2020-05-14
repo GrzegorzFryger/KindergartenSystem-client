@@ -1,7 +1,6 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Group} from '../../../../../data/model/groups/group';
 import {GroupService} from '../../../../../data/service/groups/group.service';
-import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -9,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {Child} from '../../../../../data/model/accounts/child';
 
 @Component({
   selector: 'app-group-management',
@@ -20,10 +20,14 @@ export class GroupManagementComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
-  public columnsToDisplay: string[] = ['groupName', 'groupDescription', 'actions'];
+  public groupListColumnsToDisplay: string[] = ['groupName', 'groupDescription', 'actions'];
+  public childListColumnsToDisplay: string[] = ['name', 'surname'];
 
-  groups: Observable<Array<Group>>;
-  public dataSource: MatTableDataSource<Group> = new MatTableDataSource();
+  openedGroupDetailsTable = false;
+  groupDetails: Group = new Group();
+
+  public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
+  public groupDetailsDataSource: MatTableDataSource<Child> = new MatTableDataSource();
 
   constructor(private groupService: GroupService,
               private dialog: MatDialog,
@@ -34,9 +38,29 @@ export class GroupManagementComponent implements OnInit {
     this.initializeTables();
   }
 
-  public deleteGroup(groupId: string): void {
+  deleteGroup(groupId: string): void {
     this.openRemovalDialog('Czy na pewno usunąć tą grupę?', groupId);
   }
+
+  openGroupDetailsTable(groupId: string): void {
+    this.groupService.getGroupById(groupId).subscribe(resp => {
+      this.groupDetails = resp;
+      console.log(resp);
+    });
+    this.groupService.findAllChildrenInGroup(groupId).subscribe(resp => {
+      this.groupDetailsDataSource.data = resp;
+      this.groupDetailsDataSource.sort = this.sort.toArray()[1];
+      this.groupDetailsDataSource.paginator = this.paginator.toArray()[1];
+      this.groupDetailsDataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
+      console.log(resp);
+    });
+    this.openedGroupDetailsTable = true;
+  }
+
+  closeGroupDetailsTable() {
+    this.openedGroupDetailsTable = false;
+  }
+
 
   private removeGroup(confirmation: boolean, id: string): void {
     if (confirmation) {
@@ -73,10 +97,10 @@ export class GroupManagementComponent implements OnInit {
   private initializeTables(): void {
     this.groupService.getAllGroups().subscribe(resp => {
       console.log(resp);
-      this.dataSource.data = resp;
-      this.dataSource.sort = this.sort.toArray()[0];
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
+      this.groupListDataSource.data = resp;
+      this.groupListDataSource.sort = this.sort.toArray()[0];
+      this.groupListDataSource.paginator = this.paginator.toArray()[0];
+      this.groupListDataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
   }
 

@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {Group} from '../../model/groups/group';
+import {Child} from '../../model/accounts/child';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class GroupService {
 
   public deleteGroup(id: string): Observable<any> {
     return this.http.delete(environment.apiUrls.groups.deleteGroup + id);
+  }
+
+  public findAllChildrenInGroup(groupId: string): Observable<Array<Child>> {
+    return this.http.get<Array<Child>>(environment.apiUrls.groups.findAllChildrenInGroup + groupId);
   }
 
   public addChildToGroup(groupId: string, childId: string): Observable<Group> {
