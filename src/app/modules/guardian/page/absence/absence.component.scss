@@ -1,75 +1,3 @@
-//.container-absence {
-//  display: flex;
-//  flex-direction: row;
-//
-//  .mat-card {
-//    flex-grow: 1;
-//    flex-shrink: 1;
-//
-//    .mat-calendar {
-//
-//      .absence {
-//        .mat-calendar-body-cell-content {
-//          border-style: solid;
-//          border-width: 2px;
-//          border-color: #C40F11;
-//          border-radius: 100% !important;
-//        }
-//      }
-//
-//      .day-off-work {
-//        background-color: #F5F5F5;
-//        border-radius: 100%;
-//      }
-//    }
-//
-//    .calendar-more {
-//
-//      .d-flex {
-//        flex-direction: column;
-//        width: 100%;
-//        height: 100%;
-//
-//        .header-container {
-//          flex-basis: 20%;
-//
-//          .header {
-//            display: flex;
-//            justify-content: center;
-//            align-items: center;
-//            height: 100%;
-//            width: 100%;
-//
-//            p {
-//              font-weight: bold;
-//              color: #673ab7;
-//              margin-bottom: 0;
-//            }
-//          }
-//        }
-//
-//        .legend-container {
-//          flex-basis: 40%;
-//          margin-top: 16px;
-//          background-color: #F5F5F5;
-//
-//          .legend {
-//            display: flex;
-//            justify-content: flex-start;
-//          }
-//        }
-//
-//        .information-container {
-//          flex-basis: 40%;
-//          margin-top: 16px;
-//          background-color: #F5F5F5;
-//        }
-//      }
-//    }
-//  }
-//}
-
-
 .absence-main-container {
   background-color: white;
   border-radius: 24px;
@@ -237,6 +165,8 @@
   }
 }
 
+
+
 @keyframes resize-calendar-cell {
   0% {
     width: 90%
@@ -266,6 +196,15 @@
 
   100% {
     flex-basis: 55%;
+  }
+}
+
+@keyframes resize-button {
+  0% {
+  }
+
+  100% {
+    transform: translate3d(0%, 0px, 0px);
   }
 }
 
