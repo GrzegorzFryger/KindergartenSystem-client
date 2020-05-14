@@ -72,6 +72,7 @@ import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {PaymentsComponent} from './page/payments/payments.component';
 import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
+import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import {ChildListComponent} from './page/payments/child-list/child-list.componen
     MealOrderComponent,
     PaymentsComponent,
     PaymentListComponent,
-    ChildListComponent
+    ChildListComponent,
+    ChildrenPaymentsComponent
   ],
 
 

@@ -1,15 +1,13 @@
-<!--<app-payment-list-->
-<!--  [dataSource]="paymentsOutput"-->
-<!--  (outputDataEmitter)="onSelectPaymentEvent($event)">-->
-<!--</app-payment-list>-->
-
 <div class="payments-container">
-  <div [ngClass]="{'resize' : child}" class="payments-item">
-
+  <div [@move2]="currentState" class="payments-item">
       <app-child-list
         [dataSource]="childrenOutput"
         (outputDataEmitter)="onSelectPaymentEvent($event)">
       </app-child-list>
-
   </div>
+
+  <div [@move]="currentState" class="payments-item">
+   <app-children-payments [dataSource]="childSelectOutput"></app-children-payments>
+  </div>
+
 </div>

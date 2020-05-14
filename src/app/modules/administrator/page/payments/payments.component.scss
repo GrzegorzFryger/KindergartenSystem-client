@@ -1,22 +1,8 @@
 .payments-container {
-  display:flex;
+  display: flex;
+  flex-direction: column;
+
   .payments-item {
-    flex-basis: 100%;
   }
 }
 
-
-.resize {
-  animation: fade-card 500ms forwards;
-  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-@keyframes fade-card {
-  0% {
-  }
-
-  100% {
-    //transform: translate3d(-30%, 0px, 0px);
-    flex-basis: 40%;
-  }
-}

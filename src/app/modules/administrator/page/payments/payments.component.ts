@@ -1,17 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {PaymentsService} from '../../../../data/service/payments/payments.service';
 import {RecurringPayment} from '../../../../data/model/payments/recurring-payment';
 import {Child} from '../../../../data/model/accounts/child';
 import {ChildService} from '../../../../data/service/accounts/child.service';
+import {Router} from '@angular/router';
+import {fadeAnimation, fadeAnimation2} from './animations';
 
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.scss']
+  styleUrls: ['./payments.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations: [fadeAnimation, fadeAnimation2]
 })
 export class PaymentsComponent implements OnInit {
-
+  currentState = 'initial';
   public paymentsColumnsToDisplay: string[] = ['amount', 'description', 'childSurname',
     'childName', 'type', 'select'
   ];
@@ -33,6 +37,10 @@ export class PaymentsComponent implements OnInit {
     select: Observable<Child>
   };
 
+  public childSelectOutput: {
+    data: Observable<Child>
+  };
+
   private paymentsSub: ReplaySubject<Array<RecurringPayment>>;
   private paymentsColumnsSub: BehaviorSubject<Array<string>>;
   private childrenSub: ReplaySubject<Array<Child>>;
@@ -40,8 +48,8 @@ export class PaymentsComponent implements OnInit {
   private childrenSelectSub: ReplaySubject<Child>;
 
   constructor(private paymentsService: PaymentsService,
-              private childService: ChildService
-  ) {
+              private childService: ChildService,
+              private router: Router) {
     this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
     this.paymentsColumnsSub = new BehaviorSubject(this.paymentsColumnsToDisplay);
 
@@ -61,6 +69,11 @@ export class PaymentsComponent implements OnInit {
       filterPredicate: null,
       select: this.childrenSelectSub.asObservable()
     };
+
+    this.childSelectOutput = {
+      data: this.childrenSelectSub.asObservable()
+    };
+
   }
 
   ngOnInit(): void {
@@ -77,8 +90,14 @@ export class PaymentsComponent implements OnInit {
     this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender'));
     this.childrenSelectSub.next($event.selected);
     this.childrenSub.next(new Array<Child>($event.selected));
+    // this.child = $event.selected;
 
-    this.child = $event.selected;
+    this.router.navigate(['/administrator/payments/child']);
+    this.currentState = 'final';
+  }
+
+  prepareRoute() {
+
   }
 }
 
