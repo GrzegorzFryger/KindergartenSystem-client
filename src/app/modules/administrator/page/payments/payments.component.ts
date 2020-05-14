@@ -5,14 +5,14 @@ import {RecurringPayment} from '../../../../data/model/payments/recurring-paymen
 import {Child} from '../../../../data/model/accounts/child';
 import {ChildService} from '../../../../data/service/accounts/child.service';
 import {Router} from '@angular/router';
-import {fadeAnimation, fadeAnimation2} from './animations';
+import {fadeAnimation, fadeAnimation2, showHide} from './animations';
 
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [fadeAnimation, fadeAnimation2]
+  animations: [fadeAnimation, fadeAnimation2, showHide]
 })
 export class PaymentsComponent implements OnInit {
   currentState = 'initial';
@@ -89,10 +89,8 @@ export class PaymentsComponent implements OnInit {
   onSelectPaymentEvent($event: { selected: any }) {
     this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender'));
     this.childrenSelectSub.next($event.selected);
-    this.childrenSub.next(new Array<Child>($event.selected));
-    // this.child = $event.selected;
+    this.child = $event.selected;
 
-    this.router.navigate(['/administrator/payments/child']);
     this.currentState = 'final';
   }
 

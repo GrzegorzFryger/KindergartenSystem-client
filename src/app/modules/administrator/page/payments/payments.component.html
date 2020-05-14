@@ -1,13 +1,12 @@
 <div class="payments-container">
-  <div [@move2]="currentState" class="payments-item">
-      <app-child-list
-        [dataSource]="childrenOutput"
-        (outputDataEmitter)="onSelectPaymentEvent($event)">
-      </app-child-list>
+  <div [@paymentTable]="currentState" class="payments-table-item">
+    <app-child-list
+      [dataSource]="childrenOutput"
+      (outputDataEmitter)="onSelectPaymentEvent($event)">
+    </app-child-list>
   </div>
 
-  <div [@move]="currentState" class="payments-item">
-   <app-children-payments [dataSource]="childSelectOutput"></app-children-payments>
+  <div [@hide]="currentState" [@paymentChildComponent]="currentState" class="payments-children-item">
+    <app-children-payments [dataSource]="childSelectOutput"></app-children-payments>
   </div>
-
 </div>

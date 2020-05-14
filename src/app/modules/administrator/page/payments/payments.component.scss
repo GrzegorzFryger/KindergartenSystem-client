@@ -1,8 +1,13 @@
 .payments-container {
   display: flex;
-  flex-direction: column;
 
-  .payments-item {
+  .payments-table-item {
+    min-width: 330px;
+    padding: 16px;
+  }
+
+  .payments-children-item {
+    padding: 16px;
   }
 }
 
