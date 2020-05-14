@@ -56,6 +56,14 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
               <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
+              <mat-cell *matCellDef="let child">
+                <mat-icon matTooltip="Usuń dziecko z grupy" class="mat-warn" (click)="deleteChildFromGroup(child.id)">
+                  delete
+                </mat-icon>
+              </mat-cell>
+            </ng-container>
             <mat-header-row *matHeaderRowDef="childListColumnsToDisplay"></mat-header-row>
             <mat-row *matRowDef="let row; columns: childListColumnsToDisplay;"></mat-row>
           </mat-table>

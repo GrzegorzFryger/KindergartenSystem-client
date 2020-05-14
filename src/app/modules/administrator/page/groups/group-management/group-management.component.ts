@@ -21,7 +21,7 @@ export class GroupManagementComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
   public groupListColumnsToDisplay: string[] = ['groupName', 'groupDescription', 'actions'];
-  public childListColumnsToDisplay: string[] = ['name', 'surname'];
+  public childListColumnsToDisplay: string[] = ['name', 'surname', 'actions'];
 
   openedGroupDetailsTable = false;
   groupDetails: Group = new Group();
@@ -39,7 +39,11 @@ export class GroupManagementComponent implements OnInit {
   }
 
   deleteGroup(groupId: string): void {
-    this.openRemovalDialog('Czy na pewno usunąć tą grupę?', groupId);
+    this.openGroupRemovalDialog('Czy na pewno usunąć tą grupę?', groupId);
+  }
+
+  deleteChildFromGroup(childId: string): void {
+    this.openChildRemovalDialog('Czy na pewno usunąć dziecko z grupy?', childId);
   }
 
   openGroupDetailsTable(groupId: string): void {
@@ -61,10 +65,28 @@ export class GroupManagementComponent implements OnInit {
     this.openedGroupDetailsTable = false;
   }
 
-
-  private removeGroup(confirmation: boolean, id: string): void {
+  private removeChildFromGroup(confirmation: boolean, childId: string): void {
     if (confirmation) {
-      this.groupService.deleteGroup(id).subscribe(
+      this.groupService.removeChildFromGroup(this.groupDetails.id.toString(), childId).subscribe(
+        resp => {
+          this.snackMessageHandlingService.success('Dziecko zostało usunięte z grupy');
+          this.openGroupDetailsTable(this.groupDetails.id.toString());
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dziecka');
+        },
+        () => {
+          // ON COMPLETE
+        }
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
+  }
+
+
+  private removeGroup(confirmation: boolean, groupId: string): void {
+    if (confirmation) {
+      this.groupService.deleteGroup(groupId).subscribe(
         resp => {
           this.snackMessageHandlingService.success('Grupa została usunięta');
           this.initializeTables();
@@ -80,7 +102,7 @@ export class GroupManagementComponent implements OnInit {
     }
   }
 
-  private openRemovalDialog(question: string, dayOffWorkId: string): void {
+  private openGroupRemovalDialog(question: string, dayOffWorkId: string): void {
     const data = new YesNoDialogData(question);
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
       data: {data}
@@ -90,6 +112,20 @@ export class GroupManagementComponent implements OnInit {
       result => {
         console.log('The dialog was closed with answer: ' + result.answer);
         this.removeGroup(result.answer, dayOffWorkId);
+      }
+    );
+  }
+
+  private openChildRemovalDialog(question: string, childId: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+        this.removeChildFromGroup(result.answer, childId);
       }
     );
   }
