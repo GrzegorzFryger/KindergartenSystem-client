@@ -1,0 +1,11 @@
+.children-payments-container {
+  display: flex;
+
+  .children-payments-item {
+    flex-basis: 50%;
+    .children-payments-item-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
