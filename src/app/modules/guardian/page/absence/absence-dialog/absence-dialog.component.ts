@@ -13,9 +13,7 @@ import {AbsenceRange} from '../../../../../data/model/absence/absence-range';
 })
 export class AbsenceDialogComponent implements OnInit {
   absencePreview: AbsenceRange;
-  startFormGroup: FormGroup;
-  endFormGroup: FormGroup;
-  reasonFormGroup: FormGroup;
+  absenceForm: FormGroup;
   formResponseSub: Subject<AbsenceRange>;
   formResponse: Observable<AbsenceRange>;
 
@@ -27,28 +25,21 @@ export class AbsenceDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.startFormGroup = this.fb.group({
-      startDate: ['', [Validators.required]]
-    });
-
-    this.endFormGroup = this.fb.group({
-      endDate: ['', [Validators.required]]
-    });
-
-    this.reasonFormGroup = this.fb.group({
+    this.absenceForm = this.fb.group({
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
       comment: ['', [Validators.required]]
     });
   }
 
-  prepareData() {
+  sendForm() {
     this.absencePreview = {
       childId: this.data.childId,
-      dateFrom: new Date(this.startFormGroup.get('startDate').value),
-      dateTo: new Date(this.endFormGroup.get('endDate').value),
-      reason: this.reasonFormGroup.get('comment').value
+      dateFrom: new Date(this.absenceForm.get('startDate').value),
+      dateTo: new Date(this.absenceForm.get('endDate').value),
+      reason: this.absenceForm.get('comment').value
     };
-  }
-  sendForm() {
+
     this.formResponseSub.next(this.absencePreview);
   }
 }
