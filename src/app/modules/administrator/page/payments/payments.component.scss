@@ -1,4 +1,3 @@
-
 .payments-layout-container {
   display: flex;
   flex-direction: column;
@@ -22,9 +21,8 @@
       .button-item {
         flex-basis: 70%;
 
-
         .menu-item {
-          margin-right: 8px;
+          margin-right: 16px;
           display: inline-flex;
           align-items: center;
           padding: 8px;
@@ -37,11 +35,8 @@
           .mat-icon {
             margin-right: 2px;
           }
-
         }
-
       }
-
     }
   }
 
@@ -67,5 +62,4 @@
 .mat-button-toggle-label-content {
   padding: 32px;
 }
-
 

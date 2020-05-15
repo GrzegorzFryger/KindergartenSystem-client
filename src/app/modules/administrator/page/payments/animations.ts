@@ -45,11 +45,9 @@ export const refresh = trigger('refresh', [
   state('true', style({})),
   state('false', style({})),
   transition('true => false', [
-    animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', keyframes ( [
+    animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', keyframes([
       style({transform: 'translate3d(0, -100%, 0)', offset: 0}),
-      style({transform: 'translate3d(0, 0px, 0)', offset: 1 })
+      style({transform: 'translate3d(0, 0px, 0)', offset: 1})
     ]))
   ])
 ]);
-
-

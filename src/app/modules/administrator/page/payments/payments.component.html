@@ -2,9 +2,8 @@
 
   <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
     <div class="child-profile-item-container">
-
       <div class="fullName-item">
-        <div class="d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center align-items-center justify-content-center">
           <h2 [@refresh]="refresh"
               (@refresh.done)="onAnimationEvent($event)">
             {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
@@ -12,7 +11,7 @@
       </div>
 
       <div class="button-item">
-        <div class="d-flex justify-content-center max-height">
+        <div class="d-flex align-items-center justify-content-end max-height">
           <div>
             <div routerLink="/administrator/payments/list" matRipple class="menu-item">
               <mat-icon>payment</mat-icon>
