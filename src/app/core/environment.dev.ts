@@ -145,7 +145,12 @@ export const environment = {
       createOtherPayment: paymentsUrl + 'recurring-payments/other',
       updatePayment: paymentsUrl + 'recurring-payments',
       markAsCancelPayment: paymentsUrl + 'recurring-payments/',
+
+      history: {
+        getChildById: paymentsUrl +  'payment-history/'
+      }
     }
+
   }
 
 };

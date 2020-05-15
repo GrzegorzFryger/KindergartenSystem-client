@@ -36,8 +36,8 @@ export const childHeader = trigger('childHeader', [
   state('final', style({
     transform: 'translate3d(0, 0px, 0px)'
   })),
-  transition('initial=>final', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)')),
-  transition('final=>initial', animate('500ms cubic-bezier(0.35, 0, 0.25, 1)'))
+  transition('initial=>final', animate('500ms 400ms cubic-bezier(0.35, 0, 0.25, 1)')),
+  transition('final=>initial', animate('500ms 400ms cubic-bezier(0.35, 0, 0.25, 1)'))
 ]);
 
 
