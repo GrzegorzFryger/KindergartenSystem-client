@@ -5,13 +5,28 @@
   display: flex;
   flex-direction: column;
 
-  .children-payments-item {
-    flex-basis: 50%;
-    .children-payments-item-container {
-      display: flex;
-      flex-direction: column;
-      padding: 16px;
+  .expansion-panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+    justify-content: space-between;
+  }
+
+  .edit-button {
+    display: flex;
+    padding: 8px 0 0 8px;
+    justify-content: flex-end;
+
+    button {
+      width: 100%;
     }
+
+  }
+
+  .add-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
   }
 }
 
@@ -23,8 +38,4 @@
   //padding: 8px;
 }
 
-.add-button {
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px;
-}
+

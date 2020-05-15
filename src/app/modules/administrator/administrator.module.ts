@@ -74,6 +74,7 @@ import {PaymentListComponent} from './page/payments/payment-list/payment-list.co
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
 import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     PaymentsComponent,
     PaymentListComponent,
     ChildListComponent,
-    ChildrenPaymentsComponent
+    ChildrenPaymentsComponent,
+    HistoryPaymentsComponent
   ],
 
 

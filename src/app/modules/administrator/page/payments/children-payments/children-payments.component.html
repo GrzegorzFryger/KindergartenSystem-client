@@ -16,6 +16,51 @@
             {{payment.description}}
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <div class="expansion-panel-container">
+          <div class="expansion-panel-item">
+            <div class="header">
+              Kwota:
+            </div>
+            <div class="amount">
+              <b> {{payment.amount}} PLN </b>
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <div class="header">
+              Początek:
+            </div>
+            <div class="amount">
+              <b> {{payment.startDate}}</b>
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <div class="header">
+              Koniec:
+            </div>
+            <div class="amount">
+              <b> {{payment.endDate}}  </b>
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <div class="header">
+              Opis:
+            </div>
+            <div class="amount">
+              <b> {{payment.description}} </b>
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <div class="header">
+              Typ:
+            </div>
+            <div class="amount">
+              <b> {{payment.type}} </b>
+            </div>
+          </div>
+        </div>
+        <div class="edit-button">
+          <button mat-stroked-button color="primary">Edytu płatność</button>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </ng-container>
