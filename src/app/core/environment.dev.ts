@@ -139,6 +139,7 @@ export const environment = {
 
     payments: {
       findAllRecurringPayments: paymentsUrl + 'recurring-payments',
+      findAllRecurringPaymentsByChildId: paymentsUrl + 'recurring-payments/',
       findPaymentById: paymentsUrl + 'recurring-payment',
       createTuition: paymentsUrl + 'recurring-payment/tuition',
       createOtherPayment: paymentsUrl + 'recurring-payments/other',
