@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Child} from '../../../../data/model/accounts/child';
 import {ChildService} from '../../../../data/service/accounts/child.service';
 import {childHeader, fadeAnimation, fadeAnimation2, refresh, showHide} from './animations';
+import {ChildrenSelectShareService} from './children-select-share.service';
 
 @Component({
   selector: 'app-payments',
@@ -30,7 +31,7 @@ export class PaymentsComponent implements OnInit {
   private childrenColumnsSub: BehaviorSubject<Array<string>>;
   private childrenSelectSub: ReplaySubject<Child>;
 
-  constructor(private childService: ChildService) {
+  constructor(private childService: ChildService, private childrenSelectShareService: ChildrenSelectShareService) {
     this.childrenSub = new ReplaySubject<Array<Child>>();
     this.childrenColumnsSub = new BehaviorSubject(this.childColumnsToDisplay);
     this.childrenSelectSub = new ReplaySubject<Child>();
@@ -58,6 +59,7 @@ export class PaymentsComponent implements OnInit {
     this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender'));
     this.childrenSelectSub.next($event.selected);
     this.child = $event.selected;
+    this.childrenSelectShareService.selectChild($event.selected);
 
     this.currentState = 'final';
     this.refresh = 'true';

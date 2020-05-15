@@ -1,23 +1,24 @@
 <div class="payments-layout-container">
-
   <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
     <div class="child-profile-item-container">
       <div class="fullName-item">
         <div class="d-flex align-items-center justify-content-center">
           <h1 [@refresh]="refresh"
-              (@refresh.done)="onAnimationEvent($event)"
-          > {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h1>
+              (@refresh.done)="onAnimationEvent($event)">
+            {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h1>
         </div>
       </div>
 
       <div class="button-item">
         <div [@refresh]="refresh" class="d-flex align-items-center justify-content-around max-height">
           <mat-button-toggle-group (valueChange)="onMatButtonValueChange()" name="fontStyle">
-            <mat-button-toggle routerLink="/administrator/payments/list" value="show-payments">Lista płatności
+            <mat-button-toggle routerLink="/administrator/payments/list"
+                               value="payments">Płatnosci
             </mat-button-toggle>
-            <mat-button-toggle value="add-payment">Dodaj płatność</mat-button-toggle>
-            <mat-button-toggle value="add-discount">Dodaj rabat</mat-button-toggle>
-            <mat-button-toggle value="show-history">Wyświetl historie</mat-button-toggle>
+            <mat-button-toggle value="discount">Rabaty</mat-button-toggle>
+            <mat-button-toggle routerLink="/administrator/payments/history"
+                               value="history">Historia płatności
+            </mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </div>
