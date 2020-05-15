@@ -1,25 +1,32 @@
 <div class="payments-layout-container">
+
   <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
     <div class="child-profile-item-container">
+
       <div class="fullName-item">
         <div class="d-flex align-items-center justify-content-center">
-          <h1 [@refresh]="refresh"
+          <h2 [@refresh]="refresh"
               (@refresh.done)="onAnimationEvent($event)">
-            {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h1>
+            {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
         </div>
       </div>
 
       <div class="button-item">
-        <div [@refresh]="refresh" class="d-flex align-items-center justify-content-around max-height">
-          <mat-button-toggle-group name="fontStyle">
-            <mat-button-toggle routerLink="/administrator/payments/list"
-                               value="payments">Płatnosci
-            </mat-button-toggle>
-            <mat-button-toggle value="discount">Rabaty</mat-button-toggle>
-            <mat-button-toggle routerLink="/administrator/payments/history"
-                               value="history">Historia płatności
-            </mat-button-toggle>
-          </mat-button-toggle-group>
+        <div class="d-flex justify-content-center max-height">
+          <div>
+            <div routerLink="/administrator/payments/list" matRipple class="menu-item">
+              <mat-icon>payment</mat-icon>
+              <p>Aktywne płatności</p>
+            </div>
+            <div routerLink="/administrator/payments/history" matRipple class="menu-item">
+              <mat-icon>history</mat-icon>
+              <p>Historia płatności</p>
+            </div>
+            <div matRipple class="menu-item">
+              <mat-icon>attach_money</mat-icon>
+              <p>Rabaty</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

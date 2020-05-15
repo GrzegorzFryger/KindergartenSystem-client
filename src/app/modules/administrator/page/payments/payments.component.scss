@@ -1,5 +1,4 @@
 
-
 .payments-layout-container {
   display: flex;
   flex-direction: column;
@@ -14,14 +13,33 @@
 
       .fullName-item {
         flex-basis: 30%;
+
+        h2 {
+          margin-bottom: 0;
+        }
       }
 
       .button-item {
         flex-basis: 70%;
 
-        button {
-          height: 100%;
+
+        .menu-item {
+          margin-right: 8px;
+          display: inline-flex;
+          align-items: center;
+          padding: 8px;
+          cursor: pointer;
+
+          p {
+            margin-bottom: 0;
+          }
+
+          .mat-icon {
+            margin-right: 2px;
+          }
+
         }
+
       }
 
     }
@@ -41,7 +59,8 @@
     }
   }
 }
-.max-height{
+
+.max-height {
   height: 100%;
 }
 
