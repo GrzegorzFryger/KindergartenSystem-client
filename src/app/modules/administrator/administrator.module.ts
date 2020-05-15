@@ -73,6 +73,7 @@ import {PaymentsComponent} from './page/payments/payments.component';
 import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
 import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import {ChildrenPaymentsComponent} from './page/payments/children-payments/child
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
-    MatRippleModule
+    MatRippleModule,
+    MatButtonToggleModule
   ],
   bootstrap: [],
   providers: [

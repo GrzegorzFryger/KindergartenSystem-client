@@ -18,6 +18,7 @@ import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.com
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {PaymentsComponent} from './page/payments/payments.component';
+import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
 
 
 const routes: Routes = [
@@ -98,6 +99,12 @@ const routes: Routes = [
       {
         path: 'payments',
         component: PaymentsComponent,
+        children: [
+          {
+            path: 'list',
+            component: ChildrenPaymentsComponent
+          }
+        ]
       }
     ]
   }

@@ -1,101 +1,27 @@
 <div class="children-payments-container">
-
-  <div class="children-payments-item-header">
-    <div class="children-payments-item-container">
-      <div>
-<!--        <app-payment-list></app-payment-list>-->
-      </div>
-    </div>
-  </div>
-
-  <div class="children-payments-item-content">
-
+  <ng-container *ngFor="let payment of (paymentsOutput.data | async); let i = index">
+    <mat-accordion>
+      <mat-expansion-panel class="mat-elevation-z1">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{i + 1 }}.
+            <ng-container *ngIf="payment.type === 'TUITION'; else other">
+              Czesne
+            </ng-container>
+            <ng-template #other>
+              Inna płatność
+            </ng-template>
+          </mat-panel-title>
+          <mat-panel-description>
+            {{payment.description}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+  <div class="add-button">
+    <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-<!--    <div class="profile-card-layout">-->
-<!--        <div class="profile-content-container">-->
-<!--          <div class="header-item">-->
-<!--            <div class="header">-->
-<!--              <div class="center">-->
-<!--                <img src="../../../assets/images/d.png" height="120" width="120" class="img-fluid"/>-->
-<!--              </div>-->
-<!--              <div class="center">-->
-<!--                {{(dataSource.data | async)?.name }}  {{(dataSource.data | async)?.surname }}-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <mat-divider [inset]="true"></mat-divider>-->
-<!--          <div class="profile-data-item contact">-->
-<!--            <p>Dane kontaktowe:</p>-->
-<!--            <div class="d-flex">-->
-<!--              <div class="item">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Pesel:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.pesel}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Gender:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.gender}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Data urodzin:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.dateOfBirth}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Data ropoczecia:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.startDate}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Data zakończenia:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.endDate}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="profile-data-item address">-->
-<!--            <p>Adres:</p>-->
-<!--            <div class="d-flex">-->
-<!--              <div class="item street">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Ulica:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.streetNumber}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item city">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Kod pocztowy:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.postalCode}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="item zip-code">-->
-<!--                <div class="item-container">-->
-<!--                  <div class="label">Miasto:</div>-->
-<!--                  <div class="value">{{(dataSource.data | async)?.city}}</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--      <mat-card-footer>-->
-<!--      </mat-card-footer>-->
-<!--    </div>-->

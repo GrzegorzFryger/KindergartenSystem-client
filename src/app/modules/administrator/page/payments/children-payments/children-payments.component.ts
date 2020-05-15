@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fadeAnimation} from '../animations';
-import {Observable} from 'rxjs';
-import {Child} from '../../../../../data/model/accounts/child';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
+import {PaymentsService} from '../../../../../data/service/payments/payments.service';
 
 @Component({
   selector: 'app-children-payments',
@@ -11,14 +12,36 @@ import {Child} from '../../../../../data/model/accounts/child';
   animations: [fadeAnimation]
 })
 export class ChildrenPaymentsComponent implements OnInit {
-  @Input() dataSource: {
-    data: Observable<Child>,
+  public paymentsColumnsToDisplay: string[] = ['amount', 'description', 'childSurname',
+    'childName', 'type', 'select'
+  ];
+
+  public paymentsOutput: {
+    data: Observable<Array<RecurringPayment>>,
+    columnToDisplay: Observable<Array<string>>,
+    filterPredicate: (data: RecurringPayment, filter: string) => boolean
   };
 
-  constructor() {
+  private paymentsSub: ReplaySubject<Array<RecurringPayment>>;
+  private paymentsColumnsSub: BehaviorSubject<Array<string>>;
+  panelOpenState: boolean;
+
+  constructor(private paymentsService: PaymentsService) {
+    this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
+    this.paymentsColumnsSub = new BehaviorSubject(this.paymentsColumnsToDisplay);
+
+    this.paymentsOutput = {
+      data: this.paymentsSub.asObservable(),
+      columnToDisplay: this.paymentsColumnsSub.asObservable(),
+      filterPredicate: null
+    };
   }
 
   ngOnInit(): void {
+    this.paymentsService.findAllRecurringPayments().subscribe(payments => {
+      this.paymentsSub.next(payments);
+    });
+
   }
 
 }
