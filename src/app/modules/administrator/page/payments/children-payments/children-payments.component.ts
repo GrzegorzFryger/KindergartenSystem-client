@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {fadeAnimation} from '../animations';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject, Subscription} from 'rxjs';
 import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
 import {PaymentsService} from '../../../../../data/service/payments/payments.service';
 import {ChildrenSelectShareService} from '../children-select-share.service';
@@ -12,7 +12,7 @@ import {ChildrenSelectShareService} from '../children-select-share.service';
   encapsulation: ViewEncapsulation.None,
   animations: [fadeAnimation]
 })
-export class ChildrenPaymentsComponent implements OnInit {
+export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   public paymentsColumnsToDisplay: string[] = ['amount', 'description', 'childSurname',
     'childName', 'type', 'select'
   ];
@@ -26,6 +26,7 @@ export class ChildrenPaymentsComponent implements OnInit {
   private paymentsSub: ReplaySubject<Array<RecurringPayment>>;
   private paymentsColumnsSub: BehaviorSubject<Array<string>>;
   panelOpenState: boolean;
+  private sub: Subscription;
 
   constructor(private paymentsService: PaymentsService, private childrenSelectShareService: ChildrenSelectShareService) {
     this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
@@ -39,11 +40,16 @@ export class ChildrenPaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.childrenSelectShareService.childrenSelect.subscribe(child => {
+    this.sub =  this.childrenSelectShareService.childrenSelect.subscribe(child => {
+        console.log(child);
         this.paymentsService.findAllRecurringPaymentsByChildId(child.id).subscribe(payments => {
           this.paymentsSub.next(payments);
         });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

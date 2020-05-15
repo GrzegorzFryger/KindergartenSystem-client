@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Child} from '../../../../data/model/accounts/child';
 
 @Injectable({
@@ -7,11 +7,11 @@ import {Child} from '../../../../data/model/accounts/child';
 })
 export class ChildrenSelectShareService {
 
-  private childrenSelectSub: ReplaySubject<Child>;
-  public childrenSelect: Observable<Child>;
+  private childrenSelectSub: BehaviorSubject<Child>;
+  childrenSelect: Observable<Child>;
 
   constructor() {
-    this.childrenSelectSub = new ReplaySubject<Child>();
+    this.childrenSelectSub = new BehaviorSubject<Child>(null);
     this.childrenSelect = this.childrenSelectSub.asObservable();
   }
 
