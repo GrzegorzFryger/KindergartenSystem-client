@@ -1,11 +1,16 @@
 .payments-history-table-container {
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 
   .payments-history-table-item {
 
     .search {
-      width: 100%;
+      .mat-form-field {
+        width: 100%;
+      }
     }
 
    span {

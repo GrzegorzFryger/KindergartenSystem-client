@@ -6,6 +6,9 @@ import {MatSort} from '@angular/material/sort';
 import {ChildrenSelectShareService} from '../children-select-share.service';
 import {PaymentHistoryService} from '../../../../../data/service/payments/payment-history.service';
 import {Subscription} from 'rxjs';
+import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-history-payments',
@@ -22,14 +25,14 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private childrenSelectShareService: ChildrenSelectShareService,
-              private paymentHistoryService: PaymentHistoryService) {
+              private paymentHistoryService: PaymentHistoryService,
+              private dialog: MatDialog) {
     this.dataSourceToDisplay = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-   this.subscription = this.childrenSelectShareService.childrenSelect.subscribe(child => {
+    this.subscription = this.childrenSelectShareService.childrenSelect.subscribe(child => {
       this.paymentHistoryService.findByIdChildId(child.id).subscribe(paymentHistory => {
-        console.log(paymentHistory);
         this.dataSourceToDisplay.data = paymentHistory;
         this.dataSourceToDisplay.sort = this.sort;
         this.dataSourceToDisplay.paginator = this.paginator;
@@ -49,5 +52,16 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
 
   applyBalanceCorrection(recurringPayment: any) {
 
+    const data = new YesNoDialogData('test');
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+      }
+    );
   }
+
 }

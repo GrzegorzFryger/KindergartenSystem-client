@@ -39,13 +39,9 @@
       <ng-container matColumnDef="delete">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Korekta</mat-header-cell>
         <mat-cell *matCellDef="let recurringPayment" >
-
-<!--        (click)="applyBalanceCorrection(recurringPayment)">-->
-          <span matRipple >
+          <span (click)="applyBalanceCorrection(recurringPayment)" matRipple >
             <mat-icon >delete</mat-icon>
           </span>
-
-
         </mat-cell>
       </ng-container>
 

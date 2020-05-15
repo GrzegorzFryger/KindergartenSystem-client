@@ -56,7 +56,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   onSelectPaymentEvent($event: { selected: any }) {
-    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender'));
+    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender' && col !== 'pesel'));
     this.childrenSelectSub.next($event.selected);
     this.child = $event.selected;
     this.childrenSelectShareService.selectChild($event.selected);
@@ -69,8 +69,5 @@ export class PaymentsComponent implements OnInit {
     this.refresh = 'false';
   }
 
-  onMatButtonValueChange() {
-
-  }
 }
 
