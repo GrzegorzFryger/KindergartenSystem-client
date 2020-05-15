@@ -15,7 +15,7 @@ export class YesNoDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogRef.disableClose = true; // Force user to click Yes or No
-    this.dialogRef.updateSize('30%', '30%');
+    this.dialogRef.updateSize('25%', '20%');
   }
 
   public yesClick(): void {

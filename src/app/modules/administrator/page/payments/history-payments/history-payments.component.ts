@@ -10,6 +10,8 @@ import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-d
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
+const USER_DIALOG_MESSAGE = 'Czy chcesz wykonać korektę płatności?';
+
 @Component({
   selector: 'app-history-payments',
   templateUrl: './history-payments.component.html',
@@ -52,7 +54,7 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
 
   applyBalanceCorrection(recurringPayment: any) {
 
-    const data = new YesNoDialogData('test');
+    const data = new YesNoDialogData(USER_DIALOG_MESSAGE);
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
       data: {data}
     });
