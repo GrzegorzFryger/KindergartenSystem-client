@@ -69,6 +69,7 @@ import {GuardianListComponent} from './page/receivables/transactions/share/guard
 import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import { CashPaymentsListComponent } from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
     AbsenceComponent,
     FindAbsenceComponent,
     AddAbsenceComponent,
-    MealOrderComponent
+    MealOrderComponent,
+    CashPaymentsListComponent
   ],
 
 

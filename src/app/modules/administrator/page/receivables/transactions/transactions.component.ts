@@ -23,7 +23,10 @@ export class TransactionsComponent implements OnInit {
   ) {
     this.isSelected = true;
     this.transactionSub = new ReplaySubject<Array<Transaction>>();
-    this.transactionOutput = {transactions: this.transactionSub.asObservable(), columnToDisplay: this.transactionColumnsToDisplay};
+    this.transactionOutput = {
+      transactions: this.transactionSub.asObservable(),
+      columnToDisplay: this.transactionColumnsToDisplay
+    };
   }
 
   ngOnInit(): void {
