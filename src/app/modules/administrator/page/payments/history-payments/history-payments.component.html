@@ -1,1 +1,58 @@
-<p>history-payments works!</p>
+<div class="payments-history-table-container">
+
+  <div class="payments-history-table-item">
+
+    <div class="search">
+      <mat-form-field appearance="standard">
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj płatność">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="dataSourceToDisplay" matSort matSortDirection="asc" matSortActive="surname">
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.date}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Kwota</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.amount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Opis</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.description}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.type}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="operationType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Type Operacji</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.operationType}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Korekta</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment" >
+
+<!--        (click)="applyBalanceCorrection(recurringPayment)">-->
+          <span matRipple >
+            <mat-icon >delete</mat-icon>
+          </span>
+
+
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10, 25,50]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

@@ -13,7 +13,7 @@ import {ChildrenSelectShareService} from '../children-select-share.service';
   animations: [fadeAnimation]
 })
 export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
-  public paymentsColumnsToDisplay: string[] = ['amount', 'description', 'childSurname',
+  public paymentsColumnsToDisplay = ['amount', 'description', 'childSurname',
     'childName', 'type', 'select'
   ];
 

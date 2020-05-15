@@ -1,0 +1,19 @@
+.payments-history-table-container {
+  display: flex;
+  flex-direction: column;
+
+  .payments-history-table-item {
+
+    .search {
+      width: 100%;
+    }
+
+   span {
+     cursor: pointer;
+     .mat-icon {
+       color: #673ab7;
+     }
+   }
+
+  }
+}
