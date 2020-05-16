@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="edit-button">
-          <button mat-stroked-button color="primary">Edytu płatność</button>
+          <button mat-stroked-button color="primary">Edytuj płatność</button>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
@@ -67,7 +67,7 @@
 
 
   <div class="add-button">
-    <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button (click)="addRecurringPayment()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
       <mat-icon>add</mat-icon>
     </button>
   </div>

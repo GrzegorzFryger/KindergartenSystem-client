@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-edit-cash-payment',
