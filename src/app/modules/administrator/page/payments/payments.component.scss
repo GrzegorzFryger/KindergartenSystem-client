@@ -41,6 +41,7 @@
   }
 
   .context-item {
+    padding: 16px;
     .payments-container {
       display: flex;
 
@@ -49,7 +50,7 @@
       }
 
       .payments-children-item {
-        margin: 0 16px 0 16px;
+        //margin: 0 16px 0 16px;
       }
     }
   }
@@ -61,5 +62,9 @@
 
 .mat-button-toggle-label-content {
   padding: 32px;
+}
+
+.margin-right {
+  margin-right: 16px
 }
 
