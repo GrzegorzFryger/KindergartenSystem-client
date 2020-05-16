@@ -1,0 +1,25 @@
+.payments-history-table-container {
+  padding: 0 16px 0 16px;
+  background-color: white;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .payments-history-table-item {
+
+    .search {
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+
+   span {
+     cursor: pointer;
+     .mat-icon {
+       color: #673ab7;
+     }
+   }
+
+  }
+}

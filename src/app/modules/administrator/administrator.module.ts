@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
-
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
 import {MatCardModule} from '@angular/material/card';
@@ -23,7 +22,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
-
 import {CashPaymentsComponent} from './page/receivables/cash-payments/cash-payments.component';
 import {AssignTransactionsComponent} from './page/receivables/transactions/assign-transactions/assign-transactions.component';
 import {ImportComponent} from './page/receivables/transactions/import/import.component';
@@ -72,6 +70,17 @@ import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {GroupsComponent} from './page/groups/groups.component';
 import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
+import { CashPaymentsListComponent } from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
+import {PaymentsComponent} from './page/payments/payments.component';
+import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
+import {ChildListComponent} from './page/payments/child-list/child-list.component';
+import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
+import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
+import { AddPaymentDialogComponent } from './page/payments/add-payment-dialog/add-payment-dialog.component';
+import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/add-discount-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -121,6 +130,15 @@ import {AddGroupComponent} from './page/groups/add-group/add-group.component';
     GroupsComponent,
     GroupManagementComponent,
     AddGroupComponent
+    CashPaymentsListComponent
+    PaymentsComponent,
+    PaymentListComponent,
+    ChildListComponent,
+    ChildrenPaymentsComponent,
+    HistoryPaymentsComponent,
+    DiscountPaymentsComponent,
+    AddPaymentDialogComponent,
+    AddDiscountDialogComponent
   ],
 
 
@@ -155,7 +173,8 @@ import {AddGroupComponent} from './page/groups/add-group/add-group.component';
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
-    MatRippleModule
+    MatRippleModule,
+    MatButtonToggleModule
   ],
   bootstrap: [],
   providers: [
