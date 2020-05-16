@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {DiscountPayment} from '../../../../../data/model/payments/discount-payment';
+import {DiscountPaymentService} from '../../../../../data/service/payments/discount-payment.service';
 
 @Component({
   selector: 'app-discount-payments',
@@ -7,9 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DiscountPaymentsComponent implements OnInit {
 
-  constructor() { }
+  data: Array<DiscountPayment>;
+
+  constructor(private discountPaymentService: DiscountPaymentService) { }
 
   ngOnInit(): void {
+    this.discountPaymentService.getAllDiscounts().subscribe(discount => {
+      this.data = discount;
+    });
   }
 
 }

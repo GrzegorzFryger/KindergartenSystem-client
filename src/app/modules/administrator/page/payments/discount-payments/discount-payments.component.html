@@ -1,1 +1,48 @@
-<p>discount-payments works!</p>
+<div class="children-payments-container">
+
+  <ng-container *ngIf="(data  )?.length === 0">
+    <div class="expansion-panel-container empty">
+      <p>Brak aktywnych płatności</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let payment of (data ); let i = index">
+    <div class="expansion-panel-container">
+      <div class="expansion-panel-item">
+        <div class="header">
+          Kwota:
+        </div>
+        <div class="amount">
+          <b> {{payment.value}} PLN </b>
+        </div>
+      </div>
+
+      <div class="expansion-panel-item">
+        <div class="header">
+          Opis:
+        </div>
+        <div class="amount">
+          <b> {{payment.description}} </b>
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <div class="header">
+          Typ:
+        </div>
+        <div class="amount">
+          <b> {{payment.typeDiscount}} </b>
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <div class="add-button">
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

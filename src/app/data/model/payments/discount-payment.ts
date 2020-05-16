@@ -8,4 +8,5 @@ export class DiscountPayment {
   constructor(init?: Partial<DiscountPayment>) {
     Object.assign(this, init);
   }
+
 }
