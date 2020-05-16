@@ -149,7 +149,15 @@ export const environment = {
 
       history: {
         getChildById: paymentsUrl +  'payment-history/'
-      }
+      },
+
+      discount: {
+        getById: paymentsUrl + 'discount/',
+        getAll: paymentsUrl +  'discounts',
+        create: paymentsUrl + 'discount',
+        update: paymentsUrl + 'discount',
+        delete: paymentsUrl + 'discount'
+      },
     }
 
   }
