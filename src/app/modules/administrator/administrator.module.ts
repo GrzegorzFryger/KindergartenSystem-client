@@ -78,6 +78,7 @@ import { AddPaymentDialogComponent } from './page/payments/add-payment-dialog/ad
 import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/add-discount-dialog.component';
 
 
+
 @NgModule({
   declarations: [
     AdministratorComponent,

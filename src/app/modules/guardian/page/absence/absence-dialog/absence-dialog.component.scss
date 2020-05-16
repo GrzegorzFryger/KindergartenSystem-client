@@ -1,15 +1,26 @@
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: rgba(0,0,0,0);
+.container-fluid {
+  height: 100%;
+  padding: 5% 10% 5% 10%;
+
+  h2 {
+    margin-bottom: 5%;
+  }
+
+  .calendar-filed-container {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
+
 
 .full-width {
   width: 100%;
 }
 
-.info{
-  margin: 16px 0 16px 0;
-  background-color: #F5F5F5;
-  p{
-    margin: 8px;
-  }
+.button-accept {
+  margin-top: 16px;
+  background-color: #EE502D;
+  color: white;
 }
