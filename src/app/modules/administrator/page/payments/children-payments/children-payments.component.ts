@@ -7,7 +7,9 @@ import {ChildrenSelectShareService} from '../children-select-share.service';
 import {AddPaymentDialogComponent} from '../add-payment-dialog/add-payment-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AccountService} from '../../../../../data/service/accounts/account.service';
-import {SnackMessageHandlingService} from "../../../../../core/snack-message-handling/snack-message-handling.service";
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {EditPaymentDialogComponent} from '../edit-payment-dialog/edit-payment-dialog.component';
+import {EditPaymentDialogData} from '../../../../../data/model/payments/edit-payment-dialog-data';
 
 @Component({
   selector: 'app-children-payments',
@@ -88,38 +90,40 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
       result => {
         result.child = this.selectedChildId;
         result.guardian = this.selectedGuardianId;
-        // Logic for sending to backend9
 
         if (result.type === 'TUITION') {
-          console.log('Attempting to save payment');
-          console.log(result);
-
           this.paymentsService.createTuition(result).subscribe(
             resp => {
-              console.log(resp);
-              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+
+              this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
             }
           );
         } else if (result.type === 'OTHER') {
-          console.log('Attempting to save payment');
-          console.log(result);
-
           this.paymentsService.createOtherPayment(result).subscribe(
             resp => {
-              console.log(resp);
-              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+              this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
             }
           );
         } else {
-          // Do not save payment
-          console.log('Aborting saving payment');
         }
       }
     );
   }
 
+  editRecurringPayment(recurringPayment: RecurringPayment) {
+    const data = new EditPaymentDialogData();
+    data.recurringPayment = recurringPayment;
+
+    const dialogRef = this.dialog.open(EditPaymentDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
 }
