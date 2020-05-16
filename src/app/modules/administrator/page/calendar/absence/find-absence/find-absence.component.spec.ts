@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FindByDateComponent } from './find-by-date.component';
+import { FindAbsenceComponent } from './find-absence.component';
 
 describe('FindByDateComponent', () => {
-  let component: FindByDateComponent;
-  let fixture: ComponentFixture<FindByDateComponent>;
+  let component: FindAbsenceComponent;
+  let fixture: ComponentFixture<FindAbsenceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FindByDateComponent ]
+      declarations: [ FindAbsenceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FindByDateComponent);
+    fixture = TestBed.createComponent(FindAbsenceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

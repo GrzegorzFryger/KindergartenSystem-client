@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Observable} from 'rxjs';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-add-absence',
@@ -30,7 +31,8 @@ export class AddAbsenceComponent implements OnInit {
   dateFrom: Date = null;
   dateTo: Date = null;
 
-  constructor(private childService: ChildService, private absenceService: AbsenceService) {
+  constructor(private childService: ChildService, private absenceService: AbsenceService,
+              private datePipe: DatePipe) {
     this.children = this.childService.getAllChildren();
   }
 
@@ -49,19 +51,17 @@ export class AddAbsenceComponent implements OnInit {
   }
 
   onSubmit(submittedForm) {
-    this.dateFrom = submittedForm.value.dateFrom;
-    this.dateTo = submittedForm.value.dateTo;
+    this.dateFrom = this.convertToDate(submittedForm.value.dateFrom);
+    this.dateTo = this.convertToDate(submittedForm.value.dateTo);
     this.reason = submittedForm.value.reason;
 
-    if (this.dateTo == null && this.dateFrom != null) {
-      this.absenceToAdd = new Absence();
-      this.absenceToAdd.date = this.dateFrom;
-      this.absenceToAdd.childId = this.selectedChildId;
-      this.absenceToAdd.reason = this.reason;
-      this.absenceService.createAbsence(this.absenceToAdd).subscribe(resp => {
-        console.log(resp);
-      });
-    }
+    this.absenceToAdd = new Absence();
+    this.absenceToAdd.date = this.dateFrom;
+    this.absenceToAdd.childId = this.selectedChildId;
+    this.absenceToAdd.reason = this.reason;
+    this.absenceService.createAbsence(this.absenceToAdd).subscribe(resp => {
+      console.log(resp);
+    });
     // TODO: implement adding absence range
     submittedForm.reset();
   }
@@ -69,5 +69,11 @@ export class AddAbsenceComponent implements OnInit {
   getChildIdOnClick(childId: string): void {
     this.selectedChildId = childId;
   }
+
+  convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
+  }
+
+
 
 }
