@@ -4,8 +4,8 @@ import {BehaviorSubject, Observable, ReplaySubject, Subscription} from 'rxjs';
 import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
 import {PaymentsService} from '../../../../../data/service/payments/payments.service';
 import {ChildrenSelectShareService} from '../children-select-share.service';
-import {AddPaymentDialogComponent} from "../add-payment-dialog/add-payment-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
+import {AddPaymentDialogComponent} from '../add-payment-dialog/add-payment-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-children-payments',
@@ -63,7 +63,17 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   }
 
   private openDialogForAddingRecurringPayment(): void {
-    const dialogRef = this.dialog.open(AddPaymentDialogComponent, {});
+    const data = new RecurringPayment();
+
+    const dialogRef = this.dialog.open(AddPaymentDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        // Logic for sending to backend9
+      }
+    );
   }
 
 }
