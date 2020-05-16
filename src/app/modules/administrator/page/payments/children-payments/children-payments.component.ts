@@ -97,7 +97,7 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
           this.paymentsService.createTuition(result).subscribe(
             resp => {
               console.log(resp);
-              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+              this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
             }
@@ -109,7 +109,7 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
           this.paymentsService.createOtherPayment(result).subscribe(
             resp => {
               console.log(resp);
-              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+              this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
             }
