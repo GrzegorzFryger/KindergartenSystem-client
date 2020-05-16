@@ -25,14 +25,16 @@ export class FindAbsenceComponent implements OnInit {
   endDate: string;
   startDate: string;
   childName: string;
-  children: Observable<Array<Child>>;
+  children: Array<Child>;
 
   constructor(private datePipe: DatePipe, private absenceService: AbsenceService,
               private childService: ChildService) {
-    this.children = this.childService.getAllChildren();
   }
 
   ngOnInit(): void {
+    this.childService.getAllChildren().subscribe(resp => {
+      this.children = resp;
+    });
   }
 
   onSubmit(submittedForm) {
@@ -58,13 +60,12 @@ export class FindAbsenceComponent implements OnInit {
   }
 
   getChildNameFromId(childId: string): string {
-    this.children.subscribe(resp => {
-      resp.forEach(child => {
+    console.log(this.children);
+    this.children.forEach(child => {
         if (child.id === childId) {
           this.childName = child.name + ' ' + child.surname;
         }
       });
-    });
     return this.childName;
   }
 }
