@@ -2,6 +2,7 @@ const apiUrl = 'https://localhost:8080';
 const receivablesUrl = apiUrl + '/api/receivables/';
 const financesUrl = apiUrl + '/api/finances/';
 const calendarUrl = apiUrl + '/api/calendar/';
+const groupsUrl = apiUrl + '/api/groups/';
 
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
@@ -112,6 +113,17 @@ export const environment = {
       createDayOffWork: calendarUrl + 'dayoff',
       updateDayOffWork: calendarUrl + 'dayoff',
       deleteDayOffWork: calendarUrl + 'dayoff/',
+    },
+    groups: {
+      // Groups Controller
+      getGroup: groupsUrl,
+      getAllGroups: groupsUrl + 'groups',
+      createGroup: groupsUrl,
+      updateGroup: groupsUrl,
+      deleteGroup: groupsUrl,
+      addChildToGroup: groupsUrl + 'add/',
+      findAllChildrenInGroup: groupsUrl + 'list/',
+      removeChildFromGroup: groupsUrl + 'remove/'
     },
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
