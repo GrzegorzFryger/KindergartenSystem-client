@@ -10,10 +10,10 @@ import {AccountService} from '../../../../data/service/accounts/account.service'
 import {Account} from '../../../../data/model/accounts/account';
 import {Child} from '../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../data/service/accounts/guardian.service';
-import {PaymentDetails} from "../../../../data/model/finances/payment-details";
-import {PaymentDataComponent} from "./payment-data/payment-data.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AccountNumber} from "../../../../data/model/finances/account-number";
+import {PaymentDetails} from '../../../../data/model/finances/payment-details';
+import {PaymentDataComponent} from './payment-data/payment-data.component';
+import {MatDialog} from '@angular/material/dialog';
+import {AccountNumber} from '../../../../data/model/finances/account-number';
 
 interface UserMapping {
   name: string;
@@ -35,7 +35,7 @@ export class FinancesComponent implements OnInit {
   public children: Array<Child> = new Array<Child>();
 
   public accountNumber: AccountNumber;
-  private isBalancePositive: boolean;
+  public isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,

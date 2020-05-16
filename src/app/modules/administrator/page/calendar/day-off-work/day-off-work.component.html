@@ -1,141 +1,132 @@
-<mat-card class="addAbsenceCard">
-  <mat-card-content>
-    <div class="container-fluid">
-      <div class="row">
-        <h3>Dodaj dzień wolny</h3>
-      </div>
+<div class="content">
+  <div class="row">
+    <div class="col-3">
+      <mat-card class="add-day-off-form">
+        <mat-card-content>
+          <div class="row">
+            <h3>Dodaj dzień wolny</h3>
+          </div>
 
-      <div class="row">
-        <form (ngSubmit)="onSubmit(addForm)" #addForm="ngForm">
-          <table>
-            <tr>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj datę</mat-label>
-                    <input matInput [matDatepicker]="addDayOffDatepicker" placeholder="Data" name="date"
-                           class="form-control"
-                           ngModel>
-                    <mat-datepicker-toggle matSuffix [for]="addDayOffDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #addDayOffDatepicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj nazwę</mat-label>
-                    <input matInput placeholder="Nazwa" type="text" name="name" class="form-control" ngModel>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj typ</mat-label>
-                    <mat-select class="form-control" id="eventType" name="eventType" ngModel>
-                      <mat-option value="HOLIDAY">Święto</mat-option>
-                      <mat-option value="WEEKEND">Weekend</mat-option>
-                      <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <button mat-stroked-button class="btn-primary" type="submit">Dodaj</button>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
+          <div class="row">
+            <form (ngSubmit)="onSubmit(addForm)" #addForm="ngForm">
+              <div class="col">
+                <mat-form-field appearance="standard">
+                  <mat-label>Podaj datę</mat-label>
+                  <input matInput [matDatepicker]="addDayOffDatepicker" placeholder="Data" name="date"
+                         class="form-control"
+                         ngModel>
+                  <mat-datepicker-toggle matSuffix [for]="addDayOffDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #addDayOffDatepicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="standard">
+                  <mat-label>Podaj nazwę</mat-label>
+                  <input matInput placeholder="Nazwa" type="text" name="name" class="form-control" ngModel>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="standard">
+                  <mat-label>Podaj typ</mat-label>
+                  <mat-select class="form-control" id="eventType" name="eventType" ngModel>
+                    <mat-option value="HOLIDAY">Święto</mat-option>
+                    <mat-option value="WEEKEND">Weekend</mat-option>
+                    <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <button mat-stroked-button class="btn-primary" type="submit">Dodaj</button>
+              </div>
+            </form>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-  </mat-card-content>
-</mat-card>
 
-<mat-card>
-  <mat-card-content>
-    <div class="container-fluid">
-      <div class="row">
-        <h3>Dni wolne</h3>
-      </div>
-      <div class="row">
-        <form (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
-          <table>
-            <tr>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj datę od</mat-label>
-                    <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
-                           class="form-control" ngModel>
-                    <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj datę do</mat-label>
-                    <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
-                           class="form-control" ngModel>
-                    <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dateSortToDatepicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
+    <div class="col-9">
+      <mat-card class="day-off-work-table">
+        <mat-card-content>
+          <div class="row">
+            <h3>Dni wolne</h3>
+          </div>
+          <div class="row">
+            <form (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
+              <table>
+                <tr>
+                  <td>
+                    <div class="col">
+                      <mat-form-field appearance="standard">
+                        <mat-label>Podaj datę od</mat-label>
+                        <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
+                               class="form-control" ngModel>
+                        <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="col">
+                      <mat-form-field appearance="standard">
+                        <mat-label>Podaj datę do</mat-label>
+                        <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
+                               class="form-control" ngModel>
+                        <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateSortToDatepicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="col">
+                      <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
 
-      <div class="row">
-        <div class="col">
-          <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
-            <ng-container matColumnDef="id">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.id}} </mat-cell>
-            </ng-container>
+          <div class="row">
+            <div class="col">
+              <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
+                <ng-container matColumnDef="date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+                  <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="date">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
-            </ng-container>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
+                  <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
-            </ng-container>
+                <ng-container matColumnDef="eventType">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
+                  <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="eventType">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.eventType}} </mat-cell>
-            </ng-container>
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+                  <mat-cell *matCellDef="let dayOffWork">
+                    <button mat-icon-button (click)="deleteDayOff(dayOffWork.id)">
+                      <mat-icon class="mat-warn">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
 
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork">
-                <button mat-stroked-button>Edytuj</button>
-                <button mat-stroked-button class="mat-warn" (click)="removeDayOff(dayOffWork.id)">Usuń</button>
-              </mat-cell>
-            </ng-container>
+                <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
 
-            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-
-          </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-        </div>
-      </div>
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-  </mat-card-content>
-</mat-card>
+
+  </div>
+</div>
+
+
 
 <router-outlet></router-outlet>

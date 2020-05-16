@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 
 import {AdministratorRoutingModule} from './administrator-routing.module';
 import {AdministratorComponent} from './administrator.component';
@@ -66,12 +66,13 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {ChildrenListComponent} from './page/receivables/transactions/share/children-list/children-list.component';
 import {TransactionListComponent} from './page/receivables/transactions/share/transaction-list/transaction-list.component';
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
-import {FindByDateComponent} from './page/calendar/absence/find-by-date/find-by-date.component';
+import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {PaymentsComponent} from './page/payments/payments.component';
 import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
+
 
 @NgModule({
   declarations: [
@@ -115,7 +116,7 @@ import {ChildListComponent} from './page/payments/child-list/child-list.componen
     GuardianListComponent,
     DayOffWorkComponent,
     AbsenceComponent,
-    FindByDateComponent,
+    FindAbsenceComponent,
     AddAbsenceComponent,
     MealOrderComponent,
     PaymentsComponent,
@@ -164,6 +165,7 @@ import {ChildListComponent} from './page/payments/child-list/child-list.componen
     {provide: MAT_RADIO_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: {color: 'primary'}},
     DatePipe,
+    DecimalPipe,
     MatCheckboxModule
   ]
 })

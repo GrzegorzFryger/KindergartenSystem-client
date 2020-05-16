@@ -194,7 +194,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     cashPayment.guardianId = this.selectedGuardianId;
     cashPayment.transactionDate = this.form.get('transactionDate').value;
     cashPayment.contractorDetails = this.form.get('contractorDetails').value;
-    cashPayment.transactionAmount = this.form.get('transactionAmount').value;
+    cashPayment.transactionAmount = this.form.get('transactionAmount').value.replace(',', '.');
     cashPayment.transactionCurrency = this.form.get('transactionCurrency').value;
     cashPayment.title = this.form.get('title').value;
     delete cashPayment.isEdited;
@@ -217,7 +217,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       transactionAmount: [
         '',
-        [Validators.required, Validators.min(1), this.validationService.isInteger]
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
       transactionCurrency: [
         this.CURRENCY,
