@@ -88,11 +88,12 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
       result => {
         result.child = this.selectedChildId;
         result.guardian = this.selectedGuardianId;
-        console.log('Attempting to save payment');
-        console.log(result);
         // Logic for sending to backend9
 
         if (result.type === 'TUITION') {
+          console.log('Attempting to save payment');
+          console.log(result);
+
           this.paymentsService.createTuition(result).subscribe(
             resp => {
               console.log(resp);
@@ -102,6 +103,9 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
             }
           );
         } else if (result.type === 'OTHER') {
+          console.log('Attempting to save payment');
+          console.log(result);
+
           this.paymentsService.createOtherPayment(result).subscribe(
             resp => {
               console.log(resp);
@@ -111,7 +115,8 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
             }
           );
         } else {
-          this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
+          // Do not save payment
+          console.log('Aborting saving payment');
         }
       }
     );
