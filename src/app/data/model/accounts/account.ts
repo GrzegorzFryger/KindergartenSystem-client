@@ -11,6 +11,4 @@ export class Account {
    status: string;
    email: string;
    roles: Array<Role>;
-
-
 }

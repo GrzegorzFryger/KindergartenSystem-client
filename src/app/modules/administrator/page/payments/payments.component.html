@@ -1,0 +1,51 @@
+<div class="payments-layout-container">
+
+  <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
+    <div class="child-profile-item-container">
+      <div class="fullName-item">
+        <div class="d-flex align-items-center align-items-center justify-content-center">
+          <h2 [@refresh]="refresh"
+              (@refresh.done)="onAnimationEvent($event)">
+            {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
+        </div>
+      </div>
+
+      <div class="button-item">
+        <div class="d-flex align-items-center justify-content-end max-height">
+          <div>
+            <div routerLink="/administrator/payments/list" matRipple class="menu-item">
+              <mat-icon>payment</mat-icon>
+              <p>Aktywne płatności</p>
+            </div>
+            <div routerLink="/administrator/payments/history" matRipple class="menu-item">
+              <mat-icon>history</mat-icon>
+              <p>Historia płatności</p>
+            </div>
+            <div routerLink="/administrator/payments/discount" matRipple class="menu-item">
+              <mat-icon>attach_money</mat-icon>
+              <p>Rabaty</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="context-item">
+    <div class="payments-container">
+
+      <div [@paymentTable]="currentState" class="payments-table-item margin-right">
+        <app-child-list
+          [dataSource]="childrenOutput"
+          (outputDataEmitter)="onSelectPaymentEvent($event)">
+        </app-child-list>
+      </div>
+
+      <div [@show]="!!(childSelectOutput.data | async)" [@paymentChildComponent]="currentState"
+           class="payments-children-item ">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+  </div>
+</div>

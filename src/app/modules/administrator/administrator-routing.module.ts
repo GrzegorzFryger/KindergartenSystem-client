@@ -17,6 +17,10 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import {PaymentsComponent} from './page/payments/payments.component';
+import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
+import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
+import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 
 
 const routes: Routes = [
@@ -93,8 +97,25 @@ const routes: Routes = [
       {
         path: 'actuator',
         component: ActuatorComponent,
+      },
+      {
+        path: 'payments',
+        component: PaymentsComponent,
+        children: [
+          {
+            path: 'list',
+            component: ChildrenPaymentsComponent
+          },
+          {
+            path: 'history',
+            component: HistoryPaymentsComponent
+          },
+          {
+            path: 'discount',
+            component: DiscountPaymentsComponent
+          },
+        ]
       }
-
     ]
   }
 ];
