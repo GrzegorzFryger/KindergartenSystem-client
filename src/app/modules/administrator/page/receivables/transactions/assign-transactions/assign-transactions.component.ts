@@ -31,11 +31,13 @@ export class AssignTransactionsComponent implements OnInit {
     transactions: Observable<Array<Transaction>>,
     columnToDisplay: Array<string>
   };
+
   public childrenOutput: {
     children: Observable<Array<Child>>,
     columnToDisplay: Array<string>,
     filterPredicate: (data: Child, filter: string) => boolean
   };
+
   public guardianOutput: {
     guardians: Observable<Array<Guardian>>,
     columnToDisplay: Array<string>
@@ -170,7 +172,7 @@ export class AssignTransactionsComponent implements OnInit {
       return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
         data.pesel.toLowerCase().includes(filter);
     }
-  }
+  };
 
   private resetState(): void {
     this.loadDataAboutUnassignedTransactions();

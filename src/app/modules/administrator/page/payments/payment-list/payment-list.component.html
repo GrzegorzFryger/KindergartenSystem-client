@@ -1,0 +1,52 @@
+<div class="payments-table-container">
+
+  <div class="payments-table-item">
+
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Szukaj</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj płatność">
+      </mat-form-field>
+    </div>
+
+    <mat-table [dataSource]="dataSourceToDisplay" matSort matSortDirection="asc" matSortActive="surname">
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Kwota</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.amount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Opis</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.description}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="childSurname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.child}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="childName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.child}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.type}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Wybór</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment">
+          <mat-radio-button name="recurringPayment_selection" (click)="onSelect(recurringPayment.id)"></mat-radio-button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10, 25,50]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

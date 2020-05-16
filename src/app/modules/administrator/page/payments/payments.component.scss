@@ -1,0 +1,70 @@
+.payments-layout-container {
+  display: flex;
+  flex-direction: column;
+
+  .child-profile-item {
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .child-profile-item-container {
+      display: flex;
+      flex-wrap: nowrap;
+
+      .fullName-item {
+        flex-basis: 30%;
+
+        h2 {
+          margin-bottom: 0;
+        }
+      }
+
+      .button-item {
+        flex-basis: 70%;
+
+        .menu-item {
+          margin-right: 16px;
+          display: inline-flex;
+          align-items: center;
+          padding: 8px;
+          cursor: pointer;
+
+          p {
+            margin-bottom: 0;
+          }
+
+          .mat-icon {
+            margin-right: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  .context-item {
+    padding: 16px;
+    .payments-container {
+      display: flex;
+
+      .payments-table-item {
+        min-width: 330px;
+      }
+
+      .payments-children-item {
+        //margin: 0 16px 0 16px;
+      }
+    }
+  }
+}
+
+.max-height {
+  height: 100%;
+}
+
+.mat-button-toggle-label-content {
+  padding: 32px;
+}
+
+.margin-right {
+  margin-right: 16px
+}
+
