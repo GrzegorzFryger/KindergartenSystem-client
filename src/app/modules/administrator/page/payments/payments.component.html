@@ -4,8 +4,7 @@
     <div class="child-profile-item-container">
       <div class="fullName-item">
         <div class="d-flex align-items-center align-items-center justify-content-center">
-          <h2 [@refresh]="refresh"
-              (@refresh.done)="onAnimationEvent($event)">
+          <h2 [@refresh]="refresh" (@refresh.done)="onAnimationEvent($event)">
             {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
         </div>
       </div>

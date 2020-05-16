@@ -1,4 +1,4 @@
-<div class="children-payments-container">
+<div class="discount-payments-container">
 
   <ng-container *ngIf="(data  )?.length === 0">
     <div class="expansion-panel-container empty">
@@ -12,8 +12,8 @@
         <div class="header">
           Kwota:
         </div>
-        <div class="amount">
-          <b> {{payment.value}} PLN </b>
+        <div class="value">
+           {{payment.value}} PLN
         </div>
       </div>
 
@@ -21,27 +21,27 @@
         <div class="header">
           Opis:
         </div>
-        <div class="amount">
-          <b> {{payment.description}} </b>
+        <div class="value">
+           {{payment.description}}
         </div>
       </div>
       <div class="expansion-panel-item">
         <div class="header">
           Typ:
         </div>
-        <div class="amount">
-          <b> {{payment.typeDiscount}} </b>
+        <div class="value">
+         {{payment.typeDiscount}}
         </div>
       </div>
       <div class="expansion-panel-item">
-        <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+        <button mat-mini-fab color="primary">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
     </div>
   </ng-container>
   <div class="add-button">
-    <button (click)="addDiscount()" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button (click)="addDiscount()" mat-mini-fab color="primary" >
       <mat-icon>add</mat-icon>
     </button>
   </div>

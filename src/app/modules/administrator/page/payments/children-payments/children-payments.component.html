@@ -12,51 +12,51 @@
         <div class="header">
           Kwota:
         </div>
-        <div class="amount">
-          <b> {{payment.amount}} PLN </b>
+        <div class="value">
+          {{payment.amount}} PLN
         </div>
       </div>
       <div class="expansion-panel-item">
         <div class="header">
           Początek:
         </div>
-        <div class="amount">
-          <b> {{payment.startDate}}</b>
+        <div class="value">
+          {{payment.startDate}}
         </div>
       </div>
       <div class="expansion-panel-item">
         <div class="header">
           Koniec:
         </div>
-        <div class="amount">
-          <b> {{payment.endDate}}  </b>
+        <div class="value">
+          {{payment.endDate}}
         </div>
       </div>
       <div class="expansion-panel-item">
         <div class="header">
           Opis:
         </div>
-        <div class="amount">
-          <b> {{payment.description}} </b>
+        <div class="value">
+          {{payment.description}}
         </div>
       </div>
       <div class="expansion-panel-item">
         <div class="header">
           Typ:
         </div>
-        <div class="amount">
-          <b> {{payment.type}} </b>
+        <div class="value">
+          {{payment.type}}
         </div>
       </div>
       <div class="expansion-panel-item">
-        <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+        <button mat-mini-fab color="primary">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
     </div>
   </ng-container>
   <div class="add-button">
-    <button (click)="addRecurringPayment()" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button (click)="addRecurringPayment()" mat-mini-fab color="primary">
       <mat-icon>add</mat-icon>
     </button>
   </div>

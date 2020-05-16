@@ -80,6 +80,7 @@ import {HistoryPaymentsComponent} from './page/payments/history-payments/history
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 import {AddPaymentDialogComponent} from './page/payments/add-payment-dialog/add-payment-dialog.component';
 import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/add-discount-dialog.component';
+import {EditPaymentDialogComponent} from './page/payments/edit-payment-dialog/edit-payment-dialog.component';
 
 
 @NgModule({
@@ -138,7 +139,8 @@ import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/ad
     HistoryPaymentsComponent,
     DiscountPaymentsComponent,
     AddPaymentDialogComponent,
-    AddDiscountDialogComponent
+    AddDiscountDialogComponent,
+    EditPaymentDialogComponent
   ],
 
 

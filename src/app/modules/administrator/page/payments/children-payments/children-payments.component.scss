@@ -11,6 +11,10 @@
     border-radius: 24px;
     margin-bottom: 8px;
     background-color: white;
+
+    .header {
+      color: #e1e2e8;
+    }
   }
 
   .add-button {
@@ -19,6 +23,8 @@
     justify-content: flex-end;
     padding: 16px;
   }
+
+
 }
 
 .empty {
@@ -27,6 +33,7 @@
   background-image: url("src/assets/images/back_empty.png");
   background-repeat: no-repeat;
   background-size: cover;
+
   h3 {
     margin: 8px;
   }
