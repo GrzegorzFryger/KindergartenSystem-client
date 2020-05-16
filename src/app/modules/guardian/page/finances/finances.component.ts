@@ -10,6 +10,10 @@ import {AccountService} from '../../../../data/service/accounts/account.service'
 import {Account} from '../../../../data/model/accounts/account';
 import {Child} from '../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../data/service/accounts/guardian.service';
+import {PaymentDetails} from '../../../../data/model/finances/payment-details';
+import {PaymentDataComponent} from './payment-data/payment-data.component';
+import {MatDialog} from '@angular/material/dialog';
+import {AccountNumber} from '../../../../data/model/finances/account-number';
 
 interface UserMapping {
   name: string;
@@ -30,14 +34,15 @@ export class FinancesComponent implements OnInit {
   public transactionMappings: Array<TransactionMapping> = new Array<TransactionMapping>();
   public children: Array<Child> = new Array<Child>();
 
-  public accountNumber: string;
-  private isBalancePositive: boolean;
+  public accountNumber: AccountNumber;
+  public isBalancePositive: boolean;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
               private userService: AccountService,
               private snackMessageHandlingService: SnackMessageHandlingService,
-              private guardianService: GuardianService) {
+              private guardianService: GuardianService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -53,7 +58,7 @@ export class FinancesComponent implements OnInit {
       // As for now it returns same account number regardless of id that you provide
       this.balanceService.getAccountNumberForChild(u.id).subscribe(
         resp => {
-          this.accountNumber = resp.accountNumber;
+          this.accountNumber = resp;
         },
         error => {
           this.snackMessageHandlingService.error('Wystąpił problem z pobraniem numeru konta dla dziecka');
@@ -73,6 +78,23 @@ export class FinancesComponent implements OnInit {
     return this.transactionMappings.find(item => item.childId === childId);
   }
 
+  public showPaymentData(childId: string): void {
+    const paymentDetails = new PaymentDetails();
+    paymentDetails.accountNumber = this.accountNumber.accountNumber;
+    paymentDetails.title = this.findTransactionMapping(childId).title;
+    const amount = this.findBalanceForChild(childId).balance;
+    if (amount < 0) {
+      paymentDetails.amount = (0 - amount);
+    } else {
+      paymentDetails.amount = 0;
+    }
+    paymentDetails.street = this.accountNumber.street;
+    paymentDetails.city = this.accountNumber.city;
+    paymentDetails.postalCode = this.accountNumber.postalCode;
+    paymentDetails.name = this.accountNumber.name;
+    this.openPaymentDetailsDialog(paymentDetails);
+  }
+
   private forkResources(u: Account) {
     zip(
       this.initializeTransactionMappings(u),
@@ -85,17 +107,17 @@ export class FinancesComponent implements OnInit {
 
   private initializeSumOfAllBalances(u: Account) {
     this.sumOfBalancesForAllChildren = this.balanceService
-    .getSumOfBalancesForAllChildren(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem salda');
-        return throwError(err);
-      }),
-      map(response => {
-        this.isBalancePositive = response.balance >= 0;
-        return response;
-      })
-    );
+      .getSumOfBalancesForAllChildren(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem salda');
+          return throwError(err);
+        }),
+        map(response => {
+          this.isBalancePositive = response.balance >= 0;
+          return response;
+        })
+      );
   }
 
   private initializeBalancesForAllChildren(u: Account) {
@@ -112,15 +134,26 @@ export class FinancesComponent implements OnInit {
 
   private initializeTransactionMappings(u: Account) {
     return this.transactionMappingService
-    .getAllPaymentMappingsForGuardian(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem danych do przelewu');
-        return throwError(err);
-      }),
-      map(response => {
-        return response;
-      })
+      .getAllPaymentMappingsForGuardian(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackMessageHandlingService.error('Wystąpił problem z załadowaniem danych do przelewu');
+          return throwError(err);
+        }),
+        map(response => {
+          return response;
+        })
+      );
+  }
+
+  private openPaymentDetailsDialog(data: PaymentDetails): void {
+    const dialogRef = this.dialog.open(PaymentDataComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+      }
     );
   }
 

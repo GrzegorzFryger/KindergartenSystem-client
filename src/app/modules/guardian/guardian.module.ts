@@ -38,6 +38,7 @@ import {ChartsModule} from 'ng2-charts';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import { MealAddFormGuardianComponent } from './page/meal/meal-add-form-guardian/meal-add-form-guardian.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PaymentDataComponent } from './page/finances/payment-data/payment-data.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AbsenceDialogComponent,
     FinanceChartComponent,
     NavbarComponent,
-    MealAddFormGuardianComponent
+    MealAddFormGuardianComponent,
+    PaymentDataComponent
   ],
 
     imports: [

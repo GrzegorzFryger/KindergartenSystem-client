@@ -1,10 +1,10 @@
 <div class="finances">
   <div class="left">
     <div class="left-flex-container">
-      <p>Całkowity stan</p>
-      <div class="chart">
-        <app-finance-chart></app-finance-chart>
-      </div>
+      <!--<p>Całkowity stan</p>-->
+      <!--<div class="chart">-->
+      <!--<app-finance-chart></app-finance-chart>-->
+      <!--</div>-->
 
       <div class="common-finance-item">
         <div *ngIf="sumOfBalancesForAllChildren | async as balance" class="common-finance-container">
@@ -14,8 +14,8 @@
               <div class="header">
                 <p>Saldo:</p>
               </div>
-              <div class="amount">
-                <p> {{ balance?.balance }} PLN</p>
+              <div class="amount" [ngClass]="isBalancePositive ? 'font-success' : 'font-danger'">
+                <p> {{ balance?.balance | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -25,8 +25,8 @@
               <div class="header">
                 <p>Wpłaty:</p>
               </div>
-              <div class="amount">
-                <p> {{ balance?.receivables }} PLN</p>
+              <div class="amount font-warning">
+                <p> {{ balance?.receivables | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -36,8 +36,8 @@
               <div class="header">
                 <p>Należności:</p>
               </div>
-              <div class="amount">
-                <p> {{ balance?.liabilities }} PLN</p>
+              <div class="amount font-danger">
+                <p> {{ balance?.liabilities | number:'1.2-2' }} PLN</p>
               </div>
             </div>
           </mat-card>
@@ -68,16 +68,6 @@
             <div class="common-finance-container">
               <b>{{findTransactionMapping(data.id)?.title}} </b>
               <b *ngIf="!findTransactionMapping(data.id)">Nie przydzielono konta </b>
-            </div>
-          </div>
-
-          <div class="inline">
-            <div class="common-finance-container">
-              Numer konta:&nbsp;
-            </div>
-            <div class="common-finance-container">
-              <b>{{accountNumber}} </b>
-              <b *ngIf="!accountNumber">Nie znaleziono konta do przelewów </b>
             </div>
           </div>
 
@@ -122,7 +112,7 @@
                 </div>
 
                 <div class="button-container">
-                  <button mat-flat-button>Generuj dane do przelewu</button>
+                  <button mat-flat-button (click)="showPaymentData(data.id)">Generuj dane do przelewu</button>
                 </div>
               </mat-expansion-panel>
             </mat-accordion>

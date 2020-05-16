@@ -18,7 +18,7 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Wybierz dzieci</ng-template>
+      <ng-template matStepLabel>Wybierz dziecko</ng-template>
       <ng-container *ngIf="selectedTransactions?.length > 0">
 
         <app-children-list
@@ -37,7 +37,7 @@
 
     <mat-step>
       <ng-template matStepLabel>Wybierz rodzica</ng-template>
-      <ng-container *ngIf="(guardianOutput.guardians | async)?.length > 0">
+      <ng-container *ngIf="(guardianOutput.guardians | async)?.length > 0 && selectedTransactions?.length > 0">
 
         <app-guardian-list [dataSource]="guardianOutput"
                            (checkedGuardiansEvent)="onSelectedGuardian($event)">
@@ -56,19 +56,20 @@
 
     <mat-step>
       <ng-template matStepLabel>Zakończ</ng-template>
-
-      <!--    <div class="button-container">-->
-      <!--      <div>-->
-      <!--        <div class="row" [hidden]="!selectedChildId || amountOfSelectedTranactions <= 0">-->
-      <!--          <div class="col">-->
-      <!--            <button mat-raised-button color="primary" type="button"-->
-      <!--                    (click)="assignTransactions()" [disabled]="selectedGuardianId === '' ||-->
-      <!--                  amountOfSelectedTranactions === 0 || selectedChildId === ''">Przypisz transakcje-->
-      <!--            </button>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--    </div>-->
+      Aby przypisać wybrane transakcje do wskazanego dziecka, kliknij zakończ.
+      <div class="button-container">
+        <div>
+          <div class="row">
+            <div class="col">
+              <button mat-raised-button matStepperPrevious [color]="'primary'">Cofnij</button>
+              <button mat-raised-button color="primary" type="button"
+                      (click)="assignTransactions()" [disabled]="selectedGuardian === '' ||
+                        selectedTransactions.length === 0 || selectedChild === ''">Zakończ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </mat-step>
 
   </mat-horizontal-stepper>

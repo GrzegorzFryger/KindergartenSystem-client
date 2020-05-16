@@ -30,7 +30,7 @@
     <ng-container matColumnDef="transactionAmount">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Kwota</mat-header-cell>
       <mat-cell
-        *matCellDef="let incomingPayment"> {{incomingPayment.transactionAmount}} {{ incomingPayment.transactionCurrency }}</mat-cell>
+        *matCellDef="let incomingPayment"> {{incomingPayment.transactionAmount | number:'1.2-2'}} {{ incomingPayment.transactionCurrency }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="transactionDate">

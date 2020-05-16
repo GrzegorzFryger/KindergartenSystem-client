@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/
 import {CashPayment} from '../../../../../../data/model/receivables/cash-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
+import {DatePipe, DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-edit-cash-payment',
@@ -16,7 +17,9 @@ export class EditCashPaymentDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditCashPaymentDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public dialogConfig: MatDialogConfig<CashPayment>,
               private fb: FormBuilder,
-              private validationService: ValidatorsService) {
+              private validationService: ValidatorsService,
+              private datePipe: DatePipe,
+              private decimalPipe: DecimalPipe) {
   }
 
   ngOnInit(): void {
@@ -27,9 +30,9 @@ export class EditCashPaymentDialogComponent implements OnInit {
 
   public yesClick(): void {
     this.dialogConfig.data.isEdited = true;
-    this.dialogConfig.data.transactionDate = this.form.get('transactionDate').value;
+    this.dialogConfig.data.transactionDate = this.convertToDate(this.form.get('transactionDate').value);
     this.dialogConfig.data.contractorDetails = this.form.get('contractorDetails').value;
-    this.dialogConfig.data.transactionAmount = this.form.get('transactionAmount').value;
+    this.dialogConfig.data.transactionAmount = this.form.get('transactionAmount').value.replace(',', '.');
     this.dialogConfig.data.title = this.form.get('title').value;
     this.dialogRef.close(this.dialogConfig.data);
   }
@@ -37,6 +40,10 @@ export class EditCashPaymentDialogComponent implements OnInit {
   public noClick(): void {
     this.dialogConfig.data.isEdited = false;
     this.dialogRef.close(this.dialogConfig.data);
+  }
+
+  public convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
   private initializeForm(): void {
@@ -54,8 +61,8 @@ export class EditCashPaymentDialogComponent implements OnInit {
         [Validators.required, Validators.minLength(14)]
       ],
       transactionAmount: [
-        this.dialogConfig.data.transactionAmount,
-        [Validators.required, Validators.min(1), this.validationService.isInteger]
+        this.decimalPipe.transform(this.dialogConfig.data.transactionAmount, '1.2-2'),
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
     });
   }
