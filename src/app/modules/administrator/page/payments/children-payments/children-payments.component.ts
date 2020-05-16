@@ -4,6 +4,8 @@ import {BehaviorSubject, Observable, ReplaySubject, Subscription} from 'rxjs';
 import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
 import {PaymentsService} from '../../../../../data/service/payments/payments.service';
 import {ChildrenSelectShareService} from '../children-select-share.service';
+import {AddPaymentDialogComponent} from "../add-payment-dialog/add-payment-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-children-payments',
@@ -28,7 +30,10 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   panelOpenState: boolean;
   private sub: Subscription;
 
-  constructor(private paymentsService: PaymentsService, private childrenSelectShareService: ChildrenSelectShareService) {
+  constructor(private paymentsService: PaymentsService,
+              private childrenSelectShareService: ChildrenSelectShareService,
+              private dialog: MatDialog) {
+
     this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
     this.paymentsColumnsSub = new BehaviorSubject(this.paymentsColumnsToDisplay);
 
@@ -40,16 +45,25 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub =  this.childrenSelectShareService.childrenSelect.subscribe(child => {
-        console.log(child);
-        this.paymentsService.findAllRecurringPaymentsByChildId(child.id).subscribe(payments => {
-          this.paymentsSub.next(payments);
-        });
+    this.sub = this.childrenSelectShareService.childrenSelect.subscribe(child => {
+      console.log(child);
+      this.paymentsService.findAllRecurringPaymentsByChildId(child.id).subscribe(payments => {
+        this.paymentsSub.next(payments);
+      });
     });
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  addRecurringPayment(): void {
+    console.log('Showing panel for adding recurring payment');
+    this.openDialogForAddingRecurringPayment();
+  }
+
+  private openDialogForAddingRecurringPayment(): void {
+    const dialogRef = this.dialog.open(AddPaymentDialogComponent, {});
   }
 
 }
