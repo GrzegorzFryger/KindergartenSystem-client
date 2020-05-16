@@ -68,7 +68,6 @@ export class DayOffWorkComponent implements OnInit {
     this.dateFrom = submittedForm.value.dateFrom;
     this.dateTo = submittedForm.value.dateTo;
     this.filterByDate(this.dateFrom, this.dateTo);
-
   }
 
   convertToDate(date: Date): Date {
@@ -104,7 +103,7 @@ export class DayOffWorkComponent implements OnInit {
       this.dayOffWorkService.deleteDayOffWork(id).subscribe(
         resp => {
           this.snackMessageHandlingService.success('Dzień wolny został usunięty');
-          if (this.dateFrom == null && this.dateTo == null) {
+          if (this.dateFrom == null || this.dateTo == null) {
             this.getAllDaysOff();
           } else {
             this.filterByDate(this.dateFrom, this.dateTo);

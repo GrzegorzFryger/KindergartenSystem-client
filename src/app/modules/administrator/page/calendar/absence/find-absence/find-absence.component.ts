@@ -8,6 +8,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Child} from '../../../../../../data/model/accounts/child';
 import {ChildService} from '../../../../../../data/service/accounts/child.service';
 import {Observable} from 'rxjs';
+import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-find-absence',
@@ -21,14 +25,15 @@ export class FindAbsenceComponent implements OnInit {
 
   public dataSource: MatTableDataSource<Absence> = new MatTableDataSource();
 
-  public columnsToDisplay: string[] = ['childName', 'date', 'reason', 'actions'];
+  public columnsToDisplay: string[] = ['childName', 'childSurname', 'date', 'reason', 'actions'];
   endDate: string;
   startDate: string;
   childName: string;
   children: Array<Child>;
 
   constructor(private datePipe: DatePipe, private absenceService: AbsenceService,
-              private childService: ChildService) {
+              private childService: ChildService, private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -42,10 +47,8 @@ export class FindAbsenceComponent implements OnInit {
     console.log(this.children);
   }
 
-  removeAbsence(id: string): void {
-    this.absenceService.deleteAbsence(id).subscribe(resp => {
-      this.getAllAbsencesBetweenDates(this.startDate, this.endDate);
-    });
+  deleteAbsence(id: string): void {
+    this.openRemovalDialog('Czy na pewno usunąć nieobecność?', id);
   }
 
   getAllAbsencesBetweenDates(startDate: string, endDate: string) {
@@ -59,13 +62,41 @@ export class FindAbsenceComponent implements OnInit {
     });
   }
 
-  getChildNameFromId(childId: string): string {
-    console.log(this.children);
-    this.children.forEach(child => {
-        if (child.id === childId) {
-          this.childName = child.name + ' ' + child.surname;
+
+  filterChildren($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private removeAbsence(confirmation: boolean, id: string): void {
+    if (confirmation) {
+      this.absenceService.deleteAbsence(id).subscribe(
+        resp => {
+          this.getAllAbsencesBetweenDates(this.startDate, this.endDate);
+          this.snackMessageHandlingService.success('Nieobecność została usunięta');
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dnia wolnego');
+        },
+        () => {
+          // ON COMPLETE
         }
-      });
-    return this.childName;
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
+  }
+
+  private openRemovalDialog(question: string, absenceId: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        console.log('The dialog was closed with answer: ' + result.answer);
+        this.removeAbsence(result.answer, absenceId);
+      }
+    );
   }
 }

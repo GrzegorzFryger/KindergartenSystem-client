@@ -1,5 +1,10 @@
 <mat-card>
   <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <h3>Znajdź nieobecność</h3>
+      </div>
+    </div>
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="row">
         <table>
@@ -34,6 +39,16 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td>
+              <div class="col">
+                <mat-form-field appearance="standard">
+                  <mat-label>Znajdź dziecko</mat-label>
+                  <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
+                </mat-form-field>
+              </div>
+            </td>
+          </tr>
         </table>
       </div>
     </form>
@@ -41,8 +56,12 @@
       <div class="col">
         <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
           <ng-container matColumnDef="childName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię i nazwisko</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{getChildNameFromId(absence.childId)}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+            <mat-cell *matCellDef="let absence"> {{absence.childName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="childSurname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+            <mat-cell *matCellDef="let absence"> {{absence.childSurname}} </mat-cell>
           </ng-container>
           <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
@@ -56,8 +75,12 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
             <mat-cell *matCellDef="let absence">
-              <button mat-stroked-button>Edytuj</button>
-              <button mat-stroked-button class="mat-warn" (click)="removeAbsence(absence.id)">Usuń</button>
+              <button mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteAbsence(absence.id)">
+                <mat-icon class="mat-warn">delete</mat-icon>
+              </button>
             </mat-cell>
           </ng-container>
 
