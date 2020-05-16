@@ -67,6 +67,7 @@ import {GuardianListComponent} from './page/receivables/transactions/share/guard
 import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
 import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import { CashPaymentsListComponent } from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
 import {PaymentsComponent} from './page/payments/payments.component';
 import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
@@ -76,8 +77,6 @@ import {HistoryPaymentsComponent} from './page/payments/history-payments/history
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 import { AddPaymentDialogComponent } from './page/payments/add-payment-dialog/add-payment-dialog.component';
 import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/add-discount-dialog.component';
-
-
 
 @NgModule({
   declarations: [
@@ -124,6 +123,7 @@ import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/
     FindAbsenceComponent,
     AddAbsenceComponent,
     MealOrderComponent,
+    CashPaymentsListComponent
     PaymentsComponent,
     PaymentListComponent,
     ChildListComponent,

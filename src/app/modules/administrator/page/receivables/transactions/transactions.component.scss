@@ -11,12 +11,8 @@
       flex-wrap: nowrap;
       justify-content: space-around;
 
-      .chart {
-        flex-basis: 45%;
-      }
-
       .history {
-        flex-basis: 45%;
+        flex-basis: 80%;
         flex-grow: 0;
         overflow: auto;
       }
@@ -43,7 +39,6 @@
         background-size: 100%;
         padding-bottom: 0;
       }
-
     }
   }
 }
