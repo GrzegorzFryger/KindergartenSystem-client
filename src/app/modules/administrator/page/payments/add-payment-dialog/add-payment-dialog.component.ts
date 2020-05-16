@@ -41,7 +41,7 @@ export class AddPaymentDialogComponent implements OnInit {
     this.dialogConfig.data.startDate = this.convertToDate(this.form.get('startDate').value);
     this.dialogConfig.data.endDate = this.convertToDate(this.form.get('startDate').value);
     this.dialogConfig.data.type = this.form.get('type').value;
-    this.dialogConfig.data.amount = this.form.get('amount').value;
+    this.dialogConfig.data.amount = this.form.get('amount').value.replace(',', '.');
     this.dialogConfig.data.description = this.form.get('description').value;
     this.dialogRef.close(this.dialogConfig.data);
   }

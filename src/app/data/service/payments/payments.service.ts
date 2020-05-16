@@ -36,6 +36,12 @@ export class PaymentsService {
     );
   }
 
+  createOtherPayment(recurringPayment: RecurringPayment): Observable<RecurringPayment> {
+    return this.http.post<RecurringPayment>(
+      environment.apiUrls.payments.createOtherPayment, recurringPayment
+    );
+  }
+
   updatePayment(recurringPayment: RecurringPayment) {
     return this.http.put<RecurringPayment>(
       environment.apiUrls.payments.createTuition, recurringPayment

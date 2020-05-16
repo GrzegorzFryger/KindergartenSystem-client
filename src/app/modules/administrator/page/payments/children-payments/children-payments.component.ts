@@ -6,6 +6,8 @@ import {PaymentsService} from '../../../../../data/service/payments/payments.ser
 import {ChildrenSelectShareService} from '../children-select-share.service';
 import {AddPaymentDialogComponent} from '../add-payment-dialog/add-payment-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {AccountService} from '../../../../../data/service/accounts/account.service';
+import {SnackMessageHandlingService} from "../../../../../core/snack-message-handling/snack-message-handling.service";
 
 @Component({
   selector: 'app-children-payments',
@@ -29,10 +31,14 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   private paymentsColumnsSub: BehaviorSubject<Array<string>>;
   panelOpenState: boolean;
   private sub: Subscription;
+  private selectedChildId: string;
+  private selectedGuardianId: string;
 
   constructor(private paymentsService: PaymentsService,
               private childrenSelectShareService: ChildrenSelectShareService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private userService: AccountService,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
 
     this.paymentsSub = new ReplaySubject<Array<RecurringPayment>>();
     this.paymentsColumnsSub = new BehaviorSubject(this.paymentsColumnsToDisplay);
@@ -47,18 +53,27 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.childrenSelectShareService.childrenSelect.subscribe(child => {
       console.log(child);
+      this.selectedChildId = child.id;
       this.paymentsService.findAllRecurringPaymentsByChildId(child.id).subscribe(payments => {
         this.paymentsSub.next(payments);
       });
     });
+
+    this.userService.currentUser.subscribe(
+      u => {
+        this.selectedGuardianId = u.id;
+      }, error => {
+        // Some error handling
+      }
+    );
   }
+
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
   addRecurringPayment(): void {
-    console.log('Showing panel for adding recurring payment');
     this.openDialogForAddingRecurringPayment();
   }
 
@@ -71,7 +86,33 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(
       result => {
+        result.child = this.selectedChildId;
+        result.guardian = this.selectedGuardianId;
+        console.log('Attempting to save payment');
+        console.log(result);
         // Logic for sending to backend9
+
+        if (result.type === 'TUITION') {
+          this.paymentsService.createTuition(result).subscribe(
+            resp => {
+              console.log(resp);
+              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+            }, error => {
+              this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
+            }
+          );
+        } else if (result.type === 'OTHER') {
+          this.paymentsService.createOtherPayment(result).subscribe(
+            resp => {
+              console.log(resp);
+              this.snackMessageHandlingService.error('Płatność dodana pomyślnie');
+            }, error => {
+              this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
+            }
+          );
+        } else {
+          this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
+        }
       }
     );
   }
