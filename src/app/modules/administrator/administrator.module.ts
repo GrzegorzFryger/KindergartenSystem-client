@@ -75,6 +75,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 import { AddPaymentDialogComponent } from './page/payments/add-payment-dialog/add-payment-dialog.component';
+import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/add-discount-dialog.component';
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import { AddPaymentDialogComponent } from './page/payments/add-payment-dialog/ad
     ChildrenPaymentsComponent,
     HistoryPaymentsComponent,
     DiscountPaymentsComponent,
-    AddPaymentDialogComponent
+    AddPaymentDialogComponent,
+    AddDiscountDialogComponent
   ],
 
 
