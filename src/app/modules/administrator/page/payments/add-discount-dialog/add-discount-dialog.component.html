@@ -1,1 +1,61 @@
-<p>add-discount-dialog works!</p>
+<h2 class="center" mat-dialog-title>Dodaj rabat</h2>
+<div mat-dialog-content class="center">
+
+</div>
+<div mat-dialog-actions>
+  <div class="container-fluid">
+    <form class="form-layout-container container-fluid" [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Nazwa</mat-label>
+            <input matInput formControlName="name">
+            <mat-error>Nazwa zniżki jest wymagana (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Opis</mat-label>
+            <input matInput formControlName="description">
+            <mat-error>Opis zniżki jest wymagany (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Typ płatności</mat-label>
+            <mat-select formControlName="typeDiscount" [(ngModel)]="discountTypes[0].value">
+              <mat-option *ngFor="let paymentType of discountTypes" [value]="paymentType.value">
+                {{paymentType.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error>Typ zniżki jest wymagany</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <!-- TODO Change label based on what is selected in above select -->
+          <mat-form-field appearance="standard" class="full-width">
+            <mat-label>Wartość zniżki</mat-label>
+            <input matInput formControlName="value">
+            <mat-error>Wartość zniżki jest wymagana (minimum: 1,00)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row center">
+        <div class="col">
+          <button mat-raised-button class="mat-button-no" (click)="noClick()">
+            Anuluj
+          </button>
+        </div>
+        <div class="col">
+          <button mat-raised-button class="mat-button-yes" [disabled]="!form.valid" (click)="yesClick()">
+            Zawtwierdź
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

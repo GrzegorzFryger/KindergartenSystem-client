@@ -129,8 +129,8 @@ import { AddDiscountDialogComponent } from './page/payments/add-discount-dialog/
     MealOrderComponent,
     GroupsComponent,
     GroupManagementComponent,
-    AddGroupComponent
-    CashPaymentsListComponent
+    AddGroupComponent,
+    CashPaymentsListComponent,
     PaymentsComponent,
     PaymentListComponent,
     ChildListComponent,
