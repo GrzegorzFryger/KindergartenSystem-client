@@ -58,7 +58,7 @@ export class AddPaymentDialogComponent implements OnInit {
     this.form = this.fb.group({
       amount: [
         '',
-        [Validators.required]
+        [Validators.required, this.validationService.isCorrectNumber]
       ],
       description: [
         '',
