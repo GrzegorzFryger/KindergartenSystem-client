@@ -1,17 +1,6 @@
-.center {
-  text-align: center;
-}
-
-.mat-button-yes {
-  background-color: #23b74b;
-  color: #fff;
-  height: 50px;
-  width: 50%;
-}
-
-.mat-button-no {
-  background-color: #ff3f0e;
-  color: #fff;
-  height: 50px;
-  width: 50%;
+.button-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }

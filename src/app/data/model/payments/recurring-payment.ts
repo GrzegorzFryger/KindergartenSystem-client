@@ -4,8 +4,8 @@ export class RecurringPayment {
   description: string;
   child: string;
   guardian: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   type: string;
 
   constructor(init?: Partial<RecurringPayment>) {

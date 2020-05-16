@@ -140,12 +140,26 @@ export const environment = {
 
     payments: {
       findAllRecurringPayments: paymentsUrl + 'recurring-payments',
+      findAllRecurringPaymentsByChildId: paymentsUrl + 'recurring-payments/',
       findPaymentById: paymentsUrl + 'recurring-payment',
       createTuition: paymentsUrl + 'recurring-payment/tuition',
       createOtherPayment: paymentsUrl + 'recurring-payments/other',
       updatePayment: paymentsUrl + 'recurring-payments',
       markAsCancelPayment: paymentsUrl + 'recurring-payments/',
+
+      history: {
+        getChildById: paymentsUrl +  'payment-history/'
+      },
+
+      discount: {
+        getById: paymentsUrl + 'discount/',
+        getAll: paymentsUrl +  'discounts',
+        create: paymentsUrl + 'discount',
+        update: paymentsUrl + 'discount',
+        delete: paymentsUrl + 'discount'
+      },
     }
+
   }
 
 };

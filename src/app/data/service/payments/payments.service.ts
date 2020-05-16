@@ -18,6 +18,12 @@ export class PaymentsService {
     );
   }
 
+  findAllRecurringPaymentsByChildId(childId: string): Observable<Array<RecurringPayment>> {
+    return this.http.get<Array<RecurringPayment>>(
+      environment.apiUrls.payments.findAllRecurringPaymentsByChildId + `${childId}`
+    );
+  }
+
   findPaymentById(recurringPayment: string): Observable<RecurringPayment> {
     return this.http.get<RecurringPayment>(
       environment.apiUrls.payments.findPaymentById + `${recurringPayment}`
@@ -27,6 +33,12 @@ export class PaymentsService {
   createTuition(recurringPayment: RecurringPayment): Observable<RecurringPayment> {
     return this.http.post<RecurringPayment>(
       environment.apiUrls.payments.createTuition, recurringPayment
+    );
+  }
+
+  createOtherPayment(recurringPayment: RecurringPayment): Observable<RecurringPayment> {
+    return this.http.post<RecurringPayment>(
+      environment.apiUrls.payments.createOtherPayment, recurringPayment
     );
   }
 
