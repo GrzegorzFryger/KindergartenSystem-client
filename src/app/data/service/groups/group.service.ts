@@ -43,8 +43,6 @@ export class GroupService {
   }
 
   public removeChildFromGroup(groupId: string, childId: string): Observable<Group> {
-    const params = new HttpParams().append('groupId', groupId).append('childId', childId);
-    console.log(params);
     return this.http.put<Group>(environment.apiUrls.groups.removeChildFromGroup + groupId + '/' + childId ,  null);
   }
 
