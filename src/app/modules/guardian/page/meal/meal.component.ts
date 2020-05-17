@@ -12,6 +12,7 @@ import {AuthenticationService} from '../../../../core/auth/authentication.servic
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 import {SelectedChildService} from '../../component/children/selected-child.service';
+import {MealDictionary} from '../../../../data/model/meal/meal-dictionary';
 
 
 export interface DialogData {
@@ -37,6 +38,8 @@ export class MealComponent implements OnInit {
   openNutritionalNotes = false;
   openAddMealForm = false;
   selectedChild: Child;
+  mealTypeDic: Array<MealDictionary> = [];
+  dietTypeDic: Array<MealDictionary> = [];
 
 
   public children: Observable<Array<Child>>;
@@ -65,6 +68,8 @@ export class MealComponent implements OnInit {
       this.getAllMealsForChild();
     });
 
+    this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
+    this.mealService.getDietType().subscribe(resp => this.dietTypeDic = resp);
 
   }
 
@@ -144,6 +149,36 @@ export class MealComponent implements OnInit {
 
     });
 
+  }
+
+  statusBusinessName(value: string): string {
+    if (value === 'INACTIVE') {
+      return 'Nieaktywny';
+    } else if (value === 'ACTIVE') {
+      return 'Aktywny';
+    }
+
+    return value;
+  }
+
+  mealTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.mealTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
+  }
+
+  dietTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.dietTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
   }
 
 

@@ -50,17 +50,17 @@
 
             <ng-container matColumnDef="mealStatus">
               <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealStatus}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{statusBusinessName(element.mealStatus)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="mealType">
               <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealType }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dietType">
               <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.dietType }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{dietTypeBusinessName(element.dietType)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="childID">
