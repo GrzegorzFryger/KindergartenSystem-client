@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'administrator',
     loadChildren: () => import('./modules/administrator/administrator.module').then(m => m.AdministratorModule)
     // canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'teacher',
+    loadChildren: () => import('./modules/administrator/teacher.module').then(m => m.TeacherModule)
+    // canActivate: [AuthenticationGuard]
   }
 
 ];
