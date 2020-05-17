@@ -20,7 +20,7 @@ export class AddDiscountDialogComponent implements OnInit {
 
   discountTypes: DiscountType[] = [
     {value: 'PERCENTAGE', viewValue: 'Procentowa'},
-    {value: 'OTHAMOUNTER', viewValue: 'Kwotowa'},
+    {value: 'AMOUNT', viewValue: 'Kwotowa'},
   ];
 
   constructor(public dialogRef: MatDialogRef<AddDiscountDialogComponent>,
@@ -36,11 +36,15 @@ export class AddDiscountDialogComponent implements OnInit {
   }
 
   public yesClick(): void {
+    this.dialogConfig.data.typeDiscount =  this.form.get('typeDiscount').value;
+    this.dialogConfig.data.description =  this.form.get('description').value;
+    this.dialogConfig.data.name =  this.form.get('name').value;
+    this.dialogConfig.data.value =  this.form.get('value').value;
     this.dialogRef.close(this.dialogConfig.data);
   }
 
   public noClick(): void {
-    this.dialogRef.close(this.dialogConfig.data);
+    this.dialogRef.close(null);
   }
 
   private initializeForm(): void {

@@ -1,11 +1,11 @@
-<div class="container-fluid">
+<div class="container-fluid edit-payment-dialog">
   <form [formGroup]="form">
     <h2>Edytuj płatność okresową</h2>
 
     <div class="row">
       <div class="col">
         <p>Dodaj Rabat</p>
-        <div class="calendar-filed-container ">
+        <div class="edit-payment-dialog-filed-container ">
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Dodaj rabat</mat-label>
             <mat-select formControlName="discount">
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col">
         <p>Wybierz datę</p>
-        <div class="calendar-filed-container">
+        <div class="edit-payment-dialog-filed-container">
           <mat-form-field appearance="standard">
             <mat-label>Data początkowa</mat-label>
             <input matInput [matDatepicker]="startDate" formControlName="startDate">
@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col">
         <p>Wpisz opis</p>
-        <div class="calendar-filed-container ">
+        <div class="edit-payment-dialog-filed-container ">
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Opis</mat-label>
             <input matInput formControlName="description">
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col">
         <p>Wybierz typ oraz wpisz kwotę</p>
-        <div class="calendar-filed-container ">
+        <div class="edit-payment-dialog-filed-container ">
           <mat-form-field appearance="standard">
             <mat-label>Typ płatności</mat-label>
             <mat-select formControlName="type" [(ngModel)]="paymentTypes[0].value">
@@ -67,6 +67,7 @@
             </mat-select>
             <mat-error>Typ płatności jest wymagany</mat-error>
           </mat-form-field>
+
           <mat-form-field appearance="standard">
             <mat-label>Kwota (PLN)</mat-label>
             <input matInput formControlName="amount">
@@ -80,7 +81,7 @@
       <div class="col">
         <div class="d-flex align-items-end justify-content-end button-payment-edit">
           <button mat-raised-button color="warn" class="m-8" (click)="noClick()">Anuluj</button>
-          <button mat-raised-button color="primary" (click)="yesClick()">Zatwierdź</button>
+          <button mat-raised-button color="primary" (click)="yesClick()" [disabled]="!form.valid" >Zatwierdź</button>
         </div>
       </div>
     </div>
