@@ -103,6 +103,11 @@
         <mat-card-title>Uwagi żywieniowe - {{selectedMeal.mealType}} - {{selectedMeal.dietType}} ({{selectedMeal.id}})</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+
+        <div class="close-cross" style="">
+          <mat-icon matTooltip="Zamknij" (click)="closeNutritionalNotes()">close</mat-icon>
+        </div>
+
         <div class="cardContent">
 
           <div class="container">

@@ -137,6 +137,10 @@ export class MealComponent implements OnInit {
     }
   }
 
+  closeNutritionalNotes() {
+    this.openNutritionalNotes = false;
+  }
+
   invokeMeals() {
     this.selectedMealId.forEach(u => {
       this.mealService.invokeMeal(u).subscribe(reps => {
