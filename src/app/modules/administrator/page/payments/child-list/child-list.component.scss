@@ -1,0 +1,36 @@
+.payment-child-list-container {
+  display: flex;
+  justify-content: center;
+
+  padding: 16px;
+  background-color: white;
+  border-radius: 24px;
+
+  .payment-child-table-item {
+    flex-basis: 90%;
+
+    .payment-child-search {
+      margin-bottom: 16px;
+
+      .mat-form-field {
+        width: 100%;
+        .mat-form-field-flex {
+          background-color: white;
+        }
+      }
+    }
+
+    .mat-table {
+      .mat-row {
+        &:hover {
+          background-color: #bec9f4;
+        }
+      }
+    }
+  }
+}
+
+
+.selected {
+  background-color: #bec9f4;
+}

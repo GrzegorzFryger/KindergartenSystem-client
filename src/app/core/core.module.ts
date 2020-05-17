@@ -13,7 +13,9 @@ import {InfoComponent} from './snack-message-handling/info/info.component';
 import {SuccessComponent} from './snack-message-handling/success/success.component';
 import {WarningComponent} from './snack-message-handling/warning/warning.component';
 import {MatIconModule} from '@angular/material/icon';
-import { YesNoDialogComponent } from './dialog/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogComponent} from './dialog/yes-no-dialog/yes-no-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { YesNoDialogComponent } from './dialog/yes-no-dialog/yes-no-dialog.compo
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     AuthenticationGuard,

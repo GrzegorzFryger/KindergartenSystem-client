@@ -8,7 +8,7 @@ import {Child} from '../../../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../../../data/service/accounts/guardian.service';
 import {ChildService} from 'src/app/data/service/accounts/child.service';
 import {Guardian} from 'src/app/data/model/accounts/guardian';
-import {Observable, ReplaySubject} from 'rxjs';
+import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {MatStepper} from '@angular/material/stepper';
 
 @Component({
@@ -31,11 +31,13 @@ export class AssignTransactionsComponent implements OnInit {
     transactions: Observable<Array<Transaction>>,
     columnToDisplay: Array<string>
   };
+
   public childrenOutput: {
     children: Observable<Array<Child>>,
     columnToDisplay: Array<string>,
     filterPredicate: (data: Child, filter: string) => boolean
   };
+
   public guardianOutput: {
     guardians: Observable<Array<Guardian>>,
     columnToDisplay: Array<string>
@@ -43,7 +45,7 @@ export class AssignTransactionsComponent implements OnInit {
 
   private childrenSub: ReplaySubject<Array<Child>>;
   private guardianSub: ReplaySubject<Array<Guardian>>;
-  private transactionSub: ReplaySubject<Array<Transaction>>;
+  private transactionSub: Subject<Array<Transaction>>;
 
   selectedChild: string;
   selectedTransactions: Array<Transaction>;
@@ -57,7 +59,7 @@ export class AssignTransactionsComponent implements OnInit {
 
     this.selectedTransactions = new Array<Transaction>();
 
-    this.transactionSub = new ReplaySubject<Array<Transaction>>();
+    this.transactionSub = new Subject<Array<Transaction>>();
     this.childrenSub = new ReplaySubject<Array<Child>>();
     this.guardianSub = new ReplaySubject<Array<Guardian>>();
 
@@ -170,7 +172,7 @@ export class AssignTransactionsComponent implements OnInit {
       return data.name.toLowerCase().includes(filter) || data.surname.toLowerCase().includes(filter) ||
         data.pesel.toLowerCase().includes(filter);
     }
-  }
+  };
 
   private resetState(): void {
     this.loadDataAboutUnassignedTransactions();
