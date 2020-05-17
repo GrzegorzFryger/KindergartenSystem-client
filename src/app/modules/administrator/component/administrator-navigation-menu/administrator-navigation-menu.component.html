@@ -50,3 +50,26 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<div class="container-fluid" *ngIf="selectedRole == 'TEACHER'">
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher">Home</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher/absence">Nieobecności</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher/dayOff">Dni wolne</button>
+    </div>
+  </div>
+</div>
+
