@@ -16,14 +16,14 @@
 
           <ng-container matColumnDef="mealType">
             <mat-header-cell *matHeaderCellDef> Meal Type</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.mealType}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="mealPrice">
             <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
             <div *matCellDef="let element">
               <div *ngIf="!editingMealPrice">
-                <mat-cell> {{element.mealPrice}} zł</mat-cell>
+                <mat-cell> {{element.mealPrice | number:'1.2-2'}} zł</mat-cell>
               </div>
               <div *ngIf="editingMealPrice">
                 <mat-form-field class="mealPrice-input" style="background: #ffffff">

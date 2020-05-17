@@ -6,6 +6,7 @@ import {MealService} from '../../../../../data/service/meal/meal.service';
 import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class MealPriceComponent implements OnInit {
   mealPriceAvailableToAdd = [];
   addedMealPrice: MealPrice = new MealPrice();
   addingMealPrice = false;
+  mealTypeDic: Array<MealDictionary> = [];
 
   constructor(private http: HttpClient,
               private mealService: MealService,
@@ -31,6 +33,7 @@ export class MealPriceComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMealPrice();
     this.getAvailableMealPrice();
+    this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
   }
 
   getAllMealPrice() {
@@ -55,6 +58,16 @@ export class MealPriceComponent implements OnInit {
       this.openAddViewMealPrice();
       this.getAvailableMealPrice();
     });
+  }
+
+  mealTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.mealTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
   }
 
   uploadMealPrice(id: number) {

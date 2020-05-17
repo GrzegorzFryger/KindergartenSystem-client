@@ -36,7 +36,7 @@
 
             <ng-container matColumnDef="meaPrice">
               <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł</mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice  | number:'1.2-2' }} zł</mat-cell>
             </ng-container>
 
 
