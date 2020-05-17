@@ -94,7 +94,6 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
         if (result.type === 'TUITION') {
           this.paymentsService.createTuition(result).subscribe(
             resp => {
-
               this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');

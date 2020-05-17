@@ -82,7 +82,6 @@ import {AddPaymentDialogComponent} from './page/payments/add-payment-dialog/add-
 import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/add-discount-dialog.component';
 import {EditPaymentDialogComponent} from './page/payments/edit-payment-dialog/edit-payment-dialog.component';
 
-
 @NgModule({
   declarations: [
     AdministratorComponent,
@@ -140,7 +139,7 @@ import {EditPaymentDialogComponent} from './page/payments/edit-payment-dialog/ed
     DiscountPaymentsComponent,
     AddPaymentDialogComponent,
     AddDiscountDialogComponent,
-    EditPaymentDialogComponent
+    EditPaymentDialogComponent,
   ],
 
 

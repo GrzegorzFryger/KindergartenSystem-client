@@ -160,7 +160,8 @@ export const environment = {
       markAsCancelPayment: paymentsUrl + 'recurring-payments/',
 
       history: {
-        getChildById: paymentsUrl +  'payment-history/'
+        getChildById: paymentsUrl +  'payment-history/',
+        applyBalanceCorrectionForPayment: paymentsUrl + 'payment-history/balance-correction'
       },
 
       discount: {

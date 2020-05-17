@@ -18,4 +18,11 @@ export class PaymentHistoryService {
     );
   }
 
+  applyBalanceCorrectionForPayment(paymentHistory: PaymentHistory): Observable<PaymentHistory> {
+   return this.http.post<PaymentHistory>(
+      environment.apiUrls.payments.history.applyBalanceCorrectionForPayment, paymentHistory
+    );
+  }
+
 }
+
