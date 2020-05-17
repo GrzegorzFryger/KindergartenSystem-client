@@ -15,7 +15,7 @@
             <ng-container matColumnDef="select">
               <mat-header-cell *matHeaderCellDef>
                 <mat-checkbox [disabled]="true"
-                          [indeterminate]="true">
+                              [indeterminate]="true">
                 </mat-checkbox>
               </mat-header-cell>
               <mat-cell *matCellDef="let element">
@@ -70,8 +70,11 @@
             <ng-container matColumnDef="childID">
               <mat-header-cell *matHeaderCellDef> Opcje</mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <mat-icon matTooltip="Szczegóły dziecka" (click)="openChildDetails(element.childID)">child_care</mat-icon>
-                <mat-icon matTooltip="Uwagi żywieniowe" style="color: #6DB33F" (click)="getNutritionalNotes(element.id, element.childID); selectedMeal=element">eco</mat-icon>
+                <mat-icon matTooltip="Szczegóły dziecka" (click)="openChildDetails(element.childID)">child_care
+                </mat-icon>
+                <mat-icon matTooltip="Uwagi żywieniowe" style="color: #6DB33F"
+                          (click)="getNutritionalNotes(element.id, element.childID); selectedMeal=element">eco
+                </mat-icon>
               </mat-cell>
             </ng-container>
 
@@ -85,10 +88,12 @@
         <button *ngIf="selectedMealId?.length != 0"
                 mat-button class="invoke-meal-button"
                 (click)="invokeMeals()"
-                color="primary">Zrezygnuj</button>
+                color="primary">Zrezygnuj
+        </button>
 
         <button mat-button (click)="openAddMealFormM()"
-                color="primary">Dodaj kolejny</button>
+                color="primary">Dodaj kolejny
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -175,7 +180,9 @@
     <div class="row">
       <mat-card class="childDetailsCardContent">
         <mat-card-header class="mealCardHeader">
-          <mat-card-title>Uwagi żywieniowe - {{selectedMeal.mealType}} - {{selectedMeal.dietType}} ({{selectedMeal.id}})</mat-card-title>
+          <mat-card-title>Uwagi żywieniowe - {{mealTypeBusinessName(selectedMeal.mealType)}}
+            - {{dietTypeBusinessName(selectedMeal.dietType)}} ({{selectedMeal.id}})
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="close-cross" style="">
@@ -232,15 +239,15 @@
 
                         <div class="container nnContent" *ngFor="let i of selectedNutritionalNotes">
                           <div class="row">
-                          <div class="col-3 dateValue justify-content-center">
-                            <span>{{i.createdTime | date:'longDate' }} </span>
-                          </div>
-                          <div class="col-8 textValue justify-content-center">
-                            <span>{{i.nutritionalNotesValue}} </span>
-                          </div>
-                          <div class="col-1 iconsValue justify-content-center">
-                            <span><mat-icon (click)="deleteNN(i)">delete</mat-icon></span>
-                          </div>
+                            <div class="col-3 dateValue justify-content-center">
+                              <span>{{i.createdTime | date:'longDate' }} </span>
+                            </div>
+                            <div class="col-8 textValue justify-content-center">
+                              <span>{{i.nutritionalNotesValue}} </span>
+                            </div>
+                            <div class="col-1 iconsValue justify-content-center">
+                              <span><mat-icon (click)="deleteNN(i)">delete</mat-icon></span>
+                            </div>
                           </div>
                         </div>
 
