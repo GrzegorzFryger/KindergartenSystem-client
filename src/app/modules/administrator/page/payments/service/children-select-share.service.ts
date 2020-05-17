@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Child} from '../../../../data/model/accounts/child';
+import {Child} from '../../../../../data/model/accounts/child';
 
 @Injectable({
   providedIn: 'root'

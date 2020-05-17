@@ -3,7 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {PaymentHistory} from '../../../../../data/model/payments/payment-history';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {ChildrenSelectShareService} from '../children-select-share.service';
+import {ChildrenSelectShareService} from '../service/children-select-share.service';
 import {PaymentHistoryService} from '../../../../../data/service/payments/payment-history.service';
 import {Subscription} from 'rxjs';
 import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';

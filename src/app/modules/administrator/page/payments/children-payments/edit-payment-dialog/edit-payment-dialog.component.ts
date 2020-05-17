@@ -2,10 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {DatePipe} from '@angular/common';
-import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
-import {DiscountPayment} from '../../../../../data/model/payments/discount-payment';
-import {DiscountPaymentService} from '../../../../../data/service/payments/discount-payment.service';
-import {EditPaymentDialogData} from '../../../../../data/model/payments/edit-payment-dialog-data';
+import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
+import {DiscountPayment} from '../../../../../../data/model/payments/discount-payment';
+import {DiscountPaymentService} from '../../../../../../data/service/payments/discount-payment.service';
+import {EditPaymentDialogData} from '../../../../../../data/model/payments/edit-payment-dialog-data';
 
 
 interface PaymentType {

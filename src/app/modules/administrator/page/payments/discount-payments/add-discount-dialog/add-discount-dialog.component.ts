@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {DiscountPayment} from '../../../../../data/model/payments/discount-payment';
+import {DiscountPayment} from '../../../../../../data/model/payments/discount-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
+import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
 
 interface DiscountType {
   value: string;

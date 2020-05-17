@@ -2,8 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Child} from '../../../../data/model/accounts/child';
 import {ChildService} from '../../../../data/service/accounts/child.service';
-import {childHeader, fadeAnimation, fadeAnimation2, refresh, showHide} from './animations';
-import {ChildrenSelectShareService} from './children-select-share.service';
+import {childHeader, fadeAnimation, fadeAnimation2, refresh, showHide} from './animation/animations';
+import {ChildrenSelectShareService} from './service/children-select-share.service';
 
 @Component({
   selector: 'app-payments',

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DiscountPayment} from '../../../../../data/model/payments/discount-payment';
-import {AddDiscountDialogComponent} from '../add-discount-dialog/add-discount-dialog.component';
+import {AddDiscountDialogComponent} from './add-discount-dialog/add-discount-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {DiscountPaymentService} from '../../../../../data/service/payments/discount-payment.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
