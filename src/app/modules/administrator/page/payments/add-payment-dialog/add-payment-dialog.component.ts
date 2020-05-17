@@ -33,7 +33,7 @@ export class AddPaymentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogRef.disableClose = true; // Force user to click Yes or No
-    this.dialogRef.updateSize('60%', '50%');
+    this.dialogRef.updateSize('40%', '60%');
     this.initializeForm();
   }
 
