@@ -45,7 +45,12 @@
           Typ:
         </div>
         <div class="value">
-          {{payment.type}}
+          <ng-container *ngIf="payment.type === 'TUITION'; else typePayment" >
+            Czesne
+          </ng-container>
+          <ng-template #typePayment >
+            Inna
+          </ng-template>
         </div>
       </div>
       <div class="expansion-panel-item">
