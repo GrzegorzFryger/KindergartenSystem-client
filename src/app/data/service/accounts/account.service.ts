@@ -12,22 +12,23 @@ import {AuthenticationService} from '../../../core/auth/authentication.service';
 })
 export class AccountService {
   private currentUserSub: Subject<Account>;
-  public currentUser: Observable<Account>;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.currentUserSub = new ReplaySubject<Account>(1);
-    this.currentUser = this.currentUserSub.asObservable();
 
     authenticationService.currentUserCred.subscribe(userCred => {
-      this.getByEmail(userCred.email).subscribe(user => {
-        this.currentUserSub.next(user);
-      });
-
-      if (!userCred) {
-        this.logOut();
+      if (userCred) {
+        this.getByEmail(userCred.email).subscribe(user => {
+          this.currentUserSub.next(user);
+        });
+      } else {
+        this.currentUserSub.next(null);
       }
-
     });
+  }
+
+  get currentUser(): Observable<Account> {
+   return this.currentUserSub.asObservable();
   }
 
   getByEmail(email: string): Observable<Account> {
@@ -39,7 +40,6 @@ export class AccountService {
   }
 
   public logOut() {
-    this.currentUserSub.next(null);
   }
 
 

@@ -15,28 +15,26 @@ const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
 })
 export class GuardianService {
   private childrenSub: BehaviorSubject<Array<Child>>;
-  public children: Observable<Array<Child>>;
   public userId: string;
 
   constructor(private http: HttpClient, private userService: AccountService,
               private errorHandlingService: SnackMessageHandlingService) {
     this.childrenSub = new BehaviorSubject<Array<Child>>(null);
-    this.children = this.childrenSub.asObservable();
 
-    this.userService.currentUser.subscribe(user => {
-
-      if(!user) {
-        this.logOut();
-      }
-
-      this.userId = user.id;
-
-      this.findAllGuardianChildren(user.id).subscribe(children => {
-        this.childrenSub.next(children);
+      this.userService.currentUser.subscribe(user => {
+        if (user) {
+          this.userId = user.id;
+          this.findAllGuardianChildren(user.id).subscribe(children => {
+            this.childrenSub.next(children);
+          });
+        } else {
+          this.childrenSub.next(null);
+        }
       });
+  }
 
-
-    });
+  get children(): Observable<Array<Child>> {
+    return this.childrenSub.asObservable();
   }
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
@@ -74,10 +72,6 @@ export class GuardianService {
 
   public appendChildToGuardian(appendChild: { childId: Array<string>, guardianId: Array<string> }): Observable<Array<Guardian>> {
     return this.http.post<Array<Guardian>>(environment.apiUrls.account.guardian.appendChild, appendChild);
-  }
-
-  public logOut() {
-    this.childrenSub.next(null);
   }
 
 }

@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AccountService} from '../../data/service/accounts/account.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Account} from '../../data/model/accounts/account';
 import {environment} from '../../core/environment.dev';
 import {Router} from '@angular/router';
@@ -11,12 +11,13 @@ import {AuthenticationService} from '../../core/auth/authentication.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, AfterViewInit {
+export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
   public user: Observable<Account>;
   isUserAdmin = false;
   isUserTeacher = false;
   isUserParent = false;
   selectedRole;
+  private userSubb: Subscription;
 
   constructor(private authenticationService: AuthenticationService,
     private userService: AccountService,
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   identifyRoles(): void {
-    this.user.subscribe(user => {
+    this.userSubb =  this.user.subscribe(user => {
       const roles = user.roles;
 
       this.showSelectedRole(roles[0].name);
@@ -95,6 +96,10 @@ export class UserComponent implements OnInit, AfterViewInit {
     if (role === 'TEACHER') {
       this.router.navigate([environment.routes.homeUrlTeacher]);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.userSubb.unsubscribe();
   }
 
 
