@@ -27,11 +27,13 @@ export class ChildrenComponent implements OnInit {
   }
 
   getChildren() {
-    this.children = this.guardianService.children;
-    this.children?.subscribe(children => {
-      this.childrenList = children;
-      return children;
-    });
+    if (this.children == null) {
+      this.children = this.guardianService.children;
+      this.children?.subscribe(children => {
+        this.childrenList = children;
+        return children;
+      });
+    }
   }
 
   onSelectChange($event: MatSelectChange) {
