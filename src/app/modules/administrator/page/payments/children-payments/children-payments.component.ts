@@ -30,11 +30,9 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
               private dialog: MatDialog,
               private userService: AccountService,
               private snackMessageHandlingService: SnackMessageHandlingService) {
-
   }
 
   ngOnInit(): void {
-
     this.sub = this.childrenSelectShareService.childrenSelect.subscribe(child => {
       console.log(child);
       this.selectedChildId = child.id;
