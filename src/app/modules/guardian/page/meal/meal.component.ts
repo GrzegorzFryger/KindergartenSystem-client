@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
@@ -26,7 +26,7 @@ export interface DialogData {
   templateUrl: './meal.component.html',
   styleUrls: ['./meal.component.scss']
 })
-export class MealComponent implements OnInit {
+export class MealComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['select', 'id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   meals: Array<Meal>;
@@ -44,6 +44,7 @@ export class MealComponent implements OnInit {
 
   public children: Observable<Array<Child>>;
   selectedMealId: Array<number> = [];
+  private childSubscription: Subscription;
 
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
@@ -52,10 +53,7 @@ export class MealComponent implements OnInit {
               private mealService: MealService,
               private snackMessageHandlingService: SnackMessageHandlingService,
               private selectedChildService: SelectedChildService) {
-    selectedChildService.selectedChild.subscribe((child: Child) => {
-      this.selectedChild = child;
-      this.getAllMealsForChild();
-    });
+
   }
 
   ngOnInit(): void {
@@ -63,7 +61,7 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
 
-    this.selectedChildService.selectedChild.subscribe((child: Child) => {
+    this.childSubscription = this.selectedChildService.selectedChild.subscribe((child: Child) => {
         this.selectedChild = child;
         this.getAllMealsForChild();
     });
@@ -183,6 +181,10 @@ export class MealComponent implements OnInit {
       }
     });
     return businessName != null ? businessName : value;
+  }
+
+  ngOnDestroy(): void {
+    this.childSubscription.unsubscribe();
   }
 
 
