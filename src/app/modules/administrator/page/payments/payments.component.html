@@ -1,51 +1,25 @@
-<div class="payments-layout-container">
-
-  <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item">
-    <div class="child-profile-item-container">
-      <div class="fullName-item">
-        <div class="d-flex align-items-center align-items-center justify-content-center">
-          <h2 [@refresh]="refresh"
-              (@refresh.done)="onAnimationEvent($event)">
-            {{(childSelectOutput.data | async)?.name}} {{(childSelectOutput.data | async)?.surname}}</h2>
-        </div>
+<div class="payments-main-container">
+  <ng-container *ngIf="isSelected">
+    <div class="payments-main-options">
+      <div class="payments-main-options-container">
+        <mat-card matRipple routerLink="/administrator/payments-main/discount" class="payments-main-option-card">
+          <h2>Zarządzanie rabatami</h2>
+        </mat-card>
+        <mat-card matRipple routerLink="/administrator/payments-main/payments"  class="payments-main-option-card">
+          <h2>Zarządzanie płatnościami dzieci</h2>
+        </mat-card>
       </div>
-
-      <div class="button-item">
-        <div class="d-flex align-items-center justify-content-end max-height">
-          <div>
-            <div routerLink="/administrator/payments/list" matRipple class="menu-item">
-              <mat-icon>payment</mat-icon>
-              <p>Aktywne płatności</p>
-            </div>
-            <div routerLink="/administrator/payments/history" matRipple class="menu-item">
-              <mat-icon>history</mat-icon>
-              <p>Historia płatności</p>
-            </div>
-            <div routerLink="/administrator/payments/discount" matRipple class="menu-item">
-              <mat-icon>attach_money</mat-icon>
-              <p>Rabaty</p>
-            </div>
-          </div>
+    </div>
+    <div class="payments-main-info">
+      <div class="payments-main-info-container">
+        <div class="history">
+          <p>Historia płatności: </p>
+          <app-history-payments-list [dataSource]="paymentsHistoryOutput" ></app-history-payments-list>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
-  <div class="context-item">
-    <div class="payments-container">
 
-      <div [@paymentTable]="currentState" class="payments-table-item margin-right">
-        <app-child-list
-          [dataSource]="childrenOutput"
-          (outputDataEmitter)="onSelectPaymentEvent($event)">
-        </app-child-list>
-      </div>
-
-      <div [@show]="!!(childSelectOutput.data | async)" [@paymentChildComponent]="currentState"
-           class="payments-children-item ">
-        <router-outlet></router-outlet>
-      </div>
-
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>

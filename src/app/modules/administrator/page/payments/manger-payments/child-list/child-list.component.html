@@ -13,10 +13,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Ikona</mat-header-cell>
         <mat-cell *matCellDef="let children">
           <div *ngIf="children?.gender === 'FEMALE'; else male" class="img">
-            <img src="../../../../../../assets/images/girl.png" height="30" width="30" class="img-fluid"/>
+            <img src="../../../../../../../assets/images/girl.png" height="30" width="30" class="img-fluid"/>
           </div>
           <ng-template #male>
-            <img src="../../../../../../assets/images/icon-boy.png" height="30" width="30" class="img-fluid"/>
+            <img src="../../../../../../../assets/images/icon-boy.png" height="30" width="30" class="img-fluid"/>
           </ng-template>
         </mat-cell>
       </ng-container>

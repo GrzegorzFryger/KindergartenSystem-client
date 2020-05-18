@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {PaymentHistory} from '../../../../../data/model/payments/payment-history';
+import {PaymentHistory} from '../../../../../../data/model/payments/payment-history';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {ChildrenSelectShareService} from '../children-select-share.service';
-import {PaymentHistoryService} from '../../../../../data/service/payments/payment-history.service';
+import {ChildrenSelectShareService} from '../../service/children-select-share.service';
+import {PaymentHistoryService} from '../../../../../../data/service/payments/payment-history.service';
 import {Subscription} from 'rxjs';
-import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
-import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 
 const USER_DIALOG_MESSAGE = 'Czy chcesz wykonać korektę płatności?';
 
@@ -28,7 +29,8 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
 
   constructor(private childrenSelectShareService: ChildrenSelectShareService,
               private paymentHistoryService: PaymentHistoryService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
     this.dataSourceToDisplay = new MatTableDataSource();
   }
 
@@ -52,8 +54,7 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  applyBalanceCorrection(recurringPayment: any) {
-
+  applyBalanceCorrection(paymentHistory: PaymentHistory) {
     const data = new YesNoDialogData(USER_DIALOG_MESSAGE);
     const dialogRef = this.dialog.open(YesNoDialogComponent, {
       data: {data}
@@ -61,6 +62,15 @@ export class HistoryPaymentsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(
       result => {
+        if (result.answer) {
+          this.paymentHistoryService.applyBalanceCorrectionForPayment(paymentHistory).subscribe(
+            () => {
+              this.dataSourceToDisplay.data = this.dataSourceToDisplay.data.filter(history => history !== paymentHistory);
+              this.snackMessageHandlingService.success('Korektę dodano pomyślnie');
+            }, error => {
+              this.snackMessageHandlingService.error('Wystąpił problem z dodaniem korekty');
+            });
+        }
         console.log('The dialog was closed with answer: ' + result.answer);
       }
     );

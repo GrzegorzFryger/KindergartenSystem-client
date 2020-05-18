@@ -72,15 +72,16 @@ import {GroupManagementComponent} from './page/groups/group-management/group-man
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 import {CashPaymentsListComponent} from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
 import {PaymentsComponent} from './page/payments/payments.component';
-import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
-import {ChildListComponent} from './page/payments/child-list/child-list.component';
-import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
+import {HistoryPaymentsListComponent} from './page/payments/history-payment-list/history-payments-list.component';
+import {ChildListComponent} from './page/payments/manger-payments/child-list/child-list.component';
+import {ChildrenPaymentsComponent} from './page/payments/manger-payments/children-payments/children-payments.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
+import {HistoryPaymentsComponent} from './page/payments/manger-payments/history-payments/history-payments.component';
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
-import {AddPaymentDialogComponent} from './page/payments/add-payment-dialog/add-payment-dialog.component';
-import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/add-discount-dialog.component';
-
+import {AddPaymentDialogComponent} from './page/payments/manger-payments/children-payments/add-payment-dialog/add-payment-dialog.component';
+import {AddDiscountDialogComponent} from './page/payments/discount-payments/add-discount-dialog/add-discount-dialog.component';
+import {EditPaymentDialogComponent} from './page/payments/manger-payments/children-payments/edit-payment-dialog/edit-payment-dialog.component';
+import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
 
 @NgModule({
   declarations: [
@@ -132,13 +133,15 @@ import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/ad
     AddGroupComponent,
     CashPaymentsListComponent,
     PaymentsComponent,
-    PaymentListComponent,
+    HistoryPaymentsListComponent,
     ChildListComponent,
     ChildrenPaymentsComponent,
     HistoryPaymentsComponent,
     DiscountPaymentsComponent,
     AddPaymentDialogComponent,
-    AddDiscountDialogComponent
+    AddDiscountDialogComponent,
+    EditPaymentDialogComponent,
+    MangerPaymentsComponent,
   ],
 
 

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
+import {RecurringPayment} from '../../../../../../../data/model/payments/recurring-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
+import {ValidatorsService} from '../../../../../../../data/service/validation/validators.service';
 
 interface PaymentType {
   value: string;
@@ -33,7 +33,7 @@ export class AddPaymentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dialogRef.disableClose = true; // Force user to click Yes or No
-    this.dialogRef.updateSize('60%', '50%');
+    this.dialogRef.updateSize('40%', '60%');
     this.initializeForm();
   }
 

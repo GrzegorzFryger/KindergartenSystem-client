@@ -5,7 +5,7 @@ export class PaymentHistory {
   description: string;
   child: string;
   guardian: string;
-  type: string;
+  typeRecurringPayment: string;
   operationType: string;
 
   constructor(init?: Partial<PaymentHistory>) {

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddDiscountDialogComponent } from './add-discount-dialog.component';
+import {AddDiscountDialogComponent} from './add-discount-dialog.component';
 
 describe('AddDiscountDialogComponent', () => {
   let component: AddDiscountDialogComponent;

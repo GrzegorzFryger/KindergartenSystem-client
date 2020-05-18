@@ -28,12 +28,26 @@
 
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.type}} </mat-cell>
+          <mat-cell *matCellDef="let recurringPayment">
+            <ng-container *ngIf="recurringPayment.typeRecurringPayment === 'TUITION'; else typePayment" >
+              Czesne
+            </ng-container>
+            <ng-template #typePayment >
+              Inna
+            </ng-template>
+          </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="operationType">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Type Operacji</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.operationType}} </mat-cell>
+        <mat-cell *matCellDef="let recurringPayment">
+          <ng-container *ngIf="recurringPayment.operationType === 'DECREASE'; else operationType" >
+            Zmiejszenie
+          </ng-container>
+          <ng-template #operationType >
+            Zwiększenie
+          </ng-template>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="delete">

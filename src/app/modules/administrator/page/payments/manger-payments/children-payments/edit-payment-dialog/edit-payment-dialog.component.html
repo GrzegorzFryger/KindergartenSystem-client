@@ -1,0 +1,90 @@
+<div class="container-fluid edit-payment-dialog">
+  <form [formGroup]="form">
+    <h2>Edytuj płatność okresową</h2>
+
+    <div class="row">
+      <div class="col">
+        <p>Dodaj Rabat</p>
+        <div class="edit-payment-dialog-filed-container ">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Dodaj rabat</mat-label>
+            <mat-select formControlName="discount">
+              <mat-option *ngFor="let discount of discountPayments" [value]="discount.name">
+                {{discount.value}} PLN {{discount.description}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Wybierz datę</p>
+        <div class="edit-payment-dialog-filed-container">
+          <mat-form-field appearance="standard">
+            <mat-label>Data początkowa</mat-label>
+            <input matInput [matDatepicker]="startDate" formControlName="startDate">
+            <mat-error>Data w poprawnym formacie jest wymagana</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Data końcowa</mat-label>
+            <input matInput [matDatepicker]="endDate" formControlName="endDate">
+            <mat-error>Data w poprawnym formacie jest wymagana</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Wpisz opis</p>
+        <div class="edit-payment-dialog-filed-container ">
+          <mat-form-field class="full-width" appearance="standard">
+            <mat-label>Opis</mat-label>
+            <input matInput formControlName="description">
+            <mat-error>Opis jest wymagany (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Wybierz typ oraz wpisz kwotę</p>
+        <div class="edit-payment-dialog-filed-container ">
+          <mat-form-field appearance="standard">
+            <mat-label>Typ płatności</mat-label>
+            <mat-select formControlName="type" [(ngModel)]="paymentTypes[0].value">
+              <mat-option *ngFor="let paymentType of paymentTypes" [value]="paymentType.value">
+                {{paymentType.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error>Typ płatności jest wymagany</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Kwota (PLN)</mat-label>
+            <input matInput formControlName="amount">
+            <mat-error>Kwota jest wymagana (minimum: 1,00)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="d-flex align-items-end justify-content-end button-payment-edit">
+          <button mat-raised-button color="warn" class="m-8" (click)="noClick()">Anuluj</button>
+          <button mat-raised-button color="primary" (click)="yesClick()" [disabled]="!form.valid" >Zatwierdź</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

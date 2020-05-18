@@ -3,13 +3,18 @@
   <div class="payments-table-item">
 
     <div class="search">
-      <mat-form-field>
+      <mat-form-field appearance="standard">
         <mat-label>Szukaj</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj płatność">
       </mat-form-field>
     </div>
 
     <mat-table [dataSource]="dataSourceToDisplay" matSort matSortDirection="asc" matSortActive="surname">
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.date}} </mat-cell>
+      </ng-container>
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Kwota</mat-header-cell>
@@ -21,25 +26,27 @@
         <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.description}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="childSurname">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.child}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="childName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.child}} </mat-cell>
-      </ng-container>
-
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.type}} </mat-cell>
+        <mat-cell *matCellDef="let recurringPayment">
+          <ng-container *ngIf="recurringPayment.typeRecurringPayment === 'TUITION'; else typePayment" >
+            Czesne
+          </ng-container>
+          <ng-template #typePayment >
+            Inna
+          </ng-template>
+        </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="select">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Wybór</mat-header-cell>
+      <ng-container matColumnDef="operationType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Type Operacji</mat-header-cell>
         <mat-cell *matCellDef="let recurringPayment">
-          <mat-radio-button name="recurringPayment_selection" (click)="onSelect(recurringPayment.id)"></mat-radio-button>
+          <ng-container *ngIf="recurringPayment.operationType === 'DECREASE'; else operationType" >
+            Zmiejszenie
+          </ng-container>
+          <ng-template #operationType >
+            Zwiększenie
+          </ng-template>
         </mat-cell>
       </ng-container>
 

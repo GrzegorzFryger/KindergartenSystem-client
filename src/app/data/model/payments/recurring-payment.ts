@@ -1,6 +1,6 @@
 export class RecurringPayment {
   id: number;
-  amount: number;
+  amount: string;
   description: string;
   child: string;
   guardian: string;

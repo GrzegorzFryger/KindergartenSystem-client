@@ -3,35 +3,37 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Observable, Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
-import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
+import {Child} from '../../../../../../data/model/accounts/child';
 
 @Component({
-  selector: 'app-payment-list',
-  templateUrl: './payment-list.component.html',
-  styleUrls: ['./payment-list.component.scss']
+  selector: 'app-child-list',
+  templateUrl: './child-list.component.html',
+  styleUrls: ['./child-list.component.scss']
 })
-export class PaymentListComponent implements OnInit, OnDestroy {
+export class ChildListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() dataSource: {
-    data: Observable<Array<RecurringPayment>>, columnToDisplay: Observable<Array<string>>,
-    filterPredicate: (data: RecurringPayment, filter: string) => boolean
+    data: Observable<Array<Child>>,
+    columnToDisplay: Observable<Array<string>>,
+    filterPredicate: (data: Child, filter: string) => boolean,
+    select: Observable<any>
   };
-  @Output() outputDataEmitter: EventEmitter<{ selected: string }>;
+  @Output() outputDataEmitter: EventEmitter<{ selected: any }>;
 
-  public dataSourceToDisplay: MatTableDataSource<RecurringPayment>;
+  public dataSourceToDisplay: MatTableDataSource<Child>;
   public columnsToDisplay: string[];
   private dataSub: Subscription;
 
   constructor() {
     this.dataSourceToDisplay = new MatTableDataSource();
-    this.outputDataEmitter = new EventEmitter<{ selected: string }>();
+    this.outputDataEmitter = new EventEmitter<{ selected: any }>();
   }
 
   ngOnInit(): void {
-    this.dataSub = this.dataSource.data.subscribe(payment => {
-      if (payment) {
-        this.dataSourceToDisplay.data = payment;
+    this.dataSub = this.dataSource.data.subscribe(data => {
+      if (data) {
+        this.dataSourceToDisplay.data = data;
         this.dataSource.columnToDisplay.subscribe(col => {
           this.columnsToDisplay = col;
         });
@@ -44,10 +46,11 @@ export class PaymentListComponent implements OnInit, OnDestroy {
         }
       }
     });
+
   }
 
-  public onSelect(childId: string): void {
-    this.outputDataEmitter.emit({selected: childId});
+  public onSelect(sel: any): void {
+    this.outputDataEmitter.emit({selected: sel});
   }
 
   applyFilter(event: KeyboardEvent) {
@@ -59,4 +62,3 @@ export class PaymentListComponent implements OnInit, OnDestroy {
     this.dataSub.unsubscribe();
   }
 }
-
