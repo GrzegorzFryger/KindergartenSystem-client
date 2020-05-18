@@ -6,11 +6,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {PaymentHistory} from '../../../../../data/model/payments/payment-history';
 
 @Component({
-  selector: 'app-payment-history-list',
-  templateUrl: './payment-history-list.component.html',
-  styleUrls: ['./payment-history-list.component.scss']
+  selector: 'app-history-payments-list',
+  templateUrl: './history-payments-list.component.html',
+  styleUrls: ['./history-payments-list.component.scss']
 })
-export class PaymentHistoryListComponent implements OnInit, OnDestroy {
+export class HistoryPaymentsListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() dataSource: {

@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {PaymentHistory} from '../../../../../data/model/payments/payment-history';
+import {PaymentHistory} from '../../../../../../data/model/payments/payment-history';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {ChildrenSelectShareService} from '../service/children-select-share.service';
-import {PaymentHistoryService} from '../../../../../data/service/payments/payment-history.service';
+import {ChildrenSelectShareService} from '../../service/children-select-share.service';
+import {PaymentHistoryService} from '../../../../../../data/service/payments/payment-history.service';
 import {Subscription} from 'rxjs';
-import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
-import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 
 const USER_DIALOG_MESSAGE = 'Czy chcesz wykonać korektę płatności?';
 

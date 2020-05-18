@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {fadeAnimation} from '../animation/animations';
+import {fadeAnimation} from '../../animation/animations';
 import {Observable, Subscription} from 'rxjs';
-import {RecurringPayment} from '../../../../../data/model/payments/recurring-payment';
-import {PaymentsService} from '../../../../../data/service/payments/payments.service';
-import {ChildrenSelectShareService} from '../service/children-select-share.service';
+import {RecurringPayment} from '../../../../../../data/model/payments/recurring-payment';
+import {PaymentsService} from '../../../../../../data/service/payments/payments.service';
+import {ChildrenSelectShareService} from '../../service/children-select-share.service';
 import {AddPaymentDialogComponent} from './add-payment-dialog/add-payment-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AccountService} from '../../../../../data/service/accounts/account.service';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {AccountService} from '../../../../../../data/service/accounts/account.service';
+import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {EditPaymentDialogComponent} from './edit-payment-dialog/edit-payment-dialog.component';
-import {EditPaymentDialogData} from '../../../../../data/model/payments/edit-payment-dialog-data';
+import {EditPaymentDialogData} from '../../../../../../data/model/payments/edit-payment-dialog-data';
 
 @Component({
   selector: 'app-children-payments',

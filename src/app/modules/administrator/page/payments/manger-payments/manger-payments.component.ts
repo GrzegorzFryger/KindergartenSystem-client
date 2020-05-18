@@ -6,13 +6,13 @@ import {ChildService} from '../../../../../data/service/accounts/child.service';
 import {ChildrenSelectShareService} from '../service/children-select-share.service';
 
 @Component({
-  selector: 'app-payments-menager',
-  templateUrl: './payments-menager.component.html',
-  styleUrls: ['./payments-menager.component.scss'],
+  selector: 'app-manger-payments',
+  templateUrl: './manger-payments.component.html',
+  styleUrls: ['./manger-payments.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [fadeAnimation, fadeAnimation2, showHide, childHeader, refresh]
 })
-export class PaymentsMenagerComponent implements OnInit {
+export class MangerPaymentsComponent implements OnInit {
 
   refresh = 'false';
   currentState = 'initial';

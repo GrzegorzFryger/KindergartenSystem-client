@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Observable, Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
-import {Child} from '../../../../../data/model/accounts/child';
+import {Child} from '../../../../../../data/model/accounts/child';
 
 @Component({
   selector: 'app-child-list',

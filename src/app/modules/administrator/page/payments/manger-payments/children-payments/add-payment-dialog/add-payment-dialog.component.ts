@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {RecurringPayment} from '../../../../../../data/model/payments/recurring-payment';
+import {RecurringPayment} from '../../../../../../../data/model/payments/recurring-payment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
+import {ValidatorsService} from '../../../../../../../data/service/validation/validators.service';
 
 interface PaymentType {
   value: string;
