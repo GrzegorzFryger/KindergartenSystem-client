@@ -9,6 +9,7 @@ import {MealComponent} from '../meal.component';
 import {ChildService} from '../../../../../data/service/accounts/child.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {DatePipe} from '@angular/common';
+import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MealAddFormGuardianComponent implements OnInit {
               private mealService: MealService,
               private childService: ChildService,
               private mealComponent: MealComponent,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private guardianService: GuardianService) {
   }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class MealAddFormGuardianComponent implements OnInit {
   }
 
   getAllKids() {
-    this.childService.getAllChildren().subscribe(resp => {
+    this.guardianService.children.subscribe(resp => {
       this.children = resp;
     });
   }
