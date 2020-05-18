@@ -1,8 +1,6 @@
-
 <div class="discount-payments-container">
 
   <div class="illustration-item">
-
   </div>
 
   <div class="discount-item">
@@ -13,14 +11,14 @@
         </div>
       </ng-container>
 
-      <ng-container *ngFor="let payment of (data ); let i = index">
+      <ng-container *ngFor="let discount of (data ); let i = index">
         <div class="expansion-panel-container">
           <div class="expansion-panel-item">
             <div class="header">
               Kwota:
             </div>
             <div class="value">
-              {{payment.value}} PLN
+              {{discount.value}} PLN
             </div>
           </div>
 
@@ -29,7 +27,7 @@
               Opis:
             </div>
             <div class="value">
-              {{payment.description}}
+              {{discount.description}}
             </div>
           </div>
           <div class="expansion-panel-item">
@@ -37,11 +35,11 @@
               Typ:
             </div>
             <div class="value">
-              {{payment.typeDiscount}}
+              {{discount.typeDiscount}}
             </div>
           </div>
           <div class="expansion-panel-item">
-            <button mat-mini-fab color="primary">
+            <button (click)="editDiscount(discount)" mat-mini-fab color="primary">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
