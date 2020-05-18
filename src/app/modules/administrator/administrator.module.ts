@@ -72,7 +72,7 @@ import {GroupManagementComponent} from './page/groups/group-management/group-man
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 import {CashPaymentsListComponent} from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
 import {PaymentsComponent} from './page/payments/payments.component';
-import {PaymentListComponent} from './page/payments/payment-list/payment-list.component';
+import {PaymentHistoryListComponent} from './page/payments/payment-history-list/payment-history-list.component';
 import {ChildListComponent} from './page/payments/child-list/child-list.component';
 import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -81,6 +81,7 @@ import {DiscountPaymentsComponent} from './page/payments/discount-payments/disco
 import {AddPaymentDialogComponent} from './page/payments/children-payments/add-payment-dialog/add-payment-dialog.component';
 import {AddDiscountDialogComponent} from './page/payments/discount-payments/add-discount-dialog/add-discount-dialog.component';
 import {EditPaymentDialogComponent} from './page/payments/children-payments/edit-payment-dialog/edit-payment-dialog.component';
+import {PaymentsMenagerComponent} from './page/payments/payments-menager/payments-menager.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,7 @@ import {EditPaymentDialogComponent} from './page/payments/children-payments/edit
     AddGroupComponent,
     CashPaymentsListComponent,
     PaymentsComponent,
-    PaymentListComponent,
+    PaymentHistoryListComponent,
     ChildListComponent,
     ChildrenPaymentsComponent,
     HistoryPaymentsComponent,
@@ -140,6 +141,7 @@ import {EditPaymentDialogComponent} from './page/payments/children-payments/edit
     AddPaymentDialogComponent,
     AddDiscountDialogComponent,
     EditPaymentDialogComponent,
+    PaymentsMenagerComponent,
   ],
 
 

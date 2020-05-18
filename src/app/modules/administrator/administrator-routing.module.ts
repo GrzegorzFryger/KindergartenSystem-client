@@ -22,6 +22,7 @@ import {PaymentsComponent} from './page/payments/payments.component';
 import {ChildrenPaymentsComponent} from './page/payments/children-payments/children-payments.component';
 import {HistoryPaymentsComponent} from './page/payments/history-payments/history-payments.component';
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
+import {PaymentsMenagerComponent} from './page/payments/payments-menager/payments-menager.component';
 
 const routes: Routes = [
   {
@@ -103,16 +104,22 @@ const routes: Routes = [
         component: ActuatorComponent,
       },
       {
-        path: 'payments',
+        path: 'payments-main',
         component: PaymentsComponent,
         children: [
           {
-            path: 'list',
-            component: ChildrenPaymentsComponent
-          },
-          {
-            path: 'history',
-            component: HistoryPaymentsComponent
+            path: 'payments',
+            component: PaymentsMenagerComponent,
+            children: [
+              {
+                path: 'list',
+                component: ChildrenPaymentsComponent
+              },
+              {
+                path: 'history',
+                component: HistoryPaymentsComponent
+              }
+            ]
           },
           {
             path: 'discount',
