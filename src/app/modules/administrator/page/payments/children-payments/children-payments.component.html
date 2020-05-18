@@ -1,12 +1,12 @@
 <div class="children-payments-container">
 
-  <ng-container *ngIf="(paymentsOutput.data | async )?.length === 0">
+  <ng-container *ngIf="(data | async )?.length === 0">
     <div class="expansion-panel-container empty">
       <p>Brak aktywnych płatności</p>
     </div>
   </ng-container>
 
-  <ng-container *ngFor="let payment of (paymentsOutput.data | async ); let i = index">
+  <ng-container *ngFor="let payment of (data | async ); let i = index">
     <div class="expansion-panel-container">
       <div class="expansion-panel-item">
         <div class="header">
