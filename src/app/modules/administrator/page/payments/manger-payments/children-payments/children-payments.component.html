@@ -1,0 +1,68 @@
+<div class="children-payments-container">
+
+  <ng-container *ngIf="(data | async )?.length === 0">
+    <div class="expansion-panel-container empty">
+      <p>Brak aktywnych płatności</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let payment of (data | async ); let i = index">
+    <div class="expansion-panel-container">
+      <div class="expansion-panel-item">
+        <div class="header">
+          Kwota:
+        </div>
+        <div class="value">
+          {{payment.amount}} PLN
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <div class="header">
+          Początek:
+        </div>
+        <div class="value">
+          {{payment.startDate}}
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <div class="header">
+          Koniec:
+        </div>
+        <div class="value">
+          {{payment.endDate}}
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <div class="header">
+          Opis:
+        </div>
+        <div class="value">
+          {{payment.description}}
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <div class="header">
+          Typ:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="payment.type === 'TUITION'; else typePayment" >
+            Czesne
+          </ng-container>
+          <ng-template #typePayment >
+            Inna
+          </ng-template>
+        </div>
+      </div>
+      <div class="expansion-panel-item">
+        <button (click)="editRecurringPayment(payment)" mat-mini-fab color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <div class="add-button">
+    <button (click)="addRecurringPayment()" mat-mini-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

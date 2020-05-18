@@ -46,15 +46,15 @@
           <br>
         </div>
       </div>
-      <div class="row" class="center">
-        <div class="col">
-          <button mat-raised-button class="mat-button-yes" [disabled]="!form.valid" (click)="yesClick()">
-            Zawtwierdź
-          </button>
-        </div>
+      <div class="row center">
         <div class="col">
           <button mat-raised-button class="mat-button-no" (click)="noClick()">
             Anuluj
+          </button>
+        </div>
+        <div class="col">
+          <button mat-raised-button class="mat-button-yes" [disabled]="!form.valid" (click)="yesClick()">
+            Zawtwierdź
           </button>
         </div>
       </div>
