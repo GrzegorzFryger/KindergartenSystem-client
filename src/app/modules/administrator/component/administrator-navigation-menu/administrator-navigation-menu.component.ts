@@ -6,8 +6,6 @@ import {AfterViewInit, Component} from '@angular/core';
   styleUrls: ['./administrator-navigation-menu.component.scss']
 })
 export class AdministratorNavigationMenuComponent implements AfterViewInit {
-
-
   selectedRole: string;
 
   constructor() { }
