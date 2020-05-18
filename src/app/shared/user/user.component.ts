@@ -20,8 +20,8 @@ export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
   private userSubb: Subscription;
 
   constructor(private authenticationService: AuthenticationService,
-    private userService: AccountService,
-    private router: Router) {
+              private userService: AccountService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -62,26 +62,28 @@ export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   identifyRoles(): void {
-    this.userSubb =  this.user.subscribe(user => {
-      const roles = user.roles;
+    this.userSubb = this.user.subscribe(user => {
+      if (user) {
+        const roles = user.roles;
 
-      this.showSelectedRole(roles[0].name);
-      this.redirectToProperView();
+        this.showSelectedRole(roles[0].name);
+        this.redirectToProperView();
 
-      roles.forEach(u => {
-        if (u.name === 'ADMINISTRATOR') {
-          this.isUserAdmin = true;
-          this.isUserParent = true;
-          this.isUserTeacher = true;
-        }
-        if (u.name === 'USER') {
-          this.isUserParent = true;
-        }
-        if (u.name === 'TEACHER') {
-          this.isUserParent = true;
-          this.isUserTeacher = true;
-        }
-      });
+        roles.forEach(u => {
+          if (u.name === 'ADMINISTRATOR') {
+            this.isUserAdmin = true;
+            this.isUserParent = true;
+            this.isUserTeacher = true;
+          }
+          if (u.name === 'USER') {
+            this.isUserParent = true;
+          }
+          if (u.name === 'TEACHER') {
+            this.isUserParent = true;
+            this.isUserTeacher = true;
+          }
+        });
+      }
     });
   }
 
