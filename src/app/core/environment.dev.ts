@@ -161,7 +161,8 @@ export const environment = {
 
       history: {
         getChildById: paymentsUrl +  'payment-history/',
-        applyBalanceCorrectionForPayment: paymentsUrl + 'payment-history/balance-correction'
+        applyBalanceCorrectionForPayment: paymentsUrl + 'payment-history/balance-correction',
+        paymentLastMonth: paymentsUrl + ' payments-history/month'
       },
 
       discount: {

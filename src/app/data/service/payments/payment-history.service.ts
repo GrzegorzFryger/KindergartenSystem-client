@@ -19,10 +19,17 @@ export class PaymentHistoryService {
   }
 
   applyBalanceCorrectionForPayment(paymentHistory: PaymentHistory): Observable<PaymentHistory> {
-   return this.http.post<PaymentHistory>(
+    return this.http.post<PaymentHistory>(
       environment.apiUrls.payments.history.applyBalanceCorrectionForPayment, paymentHistory
     );
   }
+
+  getPaymentHistoryLastMonth(): Observable<Array<PaymentHistory>> {
+    return this.http.get<Array<PaymentHistory>>(
+      environment.apiUrls.payments.history.paymentLastMonth
+    );
+  }
+
 
 }
 
