@@ -18,7 +18,9 @@ export class AdministratorComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(ev => {
       const navEnf = ev as NavigationEnd;
-      this.display = navEnf.url !== '/administrator';
+      if (navEnf instanceof NavigationEnd) {
+        this.display = navEnf.url.split('/').length - 1 > 2;
+      }
     });
   }
 
