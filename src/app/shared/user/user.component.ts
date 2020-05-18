@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Account} from '../../data/model/accounts/account';
 import {environment} from '../../core/environment.dev';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../../core/auth/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -11,16 +12,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit, AfterViewInit {
-
   public user: Observable<Account>;
   isUserAdmin = false;
   isUserTeacher = false;
   isUserParent = false;
   selectedRole;
 
-
-  constructor(private userService: AccountService,
-              private router: Router) {
+  constructor(private authenticationService: AuthenticationService,
+    private userService: AccountService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
-    localStorage.clear();
+    this.authenticationService.logout();
     this.router.navigate([environment.routes.signInUrl]);
   }
 
