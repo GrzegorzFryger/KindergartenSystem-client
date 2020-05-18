@@ -3,11 +3,12 @@ h2 {
 }
 
 .assign-transactions-container {
-
   display: flex;
   justify-content: center;
 
   .mat-stepper-horizontal {
+    border-radius: 24px;
+    padding: 16px;
     width: 90%;
 
     .steeper {

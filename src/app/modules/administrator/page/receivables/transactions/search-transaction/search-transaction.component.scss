@@ -4,14 +4,20 @@
   justify-content: space-between;
 
   .children-search-item {
+    margin-right: 16px;
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 8px;
+    border-radius: 24px;
+    background-color: white;
+    padding: 16px;
   }
 
   .transaction-result-item {
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 8px;
+
+    border-radius: 24px;
+    background-color: white;
+    padding: 16px;
   }
 }
