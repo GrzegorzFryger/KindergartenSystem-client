@@ -64,8 +64,8 @@ export class MealComponent implements OnInit {
 
 
     this.selectedChildService.selectedChild.subscribe((child: Child) => {
-      this.selectedChild = child;
-      this.getAllMealsForChild();
+        this.selectedChild = child;
+        this.getAllMealsForChild();
     });
 
     this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);

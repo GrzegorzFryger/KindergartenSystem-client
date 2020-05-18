@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/accounts/child';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
@@ -14,14 +14,28 @@ const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
   providedIn: 'root'
 })
 export class GuardianService {
+  private childrenSub: BehaviorSubject<Array<Child>>;
   public children: Observable<Array<Child>>;
   public userId: string;
 
   constructor(private http: HttpClient, private userService: AccountService,
               private errorHandlingService: SnackMessageHandlingService) {
+    this.childrenSub = new BehaviorSubject<Array<Child>>(null);
+    this.children = this.childrenSub.asObservable();
+
     this.userService.currentUser.subscribe(user => {
+
+      if(!user) {
+        this.logOut();
+      }
+
       this.userId = user.id;
-      this.children = this.findAllGuardianChildren(user.id);
+
+      this.findAllGuardianChildren(user.id).subscribe(children => {
+        this.childrenSub.next(children);
+      });
+
+
     });
   }
 
@@ -58,8 +72,12 @@ export class GuardianService {
     return this.http.put<Guardian>(environment.apiUrls.account.guardian.update, guardian);
   }
 
-  public appendChildToGuardian( appendChild: {childId: Array<string>, guardianId: Array<string>}): Observable<Array<Guardian>> {
+  public appendChildToGuardian(appendChild: { childId: Array<string>, guardianId: Array<string> }): Observable<Array<Guardian>> {
     return this.http.post<Array<Guardian>>(environment.apiUrls.account.guardian.appendChild, appendChild);
+  }
+
+  public logOut() {
+    this.childrenSub.next(null);
   }
 
 }
