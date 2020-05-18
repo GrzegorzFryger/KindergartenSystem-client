@@ -55,7 +55,6 @@ export class MealComponent implements OnInit {
 
   ngOnInit(): void {
     this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
-    console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
     this.getAllMeals();
     this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
@@ -76,7 +75,6 @@ export class MealComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.animal = result;
     });
   }
