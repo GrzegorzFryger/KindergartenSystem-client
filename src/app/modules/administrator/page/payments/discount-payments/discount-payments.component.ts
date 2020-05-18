@@ -55,16 +55,12 @@ export class DiscountPaymentsComponent implements OnInit {
   public editDiscount(discountPayment: DiscountPayment) {
     let data = new DiscountPayment();
     data = discountPayment;
-
-    console.log(discountPayment);
-
     const dialogRef = this.dialog.open(EditDiscountDialogComponent, {
       data: {data}
     });
 
     dialogRef.afterClosed().subscribe(
       result => {
-
         if (result) {
           this.discountPaymentService.updateDiscount(result).subscribe(
             resp => {

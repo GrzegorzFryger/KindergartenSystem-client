@@ -44,7 +44,7 @@ export class PaymentsService {
 
   updatePayment(recurringPayment: RecurringPayment) {
     return this.http.put<RecurringPayment>(
-      environment.apiUrls.payments.createTuition, recurringPayment
+      environment.apiUrls.payments.updatePayment, recurringPayment
     );
   }
 

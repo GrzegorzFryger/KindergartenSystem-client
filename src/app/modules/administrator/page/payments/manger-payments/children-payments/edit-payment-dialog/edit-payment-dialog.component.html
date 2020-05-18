@@ -9,7 +9,7 @@
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Dodaj rabat</mat-label>
             <mat-select formControlName="discount">
-              <mat-option *ngFor="let discount of discountPayments" [value]="discount.name">
+              <mat-option *ngFor="let discount of discountPayments" [value]="discount">
                 {{discount.value}} PLN {{discount.description}}
               </mat-option>
             </mat-select>

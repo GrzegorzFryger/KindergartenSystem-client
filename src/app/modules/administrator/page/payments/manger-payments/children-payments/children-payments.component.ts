@@ -96,7 +96,16 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result.discount) {
+      }
+      if (result.recurringPayment) {
+        this.paymentsService.updatePayment(result.recurringPayment).subscribe(
+          resp => {
+            this.snackMessageHandlingService.success('Płatność zaktualizowano pomyślnie');
+          }, error => {
+            this.snackMessageHandlingService.error('Wystąpił problem z aktualizacją płatności');
+          });
+      }
     });
   }
 }

@@ -21,7 +21,7 @@
           Początek:
         </div>
         <div class="value">
-          {{payment.startDate}}
+          {{payment.startDate | date}}
         </div>
       </div>
       <div class="expansion-panel-item">
@@ -29,7 +29,7 @@
           Koniec:
         </div>
         <div class="value">
-          {{payment.endDate}}
+          {{payment.endDate | date}}
         </div>
       </div>
       <div class="expansion-panel-item">
@@ -45,10 +45,10 @@
           Typ:
         </div>
         <div class="value">
-          <ng-container *ngIf="payment.type === 'TUITION'; else typePayment" >
+          <ng-container *ngIf="payment.type === 'TUITION'; else typePayment">
             Czesne
           </ng-container>
-          <ng-template #typePayment >
+          <ng-template #typePayment>
             Inna
           </ng-template>
         </div>
