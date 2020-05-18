@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-administrator',
@@ -8,9 +9,17 @@ import {Location} from '@angular/common';
 })
 export class AdministratorComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  display: boolean;
+
+  constructor(private location: Location, private router: Router) {
+    this.display = false;
+  }
 
   ngOnInit(): void {
+    this.router.events.subscribe(ev => {
+      const navEnf = ev as NavigationEnd;
+      this.display = navEnf.url !== '/administrator';
+    });
   }
 
   onBack() {
