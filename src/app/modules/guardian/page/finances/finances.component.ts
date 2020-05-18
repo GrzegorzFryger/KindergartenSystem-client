@@ -1,5 +1,5 @@
 import {TransactionMappingService} from '../../../../data/service/receivables/transaction-mapping.service';
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError, zip} from 'rxjs';
 import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
@@ -47,8 +47,9 @@ export class FinancesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(u => {
+      console.log('Finding data for user: ' + u.id);
       this.initializeSumOfAllBalances(u);
-      this.guardianService.children.subscribe(resp => {
+      this.guardianService.findAllGuardianChildren(u.id).subscribe(resp => {
           this.forkResources(u);
           this.children = resp;
         }

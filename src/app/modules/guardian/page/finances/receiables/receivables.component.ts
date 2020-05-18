@@ -50,7 +50,7 @@ export class ReceivablesComponent implements OnInit {
           return throwError(err);
         }));
 
-      this.guardianService.children.subscribe(children => {
+      this.guardianService.findAllGuardianChildren(user.id).subscribe(children => {
         this.initializeTransactionMappings(user).subscribe(tras => {
           this.transactionMappings = tras;
           this.children = children;
@@ -82,16 +82,16 @@ export class ReceivablesComponent implements OnInit {
 
   private initializeTransactionMappings(u: Account) {
     return this.transactionMappingService
-    .getAllPaymentMappingsForGuardian(u.id)
-    .pipe(
-      catchError(err => {
-        this.snackMessageHandlingService.error(ERROR_MESSAGE);
-        return throwError(err);
-      }),
-      map(response => {
-        return response;
-      })
-    );
+      .getAllPaymentMappingsForGuardian(u.id)
+      .pipe(
+        catchError(err => {
+          this.snackMessageHandlingService.error(ERROR_MESSAGE);
+          return throwError(err);
+        }),
+        map(response => {
+          return response;
+        })
+      );
   }
 
 }
