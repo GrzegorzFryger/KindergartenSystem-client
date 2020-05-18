@@ -12,10 +12,10 @@
         </div>
       </div>
 
-      <div class="table-container">
-        <mat-form-field class="child-form-field" >
+      <div class="table-container" (click)="getChildren()">
+        <mat-form-field class="child-form-field"  >
           <mat-label>Wybierz Dziecko</mat-label>
-          <mat-select (selectionChange)="onSelectChange($event)" panelClass="item">
+          <mat-select (selectionChange)="onSelectChange($event)"  panelClass="item">
             <mat-option *ngFor="let child of children | async; let i = index" value="{{i}}">{{child.name}}</mat-option>
           </mat-select>
         </mat-form-field>

@@ -19,10 +19,15 @@ export class ChildrenComponent implements OnInit {
   selectedChild: Child;
 
   constructor(private guardianService: GuardianService, private selectedChildService: SelectedChildService) {
-    this.children = this.guardianService.children;
+
   }
 
   ngOnInit(): void {
+    this.getChildren();
+  }
+
+  getChildren() {
+    this.children = this.guardianService.children;
     this.children?.subscribe(children => {
       this.childrenList = children;
       return children;
