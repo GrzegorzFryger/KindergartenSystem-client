@@ -1,9 +1,9 @@
 import {MatTableDataSource} from '@angular/material/table';
 import {IncomingPaymentsService} from '../../../../../data/service/receivables/incoming-payments.service';
 import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {IncomingPayment} from 'src/app/data/model/receivables/incoming-payment';
-import {throwError} from 'rxjs';
+import {Subscription, throwError} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 
@@ -23,7 +23,7 @@ const ERROR_MESSAGE = 'Receivables component failed to perform operation';
   styleUrls: ['./receivables.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ReceivablesComponent implements OnInit {
+export class ReceivablesComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -33,6 +33,9 @@ export class ReceivablesComponent implements OnInit {
   public dataSource: MatTableDataSource<IncomingPayment> = new MatTableDataSource();
   public columnsToDisplay: string[] = ['contractorDetails', 'paymentType', 'title', 'transactionAmount', 'transactionDate'];
 
+  private userSubscription: Subscription;
+  private guardianSubscription: Subscription;
+
   constructor(private incomingPaymentsService: IncomingPaymentsService,
               private userService: AccountService,
               private snackMessageHandlingService: SnackMessageHandlingService,
@@ -41,7 +44,7 @@ export class ReceivablesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(user => {
+    this.userSubscription = this.userService.currentUser.subscribe(user => {
       this.incomingPaymentsService.getAllIncomingPaymentsForGuardian(user.id).subscribe(resp => {
           this.setUpDataTable(resp);
         },
@@ -50,7 +53,7 @@ export class ReceivablesComponent implements OnInit {
           return throwError(err);
         }));
 
-      this.guardianService.findAllGuardianChildren(user.id).subscribe(children => {
+      this.guardianSubscription = this.guardianService.findAllGuardianChildren(user.id).subscribe(children => {
         this.initializeTransactionMappings(user).subscribe(tras => {
           this.transactionMappings = tras;
           this.children = children;
@@ -92,6 +95,11 @@ export class ReceivablesComponent implements OnInit {
           return response;
         })
       );
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+    this.guardianSubscription.unsubscribe();
   }
 
 }

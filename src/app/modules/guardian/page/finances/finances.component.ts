@@ -1,7 +1,7 @@
 import {TransactionMappingService} from '../../../../data/service/receivables/transaction-mapping.service';
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
-import {Observable, throwError, zip} from 'rxjs';
+import {Observable, Subscription, throwError, zip} from 'rxjs';
 import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
@@ -27,7 +27,7 @@ interface UserMapping {
   styleUrls: ['./finances.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FinancesComponent implements OnInit {
+export class FinancesComponent implements OnInit, OnDestroy {
   // Data retrieved from backend
   public sumOfBalancesForAllChildren: Observable<Balance>;
   public balancesForAllChildren: Array<Balance> = new Array<Balance>();
@@ -36,6 +36,7 @@ export class FinancesComponent implements OnInit {
 
   public accountNumber: AccountNumber;
   public isBalancePositive: boolean;
+  private userSubscription: Subscription;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
@@ -46,8 +47,7 @@ export class FinancesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(u => {
-      console.log('Finding data for user: ' + u.id);
+    this.userSubscription = this.userService.currentUser.subscribe(u => {
       this.initializeSumOfAllBalances(u);
       this.guardianService.findAllGuardianChildren(u.id).subscribe(resp => {
           this.forkResources(u);
@@ -156,6 +156,10 @@ export class FinancesComponent implements OnInit {
       result => {
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 
 }

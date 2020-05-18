@@ -35,13 +35,20 @@
 
             <ng-container matColumnDef="status">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
-              <mat-cell *matCellDef="let guardian"> {{guardian.status}} </mat-cell>
+              <mat-cell *matCellDef="let guardian">
+                <ng-container *ngIf="guardian.status === 'ACTIVE'; else status" >
+                  Aktywny
+                </ng-container>
+                <ng-template #status >
+                  Nie aktywny
+                </ng-template>
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="select">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Wybierz Rodzica</mat-header-cell>
               <mat-cell *matCellDef="let row">
-                <div class="center">
+                <div class="center-guardian">
                   <mat-checkbox (click)="$event.stopPropagation()"
                                 (change)="$event ? selection.toggle(row) : null"
                                 [checked]="selection.isSelected(row)" >

@@ -50,12 +50,10 @@ export class AbsenceComponent implements OnInit, OnDestroy {
     this.selectedDate = new Date();
   }
 
-
   ngOnInit(): void {
     this.childSubscription = this.selectedChild.subscribe(child => {
       this.selectedChildId = child.id;
       this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absence => {
-        console.log(absence);
         this.absences = absence;
         this.myCalendar.updateTodaysDate();
       });
@@ -68,7 +66,7 @@ export class AbsenceComponent implements OnInit, OnDestroy {
     );
   }
 
-  addDateCssClass = (d: Date): MatCalendarCellCssClasses  => {
+  addDateCssClass = (d: Date): MatCalendarCellCssClasses => {
     const cssClasses = new Set();
 
     if (this.contains(this.absences, d)) {
@@ -149,7 +147,7 @@ export class AbsenceComponent implements OnInit, OnDestroy {
         () => {
         },
         () => {
-          this.snackErrorHandlingService.error('can not add absence');
+          this.snackErrorHandlingService.error('Nie można dodać nieobecności');
         });
     });
 

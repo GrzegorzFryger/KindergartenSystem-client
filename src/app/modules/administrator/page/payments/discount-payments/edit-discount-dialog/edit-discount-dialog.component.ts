@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {DiscountPayment} from '../../../../../../data/model/payments/discount-payment';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 interface DiscountType {
   value: string;
@@ -10,11 +10,11 @@ interface DiscountType {
 }
 
 @Component({
-  selector: 'app-add-discount-dialog',
-  templateUrl: './add-discount-dialog.component.html',
-  styleUrls: ['./add-discount-dialog.component.scss']
+  selector: 'app-edit-discount-dialog',
+  templateUrl: './edit-discount-dialog.component.html',
+  styleUrls: ['./edit-discount-dialog.component.scss']
 })
-export class AddDiscountDialogComponent implements OnInit {
+export class EditDiscountDialogComponent implements OnInit {
 
   public form: FormGroup;
 
@@ -23,7 +23,7 @@ export class AddDiscountDialogComponent implements OnInit {
     {value: 'AMOUNT', viewValue: 'Kwotowa'},
   ];
 
-  constructor(public dialogRef: MatDialogRef<AddDiscountDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<EditDiscountDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public dialogConfig: MatDialogConfig<DiscountPayment>,
               private validationService: ValidatorsService,
               private fb: FormBuilder) {
@@ -51,21 +51,22 @@ export class AddDiscountDialogComponent implements OnInit {
   private initializeForm(): void {
     this.form = this.fb.group({
       name: [
-        '',
+        this.dialogConfig.data.name,
         [Validators.required, Validators.minLength(3)]
       ],
       description: [
-        '',
+        this.dialogConfig.data.description,
         [Validators.required, Validators.minLength(3)]
       ],
       value: [
-        '',
+        this.dialogConfig.data.value,
         [Validators.required]
       ],
       typeDiscount: [
-        '',
+        this.dialogConfig.data.typeDiscount,
         [Validators.required]
       ],
     });
   }
 }
+

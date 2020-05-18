@@ -45,8 +45,5 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
-  openImportDialog() {
-
-  }
 }
 

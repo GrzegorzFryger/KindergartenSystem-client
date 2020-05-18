@@ -3,8 +3,14 @@
   display: flex;
   justify-content: center;
 
+
   .steeper {
     flex-basis: 90%;
+
+    .mat-stepper-horizontal {
+      border-radius: 24px;
+      padding: 16px;
+    }
 
     .button-container {
       display: flex;
@@ -24,7 +30,7 @@
         flex-wrap: wrap;
         background-color: #F9F9FB;
         margin-bottom: 16px;
-        padding: 16px 16px 0 16px;
+        padding: 8px 8px 0 8px;
 
         .item-list {
           margin: 0 8px 0 8px ;
@@ -35,6 +41,10 @@
   }
 }
 
+
+.center-assign-children {
+  padding-left: 8px;
+}
 
 .inline {
   display: inline;

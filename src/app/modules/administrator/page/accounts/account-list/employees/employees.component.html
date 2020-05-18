@@ -1,9 +1,8 @@
-
 <div class="account-list-container">
   <ng-container *ngIf="!personDetailCardOpen">
     <div [ngClass]="{'move': personDetailCardOpen }" class="table-container">
+      <h2>Lista pracowników</h2>
       <div class="flex">
-        <h2>Lista pracowników</h2>
         <div class="search">
           <mat-form-field>
             <mat-label>Szukaj</mat-label>
@@ -35,7 +34,14 @@
 
             <ng-container matColumnDef="status">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Status</mat-header-cell>
-              <mat-cell *matCellDef="let employee"> {{employee.status}} </mat-cell>
+              <mat-cell *matCellDef="let employee">
+                <ng-container *ngIf="employee.status === 'ACTIVE'; else status" >
+                  Aktywny
+                </ng-container>
+                <ng-template #status >
+                 Nie aktywny
+                </ng-template>
+              </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>

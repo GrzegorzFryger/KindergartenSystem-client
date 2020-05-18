@@ -28,7 +28,9 @@ export class CashPaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(ev => {
       const navEnf = ev as NavigationEnd;
-      this.isSelected = navEnf.url === '/administrator/cash-payments';
+      if (navEnf instanceof NavigationEnd) {
+        this.isSelected = navEnf.url === '/administrator/cash-payments';
+      }
     });
 
     this.cashPaymentService.getAllCashPaymentsFromPastMonth().subscribe(cashPayments => {
