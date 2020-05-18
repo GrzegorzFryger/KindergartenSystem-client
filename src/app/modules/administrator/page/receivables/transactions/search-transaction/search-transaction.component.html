@@ -1,7 +1,7 @@
 <h2>Wyszukiwanie przelewów</h2>
 <div class="search-container">
   <div class="children-search-item">
-    <p>Lista dzieci:</p>
+    <p class="center">Lista dzieci:</p>
     <div class="children-search-item-container">
       <ng-container>
         <app-children-list
@@ -11,7 +11,7 @@
   </div>
   <ng-container *ngIf="(transactionOutput?.transactions | async)?.length > 0" >
     <div class="transaction-result-item">
-      <p>Lista przelewów:</p>
+      <p class="center">Lista przelewów:</p>
       <div class="transaction-result-item-container">
         <app-transaction-list [dataSource]="transactionOutput"></app-transaction-list>
       </div>
