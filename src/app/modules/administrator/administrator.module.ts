@@ -5,7 +5,7 @@ import {AdministratorComponent} from './administrator.component';
 import {MatCardModule} from '@angular/material/card';
 import {SharedModule} from '../../shared/shared.module';
 import {MealPriceComponent} from './page/meal/meal-price/meal-price.component';
-import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.component';
+import {MealComponent} from './page/meal/meal.component';
 import {MealDictionaryComponent} from './page/meal/meal-dictionary/meal-dictionary.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
@@ -93,7 +93,6 @@ import {AddDiscountDialogComponent} from './page/payments/add-discount-dialog/ad
     MealPriceComponent,
     MealComponent,
     MealDictionaryComponent,
-    DialogOverviewExampleDialog,
     AdministratorNavigationMenuComponent,
     AccountsComponent,
     ProfileComponent,

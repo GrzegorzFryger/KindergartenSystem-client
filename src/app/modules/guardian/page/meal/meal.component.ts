@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {Child} from '../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../data/service/accounts/guardian.service';
 import {UserCredentials} from '../../../../data/model/accounts/user-credentials';
@@ -188,20 +188,3 @@ export class MealComponent implements OnInit {
 
 }
 
-
-@Component({
-  selector: 'app-dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

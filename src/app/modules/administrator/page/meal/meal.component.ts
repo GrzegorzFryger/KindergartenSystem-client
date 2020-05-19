@@ -67,18 +67,6 @@ export class MealComponent implements OnInit {
     });
   }
 
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
-    });
-  }
-
   openAddMealFormM() {
     this.openAddMealForm = !this.openAddMealForm;
   }
@@ -197,19 +185,3 @@ export class MealComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'app-dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
