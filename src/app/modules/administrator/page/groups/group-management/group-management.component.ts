@@ -9,6 +9,7 @@ import {SnackMessageHandlingService} from '../../../../../core/snack-message-han
 import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {Child} from '../../../../../data/model/accounts/child';
+import {AddChildToGroupComponent} from '../add-child-to-group/add-child-to-group.component';
 
 @Component({
   selector: 'app-group-management',
@@ -25,6 +26,8 @@ export class GroupManagementComponent implements OnInit {
 
   openedGroupDetailsTable = false;
   groupDetails: Group = new Group();
+  selectedGroupId: string;
+  selectedChildId: string;
 
   public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
   public groupDetailsDataSource: MatTableDataSource<Child> = new MatTableDataSource();
@@ -47,6 +50,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   openGroupDetailsTable(groupId: string): void {
+    this.selectedGroupId = groupId;
     this.groupService.getGroupById(groupId).subscribe(resp => {
       this.groupDetails = resp;
     });
@@ -61,6 +65,16 @@ export class GroupManagementComponent implements OnInit {
 
   closeGroupDetailsTable() {
     this.openedGroupDetailsTable = false;
+  }
+
+  addChildToGroup() {
+    this.openAddChildDialog(this.selectedGroupId);
+  }
+
+  private openAddChildDialog(groupId: string): void {
+    const dialogRef = this.dialog.open(AddChildToGroupComponent, {
+      data: {groupId}
+    });
   }
 
   private removeChildFromGroup(confirmation: boolean, childId: string): void {

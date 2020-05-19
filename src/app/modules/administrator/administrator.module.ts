@@ -82,6 +82,7 @@ import {AddPaymentDialogComponent} from './page/payments/manger-payments/childre
 import {AddDiscountDialogComponent} from './page/payments/discount-payments/add-discount-dialog/add-discount-dialog.component';
 import {EditPaymentDialogComponent} from './page/payments/manger-payments/children-payments/edit-payment-dialog/edit-payment-dialog.component';
 import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
+import {AddChildToGroupComponent} from './page/groups/add-child-to-group/add-child-to-group.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-pa
     AddDiscountDialogComponent,
     EditPaymentDialogComponent,
     MangerPaymentsComponent,
+    AddChildToGroupComponent
   ],
 
 
