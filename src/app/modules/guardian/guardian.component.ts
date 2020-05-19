@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-guardian',
@@ -14,7 +14,10 @@ export class GuardianComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(value => {
-      this.displayChildComponent = this.router.url !== '/parent/finances';
+      const navEnf = value as NavigationEnd;
+      if (navEnf.url === '/parent/finances') {
+        this.displayChildComponent = true;
+      }
     });
   }
 

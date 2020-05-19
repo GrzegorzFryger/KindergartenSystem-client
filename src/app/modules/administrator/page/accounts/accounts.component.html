@@ -1,15 +1,8 @@
 <div class="display-flex-col user-menu-container">
-
   <ng-container *ngIf="isSelected">
-    <div class="information-container">
-      <div class="display-flex-row">
-        <app-account-chart></app-account-chart>
-      </div>
-    </div>
-
     <div class="options-container">
       <div class="display-flex-row">
-        <mat-card id="create" (click)="onSelect('create')" class="menu-option">
+        <mat-card  matRipple  id="create" (click)="onSelect('create')" class="menu-option">
           <mat-card-header>
             <h2>Dodaj nowe konto</h2>
           </mat-card-header>
@@ -18,7 +11,7 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card id="list" (click)="onSelect('list')" class="menu-option">
+        <mat-card matRipple  id="list" (click)="onSelect('list')" class="menu-option">
           <mat-card-header>
             <h2>Lista wszystkich kont</h2>
           </mat-card-header>
@@ -27,7 +20,7 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card id="asignChild" (click)="onSelect('assign-children')" class="menu-option">
+        <mat-card matRipple  id="asignChild" (click)="onSelect('assign-children')" class="menu-option">
           <mat-card-header>
             <h2>Przypisz dzieci do rodziców</h2>
           </mat-card-header>
@@ -37,6 +30,11 @@
         </mat-card>
       </div>
     </div>
+    <div class="information-container">
+      <div class="display-flex-row">
+        <app-account-chart></app-account-chart>
+      </div>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="!isSelected">
@@ -44,6 +42,4 @@
       <router-outlet></router-outlet>
     </div>
   </ng-container>
-
-
 </div>

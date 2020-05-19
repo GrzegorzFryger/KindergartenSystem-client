@@ -12,8 +12,6 @@ import {SelectedChildService} from './selected-child.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildrenComponent implements OnInit {
-  private childrenList: Array<Child>;
-
   selected: boolean;
   children: Observable<Array<Child>>;
   selectedChild: Child;
@@ -23,15 +21,11 @@ export class ChildrenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.children?.subscribe(children => {
-      this.childrenList = children;
-      return children;
-    });
   }
 
-  onSelectChange($event: MatSelectChange) {
+  onSelectChange(event: MatSelectChange) {
     this.selected = true;
-    this.selectedChild = this.childrenList[$event.value];
-    this.selectedChildService.changeChild(this.selectedChild);
+    this.selectedChild = event.value;
+    this.selectedChildService.changeChild(event.value);
   }
 }

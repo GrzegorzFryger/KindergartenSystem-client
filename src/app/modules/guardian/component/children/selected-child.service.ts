@@ -8,7 +8,7 @@ export class SelectedChildService {
   selectedChild: Observable<Child>;
 
   constructor() {
-    this.selectedChildSub = new ReplaySubject<Child>();
+    this.selectedChildSub = new ReplaySubject<Child>(1);
     this.selectedChild = this.selectedChildSub.asObservable();
   }
 

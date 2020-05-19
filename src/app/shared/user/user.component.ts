@@ -1,25 +1,26 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {AccountService} from '../../data/service/accounts/account.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Account} from '../../data/model/accounts/account';
 import {environment} from '../../core/environment.dev';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../../core/auth/authentication.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, AfterViewInit {
-
+export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
   public user: Observable<Account>;
   isUserAdmin = false;
   isUserTeacher = false;
   isUserParent = false;
   selectedRole;
+  private userSubb: Subscription;
 
-
-  constructor(private userService: AccountService,
+  constructor(private authenticationService: AuthenticationService,
+              private userService: AccountService,
               private router: Router) {
   }
 
@@ -34,7 +35,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
-    localStorage.clear();
+    this.authenticationService.logout();
     this.router.navigate([environment.routes.signInUrl]);
   }
 
@@ -61,26 +62,28 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   identifyRoles(): void {
-    this.user.subscribe(user => {
-      const roles = user.roles;
+    this.userSubb = this.user.subscribe(user => {
+      if (user) {
+        const roles = user.roles;
 
-      this.showSelectedRole(roles[0].name);
-      this.redirectToProperView();
+        this.showSelectedRole(roles[0].name);
+        this.redirectToProperView();
 
-      roles.forEach(u => {
-        if (u.name === 'ADMINISTRATOR') {
-          this.isUserAdmin = true;
-          this.isUserParent = true;
-          this.isUserTeacher = true;
-        }
-        if (u.name === 'USER') {
-          this.isUserParent = true;
-        }
-        if (u.name === 'TEACHER') {
-          this.isUserParent = true;
-          this.isUserTeacher = true;
-        }
-      });
+        roles.forEach(u => {
+          if (u.name === 'ADMINISTRATOR') {
+            this.isUserAdmin = true;
+            this.isUserParent = true;
+            this.isUserTeacher = true;
+          }
+          if (u.name === 'USER') {
+            this.isUserParent = true;
+          }
+          if (u.name === 'TEACHER') {
+            this.isUserParent = true;
+            this.isUserTeacher = true;
+          }
+        });
+      }
     });
   }
 
@@ -95,6 +98,10 @@ export class UserComponent implements OnInit, AfterViewInit {
     if (role === 'TEACHER') {
       this.router.navigate([environment.routes.homeUrlTeacher]);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.userSubb.unsubscribe();
   }
 
 

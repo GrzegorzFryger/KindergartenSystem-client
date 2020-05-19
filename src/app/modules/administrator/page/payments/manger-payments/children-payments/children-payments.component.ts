@@ -25,6 +25,8 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   private selectedChildId: string;
   private selectedGuardianId: string;
 
+  private userSubscription: Subscription;
+
   constructor(private paymentsService: PaymentsService,
               private childrenSelectShareService: ChildrenSelectShareService,
               private dialog: MatDialog,
@@ -39,7 +41,7 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
       this.data = this.paymentsService.findAllRecurringPaymentsByChildId(child.id);
     });
 
-    this.userService.currentUser.subscribe(
+    this.userSubscription = this.userService.currentUser.subscribe(
       u => {
         this.selectedGuardianId = u.id;
       });
@@ -47,6 +49,7 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
   addRecurringPayment(): void {
@@ -96,7 +99,16 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result.discount) {
+      }
+      if (result.recurringPayment) {
+        this.paymentsService.updatePayment(result.recurringPayment).subscribe(
+          resp => {
+            this.snackMessageHandlingService.success('Płatność zaktualizowano pomyślnie');
+          }, error => {
+            this.snackMessageHandlingService.error('Wystąpił problem z aktualizacją płatności');
+          });
+      }
     });
   }
 }

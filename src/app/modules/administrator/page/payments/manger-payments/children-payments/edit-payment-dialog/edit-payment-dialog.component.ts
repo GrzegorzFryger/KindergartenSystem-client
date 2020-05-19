@@ -53,6 +53,7 @@ export class EditPaymentDialogComponent implements OnInit {
     this.dialogConfig.data.recurringPayment.amount = this.form.get('amount').value.toString().replace(',', '.');
     this.dialogConfig.data.recurringPayment.description = this.form.get('description').value;
     this.dialogConfig.data.discount = this.form.get('discount').value;
+
     this.dialogRef.close(this.dialogConfig.data);
   }
 

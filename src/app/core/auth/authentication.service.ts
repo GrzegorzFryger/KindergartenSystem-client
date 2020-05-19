@@ -16,14 +16,16 @@ const UNAUTHORIZED_MESSAGE = 'Błedne dane logowania';
 })
 export class AuthenticationService {
   private currentUserCredSubject: BehaviorSubject<UserCredentials>;
-  public currentUserCred: Observable<UserCredentials>;
+
 
   constructor(private http: HttpClient,
               private jwtDecodeService: JwtDecodeService,
               private snackMessageHandlingService: SnackMessageHandlingService) {
-
     this.currentUserCredSubject = new BehaviorSubject<UserCredentials>(this.userCredentialsFromLocalStore);
-    this.currentUserCred = this.currentUserCredSubject.asObservable();
+  }
+
+  public get currentUserCred(): Observable<UserCredentials> {
+    return this.currentUserCredSubject.asObservable();
   }
 
   login(email, rawPassword): Observable<UserCredentials> {

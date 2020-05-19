@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -17,7 +17,8 @@ import {MatStepper} from '@angular/material/stepper';
 @Component({
   selector: 'app-add-cash-payment',
   templateUrl: './add-cash-payment.component.html',
-  styleUrls: ['./add-cash-payment.component.scss']
+  styleUrls: ['./add-cash-payment.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
