@@ -27,7 +27,7 @@ export class GroupManagementComponent implements OnInit {
   openedGroupDetailsTable = false;
   groupDetails: Group = new Group();
   selectedGroupId: string;
-  selectedChildId: string;
+  childIdFromDialog: string;
 
   public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
   public groupDetailsDataSource: MatTableDataSource<Child> = new MatTableDataSource();
@@ -68,13 +68,38 @@ export class GroupManagementComponent implements OnInit {
   }
 
   addChildToGroup() {
-    this.openAddChildDialog(this.selectedGroupId);
+    this.openAddChildDialog(this.childIdFromDialog);
   }
 
-  private openAddChildDialog(groupId: string): void {
+  private openAddChildDialog(data: string): void {
     const dialogRef = this.dialog.open(AddChildToGroupComponent, {
-      data: {groupId}
+      data: {data}
     });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result == null) {
+          this.snackMessageHandlingService.error('Nie wybrano dziecka');
+        } else {
+          this.addChild(result);
+          this.openGroupDetailsTable(this.selectedGroupId);
+        }
+      }
+    );
+  }
+
+  private addChild(childId: string) {
+    this.groupService.addChildToGroup(this.selectedGroupId, childId).subscribe(
+      resp => {
+        this.snackMessageHandlingService.success('Dziecko zostało dodane do grupy');
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z dodaniem dziecka');
+      },
+      () => {
+        // ON COMPLETE
+      }
+    );
   }
 
   private removeChildFromGroup(confirmation: boolean, childId: string): void {
@@ -94,7 +119,6 @@ export class GroupManagementComponent implements OnInit {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
   }
-
 
   private removeGroup(confirmation: boolean, groupId: string): void {
     if (confirmation) {
