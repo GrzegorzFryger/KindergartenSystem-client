@@ -16,11 +16,12 @@ h2 {
 }
 
 .search-cash-payments-container {
-
   display: flex;
   justify-content: center;
 
   .mat-stepper-horizontal {
+    border-radius: 20px;
+    padding: 16px;
     width: 90%;
 
     .steeper {

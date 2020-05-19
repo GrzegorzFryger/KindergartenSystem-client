@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="selectedRole == 'ADMINISTRATOR'">
   <div class="row">
     <div class="col p-0">
       <button mat-button color="primary" class="nav-button" routerLink="/administrator">Home</button>
@@ -6,12 +6,30 @@
   </div>
   <div class="row">
     <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/administrator/transactions">Przelewy</button>
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/payments-main">
+        Należności
+      </button>
     </div>
   </div>
   <div class="row">
     <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/administrator/cash-payments">Płatności gotówkowe</button>
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/accounts">
+       Konta użytkowników
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/cash-payments">
+        Płatności gotówkowe
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/transactions">
+        Płatności bezgotówkowe
+      </button>
     </div>
   </div>
   <div class="row">
@@ -36,7 +54,7 @@
   </div>
   <div class="row">
     <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/administrator/accounts">Użytkownicy</button>
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/groups">Grupy</button>
     </div>
   </div>
   <div class="row">
@@ -44,9 +62,27 @@
       <button mat-button color="primary" class="nav-button" routerLink="/administrator/actuator">Stan aplikacji</button>
     </div>
   </div>
+</div>
+
+
+
+
+
+<div class="container-fluid" *ngIf="selectedRole == 'TEACHER'">
   <div class="row">
     <div class="col p-0">
-      <button mat-button color="primary" class="nav-button">Ustawienia</button>
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher">Home</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher/absence">Nieobecności</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col p-0">
+      <button mat-button color="primary" class="nav-button" routerLink="/teacher/dayOff">Dni wolne</button>
     </div>
   </div>
 </div>
+

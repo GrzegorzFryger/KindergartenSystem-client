@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -17,7 +17,8 @@ import {MatStepper} from '@angular/material/stepper';
 @Component({
   selector: 'app-add-cash-payment',
   templateUrl: './add-cash-payment.component.html',
-  styleUrls: ['./add-cash-payment.component.scss']
+  styleUrls: ['./add-cash-payment.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
@@ -194,7 +195,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
     cashPayment.guardianId = this.selectedGuardianId;
     cashPayment.transactionDate = this.form.get('transactionDate').value;
     cashPayment.contractorDetails = this.form.get('contractorDetails').value;
-    cashPayment.transactionAmount = this.form.get('transactionAmount').value;
+    cashPayment.transactionAmount = this.form.get('transactionAmount').value.replace(',', '.');
     cashPayment.transactionCurrency = this.form.get('transactionCurrency').value;
     cashPayment.title = this.form.get('title').value;
     delete cashPayment.isEdited;
@@ -217,7 +218,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       transactionAmount: [
         '',
-        [Validators.required, Validators.min(1), this.validationService.isInteger]
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
       transactionCurrency: [
         this.CURRENCY,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Child} from '../../model/accounts/child';
-import {Observable, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../../core/environment.dev';
 import {AccountService} from './account.service';
 import {catchError} from 'rxjs/operators';
@@ -14,15 +14,27 @@ const CHILD_NOT_FOUND_MESSAGE = 'Nie znaleziono dzieci';
   providedIn: 'root'
 })
 export class GuardianService {
-  public children: Observable<Array<Child>>;
+  private childrenSub: BehaviorSubject<Array<Child>>;
   public userId: string;
 
   constructor(private http: HttpClient, private userService: AccountService,
               private errorHandlingService: SnackMessageHandlingService) {
-    this.userService.currentUser.subscribe(user => {
-      this.userId = user.id;
-      this.children = this.findAllGuardianChildren(user.id);
-    });
+    this.childrenSub = new BehaviorSubject<Array<Child>>(null);
+
+      this.userService.currentUser.subscribe(user => {
+        if (user) {
+          this.userId = user.id;
+          this.findAllGuardianChildren(user.id).subscribe(children => {
+            this.childrenSub.next(children);
+          });
+        } else {
+          this.childrenSub.next(null);
+        }
+      });
+  }
+
+  get children(): Observable<Array<Child>> {
+    return this.childrenSub.asObservable();
   }
 
   public findAllGuardianChildren(userId: string): Observable<Array<Child>> {
@@ -58,7 +70,7 @@ export class GuardianService {
     return this.http.put<Guardian>(environment.apiUrls.account.guardian.update, guardian);
   }
 
-  public appendChildToGuardian( appendChild: {childId: Array<string>, guardianId: Array<string>}): Observable<Array<Guardian>> {
+  public appendChildToGuardian(appendChild: { childId: Array<string>, guardianId: Array<string> }): Observable<Array<Guardian>> {
     return this.http.post<Array<Guardian>>(environment.apiUrls.account.guardian.appendChild, appendChild);
   }
 

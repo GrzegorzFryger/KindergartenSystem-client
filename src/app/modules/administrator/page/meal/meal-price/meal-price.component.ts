@@ -3,6 +3,10 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MealPrice} from '../../../../../data/model/meal/meal-price';
 import {MealService} from '../../../../../data/service/meal/meal.service';
+import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
 
 
 @Component({
@@ -19,13 +23,17 @@ export class MealPriceComponent implements OnInit {
   mealPriceAvailableToAdd = [];
   addedMealPrice: MealPrice = new MealPrice();
   addingMealPrice = false;
+  mealTypeDic: Array<MealDictionary> = [];
 
-  constructor(private http: HttpClient, private mealService: MealService) {
+  constructor(private http: HttpClient,
+              private mealService: MealService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getAllMealPrice();
     this.getAvailableMealPrice();
+    this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
   }
 
   getAllMealPrice() {
@@ -52,6 +60,16 @@ export class MealPriceComponent implements OnInit {
     });
   }
 
+  mealTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.mealTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
+  }
+
   uploadMealPrice(id: number) {
     this.mealService.getMealPriceById(id).subscribe(resp => {
       resp.mealPrice = this.editedMealPrice;
@@ -63,10 +81,7 @@ export class MealPriceComponent implements OnInit {
   }
 
   async deleteMealPrice(id: number) {
-    await this.mealService.deleteMealPriceById(id).subscribe(resp => {
-      this.getAllMealPrice();
-      this.getAvailableMealPrice();
-    });
+    this.openRemovalDialog('Czy na pewno chcesz usunąć cennik?', id);
   }
 
   getAvailableMealPrice() {
@@ -74,4 +89,24 @@ export class MealPriceComponent implements OnInit {
       this.mealPriceAvailableToAdd = resp;
     });
   }
+
+  private openRemovalDialog(question: string, id: number): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result.answer) {
+          this.mealService.deleteMealPriceById(id).subscribe(resp => {
+            this.getAllMealPrice();
+            this.getAvailableMealPrice();
+          });
+        }
+      }
+    );
+  }
+
+
 }

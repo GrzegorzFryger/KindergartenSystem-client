@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 
 @Component({
   selector: 'app-administrator-navigation-menu',
   templateUrl: './administrator-navigation-menu.component.html',
   styleUrls: ['./administrator-navigation-menu.component.scss']
 })
-export class AdministratorNavigationMenuComponent implements OnInit {
+export class AdministratorNavigationMenuComponent implements AfterViewInit {
+  selectedRole: string;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.selectedRole = localStorage.getItem('selectedRole');
   }
 
 }

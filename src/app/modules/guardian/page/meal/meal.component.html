@@ -32,7 +32,7 @@
 
             <ng-container matColumnDef="meaPrice">
               <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealPrice}} zł</mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.mealPrice | number:'1.2-2'}} zł</mat-cell>
             </ng-container>
 
 
@@ -50,17 +50,17 @@
 
             <ng-container matColumnDef="mealStatus">
               <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealStatus}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{statusBusinessName(element.mealStatus)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="mealType">
               <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.mealType }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dietType">
               <mat-header-cell *matHeaderCellDef> Rodzaj diety</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.dietType }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{dietTypeBusinessName(element.dietType)}} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="childID">
@@ -100,9 +100,14 @@
   <div class="row">
     <mat-card class="childDetailsCardContent">
       <mat-card-header class="mealCardHeader">
-        <mat-card-title>Uwagi żywieniowe - {{selectedMeal.mealType}} - {{selectedMeal.dietType}} ({{selectedMeal.id}})</mat-card-title>
+        <mat-card-title>Uwagi żywieniowe - {{mealTypeBusinessName(selectedMeal.mealType)}} - {{dietTypeBusinessName(selectedMeal.dietType)}} ({{selectedMeal.id}})</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+
+        <div class="close-cross" style="">
+          <mat-icon matTooltip="Zamknij" (click)="closeNutritionalNotes()">close</mat-icon>
+        </div>
+
         <div class="cardContent">
 
           <div class="container">

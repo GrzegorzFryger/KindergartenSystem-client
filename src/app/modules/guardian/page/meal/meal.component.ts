@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import {AuthenticationService} from '../../../../core/auth/authentication.servic
 import {NutritionalNotes} from '../../../../data/model/meal/nutritional-notes';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 import {SelectedChildService} from '../../component/children/selected-child.service';
+import {MealDictionary} from '../../../../data/model/meal/meal-dictionary';
 
 
 export interface DialogData {
@@ -25,7 +26,7 @@ export interface DialogData {
   templateUrl: './meal.component.html',
   styleUrls: ['./meal.component.scss']
 })
-export class MealComponent implements OnInit {
+export class MealComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['select', 'id', 'meaPrice', 'mealFromDate', 'mealToDate', 'mealStatus', 'mealType', 'dietType', 'childID'];
   meals: Array<Meal>;
@@ -37,10 +38,13 @@ export class MealComponent implements OnInit {
   openNutritionalNotes = false;
   openAddMealForm = false;
   selectedChild: Child;
+  mealTypeDic: Array<MealDictionary> = [];
+  dietTypeDic: Array<MealDictionary> = [];
 
 
   public children: Observable<Array<Child>>;
   selectedMealId: Array<number> = [];
+  private childSubscription: Subscription;
 
   constructor(private http: HttpClient,
               private guardianService: GuardianService,
@@ -49,10 +53,7 @@ export class MealComponent implements OnInit {
               private mealService: MealService,
               private snackMessageHandlingService: SnackMessageHandlingService,
               private selectedChildService: SelectedChildService) {
-    selectedChildService.selectedChild.subscribe((child: Child) => {
-      this.selectedChild = child;
-      this.getAllMealsForChild();
-    });
+
   }
 
   ngOnInit(): void {
@@ -60,11 +61,13 @@ export class MealComponent implements OnInit {
     this.userCredentials = this.authenticationService.userCredentials;
 
 
-    this.selectedChildService.selectedChild.subscribe((child: Child) => {
-      this.selectedChild = child;
-      this.getAllMealsForChild();
+    this.childSubscription = this.selectedChildService.selectedChild.subscribe((child: Child) => {
+        this.selectedChild = child;
+        this.getAllMealsForChild();
     });
 
+    this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
+    this.mealService.getDietType().subscribe(resp => this.dietTypeDic = resp);
 
   }
 
@@ -132,6 +135,10 @@ export class MealComponent implements OnInit {
     }
   }
 
+  closeNutritionalNotes() {
+    this.openNutritionalNotes = false;
+  }
+
   invokeMeals() {
     this.selectedMealId.forEach(u => {
       this.mealService.invokeMeal(u).subscribe(reps => {
@@ -144,6 +151,40 @@ export class MealComponent implements OnInit {
 
     });
 
+  }
+
+  statusBusinessName(value: string): string {
+    if (value === 'INACTIVE') {
+      return 'Nieaktywny';
+    } else if (value === 'ACTIVE') {
+      return 'Aktywny';
+    }
+
+    return value;
+  }
+
+  mealTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.mealTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
+  }
+
+  dietTypeBusinessName(value: string): string {
+    let businessName = null;
+    this.dietTypeDic.forEach(m => {
+      if (m.value === value) {
+        businessName = m.description;
+      }
+    });
+    return businessName != null ? businessName : value;
+  }
+
+  ngOnDestroy(): void {
+    this.childSubscription.unsubscribe();
   }
 
 

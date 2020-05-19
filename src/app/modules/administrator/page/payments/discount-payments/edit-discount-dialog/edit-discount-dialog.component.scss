@@ -1,0 +1,38 @@
+.add-discount-dialog {
+  height: 100%;
+  padding: 0 5% 0 5%;
+
+  p {
+    margin-top: 2%;
+    margin-bottom: 0;
+  }
+
+  h2 {
+
+    margin-bottom: 5%;
+
+  }
+
+  .add-discount-dialog-filed-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+.button-discount-edit {
+  margin-top: 8px;
+  padding: 16px;
+}
+
+.m-8 {
+  margin-right: 8px;
+}
+

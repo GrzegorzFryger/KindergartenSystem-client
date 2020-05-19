@@ -1,0 +1,57 @@
+<div class="discount-payments-container">
+
+  <div class="illustration-item">
+  </div>
+
+  <div class="discount-item">
+    <div class="discount-payments-list-container">
+      <ng-container *ngIf="(data  )?.length === 0">
+        <div class="expansion-panel-container empty">
+          <p>Brak aktywnych płatności</p>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let discount of (data ); let i = index">
+        <div class="expansion-panel-container">
+          <div class="expansion-panel-item">
+            <div class="header">
+              Kwota:
+            </div>
+            <div class="value">
+              {{discount.value}} PLN
+            </div>
+          </div>
+
+          <div class="expansion-panel-item">
+            <div class="header">
+              Opis:
+            </div>
+            <div class="value">
+              {{discount.description}}
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <div class="header">
+              Typ:
+            </div>
+            <div class="value">
+              {{discount.typeDiscount}}
+            </div>
+          </div>
+          <div class="expansion-panel-item">
+            <button (click)="editDiscount(discount)" mat-mini-fab color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="add-button">
+        <button (click)="addDiscount()" mat-mini-fab color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

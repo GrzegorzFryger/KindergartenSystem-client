@@ -1,23 +1,23 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Płatności gotówkowe</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <button routerLink="/administrator/cash-payments/add" mat-raised-button color="primary">
-            Dodaj płatność gotówkową
-          </button>
-        </div>
-        <div class="col">
-          <button routerLink="/administrator/cash-payments/search" mat-raised-button color="primary">
-            Szukaj płatności gotówkowej
-          </button>
+<div class="transactions-container">
+  <ng-container *ngIf="isSelected">
+    <div class="transactions-options">
+      <div class="transaction-options-container">
+        <mat-card matRipple routerLink="/administrator/cash-payments/add" class="transaction-option-card">
+          <h2> Dodaj płatność gotówkową</h2>
+        </mat-card>
+        <mat-card matRipple routerLink="/administrator/cash-payments/search" class="transaction-option-card">
+          <h2> Szukaj płatności gotówkowej</h2>
+        </mat-card>
+      </div>
+    </div>
+    <div class="transactions-info">
+      <div class="transactions-info-container">
+        <div class="history">
+          <p class="center">Historia płatności gotówkowych z ostatnich 30 dni: </p>
+          <app-cash-payments-list [dataSource]="cashPaymentOutput" ></app-cash-payments-list>
         </div>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
-<router-outlet></router-outlet>
+  </ng-container>
+  <router-outlet></router-outlet>
+</div>

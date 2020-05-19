@@ -78,13 +78,20 @@
               flex-basis: 10%;
               margin-bottom: 8px;
 
-              .d-flex {
-                justify-content: flex-end;
-                height: 100%;
+              .item {
+                flex-basis: 70%;
+              }
 
-                .user {
-
+              .item-back {
+                flex-basis: 30%;
+                .back-button {
+                  border-radius: 24px;
+                  height: 80%;
                 }
+              }
+
+              .d-flex {
+                height: 100%;
               }
             }
 

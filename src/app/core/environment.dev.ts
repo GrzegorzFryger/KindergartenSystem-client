@@ -2,12 +2,14 @@ const apiUrl = 'https://localhost:8080';
 const receivablesUrl = apiUrl + '/api/receivables/';
 const financesUrl = apiUrl + '/api/finances/';
 const calendarUrl = apiUrl + '/api/calendar/';
+const groupsUrl = apiUrl + '/api/groups/';
 
 const mealUrl = apiUrl + '/api/meal';
 const mealDictionaryUrl = apiUrl + '/api/dictionary/meal/';
 const mealPriceUrl = apiUrl + '/api/meal/price';
 const accountUrl = apiUrl + '/api/account/';
 const actuatorUrl = apiUrl + '/actuator/';
+const paymentsUrl = apiUrl + '/api/payments/';
 
 export const environment = {
   production: false,
@@ -112,6 +114,17 @@ export const environment = {
       updateDayOffWork: calendarUrl + 'dayoff',
       deleteDayOffWork: calendarUrl + 'dayoff/',
     },
+    groups: {
+      // Groups Controller
+      getGroup: groupsUrl,
+      getAllGroups: groupsUrl + 'groups',
+      createGroup: groupsUrl,
+      updateGroup: groupsUrl,
+      deleteGroup: groupsUrl,
+      addChildToGroup: groupsUrl + 'add/',
+      findAllChildrenInGroup: groupsUrl + 'list/',
+      removeChildFromGroup: groupsUrl + 'remove/'
+    },
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',
       getDietType: mealDictionaryUrl + 'dietType',
@@ -128,8 +141,6 @@ export const environment = {
       invokeMeal: mealUrl + '/',
       getAllMealsByChild: mealUrl + '/',
       getMealBySelectedDate: mealUrl + '/order/'
-
-
     },
 
     actuator: {
@@ -137,6 +148,30 @@ export const environment = {
       getHttpTrace: actuatorUrl + 'httptrace',
       getMetrics: actuatorUrl + 'metrics',
       getMetricsDetails: ''
+    },
+
+    payments: {
+      findAllRecurringPayments: paymentsUrl + 'recurring-payments',
+      findAllRecurringPaymentsByChildId: paymentsUrl + 'recurring-payments/',
+      findPaymentById: paymentsUrl + 'recurring-payment',
+      createTuition: paymentsUrl + 'recurring-payment/tuition',
+      createOtherPayment: paymentsUrl + 'recurring-payments/other',
+      updatePayment: paymentsUrl + 'recurring-payments',
+      markAsCancelPayment: paymentsUrl + 'recurring-payments/',
+
+      history: {
+        getChildById: paymentsUrl +  'payment-history/',
+        applyBalanceCorrectionForPayment: paymentsUrl + 'payment-history/balance-correction',
+        paymentLastMonth: paymentsUrl + 'payments-history/month'
+      },
+
+      discount: {
+        getById: paymentsUrl + 'discount/',
+        getAll: paymentsUrl +  'discounts',
+        create: paymentsUrl + 'discount',
+        update: paymentsUrl + 'discount',
+        delete: paymentsUrl + 'discount'
+      },
     }
 
   }

@@ -1,6 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+interface GenderType {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-child-form',
@@ -9,12 +13,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class ChildFormComponent implements OnInit {
-  @Output() formValuesChanged = new EventEmitter<{form: FormGroup}>();
+  @Output() formValuesChanged = new EventEmitter<{ form: FormGroup }>();
   @Input() initialState: { [key: string]: any };
   @Input() mode: string;
 
   form: FormGroup;
   turnOnField: boolean;
+
+  genderTypes: GenderType[] = [
+    {value: 'MALE', viewValue: 'Chłopiec'},
+    {value: 'FEMALE', viewValue: 'Dziewczynka'}
+  ];
 
   constructor(private fb: FormBuilder) {
     this.turnOnField = true;
@@ -46,8 +55,9 @@ export class ChildFormComponent implements OnInit {
     return this.form.get(childName).get(controlName).hasError(errorName);
   };
 
+
   private changeStateOptionalFields(val: string): void {
-    if ( val !== '') {
+    if (val !== '') {
       this.form.get('gender').disable();
       this.form.get('dateOfBirth').disable();
       this.turnOnField = false;

@@ -1,7 +1,7 @@
 import {TransactionMappingService} from '../../../../data/service/receivables/transaction-mapping.service';
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
-import {Observable, throwError, zip} from 'rxjs';
+import {Observable, Subscription, throwError, zip} from 'rxjs';
 import {SnackMessageHandlingService} from 'src/app/core/snack-message-handling/snack-message-handling.service';
 import {Balance} from 'src/app/data/model/finances/balance';
 import {BalanceService} from 'src/app/data/service/finances/balance.service';
@@ -10,10 +10,10 @@ import {AccountService} from '../../../../data/service/accounts/account.service'
 import {Account} from '../../../../data/model/accounts/account';
 import {Child} from '../../../../data/model/accounts/child';
 import {GuardianService} from '../../../../data/service/accounts/guardian.service';
-import {PaymentDetails} from "../../../../data/model/finances/payment-details";
-import {PaymentDataComponent} from "./payment-data/payment-data.component";
-import {MatDialog} from "@angular/material/dialog";
-import {AccountNumber} from "../../../../data/model/finances/account-number";
+import {PaymentDetails} from '../../../../data/model/finances/payment-details';
+import {PaymentDataComponent} from './payment-data/payment-data.component';
+import {MatDialog} from '@angular/material/dialog';
+import {AccountNumber} from '../../../../data/model/finances/account-number';
 
 interface UserMapping {
   name: string;
@@ -27,7 +27,7 @@ interface UserMapping {
   styleUrls: ['./finances.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FinancesComponent implements OnInit {
+export class FinancesComponent implements OnInit, OnDestroy {
   // Data retrieved from backend
   public sumOfBalancesForAllChildren: Observable<Balance>;
   public balancesForAllChildren: Array<Balance> = new Array<Balance>();
@@ -35,7 +35,8 @@ export class FinancesComponent implements OnInit {
   public children: Array<Child> = new Array<Child>();
 
   public accountNumber: AccountNumber;
-  private isBalancePositive: boolean;
+  public isBalancePositive: boolean;
+  private userSubscription: Subscription;
 
   constructor(private balanceService: BalanceService,
               private transactionMappingService: TransactionMappingService,
@@ -46,9 +47,9 @@ export class FinancesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(u => {
+    this.userSubscription = this.userService.currentUser.subscribe(u => {
       this.initializeSumOfAllBalances(u);
-      this.guardianService.children.subscribe(resp => {
+      this.guardianService.findAllGuardianChildren(u.id).subscribe(resp => {
           this.forkResources(u);
           this.children = resp;
         }
@@ -155,6 +156,10 @@ export class FinancesComponent implements OnInit {
       result => {
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 
 }

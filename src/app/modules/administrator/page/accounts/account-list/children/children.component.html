@@ -30,7 +30,14 @@
             <ng-container matColumnDef="gender">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Płeć</mat-header-cell>
               <mat-cell
-                *matCellDef="let children"> {{children.gender}} </mat-cell>
+                *matCellDef="let children">
+                <ng-container *ngIf="children.gender === 'MALE'; else gender" >
+                  Chłopiec
+                </ng-container>
+                <ng-template #gender >
+                  Dziewczynka
+                </ng-template>
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="dateOfBirth">
@@ -54,7 +61,7 @@
             <ng-container matColumnDef="select">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Wybierz dziecko</mat-header-cell>
               <mat-cell *matCellDef="let row">
-                <div class="center">
+                <div class="center-children">
                    <mat-checkbox (click)="$event.stopPropagation()"
                                  (change)="$event ? selection.toggle(row) : null"
                                  [checked]="selection.isSelected(row)" >

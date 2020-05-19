@@ -9,7 +9,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div *ngIf="presentingMetrics">
-        <p><b>opis:</b> {{presentingMetrics.description}} <b>jednostka:</b> {{presentingMetrics.baseUnit}}</p>
+          <p><b>opis:</b> {{presentingMetrics.description}} <b>jednostka:</b> {{presentingMetrics.baseUnit}}</p>
           <div class="metrics-card-details" *ngFor="let m of presentingMetrics.measurements">
             <p>{{m.statistic}} : {{m.value}}</p>
           </div>

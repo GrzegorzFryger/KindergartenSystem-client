@@ -1,0 +1,60 @@
+.discount-payments-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  .illustration-item {
+    height: 500px;
+    flex-basis: 45%;
+    margin-right: 16px;
+    background-image: url("src/assets/images/back_empty.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .discount-item {
+    height: 100%;
+    flex-basis: 55%;
+
+    .discount-payments-list-container {
+      display: flex;
+      flex-direction: column;
+
+      .expansion-panel-container {
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 16px;
+        border-radius: 24px;
+        margin-bottom: 8px;
+        background-color: white;
+
+        .header {
+          color: #e1e2e8;
+        }
+
+      }
+
+      .add-button {
+        border-radius: 24px;
+        display: flex;
+        justify-content: flex-end;
+        padding: 16px;
+      }
+    }
+  }
+
+}
+
+//.empty {
+//  flex-basis: 50%;
+//  background-color: white;
+//  background-image: url("src/assets/images/back_empty.png");
+//  background-repeat: no-repeat;
+//  background-size: cover;
+//
+//  h3 {
+//    margin: 8px;
+//  }
+//}

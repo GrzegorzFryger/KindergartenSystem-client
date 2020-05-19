@@ -1,25 +1,11 @@
-<h2 class="center" mat-dialog-title>Potwierdź czynność</h2>
-<div mat-dialog-content class="center">
-  <p>{{ dialogConfig.data.question }}</p>
-</div>
-<div mat-dialog-actions>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <br><br>
-      </div>
-    </div>
-    <div class="row" class="center">
-      <div class="col">
-        <button mat-raised-button class="mat-button-yes" (click)="yesClick()">
-          Tak
-        </button>
-      </div>
-      <div class="col">
-        <button mat-raised-button class="mat-button-no" (click)="noClick()">
-          Nie
-        </button>
-      </div>
-    </div>
+<h2 mat-dialog-title>Potwierdź operację</h2>
+<mat-dialog-content class="mat-typography">
+  {{ dialogConfig.data.question }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="button-container">
+    <button mat-raised-button color="warn" mat-dialog-close (click)="noClick()">Nie</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="yesClick()">Tak
+    </button>
   </div>
-</div>
+</mat-dialog-actions>

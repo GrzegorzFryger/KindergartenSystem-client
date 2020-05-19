@@ -3,7 +3,7 @@
     <div class="left-flex-container">
       <!--<p>Całkowity stan</p>-->
       <!--<div class="chart">-->
-        <!--<app-finance-chart></app-finance-chart>-->
+      <!--<app-finance-chart></app-finance-chart>-->
       <!--</div>-->
 
       <div class="common-finance-item">
@@ -14,7 +14,7 @@
               <div class="header">
                 <p>Saldo:</p>
               </div>
-              <div class="amount">
+              <div class="amount" [ngClass]="isBalancePositive ? 'font-success' : 'font-danger'">
                 <p> {{ balance?.balance | number:'1.2-2' }} PLN</p>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="header">
                 <p>Wpłaty:</p>
               </div>
-              <div class="amount">
+              <div class="amount font-warning">
                 <p> {{ balance?.receivables | number:'1.2-2' }} PLN</p>
               </div>
             </div>
@@ -36,7 +36,7 @@
               <div class="header">
                 <p>Należności:</p>
               </div>
-              <div class="amount">
+              <div class="amount font-danger">
                 <p> {{ balance?.liabilities | number:'1.2-2' }} PLN</p>
               </div>
             </div>
@@ -85,7 +85,7 @@
                         Saldo:
                       </div>
                       <div class="amount">
-                        <b> {{findBalanceForChild(data.id)?.balance}} PLN </b>
+                        <b> {{ findBalanceForChild(data.id)?.balance | number:'1.2-2'}} PLN </b>
                       </div>
                     </div>
                   </div>
@@ -95,7 +95,7 @@
                         Wpłaty:
                       </div>
                       <div class="amount">
-                        <b> {{findBalanceForChild(data.id)?.receivables}} PLN </b>
+                        <b> {{ findBalanceForChild(data.id)?.receivables | number:'1.2-2'}} PLN </b>
                       </div>
                     </div>
                   </div>
@@ -105,7 +105,7 @@
                         Należności:
                       </div>
                       <div class="amount">
-                        <b> {{findBalanceForChild(data.id)?.liabilities}} PLN </b>
+                        <b> {{ findBalanceForChild(data.id)?.liabilities | number:'1.2-2'}} PLN </b>
                       </div>
                     </div>
                   </div>

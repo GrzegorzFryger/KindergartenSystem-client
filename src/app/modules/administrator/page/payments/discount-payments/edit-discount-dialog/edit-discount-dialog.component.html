@@ -1,0 +1,56 @@
+<div class="container-fluid add-discount-dialog">
+  <form [formGroup]="form">
+    <h2>edytuj rabat</h2>
+
+    <div class="row">
+      <div class="col">
+        <p>Wybierz nazwę i opis</p>
+        <div class="add-discount-dialog-filed-container">
+          <mat-form-field appearance="standard">
+            <mat-label>Nazwa</mat-label>
+            <input matInput formControlName="name">
+            <mat-error>Nazwa zniżki jest wymagana (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Opis</mat-label>
+            <input matInput formControlName="description">
+            <mat-error>Opis zniżki jest wymagany (co najmniej 3 znaki)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Wybierz typ oraz wpisz kwotę</p>
+        <div class="add-discount-dialog-filed-container ">
+          <mat-form-field appearance="standard" >
+            <mat-label>Typ płatności</mat-label>
+            <mat-select formControlName="typeDiscount" [(ngModel)]="discountTypes[0].value">
+              <mat-option *ngFor="let paymentType of discountTypes" [value]="paymentType.value">
+                {{paymentType.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error>Typ zniżki jest wymagany</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Wartość zniżki</mat-label>
+            <input matInput formControlName="value">
+            <mat-error>Wartość zniżki jest wymagana (minimum: 1,00)</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="d-flex align-items-end justify-content-end button-discount-edit">
+          <button mat-raised-button color="warn" class="m-8" (click)="noClick()">Anuluj</button>
+          <button mat-raised-button color="primary" (click)="yesClick()" [disabled]="!form.valid">Zatwierdź</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
