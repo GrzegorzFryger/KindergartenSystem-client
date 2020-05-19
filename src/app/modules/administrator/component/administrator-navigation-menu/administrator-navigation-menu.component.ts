@@ -10,7 +10,8 @@ export class AdministratorNavigationMenuComponent implements OnInit {
 
   selectedRole: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.selectedRole = localStorage.getItem('selectedRole');

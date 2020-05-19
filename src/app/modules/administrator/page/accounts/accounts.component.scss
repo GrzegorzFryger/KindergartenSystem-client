@@ -1,9 +1,9 @@
 .user-menu-container {
   height: 100%;
   width: 100%;
+  margin-top: 3%;
 
   .information-container {
-    flex-basis: 50%;
     .display-flex-row {
       height: 100%;
       width: 100%;
@@ -13,22 +13,24 @@
   }
 
   .options-container {
-    flex-basis: 50%;
+    flex-basis: 30%;
 
     .display-flex-row {
       height: 100%;
       width: 100%;
       justify-content: space-around;
-      align-items: center;
       flex-wrap: wrap;
 
       .menu-option {
-        height: 50%;
-        flex-basis: 25%;
-        &:hover {
-          background-color: rgba(240, 187, 218, 0.51);
-          cursor: pointer;
-        }
+        //height: 50%;
+        //flex-basis: 25%;
+        flex-basis: 30%;
+        height: 70%;
+        cursor: pointer;
+        background-image: url("../../../../../assets/images/back-small2.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding-bottom: 0;
 
         .mat-card-header-text {
           margin: 0;

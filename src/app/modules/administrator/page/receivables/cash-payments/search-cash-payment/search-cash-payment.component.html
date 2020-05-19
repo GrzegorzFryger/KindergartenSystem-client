@@ -1,16 +1,16 @@
-<div class="assign-transactions-container">
+<div class="search-cash-payments-container">
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
     <mat-step>
       <ng-template matStepLabel>Wybierz dziecko</ng-template>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="standard" class="full-width">
             <mat-label>Imię</mat-label>
             <input matInput [(ngModel)]="childName" placeholder="Na przykład: Jan">
           </mat-form-field>
         </div>
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="standard" class="full-width">
             <mat-label>Nazwisko</mat-label>
             <input matInput [(ngModel)]="childSurname" placeholder="Na przykład: Kowalski">
           </mat-form-field>

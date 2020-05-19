@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class AccountsComponent implements OnInit {
   selected = new FormControl(0);
   isSelected = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {

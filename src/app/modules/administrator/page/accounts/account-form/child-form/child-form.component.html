@@ -30,9 +30,13 @@
 
     <ng-container *ngIf="turnOnField">
       <div class="col">
-        <mat-form-field appearance="standard">
+        <mat-form-field appearance="standard" >
           <mat-label>Płeć</mat-label>
-          <input matInput placeholder="Płeć" formControlName="gender">
+          <mat-select placeholder="Płeć" formControlName="gender" >
+            <mat-option *ngFor="let gender of genderTypes" [value]="gender.value">
+              {{gender.viewValue}}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="hasError('gender', 'required')">Płeć jest wymagana</mat-error>
         </mat-form-field>
       </div>

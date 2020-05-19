@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
-import {Child} from '../../../../data/model/accounts/child';
-import {ChildService} from '../../../../data/service/accounts/child.service';
-import {childHeader, fadeAnimation, fadeAnimation2, refresh, showHide} from './animations';
-import {ChildrenSelectShareService} from './children-select-share.service';
+import {childHeader, fadeAnimation, fadeAnimation2, refresh, showHide} from './animation/animations';
+import {NavigationEnd, Router} from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {PaymentHistoryService} from '../../../../data/service/payments/payment-history.service';
+import {PaymentHistory} from '../../../../data/model/payments/payment-history';
 
 @Component({
   selector: 'app-payments',
@@ -13,60 +13,36 @@ import {ChildrenSelectShareService} from './children-select-share.service';
   animations: [fadeAnimation, fadeAnimation2, showHide, childHeader, refresh]
 })
 export class PaymentsComponent implements OnInit {
-  refresh = 'false';
-  currentState = 'initial';
-  child: Child;
-
-  public childColumnsToDisplay: string[] = ['img', 'name', 'surname', 'pesel', 'gender', 'dateOfBirth'];
-  public childrenOutput: {
-    data: Observable<Array<Child>>,
+  isSelected: boolean;
+  public paymentsHistoryColumnsToDisplay: string[] = ['date', 'amount', 'description', 'type', 'operationType'];
+  public paymentsHistoryOutput: {
+    data: Observable<Array<PaymentHistory>>,
     columnToDisplay: Observable<Array<string>>,
-    filterPredicate: (data: Child, filter: string) => boolean,
-    select: Observable<Child>
   };
-  public childSelectOutput: {
-    data: Observable<Child>
-  };
-  private childrenSub: ReplaySubject<Array<Child>>;
-  private childrenColumnsSub: BehaviorSubject<Array<string>>;
-  private childrenSelectSub: ReplaySubject<Child>;
 
-  constructor(private childService: ChildService, private childrenSelectShareService: ChildrenSelectShareService) {
-    this.childrenSub = new ReplaySubject<Array<Child>>();
-    this.childrenColumnsSub = new BehaviorSubject(this.childColumnsToDisplay);
-    this.childrenSelectSub = new ReplaySubject<Child>();
+  private paymentsHistorySub: BehaviorSubject<Array<PaymentHistory>>;
+  private paymentsHistoryColumnsSub: BehaviorSubject<Array<string>>;
 
-    this.childrenOutput = {
-      data: this.childrenSub.asObservable(),
-      columnToDisplay: this.childrenColumnsSub.asObservable(),
-      filterPredicate: null,
-      select: this.childrenSelectSub.asObservable()
+  constructor(private router: Router, private paymentHistoryService: PaymentHistoryService) {
+    this.isSelected = true;
+    this.paymentsHistorySub = new BehaviorSubject<Array<PaymentHistory>>(null);
+    this.paymentsHistoryColumnsSub = new BehaviorSubject(this.paymentsHistoryColumnsToDisplay);
+
+    this.paymentsHistoryOutput = {
+      data: this.paymentsHistorySub.asObservable(),
+      columnToDisplay: this.paymentsHistoryColumnsSub.asObservable(),
     };
-
-    this.childSelectOutput = {
-      data: this.childrenSelectSub.asObservable()
-    };
-
   }
 
   ngOnInit(): void {
-    this.childService.getAllChildren().subscribe(children => {
-      this.childrenSub.next(children);
+    this.router.events.subscribe(ev => {
+      const navEnf = ev as NavigationEnd;
+      this.isSelected = navEnf.url === '/administrator/payments-main';
     });
-  }
 
-  onSelectPaymentEvent($event: { selected: any }) {
-    this.childrenColumnsSub.next(this.childColumnsToDisplay.filter(col => col !== 'dateOfBirth' && col !== 'gender' && col !== 'pesel'));
-    this.childrenSelectSub.next($event.selected);
-    this.child = $event.selected;
-    this.childrenSelectShareService.selectChild($event.selected);
-
-    this.currentState = 'final';
-    this.refresh = 'true';
-  }
-
-  onAnimationEvent($event: any) {
-    this.refresh = 'false';
+    this.paymentHistoryService.getPaymentHistoryLastMonth().subscribe( payments => {
+      this.paymentsHistorySub.next(payments);
+    });
   }
 
 }
