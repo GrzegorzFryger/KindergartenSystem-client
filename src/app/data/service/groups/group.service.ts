@@ -38,13 +38,11 @@ export class GroupService {
   }
 
   public addChildToGroup(groupId: string, childId: string): Observable<Group> {
-    const params = new HttpParams().append('groupId', groupId).append('childId', childId);
-    return this.http.put<Group>(environment.apiUrls.groups.addChildToGroup, {params});
+    return this.http.put<Group>(environment.apiUrls.groups.addChildToGroup + groupId + '/' + childId, null);
   }
 
   public removeChildFromGroup(groupId: string, childId: string): Observable<Group> {
-    const params = new HttpParams().append('groupId', groupId).append('childId', childId);
-    return this.http.put<Group>(environment.apiUrls.groups.removeChildFromGroup, {params});
+    return this.http.put<Group>(environment.apiUrls.groups.removeChildFromGroup + groupId + '/' + childId, null);
   }
 
 }

@@ -28,12 +28,9 @@ export class AddGroupComponent implements OnInit {
   }
 
   public addGroup() {
-    console.log('Creating group');
     const group = this.buildGroup();
-    console.log(group);
     this.groupService.createGroup(group).subscribe(
       resp => {
-        console.log(resp);
       },
       error => {
         this.snackMessageHandlingService.error('Wystąpił problem z utworzeniem grupy');
