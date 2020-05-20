@@ -71,9 +71,7 @@ import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absen
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 
 @NgModule({
-  declarations: [
-
-  ],
+  declarations: [],
 
 
   imports: [
