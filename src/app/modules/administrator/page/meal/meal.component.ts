@@ -55,7 +55,6 @@ export class MealComponent implements OnInit {
 
   ngOnInit(): void {
     this.children = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
-    console.log(this.children);
     this.userCredentials = this.authenticationService.userCredentials;
     this.getAllMeals();
     this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
@@ -65,19 +64,6 @@ export class MealComponent implements OnInit {
   getAllMeals() {
     this.mealService.getAllMeals().subscribe(resp => {
       this.meals = resp;
-    });
-  }
-
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 
@@ -199,19 +185,3 @@ export class MealComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'app-dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

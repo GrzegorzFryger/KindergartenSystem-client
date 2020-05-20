@@ -6,7 +6,7 @@ import {GuardianComponent} from './guardian.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {SharedModule} from '../../shared/shared.module';
-import {DialogOverviewExampleDialog, MealComponent} from './page/meal/meal.component';
+import {MealComponent} from './page/meal/meal.component';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -48,7 +48,6 @@ import { PaymentDataComponent } from './page/finances/payment-data/payment-data.
     ReceivablesComponent,
     FinancesComponent,
     MealComponent,
-    DialogOverviewExampleDialog,
     AbsenceComponent,
     AbsenceDialogComponent,
     FinanceChartComponent,

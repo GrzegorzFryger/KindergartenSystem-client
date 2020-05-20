@@ -4,7 +4,7 @@
     <div class="col-12">
       <div class="http-trace-card">
 
-        <div *ngFor="let i of httpTrace.traces">
+        <div *ngFor="let i of httpTrace?.traces">
           <div class="http-trace-single-card"
                [ngClass]="{
                   'resp-positive': i.response.status == 200,
