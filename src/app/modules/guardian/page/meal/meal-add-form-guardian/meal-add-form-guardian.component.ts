@@ -86,11 +86,16 @@ export class MealAddFormGuardianComponent implements OnInit {
     this.mealToAdd.mealToDate = new DatePipe('en-US').transform(this.mealToAdd.mealToDate, 'yyyy-MM-dd');
     this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
 
-    this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
+    this.mealService.addMeal(this.mealToAdd).subscribe(
+      resp => {
       this.mealComponent.getAllMealsForChild();
       this.mealComponent.openAddMealForm = false;
       this.snackMessageHandlingService.success('Posiłek dodany');
-    });
+    },
+      err => {
+        this.snackMessageHandlingService.error('Wybrany typ posiłku dla dziecka jest już aktywny');
+        this.mealComponent.openAddMealForm = false;
+      });
   }
 
 }
