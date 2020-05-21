@@ -9,6 +9,7 @@ import {SnackMessageHandlingService} from '../../../../../core/snack-message-han
 import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {Child} from '../../../../../data/model/accounts/child';
+import {AddChildToGroupComponent} from '../add-child-to-group/add-child-to-group.component';
 
 @Component({
   selector: 'app-group-management',
@@ -25,6 +26,8 @@ export class GroupManagementComponent implements OnInit {
 
   openedGroupDetailsTable = false;
   groupDetails: Group = new Group();
+  selectedGroupId: string;
+  childIdFromDialog: string;
 
   public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
   public groupDetailsDataSource: MatTableDataSource<Child> = new MatTableDataSource();
@@ -47,22 +50,56 @@ export class GroupManagementComponent implements OnInit {
   }
 
   openGroupDetailsTable(groupId: string): void {
+    this.selectedGroupId = groupId;
     this.groupService.getGroupById(groupId).subscribe(resp => {
       this.groupDetails = resp;
-      console.log(resp);
     });
     this.groupService.findAllChildrenInGroup(groupId).subscribe(resp => {
       this.groupDetailsDataSource.data = resp;
       this.groupDetailsDataSource.sort = this.sort.toArray()[1];
       this.groupDetailsDataSource.paginator = this.paginator.toArray()[1];
       this.groupDetailsDataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
-      console.log(resp);
     });
     this.openedGroupDetailsTable = true;
   }
 
   closeGroupDetailsTable() {
     this.openedGroupDetailsTable = false;
+  }
+
+  addChildToGroup() {
+    this.openAddChildDialog(this.childIdFromDialog);
+  }
+
+  private openAddChildDialog(data: string): void {
+    const dialogRef = this.dialog.open(AddChildToGroupComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result == null) {
+          this.snackMessageHandlingService.error('Nie wybrano dziecka');
+        } else {
+          this.addChild(result);
+          this.openGroupDetailsTable(this.selectedGroupId);
+        }
+      }
+    );
+  }
+
+  private addChild(childId: string) {
+    this.groupService.addChildToGroup(this.selectedGroupId, childId).subscribe(
+      resp => {
+        this.snackMessageHandlingService.success('Dziecko zostało dodane do grupy');
+      },
+      error => {
+        this.snackMessageHandlingService.error('Wystąpił problem z dodaniem dziecka');
+      },
+      () => {
+        // ON COMPLETE
+      }
+    );
   }
 
   private removeChildFromGroup(confirmation: boolean, childId: string): void {
@@ -82,7 +119,6 @@ export class GroupManagementComponent implements OnInit {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
   }
-
 
   private removeGroup(confirmation: boolean, groupId: string): void {
     if (confirmation) {
@@ -110,7 +146,6 @@ export class GroupManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log('The dialog was closed with answer: ' + result.answer);
         this.removeGroup(result.answer, dayOffWorkId);
       }
     );
@@ -124,7 +159,6 @@ export class GroupManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log('The dialog was closed with answer: ' + result.answer);
         this.removeChildFromGroup(result.answer, childId);
       }
     );
@@ -132,7 +166,6 @@ export class GroupManagementComponent implements OnInit {
 
   private initializeTables(): void {
     this.groupService.getAllGroups().subscribe(resp => {
-      console.log(resp);
       this.groupListDataSource.data = resp;
       this.groupListDataSource.sort = this.sort.toArray()[0];
       this.groupListDataSource.paginator = this.paginator.toArray()[0];
