@@ -1,22 +1,10 @@
-.add-day-off-form {
+.add-day-off-card {
+  float: left;
   width: fit-content;
-  display: inline-flex;
+  margin-right: 20px;
 }
 
-.day-off-work-table {
-  display: inline-flex;
-}
-
-.mat-card {
-  width: 100%;
-}
-
-.mat-card-content {
-  width: 100%;
-}
-
-.row {
-  h3 {
-    margin-left: 15px;
-  }
+.day-off-list-card {
+  float: left;
+  width: 80%;
 }
