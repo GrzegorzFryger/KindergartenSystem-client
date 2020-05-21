@@ -7,7 +7,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Child} from '../../../../../../data/model/accounts/child';
 import {ChildService} from '../../../../../../data/service/accounts/child.service';
-import {Observable} from 'rxjs';
 import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';

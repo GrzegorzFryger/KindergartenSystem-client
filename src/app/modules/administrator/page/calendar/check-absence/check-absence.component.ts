@@ -8,6 +8,10 @@ import {Child} from '../../../../../data/model/accounts/child';
 import {MatSort} from '@angular/material/sort';
 import {Absence} from '../../../../../data/model/absence/absence';
 import {DatePipe} from '@angular/common';
+import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-check-absence',
@@ -30,7 +34,9 @@ export class CheckAbsenceComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               private absenceService: AbsenceService,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -58,15 +64,46 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   submitAbsenceList(): void {
-    if (this.absentChildrenList.length > 0) {
-      this.absentChildrenList.forEach(id => {
-        this.absenceToAdd = new Absence();
-        this.absenceToAdd.reason = 'Nieusprawiedliwiona';
-        this.absenceToAdd.date = this.convertToDate(new Date());
-        this.absenceToAdd.childId = id;
-        this.absenceService.createAbsence(this.absenceToAdd).subscribe(resp => console.log(resp));
-      });
+    this.openConfirmationDialog('Czy zakończono sprawdzanie obecności?');
+  }
+
+  private submitAbsences(confirmation: boolean): void {
+    if (confirmation) {
+      if (this.absentChildrenList.length > 0) {
+        this.absentChildrenList.forEach(id => {
+          this.absenceToAdd = new Absence();
+          this.absenceToAdd.reason = 'Nieusprawiedliwiona';
+          this.absenceToAdd.date = this.convertToDate(new Date());
+          this.absenceToAdd.childId = id;
+          this.absenceService.createAbsence(this.absenceToAdd).subscribe(
+            resp => {
+              this.snackMessageHandlingService.success('Dodano nieobecności');
+            }, error => {
+              this.snackMessageHandlingService.error('Wystąpił problem z dodaniem nieobecności');
+            },
+            () => {
+              // ON COMPLETE
+            });
+        });
+      } else {
+        this.snackMessageHandlingService.success('Wszyscy obecni!');
+      }
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
+  }
+
+  private openConfirmationDialog(question: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        this.submitAbsences(result.answer);
+      }
+    );
   }
 
   private convertToDate(date: Date): Date {
