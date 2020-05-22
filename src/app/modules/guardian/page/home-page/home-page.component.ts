@@ -1,21 +1,23 @@
-import {Component, ElementRef, OnInit, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {DayOffWork} from '../../../../data/model/absence/day-off-work';
 import {Absence} from '../../../../data/model/absence/absence';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Child} from '../../../../data/model/accounts/child';
 import {DayOffWorkService} from '../../../../data/service/absence/day-off-work.service';
 import {AbsenceService} from '../../../../data/service/absence/absence.service';
 import {SelectedChildService} from '../../component/children/selected-child.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
+import {ChildService} from '../../../../data/service/accounts/child.service';
+import {GuardianService} from '../../../../data/service/accounts/guardian.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit, OnDestroy {
+export class HomePageComponent implements OnInit {
 
   @ViewChild('dateSelectHeader')
   private dateSelectHeader: ElementRef;
@@ -32,30 +34,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
   absences: Array<Absence>;
   daysEvents: Array<string>;
 
-  selectedChildId: string;
-  selectedChild: Observable<Child>;
   resize: boolean;
-  private childSubscription: Subscription;
+
+  guardianChildren: Observable<Array<Child>>;
 
   constructor(private dayOffWorkService: DayOffWorkService,
               private absenceService: AbsenceService,
               private selectedChildService: SelectedChildService,
+              private childService: ChildService,
+              private guardianService: GuardianService,
               public dialog: MatDialog,
               private  snackErrorHandlingService: SnackMessageHandlingService,
               private render: Renderer2) {
-    this.selectedChild = selectedChildService.selectedChild;
     this.daysEvents = new Array<string>();
     this.selectedDate = new Date();
+    this.absences = new Array<Absence>();
   }
 
   ngOnInit(): void {
-    this.childSubscription = this.selectedChild.subscribe(child => {
-      this.selectedChildId = child.id;
-      this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absence => {
-        this.absences = absence;
-        this.myCalendar.updateTodaysDate();
-      });
-    });
+    this.guardianChildren = this.guardianService.findAllGuardianChildren(this.guardianService.userId);
+    this.guardianChildren.subscribe(children => {
+        children.forEach(child => this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absence => {
+          absence.forEach(resp => this.absences.push(resp));
+          this.myCalendar.updateTodaysDate();
+        }));
+      }
+    );
 
     this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
         this.dayOffWorks = resp;
@@ -126,10 +130,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.render.removeClass(this.dateSelectHeader.nativeElement, 'move-description');
     }, 900);
-  }
-
-  ngOnDestroy(): void {
-    this.childSubscription.unsubscribe();
   }
 
 }
