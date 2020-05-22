@@ -10,22 +10,22 @@
         <div class="row">
           <p>Info o groupach - todo</p>
         </div>
-        <div class="row">
-          <div class="col">
-            <mat-table [dataSource]="absenceDataSource" matSort matSortActive="date" matSortDirection="desc">
-              <ng-container matColumnDef="date">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-                <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="reason">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Powód</mat-header-cell>
-                <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
-              </ng-container>
-              <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-            </mat-table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-          </div>
+
+        <div class="absences-for-child-table">
+          <mat-table [dataSource]="absenceDataSource" matSort matSortActive="date" matSortDirection="desc">
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+              <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="reason">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Powód</mat-header-cell>
+              <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <button mat-raised-button (click)="addAbsenceForChild()">Dodaj nieobecność</button>
         </div>
 
 

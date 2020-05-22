@@ -41,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PaymentDataComponent } from './page/finances/payment-data/payment-data.component';
 import { ChildrenDetailsComponent } from './page/children-details/children-details.component';
 import { HomePageComponent } from './page/home-page/home-page.component';
+import { AddAbsenceForChildDialogComponent } from './page/children-details/add-absence-for-child-dialog/add-absence-for-child-dialog.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { HomePageComponent } from './page/home-page/home-page.component';
     MealAddFormGuardianComponent,
     PaymentDataComponent,
     ChildrenDetailsComponent,
-    HomePageComponent
+    HomePageComponent,
+    AddAbsenceForChildDialogComponent
   ],
 
     imports: [

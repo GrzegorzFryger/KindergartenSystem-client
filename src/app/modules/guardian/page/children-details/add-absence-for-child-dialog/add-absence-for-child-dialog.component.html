@@ -1,0 +1,39 @@
+<h2>Dodaj nieobecność</h2>
+
+<div mat-dialog-content>
+  <form class="container-fluid" [formGroup]="form">
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Data od</mat-label>
+        <input matInput [matDatepicker]="dateFrom" placeholder="Data od" formControlName="dateFrom">
+        <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+        <mat-datepicker #dateFrom></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Data do</mat-label>
+        <input matInput [matDatepicker]="dateTo" placeholder="Data do" name="dateTo" formControlName="dateTo">
+        <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+        <mat-datepicker #dateTo></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Powód</mat-label>
+        <input matInput formControlName="reason">
+        <mat-error>Powód jest wymagany (min. 5 znaków)</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <button mat-raised-button (click)="addAbsenceSubmit()"
+              [disabled]="!form.valid">Dodaj
+      </button>
+    </div>
+  </form>
+</div>

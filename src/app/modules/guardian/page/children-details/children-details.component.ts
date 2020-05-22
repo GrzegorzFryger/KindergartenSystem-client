@@ -7,6 +7,9 @@ import {Absence} from '../../../../data/model/absence/absence';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+import {AddAbsenceForChildDialogComponent} from './add-absence-for-child-dialog/add-absence-for-child-dialog.component';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-children-details',
@@ -29,7 +32,9 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
   private childSubscription: Subscription;
 
   constructor(private absenceService: AbsenceService,
-              private selectedChildService: SelectedChildService) {
+              private selectedChildService: SelectedChildService,
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
     this.selectedChild = selectedChildService.selectedChild;
   }
 
@@ -37,11 +42,41 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
     this.childSubscription = this.selectedChild.subscribe(child => {
       this.selectedChildId = child.id;
       this.selectedChildName = child.name + ' ' + child.surname;
-      this.absenceService.getAllAbsencesByChildId(this.selectedChildId).subscribe(absences => {
-        this.absenceDataSource.data = absences;
-        this.absenceDataSource.sort = this.sort.toArray()[0];
-        this.absenceDataSource.paginator = this.paginator.toArray()[0];
-      });
+      this.fillTableData(this.selectedChildId);
+    });
+  }
+
+  addAbsenceForChild() {
+    this.openAddAbsenceDialog(this.selectedChildId);
+  }
+
+  private openAddAbsenceDialog(data: string): void {
+    const dialogRef = this.dialog.open(AddAbsenceForChildDialogComponent, {
+      data: {childId: this.selectedChildId}
+    });
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+      this.dialog.closeAll();
+      this.absenceService.createAbsences(resp).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie dodano nieobecności');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
+        });
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.fillTableData(this.selectedChildId);
+      sub.unsubscribe();
+    });
+  }
+
+  fillTableData(childId: string): void {
+    this.absenceService.getAllAbsencesByChildId(childId).subscribe(absences => {
+      this.absenceDataSource.data = absences;
+      this.absenceDataSource.sort = this.sort.toArray()[0];
+      this.absenceDataSource.paginator = this.paginator.toArray()[0];
     });
   }
 
