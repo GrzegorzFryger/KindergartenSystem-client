@@ -2,8 +2,11 @@
   <div class="calendar-main-item">
     <div class="absence-calendar-container">
       <div [ngClass]="{'resize' : resize}" class="absence-item-calendar">
-        <mat-calendar #calendar [dateClass]="addDateCssClass" [(selected)]="selectedDate"
-                      (selectedChange)="dateChanged()"></mat-calendar>
+        <mat-calendar #calendar [dateClass]="addDateCssClass"
+                      [(selected)]="selectedDate"
+                      (selectedChange)="dateChanged()">
+
+        </mat-calendar>
       </div>
       <div *ngIf="resize" class="absence-item-calendar-info">
         <div #dateSelectHeader class="calendar-info-container">

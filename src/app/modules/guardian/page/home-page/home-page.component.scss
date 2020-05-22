@@ -7,6 +7,8 @@
   width: 100%;
 
   .calendar-main-item {
+    margin-top: 16px;
+
     .absence-calendar-container {
       display: flex;
       justify-content: center;
@@ -55,24 +57,6 @@
             }
           }
         }
-      }
-    }
-  }
-
-  .add-button-item {
-    flex: 1;
-    padding: 20px;
-
-    .add-button-container {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
-
-      button {
-        background-color: #EE502D;
-        color: #ffffff;
       }
     }
   }
