@@ -17,6 +17,7 @@ interface DiscountType {
 export class EditDiscountDialogComponent implements OnInit {
 
   public form: FormGroup;
+  public discountType: string;
 
   discountTypes: DiscountType[] = [
     {value: 'PERCENTAGE', viewValue: 'Procentowa'},
@@ -34,6 +35,7 @@ export class EditDiscountDialogComponent implements OnInit {
     this.dialogRef.disableClose = true; // Force user to click Yes or No
     this.dialogRef.updateSize('40%', '60%');
     this.initializeForm();
+    this.discountType = this.dialogConfig.data.typeDiscount;
   }
 
   public yesClick(): void {
