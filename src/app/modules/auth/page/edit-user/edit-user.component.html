@@ -70,7 +70,7 @@
                 </mat-form-field>
               </p>
               <div class="row justify-content-center align-items-center button">
-                <button mat-raised-button color="primary" (click)="submit()">Zastosuj</button>
+                <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="submit()">Zastosuj</button>
                 <button mat-raised-button color="warn" (click)="backToHomePage()" style="margin-left: 20px">Anuluj</button>
               </div>
             </form>
