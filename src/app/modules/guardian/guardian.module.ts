@@ -39,6 +39,7 @@ import {NavbarComponent} from './component/navbar/navbar.component';
 import { MealAddFormGuardianComponent } from './page/meal/meal-add-form-guardian/meal-add-form-guardian.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PaymentDataComponent } from './page/finances/payment-data/payment-data.component';
+import { ChildrenDetailsComponent } from './page/children-details/children-details.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { PaymentDataComponent } from './page/finances/payment-data/payment-data.
     FinanceChartComponent,
     NavbarComponent,
     MealAddFormGuardianComponent,
-    PaymentDataComponent
+    PaymentDataComponent,
+    ChildrenDetailsComponent
   ],
 
     imports: [
