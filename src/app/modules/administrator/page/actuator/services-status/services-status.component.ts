@@ -15,8 +15,11 @@ export class ServicesStatusComponent implements OnInit {
 
   ngOnInit(): void {
     this.actuatorService.getHealth().subscribe(resp => {
-      this.health = resp;
-    });
+        this.health = resp;
+      },
+      err => {
+        this.health = err;
+      });
   }
 
 }

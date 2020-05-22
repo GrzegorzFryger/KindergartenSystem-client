@@ -9,6 +9,7 @@ import {MealComponent} from '../meal.component';
 import {ChildService} from '../../../../../data/service/accounts/child.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {DatePipe} from '@angular/common';
+import {GuardianService} from '../../../../../data/service/accounts/guardian.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class MealAddFormGuardianComponent implements OnInit {
               private mealService: MealService,
               private childService: ChildService,
               private mealComponent: MealComponent,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private guardianService: GuardianService) {
   }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class MealAddFormGuardianComponent implements OnInit {
   }
 
   getAllKids() {
-    this.childService.getAllChildren().subscribe(resp => {
+    this.guardianService.children.subscribe(resp => {
       this.children = resp;
     });
   }
@@ -84,11 +86,16 @@ export class MealAddFormGuardianComponent implements OnInit {
     this.mealToAdd.mealToDate = new DatePipe('en-US').transform(this.mealToAdd.mealToDate, 'yyyy-MM-dd');
     this.mealToAdd.mealFromDate = new DatePipe('en-US').transform(this.mealToAdd.mealFromDate, 'yyyy-MM-dd');
 
-    this.mealService.addMeal(this.mealToAdd).subscribe(resp => {
+    this.mealService.addMeal(this.mealToAdd).subscribe(
+      resp => {
       this.mealComponent.getAllMealsForChild();
       this.mealComponent.openAddMealForm = false;
       this.snackMessageHandlingService.success('Posiłek dodany');
-    });
+    },
+      err => {
+        this.snackMessageHandlingService.error('Wybrany typ posiłku dla dziecka jest już aktywny');
+        this.mealComponent.openAddMealForm = false;
+      });
   }
 
 }

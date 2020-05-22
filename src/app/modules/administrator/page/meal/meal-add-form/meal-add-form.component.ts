@@ -86,6 +86,9 @@ export class MealAddFormComponent implements OnInit {
       this.mealComponent.getAllMeals();
       this.mealComponent.openAddMealForm = false;
       this.snackMessageHandlingService.success('Posiłek dodany');
+    }, err => {
+      this.snackMessageHandlingService.error('Wybrany typ posiłku dla dziecka jest już aktywny');
+      this.mealComponent.openAddMealForm = false;
     });
   }
 
