@@ -40,6 +40,7 @@ import { MealAddFormGuardianComponent } from './page/meal/meal-add-form-guardian
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PaymentDataComponent } from './page/finances/payment-data/payment-data.component';
 import { ChildrenDetailsComponent } from './page/children-details/children-details.component';
+import { HomePageComponent } from './page/home-page/home-page.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ChildrenDetailsComponent } from './page/children-details/children-detai
     NavbarComponent,
     MealAddFormGuardianComponent,
     PaymentDataComponent,
-    ChildrenDetailsComponent
+    ChildrenDetailsComponent,
+    HomePageComponent
   ],
 
     imports: [

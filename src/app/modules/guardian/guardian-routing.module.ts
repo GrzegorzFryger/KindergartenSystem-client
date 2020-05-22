@@ -6,6 +6,7 @@ import {GuardianComponent} from './guardian.component';
 import {MealComponent} from './page/meal/meal.component';
 import {AbsenceComponent} from './page/absence/absence.component';
 import {ChildrenDetailsComponent} from './page/children-details/children-details.component';
+import {HomePageComponent} from './page/home-page/home-page.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
     path: '',
     component: GuardianComponent,
     children: [
+      {
+        path: '',
+        component: HomePageComponent,
+      },
       {
         path: 'meal',
         component: MealComponent,
