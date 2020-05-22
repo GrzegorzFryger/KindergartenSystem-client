@@ -5,6 +5,7 @@ import {Account} from '../../model/accounts/account';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
+import {Person} from '../../model/accounts/person';
 
 
 @Injectable({
@@ -15,8 +16,11 @@ export class AccountService {
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.currentUserSub = new ReplaySubject<Account>(1);
+    this.getCurrentUser();
+  }
 
-    authenticationService.currentUserCred.subscribe(userCred => {
+  getCurrentUser() {
+    this.authenticationService.currentUserCred.subscribe(userCred => {
       if (userCred) {
         this.getByEmail(userCred.email).subscribe(user => {
           this.currentUserSub.next(user);
@@ -43,4 +47,7 @@ export class AccountService {
   }
 
 
+  updatePerson(formUser: Person): Observable<Person> {
+    return this.http.put<Person>(environment.apiUrls.account.account, formUser);
+  }
 }

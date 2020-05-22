@@ -12,10 +12,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ActivateAccountComponent} from './page/activate-account/activate-account.component';
+import { EditUserComponent } from './page/edit-user/edit-user.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, ActivateAccountComponent],
+  declarations: [LoginComponent, ActivateAccountComponent, EditUserComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
