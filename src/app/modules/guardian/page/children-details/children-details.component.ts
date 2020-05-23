@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {AbsenceService} from '../../../../data/service/absence/absence.service';
 import {SelectedChildService} from '../../component/children/selected-child.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Absence} from '../../../../data/model/absence/absence';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
@@ -9,6 +9,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import {AddAbsenceForChildDialogComponent} from './add-absence-for-child-dialog/add-absence-for-child-dialog.component';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
+import {Child} from '../../../../data/model/accounts/child';
 
 @Component({
     selector: 'app-children-details',
@@ -42,6 +43,10 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
                 this.absenceDataSource.paginator = this.paginator.toArray()[0];
             });
         });
+    }
+
+    get getSelectedChild(): Observable<Child> {
+        return this.selectedChildService.selectedChild;
     }
 
     addAbsenceForChild() {
