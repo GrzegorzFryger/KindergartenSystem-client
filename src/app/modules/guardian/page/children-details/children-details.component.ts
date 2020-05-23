@@ -10,11 +10,13 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddAbsenceForChildDialogComponent} from './add-absence-for-child-dialog/add-absence-for-child-dialog.component';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../data/model/accounts/child';
+import {move, moveSecond} from './animations';
 
 @Component({
     selector: 'app-children-details',
     templateUrl: './children-details.component.html',
-    styleUrls: ['./children-details.component.scss']
+    styleUrls: ['./children-details.component.scss'],
+    animations: [move, moveSecond]
 })
 export class ChildrenDetailsComponent implements OnInit, OnDestroy {
     @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
@@ -23,6 +25,7 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
     public columnsToDisplay: string[] = ['date', 'reason', 'delete'];
     selectedChildId: string;
     selectedChildName: string;
+    move = 'false';
 
     private childSubscription: Subscription;
 
@@ -36,6 +39,8 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
         this.childSubscription = this.selectedChildService.selectedChild.subscribe(child => {
             this.selectedChildId = child.id;
             this.selectedChildName = child.name + ' ' + child.surname;
+
+            this.runAnimations();
 
             this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absences => {
                 this.absenceDataSource.data = absences;
@@ -87,5 +92,12 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.childSubscription.unsubscribe();
+    }
+
+    private runAnimations() {
+        this.move = 'true';
+        setTimeout(() => {
+            this.move = 'false';
+        }, 500);
     }
 }
