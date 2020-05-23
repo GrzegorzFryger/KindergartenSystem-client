@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Account} from '../../../data/model/accounts/account';
 import {Person} from '../../../data/model/accounts/person';
 import {Router} from '@angular/router';
 import {AccountService} from '../../../data/service/accounts/account.service';
 import {environment} from '../../../core/environment.dev';
+import {SnackMessageHandlingService} from '../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -18,7 +19,9 @@ export class UserEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
+  }
 
   ngOnInit(): void {
     this.accountService.currentUser.subscribe(resp => {
@@ -64,11 +67,14 @@ export class UserEditComponent implements OnInit {
   submit() {
 
     this.accountService.updatePerson(this.formUser).subscribe(resp => {
-
-    });
+        this.snackMessageHandlingService.success('Dane został zaktualizowane');
+        this.backToHomePage();
+      },
+      err => {
+        this.snackMessageHandlingService.error('Upsss... coś poszło nie tak');
+      });
     this.accountService.getCurrentUser();
 
-    this.backToHomePage();
   }
 
 }
