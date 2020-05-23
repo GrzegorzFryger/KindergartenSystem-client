@@ -11,93 +11,127 @@ import {AddAbsenceForChildDialogComponent} from './add-absence-for-child-dialog/
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../data/model/accounts/child';
 import {move, moveSecond} from './animations';
+import {YesNoDialogData} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
+import {YesNoDialogComponent} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
+import {DatePipe} from '@angular/common';
 
 @Component({
-    selector: 'app-children-details',
-    templateUrl: './children-details.component.html',
-    styleUrls: ['./children-details.component.scss'],
-    animations: [move, moveSecond]
+  selector: 'app-children-details',
+  templateUrl: './children-details.component.html',
+  styleUrls: ['./children-details.component.scss'],
+  providers: [DatePipe],
+  animations: [move, moveSecond]
 })
 export class ChildrenDetailsComponent implements OnInit, OnDestroy {
-    @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
-    @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-    public absenceDataSource: MatTableDataSource<Absence> = new MatTableDataSource();
-    public columnsToDisplay: string[] = ['date', 'reason', 'delete'];
-    selectedChildId: string;
-    selectedChildName: string;
-    move = 'false';
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
+  @ViewChildren(MatSort) sort = new QueryList<MatSort>();
+  public absenceDataSource: MatTableDataSource<Absence> = new MatTableDataSource();
+  public columnsToDisplay: string[] = ['date', 'reason', 'delete'];
+  selectedChildId: string;
+  selectedChildName: string;
+  move = 'false';
 
-    private childSubscription: Subscription;
+  private childSubscription: Subscription;
 
-    constructor(private absenceService: AbsenceService,
-                private selectedChildService: SelectedChildService,
-                private dialog: MatDialog,
-                private snackMessageHandlingService: SnackMessageHandlingService) {
-    }
+  constructor(private absenceService: AbsenceService,
+              private selectedChildService: SelectedChildService,
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private datePipe: DatePipe) {
+  }
 
-    ngOnInit(): void {
-        this.childSubscription = this.selectedChildService.selectedChild.subscribe(child => {
-            this.selectedChildId = child.id;
-            this.selectedChildName = child.name + ' ' + child.surname;
+  ngOnInit(): void {
+    this.childSubscription = this.selectedChildService.selectedChild.subscribe(child => {
+      this.selectedChildId = child.id;
+      this.selectedChildName = child.name + ' ' + child.surname;
 
-            this.runAnimations();
+      this.runAnimations();
 
-            this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absences => {
-                this.absenceDataSource.data = absences;
-                this.absenceDataSource.sort = this.sort.toArray()[0];
-                this.absenceDataSource.paginator = this.paginator.toArray()[0];
-            });
+      this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absences => {
+        this.absenceDataSource.data = absences;
+        this.absenceDataSource.sort = this.sort.toArray()[0];
+        this.absenceDataSource.paginator = this.paginator.toArray()[0];
+      });
+    });
+  }
+
+  get getSelectedChild(): Observable<Child> {
+    return this.selectedChildService.selectedChild;
+  }
+
+  addAbsenceForChild() {
+    const dialogRef = this.dialog.open(AddAbsenceForChildDialogComponent, {
+      data: {childId: this.selectedChildId}
+    });
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+      this.dialog.closeAll();
+      this.absenceService.createAbsences(resp).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie dodano nieobecności');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
         });
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.absenceDataSource.data = this.absenceDataSource.data.filter(data => data.id !== this.selectedChildId);
+      sub.unsubscribe();
+    });
+  }
+
+  isDateBefore(absenceDate: Date) {
+    return this.datePipe.transform(absenceDate, 'yyyy-MM-dd') > this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  }
+
+  applyFilter($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.absenceDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  deleteAbsence(id: string) {
+    this.openRemovalDialog('Czy na pewno usunąć zaplanowaną nieobecność?', id);
+  }
+
+  private openRemovalDialog(question: string, absenceId: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        this.removeAbsence(result.answer, absenceId);
+      }
+    );
+  }
+
+  private removeAbsence(confirmation: boolean, id: string): void {
+    if (confirmation) {
+      this.absenceService.deleteAbsence(id).subscribe(
+        resp => {
+          this.snackMessageHandlingService.success('Nieobecność została usunięta');
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dnia wolnego');
+        },
+        () => {
+          // ON COMPLETE
+        }
+      );
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
+  }
 
-    get getSelectedChild(): Observable<Child> {
-        return this.selectedChildService.selectedChild;
-    }
+  ngOnDestroy(): void {
+    this.childSubscription.unsubscribe();
+  }
 
-    addAbsenceForChild() {
-        const dialogRef = this.dialog.open(AddAbsenceForChildDialogComponent, {
-            data: {childId: this.selectedChildId}
-        });
-
-        const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
-            this.dialog.closeAll();
-            this.absenceService.createAbsences(resp).subscribe(
-                () => {
-                    this.snackMessageHandlingService.success('Pomyślnie dodano nieobecności');
-                },
-                error => {
-                    this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
-                });
-        });
-
-        dialogRef.afterClosed().subscribe(() => {
-            this.absenceDataSource.data = this.absenceDataSource.data.filter(data => data.id !== this.selectedChildId);
-            sub.unsubscribe();
-        });
-    }
-
-
-    isDateBefore(absence: Absence) {
-        return absence.date < new Date(new Date().toDateString());
-    }
-
-    applyFilter($event: KeyboardEvent) {
-        const filterValue = ($event.target as HTMLInputElement).value;
-        this.absenceDataSource.filter = filterValue.trim().toLowerCase();
-    }
-
-    deleteAbsence(absence: any) {
-
-    }
-
-    ngOnDestroy(): void {
-        this.childSubscription.unsubscribe();
-    }
-
-    private runAnimations() {
-        this.move = 'true';
-        setTimeout(() => {
-            this.move = 'false';
-        }, 500);
-    }
+  private runAnimations() {
+    this.move = 'true';
+    setTimeout(() => {
+      this.move = 'false';
+    }, 500);
+  }
 }

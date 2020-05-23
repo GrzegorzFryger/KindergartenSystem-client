@@ -9,9 +9,9 @@
               <img src="../../../assets/images/tata.png" height="80" width="80" class="img-fluid"/>
             </div>
             <div class="fullname">
-             <div class="center">
-               <p>{{(getSelectedChild | async)?.name }}  {{(getSelectedChild | async)?.surname }}</p>
-             </div>
+              <div class="center">
+                <p>{{(getSelectedChild | async)?.name }}  {{(getSelectedChild | async)?.surname }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
           </div>
         </div>
 
-<!--        todo add groups -->
+        <!--        todo add groups -->
         <div class="profile-data-item groups">
           <p>Grupy:</p>
           <div class="d-flex">
@@ -125,8 +125,8 @@
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
             <mat-cell *matCellDef="let absence">
-              <button mat-icon-button color="warn" (click)="deleteAbsence(absence)"
-                      [disabled]="!isDateBefore(absence)">
+              <button mat-icon-button color="warn" (click)="deleteAbsence(absence.id)"
+                      [disabled]="!isDateBefore(absence.date)">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-cell>
