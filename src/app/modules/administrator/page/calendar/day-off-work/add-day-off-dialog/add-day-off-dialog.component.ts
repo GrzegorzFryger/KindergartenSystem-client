@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {DayOffWork} from '../../../../../../data/model/absence/day-off-work';
-import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-add-day-off-dialog',

@@ -50,8 +50,8 @@ export class DayOffWorkComponent implements OnInit {
   }
 
   onFilter(submittedForm?): void {
-    this.dateFrom = submittedForm.value.dateFrom;
-    this.dateTo = submittedForm.value.dateTo;
+    this.dateFrom = this.convertToDate(submittedForm.value.dateFrom);
+    this.dateTo = this.convertToDate(submittedForm.value.dateTo);
     this.filterByDate(this.dateFrom, this.dateTo);
   }
 
@@ -60,6 +60,10 @@ export class DayOffWorkComponent implements OnInit {
       this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(dateFrom) &&
         new Date(m.date) <= new Date(dateTo));
     });
+  }
+
+  public convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
   translateEventType(eventType: string): string {
