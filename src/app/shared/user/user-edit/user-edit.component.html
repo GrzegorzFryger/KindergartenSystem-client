@@ -21,7 +21,6 @@
                   <label>
                     <input matInput disabled required  value="{{formUser.fullName.name}}" placeholder="Imię">
                   </label>
-                  <mat-error *ngIf="hasError('email', 'required')">Imię jest wymagane</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -30,7 +29,6 @@
                   <label>
                     <input matInput disabled required value="{{formUser.fullName.surname}}" placeholder="Nazwisko" >
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Nazwisko jest wymagane</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -39,7 +37,7 @@
                   <label>
                     <input matInput required [(ngModel)]="formUser.address.postalCode" placeholder="Nazwisko" formControlName="postalCode">
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Nazwisko jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('postalCode', 'required')">Kod pocztowy jest wymagany</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -48,7 +46,7 @@
                   <label>
                     <input matInput required [(ngModel)]="formUser.address.city" placeholder="Miasto" formControlName="city">
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Nazwisko jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('city', 'required')">Miasto jest wymagane</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -57,7 +55,7 @@
                   <label>
                     <input matInput required [(ngModel)]="formUser.address.streetNumber" placeholder="Numer domu" formControlName="streetNumber">
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Nazwisko jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('streetNumber', 'required')">Numer domu jest wymagany</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -66,7 +64,7 @@
                   <label>
                     <input matInput required [(ngModel)]="formUser.phoneNumber.phone" placeholder="Numer telefonu" formControlName="phone">
                   </label>
-                  <mat-error *ngIf="hasError('password', 'required')">Nazwisko jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('phone', 'required')">Numer telefonu jest wymagany</mat-error>
                 </mat-form-field>
               </p>
               <div class="row justify-content-center align-items-center button">
