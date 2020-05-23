@@ -10,6 +10,7 @@ export class GuardianComponent implements OnInit {
   displayChildComponent: boolean;
 
   constructor(private router: Router) {
+    this.displayChildComponent = false;
   }
 
   ngOnInit(): void {
