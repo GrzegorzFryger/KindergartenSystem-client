@@ -1,6 +1,6 @@
 
 .mat-card {
-  min-width: 400px;
+  min-width: 500px;
 
 }
 
@@ -17,8 +17,9 @@
 
 .loginForm {
   float:right;
-  margin: 0 30px;
+  margin: 10px 30px;
   padding: 30px;
+  border-left: 1px solid #bdc3c7;
 
   .mat-raised-button.mat-primary {
     background-color: #EDEEF4;
@@ -30,5 +31,4 @@
 .loginFormDecorator {
   float:left;
   padding: 20px;
-  border-right: 1px solid #bdc3c7;
 }
