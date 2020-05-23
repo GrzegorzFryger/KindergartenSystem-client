@@ -38,6 +38,7 @@
                     <input matInput required [(ngModel)]="formUser.address.postalCode" placeholder="Nazwisko" formControlName="postalCode">
                   </label>
                   <mat-error *ngIf="hasError('postalCode', 'required')">Kod pocztowy jest wymagany</mat-error>
+                  <mat-error *ngIf="hasError('postalCode', 'pattern')">Błędny format</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -47,6 +48,7 @@
                     <input matInput required [(ngModel)]="formUser.address.city" placeholder="Miasto" formControlName="city">
                   </label>
                   <mat-error *ngIf="hasError('city', 'required')">Miasto jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('city', 'pattern')">Nazwa jest za krótka</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -61,12 +63,16 @@
               <p>
                 <mat-form-field appearance="standard">
                   <mat-label>Numer telefonu</mat-label>
-                  <label>
+
+                    <span matPrefix>+48 &nbsp;</span>
                     <input matInput required [(ngModel)]="formUser.phoneNumber.phone" placeholder="Numer telefonu" formControlName="phone">
-                  </label>
+
                   <mat-error *ngIf="hasError('phone', 'required')">Numer telefonu jest wymagany</mat-error>
+                  <mat-error *ngIf="hasError('phone', 'pattern')">Błędny numer</mat-error>
                 </mat-form-field>
               </p>
+
+
               <div class="row justify-content-center align-items-center button">
                 <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="submit()">Zastosuj</button>
                 <button mat-raised-button color="warn" (click)="backToHomePage()" style="margin-left: 20px">Anuluj</button>

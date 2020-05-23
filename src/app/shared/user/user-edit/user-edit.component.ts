@@ -35,11 +35,10 @@ export class UserEditComponent implements OnInit {
 
 
     this.editForm = this.fb.group({
-      surname: ['', [Validators.required]],
-      postalCode: ['', [Validators.required]],
-      city: ['', [Validators.required]],
+      postalCode: ['', [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
+      city: ['', [Validators.required, Validators.pattern('.{3,}')]],
       streetNumber: ['', [Validators.required]],
-      phone: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
     });
   }
 
