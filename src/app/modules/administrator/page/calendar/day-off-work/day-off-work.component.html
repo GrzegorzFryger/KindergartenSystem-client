@@ -1,49 +1,3 @@
-<div class="add-day-off-card">
-  <div class="add-day-off-container">
-    <mat-card>
-      <div class="row">
-        <mat-card-header>
-          <h2>Dodaj dzień wolny</h2>
-        </mat-card-header>
-      </div>
-
-      <div class="row">
-        <form (ngSubmit)="onSubmit(addForm)" #addForm="ngForm">
-          <div class="col">
-            <mat-form-field appearance="standard">
-              <mat-label>Podaj datę</mat-label>
-              <input matInput [matDatepicker]="addDayOffDatepicker" placeholder="Data" name="date"
-                     class="form-control"
-                     ngModel>
-              <mat-datepicker-toggle matSuffix [for]="addDayOffDatepicker"></mat-datepicker-toggle>
-              <mat-datepicker #addDayOffDatepicker></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="standard">
-              <mat-label>Podaj nazwę</mat-label>
-              <input matInput placeholder="Nazwa" type="text" name="name" class="form-control" ngModel>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="standard">
-              <mat-label>Podaj typ</mat-label>
-              <mat-select class="form-control" id="eventType" name="eventType" ngModel>
-                <mat-option value="HOLIDAY">Święto</mat-option>
-                <mat-option value="WEEKEND">Weekend</mat-option>
-                <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <button mat-stroked-button class="btn-primary" type="submit">Dodaj</button>
-          </div>
-        </form>
-      </div>
-    </mat-card>
-  </div>
-</div>
-
 <div class="day-off-list-card">
   <div class="day-off-list-container">
     <mat-card>
@@ -120,6 +74,11 @@
 
           </mat-table>
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button (click)="addDayOff()">Dodaj dzień wolny</button>
         </div>
       </div>
     </mat-card>
