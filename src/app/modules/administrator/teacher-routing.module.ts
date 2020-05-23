@@ -17,6 +17,7 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -93,6 +94,10 @@ const routes: Routes = [
       {
         path: 'actuator',
         component: ActuatorComponent,
+      },
+      {
+        path: 'user-edit',
+        component: UserEditComponent
       }
 
     ]

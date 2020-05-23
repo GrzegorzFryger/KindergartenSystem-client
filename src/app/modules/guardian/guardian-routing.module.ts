@@ -5,6 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GuardianComponent} from './guardian.component';
 import {MealComponent} from './page/meal/meal.component';
 import {AbsenceComponent} from './page/absence/absence.component';
+import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'absence',
         component: AbsenceComponent,
+      },
+      {
+        path: 'user-edit',
+        component: UserEditComponent
       }
     ]
   }
