@@ -11,6 +11,7 @@ import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-n
 import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
+import {AddAbsenceDialogComponent} from '../add-absence-dialog/add-absence-dialog.component';
 
 @Component({
   selector: 'app-find-absence',
@@ -67,6 +68,33 @@ export class FindAbsenceComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  addAbsence() {
+    this.openAddAbsenceDialog();
+  }
+
+  private openAddAbsenceDialog() {
+    const dialogRef = this.dialog.open(AddAbsenceDialogComponent, {
+      width: '900px',
+      height: '550px',
+    });
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+      this.dialog.closeAll();
+      this.absenceService.createAbsences(resp).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie dodano nieobecność');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
+        }
+      );
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
+  }
+
   private removeAbsence(confirmation: boolean, id: string): void {
     if (confirmation) {
       this.absenceService.deleteAbsence(id).subscribe(
@@ -97,5 +125,9 @@ export class FindAbsenceComponent implements OnInit {
         this.removeAbsence(result.answer, absenceId);
       }
     );
+  }
+
+  private convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 }

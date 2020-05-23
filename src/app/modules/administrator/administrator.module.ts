@@ -65,7 +65,6 @@ import {ChildrenListComponent} from './page/receivables/transactions/share/child
 import {TransactionListComponent} from './page/receivables/transactions/share/transaction-list/transaction-list.component';
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
 import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
-import {AddAbsenceComponent} from './page/calendar/absence/add-absence/add-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
 import {GroupsComponent} from './page/groups/groups.component';
 import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
@@ -86,6 +85,7 @@ import {EditDiscountDialogComponent} from './page/payments/discount-payments/edi
 import {AddChildToGroupComponent} from './page/groups/add-child-to-group/add-child-to-group.component';
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import { AddDayOffDialogComponent } from './page/calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
+import { AddAbsenceDialogComponent } from './page/calendar/absence/add-absence-dialog/add-absence-dialog.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +129,6 @@ import { AddDayOffDialogComponent } from './page/calendar/day-off-work/add-day-o
     DayOffWorkComponent,
     AbsenceComponent,
     FindAbsenceComponent,
-    AddAbsenceComponent,
     MealOrderComponent,
     GroupsComponent,
     GroupManagementComponent,
@@ -148,7 +147,8 @@ import { AddDayOffDialogComponent } from './page/calendar/day-off-work/add-day-o
     EditDiscountDialogComponent,
     AddChildToGroupComponent,
     CheckAbsenceComponent,
-    AddDayOffDialogComponent
+    AddDayOffDialogComponent,
+    AddAbsenceDialogComponent
   ],
 
 
