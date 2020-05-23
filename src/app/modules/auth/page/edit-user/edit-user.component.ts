@@ -28,7 +28,6 @@ export class EditUserComponent implements OnInit {
     this.accountService.getCurrentUser();
     this.accountService.currentUser.subscribe(resp => {
       this.currentUser = resp;
-      console.log(resp);
 
       this.formUser.id = this.currentUser.id;
       this.formUser.address.postalCode = this.currentUser.postalCode;

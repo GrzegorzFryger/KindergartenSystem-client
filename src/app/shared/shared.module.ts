@@ -9,10 +9,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
-  declarations: [UserComponent, UserEditComponent],
+  declarations: [UserComponent, UserEditComponent ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -21,7 +24,10 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
     MatMenuModule,
     MatButtonToggleModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [UserComponent]
 })
