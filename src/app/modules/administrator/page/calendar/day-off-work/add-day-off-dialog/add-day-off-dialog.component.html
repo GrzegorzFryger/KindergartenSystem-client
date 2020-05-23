@@ -1,0 +1,39 @@
+<h2>Dodaj dzień wolny</h2>
+
+<div mat-dialog-content>
+  <form class="container-fluid" [formGroup]="form">
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Data od</mat-label>
+        <input matInput [matDatepicker]="date" placeholder="Data" formControlName="date">
+        <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+        <mat-datepicker #date></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Nazwa</mat-label>
+        <input matInput formControlName="name">
+        <mat-error>Nazwa jest wymagana (min. 5 znaków)</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Podaj typ</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="HOLIDAY">Święto</mat-option>
+          <mat-option value="WEEKEND">Weekend</mat-option>
+          <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <button mat-raised-button (click)="addDayOffSubmit()"
+              [disabled]="!form.valid">Dodaj
+      </button>
+    </div>
+  </form>
+</div>
