@@ -67,11 +67,11 @@ export class UserEditComponent implements OnInit {
   submit() {
 
     this.accountService.updatePerson(this.formUser).subscribe(resp => {
-        this.snackMessageHandlingService.success('Dane został zaktualizowane');
+        this.snackMessageHandlingService.success('Dane osobowe zostały zaktualizowane');
         this.backToHomePage();
       },
       err => {
-        this.snackMessageHandlingService.error('Upsss... coś poszło nie tak');
+        this.snackMessageHandlingService.error('Wystąpił problem ze zmianą danych osobowych');
       });
     this.accountService.getCurrentUser();
 
