@@ -2,7 +2,7 @@
   <mat-card-content>
     <div class="row">
       <div class="col">
-        <h3>Znajdź nieobecność</h3>
+        <h2>Znajdź nieobecność</h2>
       </div>
     </div>
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -89,6 +89,9 @@
         </mat-table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
+    </div>
+    <div class="row">
+      <button mat-raised-button (click)="addAbsence()">Dodaj nieobecność</button>
     </div>
   </mat-card-content>
 </mat-card>

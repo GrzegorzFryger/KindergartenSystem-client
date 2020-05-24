@@ -1,0 +1,152 @@
+<div class="children-details-container">
+
+  <div [@move]="move" class="child-details-item">
+    <div class="container">
+      <div class="profile-content-container">
+        <div class="header-item">
+          <div class="header">
+            <div class="image">
+              <img *ngIf="(getSelectedChild | async)?.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
+              <img *ngIf="(getSelectedChild | async)?.gender == 'MALE' " src="../../../../../assets/images/icon-boy.png"/>
+            </div>
+            <div class="fullname">
+              <div class="center">
+                <p>{{(getSelectedChild | async)?.name }}  {{(getSelectedChild | async)?.surname }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-divider [inset]="true"></mat-divider>
+        <div class="profile-data-item contact">
+          <p>Dane kontaktowe:</p>
+          <div class="d-flex">
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Pesel:</div>
+                <div class="value">{{(getSelectedChild | async)?.pesel}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Gender:</div>
+                <div class="value">{{(getSelectedChild | async)?.gender}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data urodzin:</div>
+                <div class="value">{{(getSelectedChild | async)?.dateOfBirth}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data ropoczecia:</div>
+                <div class="value">{{(getSelectedChild | async)?.startDate}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-container">
+                <div class="label">Data zakończenia:</div>
+                <div class="value">{{(getSelectedChild | async)?.endDate}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-data-item address">
+          <p>Adres:</p>
+          <div class="d-flex">
+            <div class="item street">
+              <div class="item-container">
+                <div class="label">Ulica:</div>
+                <div class="value">{{(getSelectedChild | async)?.streetNumber}}</div>
+              </div>
+            </div>
+            <div class="item city">
+              <div class="item-container">
+                <div class="label">Kod pocztowy:</div>
+                <div class="value">{{(getSelectedChild | async)?.postalCode}}</div>
+              </div>
+            </div>
+            <div class="item zip-code">
+              <div class="item-container">
+                <div class="label">Miasto:</div>
+                <div class="value">{{(getSelectedChild | async)?.city}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-data-item groups">
+          <p>Grupy:</p>
+          <div class="d-flex">
+            <div class="item group-name">
+              <div class="item-container">
+                <div class="label">Nazwa</div>
+                <div class="value" *ngFor="let group of groupListForSelectedChild">{{group.groupName}}</div>
+              </div>
+            </div>
+            <div class="item group-description">
+              <div class="item-container">
+                <div class="label">Opis</div>
+                <div class="value" *ngFor="let group of groupListForSelectedChild">{{group.groupDescription}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [@moveSecond]="move" class="child-details-absence-item">
+    <div class="container">
+      <div class="child-absence-add-container">
+        <div class="div">
+          <p>Dodaj nieobecnosci</p>
+        </div>
+        <div class="div">
+          <button mat-mini-fab color="primary" (click)="addAbsenceForChild()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="search">
+        <mat-form-field appearance="standard">
+          <mat-label>Szukaj</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Wyszukaj dzecko">
+        </mat-form-field>
+      </div>
+
+      <div class="absences-for-child-table">
+        <mat-table [dataSource]="absenceDataSource" matSort matSortActive="date" matSortDirection="desc">
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+            <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="reason">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Powód</mat-header-cell>
+            <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+            <mat-cell *matCellDef="let absence">
+              <button mat-icon-button color="warn" (click)="deleteAbsence(absence.id)"
+                      [disabled]="!isDateBefore(absence.date)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        </mat-table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
+
+
+
+
+

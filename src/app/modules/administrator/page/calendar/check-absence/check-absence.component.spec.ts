@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAbsenceComponent } from './add-absence.component';
+import { CheckAbsenceComponent } from './check-absence.component';
 
-describe('AddAbsenceComponent', () => {
-  let component: AddAbsenceComponent;
-  let fixture: ComponentFixture<AddAbsenceComponent>;
+describe('CheckAbsenceComponent', () => {
+  let component: CheckAbsenceComponent;
+  let fixture: ComponentFixture<CheckAbsenceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddAbsenceComponent ]
+      declarations: [ CheckAbsenceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddAbsenceComponent);
+    fixture = TestBed.createComponent(CheckAbsenceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

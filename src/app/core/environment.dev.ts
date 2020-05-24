@@ -123,7 +123,8 @@ export const environment = {
       deleteGroup: groupsUrl,
       addChildToGroup: groupsUrl + 'add/',
       findAllChildrenInGroup: groupsUrl + 'list/',
-      removeChildFromGroup: groupsUrl + 'remove/'
+      removeChildFromGroup: groupsUrl + 'remove/',
+      findAllGroupsForChild: groupsUrl + 'groupList/',
     },
     meals: {
       getMealType: mealDictionaryUrl + 'mealType',

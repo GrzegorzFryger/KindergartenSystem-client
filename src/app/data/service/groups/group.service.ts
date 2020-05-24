@@ -45,4 +45,8 @@ export class GroupService {
     return this.http.put<Group>(environment.apiUrls.groups.removeChildFromGroup + groupId + '/' + childId, null);
   }
 
+  public findAllGroupsForChild(childId: string): Observable<Array<Group>> {
+    return this.http.get<Array<Group>>(environment.apiUrls.groups.findAllGroupsForChild + childId);
+  }
+
 }
