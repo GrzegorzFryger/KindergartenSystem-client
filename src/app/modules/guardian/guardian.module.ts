@@ -42,6 +42,8 @@ import {PaymentDataComponent} from './page/finances/payment-data/payment-data.co
 import {ChildrenDetailsComponent} from './page/children-details/children-details.component';
 import {HomePageComponent} from './page/home-page/home-page.component';
 import {AddAbsenceForChildDialogComponent} from './page/children-details/add-absence-for-child-dialog/add-absence-for-child-dialog.component';
+import {PaymentsComponent} from './page/payments/payments.component';
+import {HistoryPaymentsListComponent} from './page/payments/payment-history-list/history-payments-list.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import {AddAbsenceForChildDialogComponent} from './page/children-details/add-abs
     PaymentDataComponent,
     ChildrenDetailsComponent,
     HomePageComponent,
-    AddAbsenceForChildDialogComponent
+    AddAbsenceForChildDialogComponent,
+    PaymentsComponent,
+    HistoryPaymentsListComponent
   ],
 
     imports: [

@@ -1,5 +1,4 @@
 <div class="payments-layout-container">
-
   <div [@show]="!!(childSelectOutput.data | async)" [@childHeader]="currentState" class="child-profile-item ">
     <div class="child-profile-item-container">
       <div [@refresh]="refresh" (@refresh.done)="onAnimationEvent($event)" class="fullName-item ">
@@ -38,7 +37,6 @@
            class="payments-children-item ">
         <router-outlet></router-outlet>
       </div>
-
     </div>
   </div>
 </div>

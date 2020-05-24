@@ -25,11 +25,10 @@ export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.user = this.userService.currentUser;
   }
 
   ngAfterViewInit() {
-    this.user = this.userService.currentUser;
     this.identifyRoles();
     this.redirectToProperView();
   }

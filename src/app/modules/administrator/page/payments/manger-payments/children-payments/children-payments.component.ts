@@ -35,16 +35,19 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub = this.childrenSelectShareService.childrenSelect.subscribe(child => {
-      console.log(child);
-      this.selectedChildId = child.id;
-      this.data = this.paymentsService.findAllRecurringPaymentsByChildId(child.id);
-    });
+    this.findAllRecurringPayment();
 
     this.userSubscription = this.userService.currentUser.subscribe(
       u => {
         this.selectedGuardianId = u.id;
       });
+  }
+
+  findAllRecurringPayment() {
+    this.sub = this.childrenSelectShareService.childrenSelect.subscribe(child => {
+      this.selectedChildId = child.id;
+      this.data = this.paymentsService.findAllRecurringPaymentsByChildId(child.id);
+    });
   }
 
   ngOnDestroy(): void {
@@ -72,6 +75,8 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
           this.paymentsService.createTuition(result).subscribe(
             resp => {
               this.snackMessageHandlingService.success('Płatność dodana pomyślnie');
+              this.findAllRecurringPayment();
+
             }, error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem płatności');
             }
@@ -102,6 +107,7 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
       if (result.recurringPayment) {
         this.paymentsService.updatePayment(result.recurringPayment).subscribe(
           resp => {
+            this.findAllRecurringPayment();
             this.snackMessageHandlingService.success('Płatność zaktualizowano pomyślnie');
           }, error => {
             this.snackMessageHandlingService.error('Wystąpił problem z aktualizacją płatności');
