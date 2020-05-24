@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-guardian',
@@ -8,20 +10,23 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class GuardianComponent implements OnInit {
   displayChildComponent: boolean;
+  private routerSubscription: Subscription;
+
 
   constructor(private router: Router) {
     this.displayChildComponent = false;
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(value => {
-      const navEnf = value as NavigationEnd;
-      if (navEnf.url !== ('/parent/finances' || '/parent')) {
-        this.displayChildComponent = true;
-      } else {
-        this.displayChildComponent = false;
-      }
-    });
+
+    this.routerSubscription = this.router.events
+      .pipe(filter(ev => ev instanceof NavigationEnd)).subscribe((value: NavigationEnd) => {
+        if (value.url !== '/parent/finances' && value.url !== '/parent') {
+          this.displayChildComponent = true;
+        } else {
+          this.displayChildComponent = false;
+        }
+      });
   }
 
 }

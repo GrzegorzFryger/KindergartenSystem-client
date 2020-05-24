@@ -20,12 +20,12 @@ import {FinancesComponent} from './page/finances/finances.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {AbsenceComponent} from './page/absence/absence.component';
+
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {environment} from '../../core/environment.dev';
 import {SelectedChildService} from './component/children/selected-child.service';
-import {AbsenceDialogComponent} from './page/absence/absence-dialog/absence-dialog.component';
+
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
@@ -36,12 +36,12 @@ import {MatSortModule} from '@angular/material/sort';
 import {FinanceChartComponent} from './page/finances/finance-chart/finance-chart.component';
 import {ChartsModule} from 'ng2-charts';
 import {NavbarComponent} from './component/navbar/navbar.component';
-import { MealAddFormGuardianComponent } from './page/meal/meal-add-form-guardian/meal-add-form-guardian.component';
+import {MealAddFormGuardianComponent} from './page/meal/meal-add-form-guardian/meal-add-form-guardian.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { PaymentDataComponent } from './page/finances/payment-data/payment-data.component';
-import { ChildrenDetailsComponent } from './page/children-details/children-details.component';
-import { HomePageComponent } from './page/home-page/home-page.component';
-import { AddAbsenceForChildDialogComponent } from './page/children-details/add-absence-for-child-dialog/add-absence-for-child-dialog.component';
+import {PaymentDataComponent} from './page/finances/payment-data/payment-data.component';
+import {ChildrenDetailsComponent} from './page/children-details/children-details.component';
+import {HomePageComponent} from './page/home-page/home-page.component';
+import {AddAbsenceForChildDialogComponent} from './page/children-details/add-absence-for-child-dialog/add-absence-for-child-dialog.component';
 
 
 @NgModule({
@@ -51,8 +51,6 @@ import { AddAbsenceForChildDialogComponent } from './page/children-details/add-a
     ReceivablesComponent,
     FinancesComponent,
     MealComponent,
-    AbsenceComponent,
-    AbsenceDialogComponent,
     FinanceChartComponent,
     NavbarComponent,
     MealAddFormGuardianComponent,

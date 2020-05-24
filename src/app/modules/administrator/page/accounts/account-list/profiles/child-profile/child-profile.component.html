@@ -25,7 +25,14 @@
             <div class="item">
               <div class="item-container">
                 <div class="label">Gender:</div>
-                <div class="value">{{inputData.child?.gender}}</div>
+                <div class="value">
+                  <ng-container *ngIf="inputData.child?.gender === 'MALE'; else gender" >
+                    Chłopiec
+                  </ng-container>
+                  <ng-template #gender >
+                    Dziewczynka
+                  </ng-template>
+                </div>
               </div>
             </div>
             <div class="item">
