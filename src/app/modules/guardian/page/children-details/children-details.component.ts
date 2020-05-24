@@ -14,6 +14,8 @@ import {move, moveSecond} from './animations';
 import {YesNoDialogData} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {DatePipe} from '@angular/common';
+import {GroupService} from '../../../../data/service/groups/group.service';
+import {Group} from '../../../../data/model/groups/group';
 
 @Component({
   selector: 'app-children-details',
@@ -29,11 +31,13 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
   public columnsToDisplay: string[] = ['date', 'reason', 'delete'];
   selectedChildId: string;
   selectedChildName: string;
+  groupListForSelectedChild: Array<Group>;
   move = 'false';
 
   private childSubscription: Subscription;
 
   constructor(private absenceService: AbsenceService,
+              private groupService: GroupService,
               private selectedChildService: SelectedChildService,
               private dialog: MatDialog,
               private snackMessageHandlingService: SnackMessageHandlingService,
@@ -51,6 +55,11 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
         this.absenceDataSource.data = absences;
         this.absenceDataSource.sort = this.sort.toArray()[0];
         this.absenceDataSource.paginator = this.paginator.toArray()[0];
+      });
+
+      this.groupService.findAllGroupsForChild(child.id).subscribe(groups => {
+        this.groupListForSelectedChild = groups;
+        console.log(groups);
       });
     });
   }
