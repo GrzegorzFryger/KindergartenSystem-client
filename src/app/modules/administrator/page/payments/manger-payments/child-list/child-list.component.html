@@ -39,7 +39,15 @@
       <ng-container matColumnDef="gender">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Płeć</mat-header-cell>
         <mat-cell
-          *matCellDef="let children"> {{children.gender}} </mat-cell>
+          *matCellDef="let children">
+          <ng-container *ngIf="children.gender === 'MALE'; else gender" >
+            Chłopiec
+          </ng-container>
+          <ng-template #gender >
+            Dziewczynka
+          </ng-template>
+
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="dateOfBirth">
