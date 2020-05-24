@@ -18,7 +18,7 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Kwota</mat-header-cell>
-        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.amount}} </mat-cell>
+        <mat-cell *matCellDef="let recurringPayment"> {{recurringPayment.amount | number:'1.2-2'}} PLN</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -27,7 +27,7 @@
       </ng-container>
 
       <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
         <mat-cell *matCellDef="let recurringPayment">
           <ng-container *ngIf="recurringPayment.typeRecurringPayment === 'TUITION'; else typePayment" >
             Czesne
@@ -39,7 +39,7 @@
       </ng-container>
 
       <ng-container matColumnDef="operationType">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Type Operacji</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Typ Operacji</mat-header-cell>
         <mat-cell *matCellDef="let recurringPayment">
           <ng-container *ngIf="recurringPayment.operationType === 'DECREASE'; else operationType" >
             Zmiejszenie

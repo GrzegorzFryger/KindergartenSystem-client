@@ -99,8 +99,6 @@ export class ChildrenPaymentsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result.discount) {
-      }
       if (result.recurringPayment) {
         this.paymentsService.updatePayment(result.recurringPayment).subscribe(
           resp => {
