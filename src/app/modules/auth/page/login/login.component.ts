@@ -12,7 +12,6 @@ import {environment} from '../../../../core/environment.dev';
 })
 export class LoginComponent implements OnInit {
   loginFrom: FormGroup;
-  returnUrl: string;
 
   constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) {
     this.loginFrom = fb.group({

@@ -5,7 +5,9 @@
     <div class="row">
       <mat-form-field appearance="standard">
         <mat-label>Data od</mat-label>
-        <input matInput [matDatepicker]="dateFrom" placeholder="Data od" formControlName="dateFrom">
+        <input matInput [min]="minDateFrom" [matDatepicker]="dateFrom" [matDatepickerFilter]="dateFilter"
+               placeholder="Data od" name="dateFrom"
+               formControlName="dateFrom" [(ngModel)]="minDateFrom">
         <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
         <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
         <mat-datepicker #dateFrom></mat-datepicker>
@@ -15,7 +17,9 @@
     <div class="row">
       <mat-form-field appearance="standard">
         <mat-label>Data do</mat-label>
-        <input matInput [matDatepicker]="dateTo" placeholder="Data do" name="dateTo" formControlName="dateTo">
+        <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" [matDatepickerFilter]="dateFilter"
+               placeholder="Data do" name="dateTo"
+               formControlName="dateTo">
         <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
         <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
         <mat-datepicker #dateTo></mat-datepicker>

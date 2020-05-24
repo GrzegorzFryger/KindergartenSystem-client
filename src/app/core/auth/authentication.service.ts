@@ -9,7 +9,7 @@ import {SnackMessageHandlingService} from '../snack-message-handling/snack-messa
 import {ActivateAccount} from '../../data/model/accounts/activate-account';
 
 
-const UNAUTHORIZED_MESSAGE = 'Błedne dane logowania';
+const UNAUTHORIZED_MESSAGE = 'Błędne dane logowania';
 
 @Injectable({
   providedIn: 'root'
