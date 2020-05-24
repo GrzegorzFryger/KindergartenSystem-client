@@ -15,6 +15,7 @@ import {EditDiscountDialogComponent} from './edit-discount-dialog/edit-discount-
 export class DiscountPaymentsComponent implements OnInit {
 
   data: Array<DiscountPayment>;
+  discountMap = new Map<string, string>();
 
   constructor(private discountPaymentService: DiscountPaymentService,
               private dialog: MatDialog,
@@ -22,6 +23,7 @@ export class DiscountPaymentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeDiscountMap();
     this.discountPaymentService.getAllDiscounts().subscribe(discount => {
       this.data = discount;
     });
@@ -74,6 +76,11 @@ export class DiscountPaymentsComponent implements OnInit {
 
       }
     );
+  }
+
+  private initializeDiscountMap() {
+    this.discountMap.set('PERCENTAGE', 'Procentowa');
+    this.discountMap.set('AMOUNT', 'Kwotowa');
   }
 
 }
