@@ -23,6 +23,7 @@ import {ChildrenPaymentsComponent} from './page/payments/manger-payments/childre
 import {HistoryPaymentsComponent} from './page/payments/manger-payments/history-payments/history-payments.component';
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
+import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 const routes: Routes = [
@@ -77,6 +78,10 @@ const routes: Routes = [
       {
         path: 'absence',
         component: AbsenceComponent,
+      },
+      {
+        path: 'check-absence',
+        component: CheckAbsenceComponent,
       },
       {
         path: 'groups',

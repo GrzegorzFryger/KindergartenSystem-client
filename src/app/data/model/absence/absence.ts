@@ -1,5 +1,5 @@
 export class Absence {
-  id: number;
+  id: string;
   childId: string;
   childName: string;
   childSurname: string;

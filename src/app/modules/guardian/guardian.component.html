@@ -19,8 +19,10 @@
             <div class="d-flex content-card-container">
              <div class="top">
                <div class="d-flex align-items-center">
-                   <div *ngIf="displayChildComponent" class="child"><app-children></app-children></div>
-                 <div class="user"><app-user></app-user></div>
+                 <ng-container *ngIf="displayChildComponent">
+                   <div  class="child"><app-children></app-children></div>
+                   <div class="user"><app-user></app-user></div>
+                 </ng-container>
                </div>
              </div>
             <div class="down">

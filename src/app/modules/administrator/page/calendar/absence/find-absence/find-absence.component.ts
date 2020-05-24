@@ -7,11 +7,11 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Child} from '../../../../../../data/model/accounts/child';
 import {ChildService} from '../../../../../../data/service/accounts/child.service';
-import {Observable} from 'rxjs';
 import {YesNoDialogData} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
+import {AddAbsenceDialogComponent} from '../add-absence-dialog/add-absence-dialog.component';
 
 @Component({
   selector: 'app-find-absence',
@@ -29,15 +29,17 @@ export class FindAbsenceComponent implements OnInit {
   endDate: string;
   startDate: string;
   childName: string;
-  children: Observable<Array<Child>>;
+  children: Array<Child>;
 
   constructor(private datePipe: DatePipe, private absenceService: AbsenceService,
               private childService: ChildService, private dialog: MatDialog,
               private snackMessageHandlingService: SnackMessageHandlingService) {
-    this.children = this.childService.getAllChildren();
   }
 
   ngOnInit(): void {
+    this.childService.getAllChildren().subscribe(resp => {
+      this.children = resp;
+    });
   }
 
   onSubmit(submittedForm) {
@@ -60,9 +62,37 @@ export class FindAbsenceComponent implements OnInit {
     });
   }
 
+
   filterChildren($event: KeyboardEvent) {
     const filterValue = ($event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addAbsence() {
+    this.openAddAbsenceDialog();
+  }
+
+  private openAddAbsenceDialog() {
+    const dialogRef = this.dialog.open(AddAbsenceDialogComponent, {
+      width: '900px',
+      height: '550px',
+    });
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+      this.dialog.closeAll();
+      this.absenceService.createAbsences(resp).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie dodano nieobecność');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
+        }
+      );
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
   }
 
   private removeAbsence(confirmation: boolean, id: string): void {

@@ -9,6 +9,7 @@ import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-d
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {AddDayOffDialogComponent} from './add-day-off-dialog/add-day-off-dialog.component';
 
 @Component({
   selector: 'app-day-off-work',
@@ -24,7 +25,6 @@ export class DayOffWorkComponent implements OnInit {
 
   public columnsToDisplay: string[] = ['date', 'name', 'eventType', 'actions'];
 
-  dayOffWork: DayOffWork;
   dateFrom: Date = null;
   dateTo: Date = null;
 
@@ -34,21 +34,6 @@ export class DayOffWorkComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllDaysOff();
-  }
-
-  onSubmit(submittedForm) {
-    this.dayOffWork = new DayOffWork();
-    this.dayOffWork.date = this.convertToDate(submittedForm.value.date);
-    this.dayOffWork.name = submittedForm.value.name;
-    this.dayOffWork.eventType = submittedForm.value.eventType;
-    this.dayOffWorkService.createDayOffWork(this.dayOffWork).subscribe(resp =>
-      console.log(resp));
-    submittedForm.reset();
-    if (this.dateFrom == null || this.dateTo == null) {
-      this.getAllDaysOff();
-    } else {
-      this.filterByDate(this.dateFrom, this.dateTo);
-    }
   }
 
   public deleteDayOff(dayOffWorkId: string): void {
@@ -65,13 +50,9 @@ export class DayOffWorkComponent implements OnInit {
   }
 
   onFilter(submittedForm?): void {
-    this.dateFrom = submittedForm.value.dateFrom;
-    this.dateTo = submittedForm.value.dateTo;
+    this.dateFrom = this.convertToDate(submittedForm.value.dateFrom);
+    this.dateTo = this.convertToDate(submittedForm.value.dateTo);
     this.filterByDate(this.dateFrom, this.dateTo);
-  }
-
-  convertToDate(date: Date): Date {
-    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
   filterByDate(dateFrom: Date, dateTo: Date) {
@@ -79,6 +60,10 @@ export class DayOffWorkComponent implements OnInit {
       this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(dateFrom) &&
         new Date(m.date) <= new Date(dateTo));
     });
+  }
+
+  public convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
   translateEventType(eventType: string): string {
@@ -128,10 +113,34 @@ export class DayOffWorkComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log('The dialog was closed with answer: ' + result.answer);
         this.removeDayOff(result.answer, dayOffWorkId);
       }
     );
+  }
+
+  addDayOff() {
+    this.openAddDayOffDialog();
+  }
+
+  private openAddDayOffDialog(): void {
+    const dialogRef = this.dialog.open(AddDayOffDialogComponent);
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+      this.dialog.closeAll();
+      this.dayOffWorkService.createDayOffWork(resp).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie dodano dzień wolny');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się dodać dnia wolnego');
+        }
+      );
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getAllDaysOff();
+      sub.unsubscribe();
+    });
   }
 
 }

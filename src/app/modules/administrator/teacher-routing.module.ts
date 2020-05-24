@@ -17,6 +17,7 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 
@@ -72,6 +73,10 @@ const routes: Routes = [
       {
         path: 'absence',
         component: AbsenceComponent,
+      },
+      {
+        path: 'check-absence',
+        component: CheckAbsenceComponent,
       },
       {
         path: 'accounts',

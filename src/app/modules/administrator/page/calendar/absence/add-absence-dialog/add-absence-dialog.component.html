@@ -1,0 +1,73 @@
+<h2>Dodaj nieobecność</h2>
+
+<div mat-dialog-content>
+  <div class="container-fluid">
+    <div class="form-input-fields-container">
+      <form class="container-fluid" [formGroup]="form">
+        <div class="row">
+          <mat-form-field appearance="standard">
+            <mat-label>Data od</mat-label>
+            <input matInput [matDatepicker]="dateFrom" placeholder="Data od" formControlName="dateFrom">
+            <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+            <mat-datepicker #dateFrom></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="standard">
+            <mat-label>Data do</mat-label>
+            <input matInput [matDatepicker]="dateTo" placeholder="Data do" name="dateTo" formControlName="dateTo">
+            <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+            <mat-datepicker #dateTo></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="standard">
+            <mat-label>Powód</mat-label>
+            <input matInput formControlName="reason">
+            <mat-error>Powód jest wymagany (min. 5 znaków)</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <button mat-raised-button (click)="addAbsenceSubmit()"
+                  [disabled]="!form.valid">Dodaj
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="form-table-container">
+    <mat-form-field appearance="standard">
+      <mat-label>Znajdź dziecko</mat-label>
+      <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
+    </mat-form-field>
+    <mat-table [dataSource]="dataSourceChild" matSort matSortActive="date" matSortDirection="desc">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="pesel">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="selected">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Wybór</mat-header-cell>
+        <mat-cell *matCellDef="let child">
+          <mat-radio-button name="childSelection" (click)="getChildIdOnClick(child.id)"></mat-radio-button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
