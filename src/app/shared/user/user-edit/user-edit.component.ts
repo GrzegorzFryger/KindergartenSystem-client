@@ -65,16 +65,14 @@ export class UserEditComponent implements OnInit {
   }
 
   submit() {
-
     this.accountService.updatePerson(this.formUser).subscribe(resp => {
         this.snackMessageHandlingService.success('Dane osobowe zostały zaktualizowane');
         this.backToHomePage();
+        this.accountService.getCurrentUser();
       },
       err => {
         this.snackMessageHandlingService.error('Wystąpił problem ze zmianą danych osobowych');
       });
-    this.accountService.getCurrentUser();
-
   }
 
 }
