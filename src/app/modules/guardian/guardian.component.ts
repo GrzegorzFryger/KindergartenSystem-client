@@ -10,12 +10,13 @@ export class GuardianComponent implements OnInit {
   displayChildComponent: boolean;
 
   constructor(private router: Router) {
+    this.displayChildComponent = false;
   }
 
   ngOnInit(): void {
     this.router.events.subscribe(value => {
       const navEnf = value as NavigationEnd;
-      if (navEnf.url !== '/parent/finances') {
+      if (navEnf.url !== ('/parent/finances' || '/parent')) {
         this.displayChildComponent = true;
       } else {
         this.displayChildComponent = false;

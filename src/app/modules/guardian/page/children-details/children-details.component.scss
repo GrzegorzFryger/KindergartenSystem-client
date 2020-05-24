@@ -1,0 +1,124 @@
+.children-details-container {
+  //height: 100%;
+  //width: 100%;
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-around;
+
+  .child-details-item {
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-items: center;
+      border-radius: 24px;
+      background-color: white;
+      padding: 16px;
+
+      .profile-content-container {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+
+        .header-item {
+          margin-bottom: 16px;
+
+          .header {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .image {
+              flex-basis: 20%;
+            }
+
+            .fullname {
+              flex-basis: 50%;
+
+              .center {
+                display: flex;
+                justify-content: flex-start;
+
+                p {
+                  margin: 0;
+                  font-weight: 600;
+                }
+              }
+            }
+
+          }
+        }
+
+        .profile-data-item {
+          margin-top: 8px;
+
+          p {
+            margin-bottom: 0;
+            font-weight: 600;
+          }
+
+          .d-flex {
+            padding: 16px;
+            flex-wrap: wrap;
+
+            .item {
+              margin-bottom: 8px;
+              flex-basis: 50%;
+
+              .item-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .label {
+                  color: #bdc3c7;
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .child-details-absence-item {
+    flex-basis: 60%;
+
+    .container {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-items: center;
+      border-radius: 24px;
+      background-color: white;
+      padding: 16px;
+
+      .search {
+        padding: 0 16px 0 16px;
+
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+
+      .absences-for-child-table {
+
+      }
+
+      .child-absence-add-container {
+        padding: 16px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
