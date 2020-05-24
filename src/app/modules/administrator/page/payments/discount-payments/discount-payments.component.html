@@ -18,7 +18,7 @@
               Kwota:
             </div>
             <div class="value">
-              {{discount.value}} PLN
+              {{discount.value | number:'1.2-2'}} {{discount.typeDiscount === 'AMOUNT' ? 'PLN' : '%'}}
             </div>
           </div>
 
