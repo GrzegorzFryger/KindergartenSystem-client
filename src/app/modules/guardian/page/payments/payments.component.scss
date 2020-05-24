@@ -8,7 +8,7 @@
   background-size: cover;
 
   .parent-payment-item-first {
-    flex-basis: 50%;
+    flex-basis: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +17,7 @@
   }
 
   .parent-payment-item-second {
-    flex-basis: 50%;
+    flex-basis: 60%;
     .parent-payment-history-table {
       background-color: white;
       border-radius: 24px;

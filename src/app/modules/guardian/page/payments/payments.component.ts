@@ -23,6 +23,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
   private paymentsHistorySub: ReplaySubject<Array<PaymentHistory>>;
   private paymentsHistoryColumnsSub: BehaviorSubject<Array<string>>;
   private childSubscription: Subscription;
+  changeChild = 'false';
 
   constructor(private router: Router, private paymentHistoryService: PaymentHistoryService,
               private selectedChildService: SelectedChildService) {
@@ -37,7 +38,7 @@ export class PaymentsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.childSubscription = this.selectedChildService.selectedChild.subscribe(child => {
-      console.log(child.id);
+      this.runAnimations();
       this.paymentHistoryService.findByIdChildId(child.id).subscribe(payments => {
         this.paymentsHistorySub.next(payments);
       });
@@ -48,4 +49,10 @@ export class PaymentsComponent implements OnInit, OnDestroy {
     this.childSubscription.unsubscribe();
   }
 
+  private runAnimations() {
+    this.changeChild = 'true';
+    setTimeout(() => {
+      this.changeChild = 'false';
+    }, 500);
+  }
 }

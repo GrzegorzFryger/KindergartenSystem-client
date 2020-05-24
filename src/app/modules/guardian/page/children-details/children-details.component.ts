@@ -59,7 +59,6 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
 
       this.groupService.findAllGroupsForChild(child.id).subscribe(groups => {
         this.groupListForSelectedChild = groups;
-        console.log(groups);
       });
     });
   }

@@ -2,7 +2,7 @@
   <div class="parent-payment-item-first">
 
   </div>
-  <div class="parent-payment-item-second">
+  <div [@move]="changeChild" class="parent-payment-item-second">
     <div class="parent-payment-history-table">
       <app-history-payments-list [dataSource]="paymentsHistoryOutput" ></app-history-payments-list>
     </div>
