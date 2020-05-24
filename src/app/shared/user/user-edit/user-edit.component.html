@@ -1,0 +1,90 @@
+<!--<div class="container-fluid h-100 px-0">-->
+<div class="row justify-content-center align-items-center background-image mx-0">
+  <div class="col-auto">
+    <mat-card class="mat-elevation-z3">
+      <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
+        <mat-card-title>Edycja konta</mat-card-title>
+      </div>
+      <mat-card-content>
+        <div class="row justify-content-center align-items-center">
+
+          <div class="loginFormDecorator">
+            <img src="../../../../../assets/images/teacher.png" height="139" width="139"/>
+          </div>
+
+
+          <div class="loginForm">
+            <form [formGroup]="editForm" >
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label >Imię</mat-label>
+                  <label>
+                    <input matInput disabled required  value="{{formUser.fullName.name}}" placeholder="Imię">
+                  </label>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Nazwisko</mat-label>
+                  <label>
+                    <input matInput disabled required value="{{formUser.fullName.surname}}" placeholder="Nazwisko" >
+                  </label>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Kod Pocztowy</mat-label>
+                  <label>
+                    <input matInput required [(ngModel)]="formUser.address.postalCode" placeholder="Nazwisko" formControlName="postalCode">
+                  </label>
+                  <mat-error *ngIf="hasError('postalCode', 'required')">Kod pocztowy jest wymagany</mat-error>
+                  <mat-error *ngIf="hasError('postalCode', 'pattern')">Błędny format</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Miasto</mat-label>
+                  <label>
+                    <input matInput required [(ngModel)]="formUser.address.city" placeholder="Miasto" formControlName="city">
+                  </label>
+                  <mat-error *ngIf="hasError('city', 'required')">Miasto jest wymagane</mat-error>
+                  <mat-error *ngIf="hasError('city', 'pattern')">Nazwa jest za krótka</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Numer domu</mat-label>
+                  <label>
+                    <input matInput required [(ngModel)]="formUser.address.streetNumber" placeholder="Numer domu" formControlName="streetNumber">
+                  </label>
+                  <mat-error *ngIf="hasError('streetNumber', 'required')">Numer domu jest wymagany</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Numer telefonu</mat-label>
+
+                    <span matPrefix>+48 &nbsp;</span>
+                    <input matInput required [(ngModel)]="formUser.phoneNumber.phone" placeholder="Numer telefonu" formControlName="phone">
+
+                  <mat-error *ngIf="hasError('phone', 'required')">Numer telefonu jest wymagany</mat-error>
+                  <mat-error *ngIf="hasError('phone', 'pattern')">Błędny numer</mat-error>
+                </mat-form-field>
+              </p>
+
+
+              <div class="row justify-content-center align-items-center button">
+                <button mat-raised-button color="warn" (click)="backToHomePage()" >Anuluj</button>
+                <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="submit()" class="margin">
+                  Zastosuj</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
+</div>
+<!--</div>-->

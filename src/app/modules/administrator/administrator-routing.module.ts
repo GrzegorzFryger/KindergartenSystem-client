@@ -24,6 +24,7 @@ import {HistoryPaymentsComponent} from './page/payments/manger-payments/history-
 import {DiscountPaymentsComponent} from './page/payments/discount-payments/discount-payments.component';
 import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
+import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 const routes: Routes = [
   {
@@ -131,6 +132,10 @@ const routes: Routes = [
             component: DiscountPaymentsComponent
           },
         ]
+      },
+      {
+        path: 'user-edit',
+        component: UserEditComponent
       }
     ]
   }

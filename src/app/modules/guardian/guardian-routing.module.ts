@@ -7,6 +7,7 @@ import {MealComponent} from './page/meal/meal.component';
 import {AbsenceComponent} from './page/absence/absence.component';
 import {ChildrenDetailsComponent} from './page/children-details/children-details.component';
 import {HomePageComponent} from './page/home-page/home-page.component';
+import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'absence',
         component: AbsenceComponent,
+      },
+      {
+        path: 'user-edit',
+        component: UserEditComponent
       },
       {
         path: 'details',
