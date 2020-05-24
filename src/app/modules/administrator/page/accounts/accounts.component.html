@@ -1,42 +1,27 @@
-<div class="display-flex-col user-menu-container">
+<div class="account-container">
   <ng-container *ngIf="isSelected">
-    <div class="options-container">
-      <div class="display-flex-row">
-        <mat-card  matRipple  id="create" (click)="onSelect('create')" class="menu-option">
-          <mat-card-header>
-            <h2>Dodaj nowe konto</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Kliknij aby dodac dowolne nowe konto w systemie</p>
-          </mat-card-content>
+    <div class="accounts-options">
+      <div class="accounts-options-container">
+        <mat-card matRipple id="create" (click)="onSelect('create')" class="menu-option blue">
+          <h2>Dodaj nowe konto</h2>
         </mat-card>
 
-        <mat-card matRipple  id="list" (click)="onSelect('list')" class="menu-option">
-          <mat-card-header>
-            <h2>Lista wszystkich kont</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Kliknij aby zobaczyc oraz zarządzać wszsytkimi kontami w systemie</p>
-          </mat-card-content>
+        <mat-card matRipple id="list" (click)="onSelect('list')" class="menu-option orange">
+          <h2>Lista wszystkich kont</h2>
         </mat-card>
 
-        <mat-card matRipple  id="asignChild" (click)="onSelect('assign-children')" class="menu-option">
-          <mat-card-header>
-            <h2>Przypisz dzieci do rodziców</h2>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Kliknij aby zobaczyc aby przypsiac dziecko do rodzica</p>
-          </mat-card-content>
+        <mat-card matRipple id="asignChild" (click)="onSelect('assign-children')" class="menu-option blue-second">
+          <h2>Przypisz dzieci do rodziców</h2>
         </mat-card>
       </div>
     </div>
-    <div class="information-container">
-      <div class="display-flex-row">
+
+    <div class="account-chart">
+      <div class="account-chart-container">
         <app-account-chart></app-account-chart>
       </div>
     </div>
   </ng-container>
-
   <ng-container *ngIf="!isSelected">
     <div class="selected-container">
       <router-outlet></router-outlet>

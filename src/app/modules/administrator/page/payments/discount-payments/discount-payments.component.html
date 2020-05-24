@@ -35,7 +35,12 @@
               Typ:
             </div>
             <div class="value">
-              {{discountMap.get(discount.typeDiscount)}}
+              <ng-container *ngIf="discount.typeDiscount === 'AMOUNT'; else type" >
+                Kwotowa
+              </ng-container>
+              <ng-template #type >
+                Procentowa
+              </ng-template>
             </div>
           </div>
           <div class="expansion-panel-item">
