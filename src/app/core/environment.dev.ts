@@ -32,6 +32,7 @@ export const environment = {
     mealDictionary: apiUrl + '/api/dictionary/meal/',
 
     account: {
+      account: accountUrl,
       user: accountUrl + 'user',
       activate: accountUrl + 'activate',
       guardian: {
@@ -161,14 +162,14 @@ export const environment = {
       markAsCancelPayment: paymentsUrl + 'recurring-payments/',
 
       history: {
-        getChildById: paymentsUrl +  'payment-history/',
+        getChildById: paymentsUrl + 'payment-history/',
         applyBalanceCorrectionForPayment: paymentsUrl + 'payment-history/balance-correction',
         paymentLastMonth: paymentsUrl + 'payments-history/month'
       },
 
       discount: {
         getById: paymentsUrl + 'discount/',
-        getAll: paymentsUrl +  'discounts',
+        getAll: paymentsUrl + 'discounts',
         create: paymentsUrl + 'discount',
         update: paymentsUrl + 'discount',
         delete: paymentsUrl + 'discount'

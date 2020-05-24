@@ -18,7 +18,7 @@
 
           <div class="mealType" *ngFor="let mealType of mealTypes; let i = index">
 
-           <h4>{{i + 1}}. {{mealType.description}} <span>({{mealType.value}})</span></h4>
+           <h4>{{i + 1}}. {{mealType.description}} </h4>
             <mat-divider *ngIf="i != mealTypes.length - 1"></mat-divider>
           </div>
 
@@ -33,7 +33,7 @@
 
           <div class="dietType" *ngFor="let dietType  of dietTypes; let i = index">
 
-            <h4>{{i + 1}}. {{dietType.description}} <span>({{dietType.value}})</span></h4>
+            <h4>{{i + 1}}. {{dietType.description}} </h4>
             <mat-divider *ngIf="i != dietTypes.length - 1"></mat-divider>
           </div>
 

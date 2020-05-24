@@ -94,7 +94,6 @@ export class MealAddFormGuardianComponent implements OnInit {
     },
       err => {
         this.snackMessageHandlingService.error('Wybrany typ posiłku dla dziecka jest już aktywny');
-        this.mealComponent.openAddMealForm = false;
       });
   }
 
