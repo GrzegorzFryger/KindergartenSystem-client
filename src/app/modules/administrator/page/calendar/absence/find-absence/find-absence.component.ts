@@ -126,8 +126,4 @@ export class FindAbsenceComponent implements OnInit {
       }
     );
   }
-
-  private convertToDate(date: Date): Date {
-    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
-  }
 }

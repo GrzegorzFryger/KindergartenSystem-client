@@ -9,9 +9,9 @@
               <img src="../../../assets/images/tata.png" height="80" width="80" class="img-fluid"/>
             </div>
             <div class="fullname">
-             <div class="center">
-               <p>{{(getSelectedChild | async)?.name }}  {{(getSelectedChild | async)?.surname }}</p>
-             </div>
+              <div class="center">
+                <p>{{(getSelectedChild | async)?.name }}  {{(getSelectedChild | async)?.surname }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -75,14 +75,19 @@
           </div>
         </div>
 
-<!--        todo add groups -->
         <div class="profile-data-item groups">
           <p>Grupy:</p>
           <div class="d-flex">
-            <div class="item street">
+            <div class="item group-name">
               <div class="item-container">
-                <div class="label">:</div>
-                <div class="value">{{(getSelectedChild | async)?.streetNumber}}</div>
+                <div class="label">Nazwa</div>
+                <div class="value" *ngFor="let group of groupListForSelectedChild">{{group.groupName}}</div>
+              </div>
+            </div>
+            <div class="item group-description">
+              <div class="item-container">
+                <div class="label">Opis</div>
+                <div class="value" *ngFor="let group of groupListForSelectedChild">{{group.groupDescription}}</div>
               </div>
             </div>
           </div>
@@ -125,8 +130,8 @@
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
             <mat-cell *matCellDef="let absence">
-              <button mat-icon-button color="warn" (click)="deleteAbsence(absence)"
-                      [disabled]="!isDateBefore(absence)">
+              <button mat-icon-button color="warn" (click)="deleteAbsence(absence.id)"
+                      [disabled]="!isDateBefore(absence.date)">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-cell>
