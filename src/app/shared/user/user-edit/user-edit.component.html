@@ -1,7 +1,7 @@
 <!--<div class="container-fluid h-100 px-0">-->
 <div class="row justify-content-center align-items-center background-image mx-0">
   <div class="col-auto">
-    <mat-card class="mat-elevation-z16">
+    <mat-card class="mat-elevation-z3">
       <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
         <mat-card-title>Edycja konta</mat-card-title>
       </div>
@@ -74,8 +74,9 @@
 
 
               <div class="row justify-content-center align-items-center button">
-                <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="submit()">Zastosuj</button>
-                <button mat-raised-button color="warn" (click)="backToHomePage()" style="margin-left: 20px">Anuluj</button>
+                <button mat-raised-button color="warn" (click)="backToHomePage()" >Anuluj</button>
+                <button mat-raised-button color="primary" [disabled]="!editForm.valid" (click)="submit()" class="margin">
+                  Zastosuj</button>
               </div>
             </form>
           </div>

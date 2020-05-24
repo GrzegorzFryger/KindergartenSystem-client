@@ -1,15 +1,12 @@
-
 .mat-card {
   min-width: 500px;
-
 }
 
-.mat-card-title {
-  color: #606FEE;
+.mat-card {
+  border-radius: 24px;
 }
 
 .loginFormHeader {
-  background-color: #EDEEF4;
   padding: 20px;
   margin-top: -20px;
   border-radius: 10px 10px 0 0;
@@ -31,4 +28,8 @@
 .loginFormDecorator {
   float:left;
   padding: 20px;
+}
+
+.margin {
+  margin-left: 16px;
 }
