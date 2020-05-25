@@ -59,7 +59,7 @@
                     <mat-form-field>
                       <mat-label>Do kiedy posiłek</mat-label>
                       <input matInput formControlName="dateTo"
-                             [min]="maxDateToOrder"
+                             [min]="mealToAdd.mealFromDate"
                              [(ngModel)]="mealToAdd.mealToDate" [matDatepicker]="dateTo">
                       <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
                       <mat-datepicker #dateTo></mat-datepicker>

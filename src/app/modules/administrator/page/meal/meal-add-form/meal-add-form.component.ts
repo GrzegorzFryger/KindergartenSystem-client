@@ -42,7 +42,6 @@ export class MealAddFormComponent implements OnInit {
     this.getAllKids();
 
     this.minDateToOrder.setDate(this.minDateToOrder.getDate() + 1);
-    this.maxDateToOrder.setDate(this.minDateToOrder.getDate() + 1);
 
 
     this.addMealForm = this.formBuilder.group({
@@ -53,7 +52,6 @@ export class MealAddFormComponent implements OnInit {
       dateFrom: [''],
     });
   }
-
 
   getAllMealTypes() {
     this.mealService.getMealType().subscribe(resp => {

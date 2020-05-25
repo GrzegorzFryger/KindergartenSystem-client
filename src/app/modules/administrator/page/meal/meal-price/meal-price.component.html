@@ -62,7 +62,7 @@
                 <mat-label>Typ</mat-label>
                 <mat-select [(ngModel)]="addedMealPrice.mealType">
                   <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type" >
-                    {{type}}
+                    {{mealTypeBusinessName(type)}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

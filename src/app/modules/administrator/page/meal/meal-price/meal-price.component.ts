@@ -51,6 +51,10 @@ export class MealPriceComponent implements OnInit {
   }
 
   saveMealPrice() {
+    if (this.addedMealPrice.mealPrice + ''.indexOf(',') !== -1) {
+      console.log(this.addedMealPrice.mealPrice + ''.replace(/,/g, '.'));
+      this.addedMealPrice.mealPrice = parseFloat(this.addedMealPrice.mealPrice + ''.replace(',', '.'));
+    }
     const mealType = this.addedMealPrice.mealType;
     const mealPrice = this.addedMealPrice.mealPrice;
     this.mealService.addMealPrice(mealType, mealPrice).subscribe(resp => {
