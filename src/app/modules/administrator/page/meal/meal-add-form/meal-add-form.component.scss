@@ -88,11 +88,6 @@
   }
 }
 
-::ng-deep .mat-form-field-wrapper {
-  width: 400px;
-  margin-left: 100px;
-}
-
 .clear {
   clear:both;
 }
@@ -103,6 +98,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    width: 400px;
+    margin-left: 100px;
   }
 
   .mat-form-field {
