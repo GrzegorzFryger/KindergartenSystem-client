@@ -9,6 +9,7 @@ import {NavigationEnd, Router} from '@angular/router';
 export class GuardianComponent implements OnInit {
   displayChildComponent: boolean;
 
+
   constructor(private router: Router) {
     this.displayChildComponent = false;
   }
@@ -16,10 +17,10 @@ export class GuardianComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(value => {
       const navEnf = value as NavigationEnd;
-      if (navEnf.url !== ('/parent/finances' || '/parent')) {
-        this.displayChildComponent = true;
-      } else {
+      if (navEnf.url === ('/parent/finances' || '/parent')) {
         this.displayChildComponent = false;
+      } else {
+        this.displayChildComponent = true;
       }
     });
   }
