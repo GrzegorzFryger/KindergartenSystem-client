@@ -26,6 +26,7 @@ export class MealPriceComponent implements OnInit {
   addingMealPrice = false;
   mealTypeDic: Array<MealDictionary> = [];
   isValidPriceField: boolean;
+  isValidAddMealPriceField: boolean;
 
   constructor(private http: HttpClient,
               private mealService: MealService,
@@ -121,6 +122,13 @@ export class MealPriceComponent implements OnInit {
 
   isValidPrice(value: string) {
     this.isValidPriceField = value.match('^\\d+(\\,\\d+)*$') !== null;
-    console.log(this.isValidPriceField);
+  }
+
+  isValidAddMealPrice(value: string) {
+    this.isValidAddMealPriceField = value.match('^\\d+(\\,\\d+)*$') !== null;
+  }
+
+  closeEditionMode() {
+    this.editingMealPrice = false;
   }
 }

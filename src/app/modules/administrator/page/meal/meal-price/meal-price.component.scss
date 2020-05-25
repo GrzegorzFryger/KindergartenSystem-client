@@ -100,3 +100,19 @@
     color: #ffffff;
   }
 }
+
+.mealPrice-saveButton {
+  margin-left: 15px;
+  margin-top:20px;
+  .mat-button {
+    background-color: #EDEEF4;
+    color: #606FEE;
+    font-size: 10px;
+    margin-left: 3px;
+  }
+
+  .mat-button-warn {
+    background-color: #f44336;
+    color: #ffffff;
+  }
+}

@@ -6,51 +6,68 @@
 
     <mat-card-content>
 
+
       <div class="mealPriceContent">
         <mat-table #table [dataSource]="dataSource">
+          <div class="container">
+            <div class="row">
 
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="mealType">
-            <mat-header-cell *matHeaderCellDef> Meal Type</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="mealPrice">
-            <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
-            <div *matCellDef="let element">
-              <div *ngIf="!editingMealPrice">
-                <mat-cell> {{element.mealPrice | number:'1.2-2'}} zł</mat-cell>
+              <div class="col-1">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                </ng-container>
               </div>
-              <div *ngIf="editingMealPrice">
-                <mat-form-field class="mealPrice-input" style="background: #ffffff">
-                  <input value="{{element.mealPrice | number:'1.2-2'}}"
-                         (change)="isValidPrice($event.target.value)"
-                         (input)="editedMealPrice = $event.target.value" matInput >
-                  <span matSuffix>zł</span>
-                </mat-form-field>
+              <div class="col-1">
+                <ng-container matColumnDef="mealType">
+                  <mat-header-cell *matHeaderCellDef> Meal Type</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
+                </ng-container>
               </div>
+              <div class="col-3">
+                <ng-container matColumnDef="mealPrice">
+                  <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
+                  <div *matCellDef="let element">
+                    <div *ngIf="!editingMealPrice">
+                      <mat-cell> {{element.mealPrice | number:'1.2-2'}} zł</mat-cell>
+                    </div>
+                    <div *ngIf="editingMealPrice">
+                      <mat-form-field class="mealPrice-input" style="background: #ffffff">
+                        <input value="{{element.mealPrice | number:'1.2-2'}}"
+                               (change)="isValidPrice($event.target.value)"
+                               (input)="editedMealPrice = $event.target.value" matInput>
+                        <span matSuffix>zł</span>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="col-7">
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <div *ngIf="!editingMealPrice">
+                      <mat-icon (click)="editMealPrice()">edit</mat-icon>
+                      <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
+                    </div>
+                    <div *ngIf="editingMealPrice" class="mealPrice-saveButton">
+                      <button mat-button (click)="uploadMealPrice(element.id)" *ngIf="isValidPriceField"
+                              color="primary">
+                        zapisz
+                      </button>
+                      <button mat-button class="mat-button-warn" (click)="closeEditionMode()" color="warn">anuluj
+                      </button>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+              </div>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </div>
-          </ng-container>
+          </div>
 
-          <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <div *ngIf="!editingMealPrice">
-                <mat-icon (click)="editMealPrice()">edit</mat-icon>
-                <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
-              </div>
-              <div *ngIf="editingMealPrice" class="mealPrice-saveButton">
-                <button mat-stroked-button (click)="uploadMealPrice(element.id)" *ngIf="isValidPriceField" color="primary">Zapisz</button>
-              </div>
-            </mat-cell>
-          </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
       </div>
 
@@ -62,8 +79,8 @@
             <div class="col-3 offset-2">
               <mat-form-field>
                 <mat-label>Typ</mat-label>
-                <mat-select [(ngModel)]="addedMealPrice.mealType">
-                  <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type" >
+                <mat-select required [(ngModel)]="addedMealPrice.mealType">
+                  <mat-option *ngFor="let type of mealPriceAvailableToAdd" [value]="type">
                     {{mealTypeBusinessName(type)}}
                   </mat-option>
                 </mat-select>
@@ -72,13 +89,18 @@
 
             <div class="col-2">
               <mat-form-field class="mealPrice-input" style="background: #ffffff">
-                <input (input)="addedMealPrice.mealPrice = $event.target.value"  matInput >
+                <input (input)="addedMealPrice.mealPrice = $event.target.value"
+                       (change)="isValidAddMealPrice($event.target.value)"
+                       matInput>
                 <span matSuffix>zł</span>
               </mat-form-field>
             </div>
 
             <div class="col-4 addMealPrice-buttons">
-              <button mat-button color="primary" *ngIf="addedMealPrice.mealPrice != null" (click)="saveMealPrice()">zapisz</button>
+              <button mat-button color="primary"
+                      *ngIf="isValidAddMealPriceField && addedMealPrice.mealType != null"
+                      (click)="saveMealPrice()">zapisz
+              </button>
               <button mat-button class="mat-button-warn" color="warn" (click)="openAddViewMealPrice()">anuluj</button>
             </div>
 
