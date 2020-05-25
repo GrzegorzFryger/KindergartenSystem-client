@@ -7,6 +7,7 @@ import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-d
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MealDictionary} from '../../../../../data/model/meal/meal-dictionary';
+import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 
 
 @Component({
@@ -24,10 +25,12 @@ export class MealPriceComponent implements OnInit {
   addedMealPrice: MealPrice = new MealPrice();
   addingMealPrice = false;
   mealTypeDic: Array<MealDictionary> = [];
+  isValidPriceField: boolean;
 
   constructor(private http: HttpClient,
               private mealService: MealService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService) {
   }
 
   ngOnInit(): void {
@@ -52,8 +55,8 @@ export class MealPriceComponent implements OnInit {
 
   saveMealPrice() {
     if (this.addedMealPrice.mealPrice + ''.indexOf(',') !== -1) {
-      console.log(this.addedMealPrice.mealPrice + ''.replace(/,/g, '.'));
-      this.addedMealPrice.mealPrice = parseFloat(this.addedMealPrice.mealPrice + ''.replace(',', '.'));
+      console.log(parseFloat(this.addedMealPrice.mealPrice + ''.replace(',' , '.')));
+      this.addedMealPrice.mealPrice = parseFloat(this.addedMealPrice.mealPrice + ''.replace(',' , '.'));
     }
     const mealType = this.addedMealPrice.mealType;
     const mealPrice = this.addedMealPrice.mealPrice;
@@ -61,6 +64,8 @@ export class MealPriceComponent implements OnInit {
       this.getAllMealPrice();
       this.openAddViewMealPrice();
       this.getAvailableMealPrice();
+      this.addedMealPrice = null;
+      this.snackMessageHandlingService.success('Dodano poprawnie');
     });
   }
 
@@ -76,10 +81,11 @@ export class MealPriceComponent implements OnInit {
 
   uploadMealPrice(id: number) {
     this.mealService.getMealPriceById(id).subscribe(resp => {
-      resp.mealPrice = this.editedMealPrice;
+      resp.mealPrice = this.editedMealPrice.replace(',' , '.');
       this.mealService.updateMealPrice(resp).subscribe(re => {
         this.getAllMealPrice();
         this.editingMealPrice = false;
+        this.snackMessageHandlingService.success('Dane zostały zaktualizowane');
       });
     });
   }
@@ -113,4 +119,8 @@ export class MealPriceComponent implements OnInit {
   }
 
 
+  isValidPrice(value: string) {
+    this.isValidPriceField = value.match('^\\d+(\\,\\d+)*$') !== null;
+    console.log(this.isValidPriceField);
+  }
 }

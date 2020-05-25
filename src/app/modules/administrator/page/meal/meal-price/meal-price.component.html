@@ -27,7 +27,9 @@
               </div>
               <div *ngIf="editingMealPrice">
                 <mat-form-field class="mealPrice-input" style="background: #ffffff">
-                  <input [value]="element.mealPrice" (input)="editedMealPrice = $event.target.value" matInput >
+                  <input value="{{element.mealPrice | number:'1.2-2'}}"
+                         (change)="isValidPrice($event.target.value)"
+                         (input)="editedMealPrice = $event.target.value" matInput >
                   <span matSuffix>zł</span>
                 </mat-form-field>
               </div>
@@ -42,7 +44,7 @@
                 <mat-icon (click)="deleteMealPrice(element.id)">delete_outline</mat-icon>
               </div>
               <div *ngIf="editingMealPrice" class="mealPrice-saveButton">
-                <button mat-stroked-button (click)="uploadMealPrice(element.id)" color="primary">Zapisz</button>
+                <button mat-stroked-button (click)="uploadMealPrice(element.id)" *ngIf="isValidPriceField" color="primary">Zapisz</button>
               </div>
             </mat-cell>
           </ng-container>
@@ -76,8 +78,8 @@
             </div>
 
             <div class="col-4 addMealPrice-buttons">
-              <button mat-button color="primary" (click)="saveMealPrice()">zapisz</button>
-              <button mat-button color="primary" (click)="openAddViewMealPrice()">anuluj</button>
+              <button mat-button color="primary" *ngIf="addedMealPrice.mealPrice != null" (click)="saveMealPrice()">zapisz</button>
+              <button mat-button class="mat-button-warn" color="warn" (click)="openAddViewMealPrice()">anuluj</button>
             </div>
 
 
