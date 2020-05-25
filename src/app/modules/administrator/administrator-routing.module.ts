@@ -25,6 +25,7 @@ import {DiscountPaymentsComponent} from './page/payments/discount-payments/disco
 import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
+import {CalendarComponent} from './page/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -72,12 +73,18 @@ const routes: Routes = [
         component: MealOrderComponent,
       },
       {
-        path: 'dayOff',
-        component: DayOffWorkComponent,
-      },
-      {
-        path: 'absence',
-        component: AbsenceComponent,
+        path: 'calendar',
+        component: CalendarComponent,
+        children: [
+          {
+            path: 'dayOff',
+            component: DayOffWorkComponent,
+          },
+          {
+            path: 'absence',
+            component: AbsenceComponent,
+          },
+        ]
       },
       {
         path: 'check-absence',

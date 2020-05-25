@@ -86,6 +86,7 @@ import {AddChildToGroupComponent} from './page/groups/add-child-to-group/add-chi
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import { AddDayOffDialogComponent } from './page/calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
 import { AddAbsenceDialogComponent } from './page/calendar/absence/add-absence-dialog/add-absence-dialog.component';
+import { CalendarComponent } from './page/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { AddAbsenceDialogComponent } from './page/calendar/absence/add-absence-d
     AddChildToGroupComponent,
     CheckAbsenceComponent,
     AddDayOffDialogComponent,
-    AddAbsenceDialogComponent
+    AddAbsenceDialogComponent,
+    CalendarComponent
   ],
 
 
