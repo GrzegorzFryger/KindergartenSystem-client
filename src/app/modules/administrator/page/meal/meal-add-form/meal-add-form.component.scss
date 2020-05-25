@@ -88,6 +88,11 @@
   }
 }
 
+::ng-deep .mat-form-field-wrapper {
+  width: 400px;
+  margin-left: 100px;
+}
+
 .clear {
   clear:both;
 }
