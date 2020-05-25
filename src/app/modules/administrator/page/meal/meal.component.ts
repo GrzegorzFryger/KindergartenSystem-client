@@ -39,6 +39,7 @@ export class MealComponent implements OnInit {
   selectedMealId: Array<number> = [];
   mealTypeDic: Array<MealDictionary> = [];
   dietTypeDic: Array<MealDictionary> = [];
+  selectedRole: string;
 
   animal: string;
   name: string;
@@ -59,6 +60,7 @@ export class MealComponent implements OnInit {
     this.getAllMeals();
     this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
     this.mealService.getDietType().subscribe(resp => this.dietTypeDic = resp);
+    this.selectedRole = localStorage.getItem('selectedRole');
   }
 
   getAllMeals() {
