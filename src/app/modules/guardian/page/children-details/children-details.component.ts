@@ -89,6 +89,17 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  translateSex(sex: string): string {
+    switch (sex) {
+      case ('MALE'): {
+        return 'Chłopiec';
+      }
+      case ('FEMALE'): {
+        return 'Dziewczynka';
+      }
+    }
+  }
+
   isDateBefore(absenceDate: Date) {
     return this.datePipe.transform(absenceDate, 'yyyy-MM-dd') > this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
