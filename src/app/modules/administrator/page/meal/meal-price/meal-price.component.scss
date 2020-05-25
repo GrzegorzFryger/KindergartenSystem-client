@@ -86,13 +86,19 @@
 
 
 .addMealPrice-buttons {
-  margin-left: 15px;
+  margin-left: 35px;
   margin-top:20px;
   .mat-button {
     background-color: #EDEEF4;
     color: #606FEE;
     font-size: 10px;
     margin-left: 3px;
+  }
+
+  ::ng-deep .mat-button {
+    min-width: 45px;
+    line-height:26px;
+    padding: 0 5px ;
   }
 
   .mat-button-warn {
@@ -111,8 +117,14 @@
     margin-left: 3px;
   }
 
-  .mat-button-warn {
-    background-color: #f44336;
-    color: #ffffff;
-  }
+  ::ng-deep .mat-button {
+    min-width: 45px;
+    line-height:26px;
+     padding: 0 5px ;
+}
+
+.mat-button-warn {
+background-color: #f44336;
+color: #ffffff;
+}
 }
