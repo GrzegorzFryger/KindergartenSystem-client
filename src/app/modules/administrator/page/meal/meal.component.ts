@@ -119,6 +119,7 @@ export class MealComponent implements OnInit {
   addNN(nnValue: string) {
     this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
+      this.snackMessageHandlingService.success('Dodano poprawnie');
     });
   }
 
