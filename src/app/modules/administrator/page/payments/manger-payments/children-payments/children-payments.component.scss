@@ -26,9 +26,9 @@
 }
 
 .empty {
-  flex-basis: 50%;
-  background-color: white;
-  background-image: url("../../../../../../../assets/images/back_empty.png");
+  flex-basis: 100%;
+  background-color: unset !important;
+  background-image: url("../../../../../../../assets/images/payments.png");
   background-repeat: no-repeat;
   background-size: cover;
 

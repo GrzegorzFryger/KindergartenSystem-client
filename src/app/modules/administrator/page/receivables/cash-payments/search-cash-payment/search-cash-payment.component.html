@@ -103,10 +103,10 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header> Akcja</mat-header-cell>
               <mat-cell *matCellDef="let cashPayment">
                 <button mat-icon-button (click)="deleteCashPayment(cashPayment.id)">
-                  <mat-icon class="red-icon">delete</mat-icon>
+                  <mat-icon color="warn">delete</mat-icon>
                 </button>
                 <button mat-icon-button (click)="editCashPayment(cashPayment)">
-                  <mat-icon class="blue-icon">edit</mat-icon>
+                  <mat-icon color="primary">edit</mat-icon>
                 </button>
               </mat-cell>
             </ng-container>

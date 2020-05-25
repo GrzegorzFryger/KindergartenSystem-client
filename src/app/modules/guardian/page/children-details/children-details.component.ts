@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddAbsenceForChildDialogComponent} from './add-absence-for-child-dialog/add-absence-for-child-dialog.component';
 import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 import {Child} from '../../../../data/model/accounts/child';
-import {move, moveSecond} from './animations';
+import {move, moveSecond} from '../animations';
 import {YesNoDialogData} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog-data';
 import {YesNoDialogComponent} from '../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {DatePipe} from '@angular/common';
@@ -59,7 +59,6 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
 
       this.groupService.findAllGroupsForChild(child.id).subscribe(groups => {
         this.groupListForSelectedChild = groups;
-        console.log(groups);
       });
     });
   }

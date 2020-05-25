@@ -37,10 +37,10 @@ export class AddDiscountDialogComponent implements OnInit {
   }
 
   public yesClick(): void {
-    this.dialogConfig.data.typeDiscount =  this.form.get('typeDiscount').value;
-    this.dialogConfig.data.description =  this.form.get('description').value;
-    this.dialogConfig.data.name =  this.form.get('name').value;
-    this.dialogConfig.data.value =  this.form.get('value').value;
+    this.dialogConfig.data.typeDiscount = this.form.get('typeDiscount').value;
+    this.dialogConfig.data.description = this.form.get('description').value;
+    this.dialogConfig.data.name = this.form.get('name').value;
+    this.dialogConfig.data.value = this.form.get('value').value.replace(',', '.');
     this.dialogRef.close(this.dialogConfig.data);
   }
 
@@ -60,7 +60,7 @@ export class AddDiscountDialogComponent implements OnInit {
       ],
       value: [
         '',
-        [Validators.required]
+        [Validators.required, Validators.min(1), this.validationService.isCorrectNumber]
       ],
       typeDiscount: [
         '',

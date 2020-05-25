@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {AbsenceDialogComponent} from './absence-dialog.component';
+import {HistoryPaymentsListComponent} from './history-payments-list.component';
 
-describe('AbsenceDialogComponent', () => {
-  let component: AbsenceDialogComponent;
-  let fixture: ComponentFixture<AbsenceDialogComponent>;
+describe('PaymentListComponent', () => {
+  let component: HistoryPaymentsListComponent;
+  let fixture: ComponentFixture<HistoryPaymentsListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AbsenceDialogComponent ]
+      declarations: [ HistoryPaymentsListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AbsenceDialogComponent);
+    fixture = TestBed.createComponent(HistoryPaymentsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
