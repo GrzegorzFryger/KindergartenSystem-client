@@ -1,1 +1,27 @@
+.day-off-list-card {
 
+  display: flex;
+  justify-content: space-around;
+
+  .mat-card {
+    width: 90%;
+
+    .container {
+      display: flex;
+      flex-direction: row;
+
+      .inner-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-right: 150px;
+
+        .div {
+          padding-right: 16px;
+        }
+      }
+    }
+
+  }
+
+}

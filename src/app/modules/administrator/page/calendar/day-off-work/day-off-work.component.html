@@ -1,88 +1,81 @@
 <div class="day-off-list-card">
-  <div class="day-off-list-container">
-    <mat-card>
-      <div class="row">
-        <mat-card-header>
-          <h2>Dni wolne</h2>
-        </mat-card-header>
-      </div>
-      <div class="row">
-        <form (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
-          <table>
-            <tr>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj datę od</mat-label>
-                    <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
-                           class="form-control" ngModel>
-                    <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Podaj datę do</mat-label>
-                    <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
-                           class="form-control" ngModel>
-                    <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #dateSortToDatepicker></mat-datepicker>
-                  </mat-form-field>
-                </div>
-              </td>
-              <td>
-                <div class="col">
-                  <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
+  <mat-card>
+    <mat-card-header>
+      <h2>Dni wolne</h2>
+    </mat-card-header>
 
-      <div class="row">
-        <div class="col">
-          <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
-            <ng-container matColumnDef="date">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
-            </ng-container>
+    <div class="container">
+      <form class="inner-container" (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
+        <div class="div">
+          <mat-form-field appearance="standard">
+            <mat-label>Podaj datę od</mat-label>
+            <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
+                   class="form-control" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="div">
+          <mat-form-field appearance="standard">
+            <mat-label>Podaj datę do</mat-label>
+            <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
+                   class="form-control" ngModel>
+            <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateSortToDatepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="div">
+          <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
+        </div>
+      </form>
 
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="eventType">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
-              <mat-cell *matCellDef="let dayOffWork">
-                <button mat-icon-button (click)="deleteDayOff(dayOffWork.id)">
-                  <mat-icon class="mat-warn">delete</mat-icon>
-                </button>
-              </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-
-          </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <div class="inner-container">
+        <div class="div">
+          Dodaj dzień wolny
+        </div>
+        <div class="div">
+          <button mat-mini-fab color="primary" (click)="addDayOff()">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <button mat-raised-button (click)="addDayOff()">Dodaj dzień wolny</button>
-        </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+            <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
+            <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="eventType">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
+            <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+            <mat-cell *matCellDef="let dayOffWork">
+              <button mat-icon-button (click)="deleteDayOff(dayOffWork.id)">
+                <mat-icon class="mat-warn">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
-    </mat-card>
-  </div>
+    </div>
+  </mat-card>
 </div>
 
 <router-outlet></router-outlet>
