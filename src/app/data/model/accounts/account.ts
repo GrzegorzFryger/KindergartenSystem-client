@@ -11,4 +11,8 @@ export class Account {
    status: string;
    email: string;
    roles: Array<Role>;
+
+  constructor(init?: Partial<Account>) {
+    Object.assign(this, init);
+  }
 }
