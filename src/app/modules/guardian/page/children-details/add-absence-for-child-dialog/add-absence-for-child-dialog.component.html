@@ -1,43 +1,37 @@
-<h2>Dodaj nieobecność</h2>
+<div class="absence-for-child-container">
 
-<div mat-dialog-content>
-  <form class="container-fluid" [formGroup]="form">
-    <div class="row">
-      <mat-form-field appearance="standard">
-        <mat-label>Data od</mat-label>
-        <input matInput [min]="minDateFrom" [matDatepicker]="dateFrom" [matDatepickerFilter]="dateFilter"
-               placeholder="Data od" name="dateFrom"
-               formControlName="dateFrom" [(ngModel)]="minDateFrom">
-        <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
-        <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
-        <mat-datepicker #dateFrom></mat-datepicker>
-      </mat-form-field>
-    </div>
+  <form class="container-fluid absence-for-child-form" [formGroup]="form">
+    <h2>Dodaj nieobecność</h2>
+    <mat-form-field appearance="standard">
+      <mat-label>Data od</mat-label>
+      <input matInput [min]="minDateFrom" [matDatepicker]="dateFrom" [matDatepickerFilter]="dateFilter"
+             placeholder="Data od" name="dateFrom"
+             formControlName="dateFrom" [(ngModel)]="minDateFrom">
+      <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+      <mat-datepicker #dateFrom></mat-datepicker>
+    </mat-form-field>
 
-    <div class="row">
-      <mat-form-field appearance="standard">
-        <mat-label>Data do</mat-label>
-        <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" [matDatepickerFilter]="dateFilter"
-               placeholder="Data do" name="dateTo"
-               formControlName="dateTo">
-        <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
-        <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
-        <mat-datepicker #dateTo></mat-datepicker>
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="standard">
+      <mat-label>Data do</mat-label>
+      <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" [matDatepickerFilter]="dateFilter"
+             placeholder="Data do" name="dateTo"
+             formControlName="dateTo">
+      <mat-error>Wymagana jest data w poprawnym formacie</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+      <mat-datepicker #dateTo></mat-datepicker>
+    </mat-form-field>
 
-    <div class="row">
-      <mat-form-field appearance="standard">
-        <mat-label>Powód</mat-label>
-        <input matInput formControlName="reason">
-        <mat-error>Powód jest wymagany (min. 5 znaków)</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="standard">
+      <mat-label>Powód</mat-label>
+      <input matInput formControlName="reason">
+      <mat-error>Powód jest wymagany (min. 5 znaków)</mat-error>
+    </mat-form-field>
 
-    <div class="row">
-      <button mat-raised-button (click)="addAbsenceSubmit()"
-              [disabled]="!form.valid">Dodaj
-      </button>
-    </div>
+    <button mat-raised-button class="mat-primary" (click)="addAbsenceSubmit()"
+            [disabled]="!form.valid">Dodaj
+    </button>
+
+
   </form>
 </div>
