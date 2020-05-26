@@ -5,27 +5,27 @@
     </mat-card-header>
 
     <div class="container">
-      <form class="inner-container" (ngSubmit)="onFilter(filterForm)" #filterForm="ngForm">
+      <form class="inner-container" [formGroup]="form">
         <div class="div">
           <mat-form-field appearance="standard">
             <mat-label>Podaj datę od</mat-label>
-            <input matInput [matDatepicker]="dateSortFromDatepicker" placeholder="Data" name="dateFrom"
-                   class="form-control" ngModel>
-            <mat-datepicker-toggle matSuffix [for]="dateSortFromDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #dateSortFromDatepicker></mat-datepicker>
+            <input matInput [matDatepicker]="dateFrom" placeholder="Data" name="dateFrom" [(ngModel)]="minDateFrom"
+                   formControlName="dateFrom">
+            <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+            <mat-datepicker #dateFrom></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="div">
           <mat-form-field appearance="standard">
             <mat-label>Podaj datę do</mat-label>
-            <input matInput [matDatepicker]="dateSortToDatepicker" placeholder="Data" name="dateTo"
-                   class="form-control" ngModel>
-            <mat-datepicker-toggle matSuffix [for]="dateSortToDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #dateSortToDatepicker></mat-datepicker>
+            <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" placeholder="Data" name="dateTo"
+                   formControlName="dateTo">
+            <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+            <mat-datepicker #dateTo></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="div">
-          <button mat-stroked-button class="btn-primary" type="submit">Filtruj</button>
+          <button mat-raised-button class="mat-primary" (click)="filter()" [disabled]="!form.valid">Filtruj</button>
         </div>
       </form>
 
