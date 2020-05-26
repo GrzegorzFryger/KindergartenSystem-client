@@ -66,7 +66,6 @@ import {TransactionListComponent} from './page/receivables/transactions/share/tr
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
 import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
-import {GroupsComponent} from './page/groups/groups.component';
 import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 import {CashPaymentsListComponent} from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
@@ -131,7 +130,6 @@ import { CalendarComponent } from './page/calendar/calendar.component';
     AbsenceComponent,
     FindAbsenceComponent,
     MealOrderComponent,
-    GroupsComponent,
     GroupManagementComponent,
     AddGroupComponent,
     CashPaymentsListComponent,

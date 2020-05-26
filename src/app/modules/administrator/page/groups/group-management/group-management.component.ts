@@ -10,6 +10,9 @@ import {YesNoDialogData} from '../../../../../core/dialog/yes-no-dialog/yes-no-d
 import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes-no-dialog.component';
 import {Child} from '../../../../../data/model/accounts/child';
 import {AddChildToGroupComponent} from '../add-child-to-group/add-child-to-group.component';
+import {AddGroupComponent} from '../add-group/add-group.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AddDayOffDialogComponent} from '../../calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
 
 @Component({
   selector: 'app-group-management',
@@ -28,17 +31,44 @@ export class GroupManagementComponent implements OnInit {
   groupDetails: Group = new Group();
   selectedGroupId: string;
   childIdFromDialog: string;
+  form: FormGroup;
 
   public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
   public groupDetailsDataSource: MatTableDataSource<Child> = new MatTableDataSource();
 
   constructor(private groupService: GroupService,
               private dialog: MatDialog,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.initializeTables();
+  }
+
+  addGroup() {
+    this.openAddGroupDialog();
+  }
+
+  private openAddGroupDialog(): void {
+    const dialogRef = this.dialog.open(AddGroupComponent);
+
+    const sub = dialogRef.componentInstance.formResponse.subscribe(group => {
+      this.dialog.closeAll();
+      this.groupService.createGroup(group).subscribe(
+        () => {
+          this.snackMessageHandlingService.success('Pomyślnie utworzono grupę');
+        },
+        error => {
+          this.snackMessageHandlingService.error('Nie udało się utworzyć grupy');
+        }
+      );
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.initializeTables();
+      sub.unsubscribe();
+    });
   }
 
   deleteGroup(groupId: string): void {
@@ -78,12 +108,8 @@ export class GroupManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        if (result == null) {
-          this.snackMessageHandlingService.error('Nie wybrano dziecka');
-        } else {
           this.addChild(result);
           this.openGroupDetailsTable(this.selectedGroupId);
-        }
       }
     );
   }

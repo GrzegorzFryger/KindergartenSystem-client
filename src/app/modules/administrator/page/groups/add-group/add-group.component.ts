@@ -4,6 +4,7 @@ import {Group} from '../../../../../data/model/groups/group';
 import {GroupService} from '../../../../../data/service/groups/group.service';
 import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-add-group',
@@ -12,42 +13,29 @@ import {SnackMessageHandlingService} from '../../../../../core/snack-message-han
 })
 export class AddGroupComponent implements OnInit {
 
+  group: Group;
   public form: FormGroup;
+  formResponse: Observable<Group>;
+  formResponseSub: Subject<Group>;
 
   public groupName = '';
   public groupDescription = '';
 
-  constructor(private groupService: GroupService,
-              private validationService: ValidatorsService,
-              private fb: FormBuilder,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+  constructor(private fb: FormBuilder) {
+    this.formResponseSub = new Subject<Group>();
+    this.formResponse = this.formResponseSub.asObservable();
   }
 
   ngOnInit(): void {
     this.initializeForm();
   }
 
-  public addGroup() {
-    const group = this.buildGroup();
-    this.groupService.createGroup(group).subscribe(
-      resp => {
-      },
-      error => {
-        this.snackMessageHandlingService.error('Wystąpił problem z utworzeniem grupy');
-      },
-      () => {
-        this.snackMessageHandlingService.success('Utworzono grupę');
-        this.resetForm();
-      }
-    );
-  }
+  addGroupSubmit() {
+    this.group = new Group();
+    this.group.groupName = this.form.get('groupName').value;
+    this.group.groupDescription = this.form.get('groupDescription').value;
 
-  private buildGroup(): Group {
-    const group = new Group();
-    group.groupName = this.form.get('groupName').value;
-    group.groupDescription = this.form.get('groupDescription').value;
-
-    return group;
+    this.formResponseSub.next(this.group);
   }
 
   private initializeForm(): void {
@@ -61,12 +49,6 @@ export class AddGroupComponent implements OnInit {
         [Validators.required, Validators.minLength(5)]
       ]
     });
-  }
-
-  private resetForm(): void {
-    this.form.reset();
-    this.groupName = '';
-    this.groupDescription = '';
   }
 
 }

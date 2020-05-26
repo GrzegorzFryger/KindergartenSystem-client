@@ -1,3 +1,45 @@
 .mat-icon {
   cursor: pointer;
 }
+
+mat-card {
+  width: 90%;
+  border-radius: 25px;
+}
+
+.group-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .group-management-card {
+
+    .group-management-header {
+      display: flex;
+      justify-content: space-between;
+
+      .add-group-button-container {
+        padding-right: 20px;
+      }
+    }
+  }
+
+  .group-details-card {
+    padding-top: 20px;
+
+    .group-details-header {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+
+      .close-button-container {
+        padding-right: 20px;
+      }
+    }
+  }
+
+}
+
+
+
+
