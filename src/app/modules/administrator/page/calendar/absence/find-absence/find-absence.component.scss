@@ -1,0 +1,53 @@
+.find-absence-container {
+  display: flex;
+  justify-content: space-around;
+
+  .mat-card {
+    width: 90%;
+
+    .find-absence-controls-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+
+      .add-absence-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .div {
+          padding-right: 16px;
+        }
+      }
+
+      .find-absence-search-fields {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+
+        .find-absence-form {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .mat-form-field {
+            padding-right: 16px;
+          }
+        }
+
+        .search {
+          width: 70%;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+
+
+
