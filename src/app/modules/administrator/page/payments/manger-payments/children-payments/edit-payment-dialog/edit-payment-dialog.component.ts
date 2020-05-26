@@ -52,8 +52,7 @@ export class EditPaymentDialogComponent implements OnInit {
     this.dialogConfig.data.recurringPayment.type = this.form.get('type').value;
     this.dialogConfig.data.recurringPayment.amount = this.form.get('amount').value.toString().replace(',', '.');
     this.dialogConfig.data.recurringPayment.description = this.form.get('description').value;
-    this.dialogConfig.data.discount = this.form.get('discount').value;
-
+    this.dialogConfig.data.recurringPayment.discount = this.form.get('discount').value;
     this.dialogRef.close(this.dialogConfig.data);
   }
 
@@ -67,7 +66,7 @@ export class EditPaymentDialogComponent implements OnInit {
 
   private initializeForm(): void {
     this.form = this.fb.group({
-      discount: ['', ],
+      discount: [this.dialogConfig.data.recurringPayment.discount, ],
       amount: [this.dialogConfig.data.recurringPayment.amount, [Validators.required, this.validationService.isCorrectNumber]],
       description: [this.dialogConfig.data.recurringPayment.description, [Validators.required, Validators.minLength(3)]],
       child: ['', ],

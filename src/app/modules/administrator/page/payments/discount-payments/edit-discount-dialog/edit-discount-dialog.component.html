@@ -27,7 +27,7 @@
         <div class="add-discount-dialog-filed-container ">
           <mat-form-field appearance="standard" >
             <mat-label>Typ płatności</mat-label>
-            <mat-select formControlName="typeDiscount" [(ngModel)]="discountTypes[0].value">
+            <mat-select formControlName="typeDiscount" [(ngModel)]="this.discountType">
               <mat-option *ngFor="let paymentType of discountTypes" [value]="paymentType.value">
                 {{paymentType.viewValue}}
               </mat-option>

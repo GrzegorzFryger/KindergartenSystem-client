@@ -6,8 +6,10 @@
         <div class="header-item">
           <div class="header">
             <div class="image">
-              <img *ngIf="(getSelectedChild | async)?.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"/>
-              <img *ngIf="(getSelectedChild | async)?.gender == 'MALE' " src="../../../../../assets/images/icon-boy.png"/>
+              <img *ngIf="(getSelectedChild | async)?.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"
+                   height="100" width="100"/>
+              <img *ngIf="(getSelectedChild | async)?.gender == 'MALE' " src="../../../../../assets/images/icon-boy.png"
+                   height="100" width="100"/>
             </div>
             <div class="fullname">
               <div class="center">

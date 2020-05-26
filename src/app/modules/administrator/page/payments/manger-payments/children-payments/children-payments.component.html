@@ -2,7 +2,7 @@
 
   <ng-container *ngIf="(data | async )?.length === 0">
     <div class="expansion-panel-container empty">
-      <p>Brak aktywnych płatności</p>
+
     </div>
   </ng-container>
 
@@ -13,7 +13,7 @@
           Kwota:
         </div>
         <div class="value">
-          {{payment.amount}} PLN
+          {{payment.amount | number:'1.2-2'}} PLN
         </div>
       </div>
       <div class="expansion-panel-item">
