@@ -65,7 +65,8 @@ export class MealPriceComponent implements OnInit {
       this.getAllMealPrice();
       this.openAddViewMealPrice();
       this.getAvailableMealPrice();
-      this.addedMealPrice = null;
+      this.addedMealPrice.mealPrice = null;
+      this.addedMealPrice.mealType = null;
       this.snackMessageHandlingService.success('Dodano poprawnie');
     });
   }
