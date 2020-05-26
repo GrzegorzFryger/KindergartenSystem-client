@@ -16,7 +16,8 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   form: FormGroup;
   formResponseSub: Subject<AbsenceRange>;
   formResponse: Observable<AbsenceRange>;
-  minDateFrom: Date = new Date();
+  todayDate: Date = new Date();
+  minDateFrom: Date;
 
   constructor(private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -24,7 +25,8 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
     this.formResponseSub = new Subject<AbsenceRange>();
     this.formResponse = this.formResponseSub.asObservable();
 
-    this.minDateFrom.setDate(this.minDateFrom.getDate() + 1);
+    this.todayDate.setDate(this.todayDate.getDate() + 1);
+    this.minDateFrom = this.todayDate;
   }
 
   ngOnInit(): void {
@@ -56,15 +58,16 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   private initializeForm(): void {
     this.form = this.fb.group({
       dateFrom: [
-        this.minDateFrom, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
+        this.todayDate, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
       ],
       dateTo: [
-        this.minDateFrom, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
+        this.todayDate, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
       ],
       reason: [
         '', [Validators.required, Validators.minLength(5)]
       ]
     });
+    console.log(this.minDateFrom);
   }
 
   dateFilter = (d: Date | null): boolean => {

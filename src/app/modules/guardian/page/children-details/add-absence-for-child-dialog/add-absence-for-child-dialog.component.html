@@ -4,7 +4,7 @@
     <h2>Dodaj nieobecność</h2>
     <mat-form-field appearance="standard">
       <mat-label>Data od</mat-label>
-      <input matInput [min]="minDateFrom" [matDatepicker]="dateFrom" [matDatepickerFilter]="dateFilter"
+      <input matInput [min]="todayDate" [matDatepicker]="dateFrom" [matDatepickerFilter]="dateFilter"
              placeholder="Data od" name="dateFrom"
              formControlName="dateFrom" [(ngModel)]="minDateFrom">
       <mat-error>Wymagana jest data w poprawnym formacie</mat-error>

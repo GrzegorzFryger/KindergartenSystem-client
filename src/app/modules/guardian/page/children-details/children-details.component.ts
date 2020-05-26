@@ -48,18 +48,21 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
     this.childSubscription = this.selectedChildService.selectedChild.subscribe(child => {
       this.selectedChildId = child.id;
       this.selectedChildName = child.name + ' ' + child.surname;
+      this.getAbsencesForChild(child.id);
 
       this.runAnimations();
-
-      this.absenceService.getAllAbsencesByChildId(child.id).subscribe(absences => {
-        this.absenceDataSource.data = absences;
-        this.absenceDataSource.sort = this.sort.toArray()[0];
-        this.absenceDataSource.paginator = this.paginator.toArray()[0];
-      });
 
       this.groupService.findAllGroupsForChild(child.id).subscribe(groups => {
         this.groupListForSelectedChild = groups;
       });
+    });
+  }
+
+  getAbsencesForChild(childId: string) {
+    this.absenceService.getAllAbsencesByChildId(childId).subscribe(absences => {
+      this.absenceDataSource.data = absences;
+      this.absenceDataSource.sort = this.sort.toArray()[0];
+      this.absenceDataSource.paginator = this.paginator.toArray()[0];
     });
   }
 
@@ -72,19 +75,22 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
       data: {childId: this.selectedChildId}
     });
 
-    const sub = dialogRef.componentInstance.formResponse.subscribe(resp => {
+    const sub = dialogRef.componentInstance.formResponse.subscribe(absence => {
       this.dialog.closeAll();
-      this.absenceService.createAbsences(resp).subscribe(
-        () => {
+      this.absenceService.createAbsences(absence).subscribe(
+        resp => {
           this.snackMessageHandlingService.success('Pomyślnie dodano nieobecności');
         },
         error => {
           this.snackMessageHandlingService.error('Nie udało się dodać nieobecności');
+        },
+        () => {
+          this.getAbsencesForChild(this.selectedChildId);
         });
+
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.absenceDataSource.data = this.absenceDataSource.data.filter(data => data.id !== this.selectedChildId);
       sub.unsubscribe();
     });
   }
@@ -132,10 +138,10 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
         resp => {
           this.snackMessageHandlingService.success('Nieobecność została usunięta');
         }, error => {
-          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dnia wolnego');
+          this.snackMessageHandlingService.error('Wystąpił problem z usunięciem nieobecności');
         },
         () => {
-          // ON COMPLETE
+          this.getAbsencesForChild(this.selectedChildId);
         }
       );
     } else {
