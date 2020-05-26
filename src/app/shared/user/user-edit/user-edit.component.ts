@@ -28,20 +28,20 @@ export class UserEditComponent implements OnInit {
       this.currentUser = resp;
 
       this.formUser.id = this.currentUser.id;
-      this.formUser.address.postalCode = this.currentUser.postalCode;
-      this.formUser.address.city = this.currentUser.city;
-      this.formUser.address.streetNumber = this.currentUser.streetNumber;
-      this.formUser.fullName.name = this.currentUser.name;
-      this.formUser.fullName.surname = this.currentUser.surname;
-      this.formUser.phoneNumber.phone = this.currentUser.phone;
+      this.formUser.postalCode = this.currentUser.postalCode;
+      this.formUser.city = this.currentUser.city;
+      this.formUser.streetNumber = this.currentUser.streetNumber;
+      this.formUser.name = this.currentUser.name;
+      this.formUser.surname = this.currentUser.surname;
+      this.formUser.phone = this.currentUser.phone;
     });
 
 
     this.editForm = this.fb.group({
-      postalCode: ['', [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
-      city: ['', [Validators.required, Validators.pattern('.{3,}')]],
-      streetNumber: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
+      postalCode: [this.formUser.postalCode, [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
+      city: [this.formUser.city, [Validators.required, Validators.pattern('.{3,}')]],
+      streetNumber: [this.formUser.streetNumber, [Validators.required]],
+      phone: [this.formUser.phone, [Validators.required, Validators.pattern('[0-9]{9}')]],
     });
   }
 
