@@ -6,24 +6,29 @@
     <div class="find-absence-controls-container">
       <div class="find-absence-search-fields">
 
-        <form class="find-absence-form" (ngSubmit)="onSubmit(form)" #form="ngForm">
-          <mat-form-field appearance="standard">
-            <mat-label>Podaj datę początkową</mat-label>
-            <input matInput [matDatepicker]="startDatepicker" placeholder="Data początkowa" name="startDate"
-                   class="form-control"
-                   ngModel>
-            <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #startDatepicker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="standard">
-            <mat-label>Podaj datę końcową</mat-label>
-            <input matInput [matDatepicker]="endDatepicker" placeholder="Data końcowa" name="endDate"
-                   class="form-control"
-                   ngModel>
-            <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #endDatepicker></mat-datepicker>
-          </mat-form-field>
-          <button mat-stroked-button class="btn-primary" type="submit">Szukaj</button>
+        <form class="find-absence-form" [formGroup]="form">
+          <div class="div">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę od</mat-label>
+              <input matInput [matDatepicker]="startDate" placeholder="Data" name="startDate" [(ngModel)]="minDateFrom"
+                     formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="div">
+            <mat-form-field appearance="standard">
+              <mat-label>Podaj datę do</mat-label>
+              <input matInput [min]="minDateFrom" [matDatepicker]="endDate" placeholder="Data" name="endDate"
+                     formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="div">
+            <button mat-raised-button class="mat-primary" (click)="filter()" [disabled]="!form.valid">Znajdź
+            </button>
+          </div>
         </form>
 
         <mat-form-field class="search" appearance="standard">
@@ -66,9 +71,6 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
             <mat-cell *matCellDef="let absence">
-              <button mat-icon-button>
-                <mat-icon>edit</mat-icon>
-              </button>
               <button mat-icon-button (click)="deleteAbsence(absence.id)">
                 <mat-icon class="mat-warn">delete</mat-icon>
               </button>

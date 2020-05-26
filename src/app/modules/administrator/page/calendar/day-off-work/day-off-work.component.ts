@@ -59,8 +59,6 @@ export class DayOffWorkComponent implements OnInit {
   filter(): void {
     this.dateFrom = this.convertToDate(this.form.get('dateFrom').value);
     this.dateTo = this.convertToDate(this.form.get('dateTo').value);
-    console.log(this.dateFrom);
-    console.log(this.dateTo);
     this.filterByDate(this.dateFrom, this.dateTo);
   }
 
