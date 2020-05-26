@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatCalendar, MatCalendarCellCssClasses} from '@angular/material/datepicker';
 import {MealService} from '../../../../../data/service/meal/meal.service';
 import {MealOrder} from '../../../../../data/model/meal/meal-order';
-import { formatDate } from '@angular/common';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { formatDate } from '@angular/common';
 export class MealOrderComponent implements OnInit {
   @ViewChild('calendar')
   myCalendar: MatCalendar<any>;
-  selectedDate: any;
+  selectedDate = new Date();
   maxDate: Date = new Date();
   orderForSelectedDate: Array<MealOrder>;
 
@@ -24,17 +24,15 @@ export class MealOrderComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.getMealBySelectedDate();
   }
 
   getMealBySelectedDate() {
-    const orderdate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
-    this.mealService.getMealBySelectedDate(orderdate).subscribe(resp => {
+    const orderDate = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US');
+    this.mealService.getMealBySelectedDate(orderDate).subscribe(resp => {
       this.orderForSelectedDate = resp;
     });
   }
-
-
 
 
 }

@@ -186,6 +186,12 @@ md-tab-group {
     }
   }
 
+  .example-large-box {
+    span {
+      white-space: normal !important;
+      word-wrap: break-word;
+    }
+  }
 
   .input_area {
 

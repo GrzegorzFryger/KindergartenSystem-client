@@ -192,6 +192,13 @@ md-tab-group {
     .mat-form-field-required-marker {
       color: red;
     }
+
+  }
+  .example-large-box {
+    span {
+      white-space: normal !important;
+      word-wrap: break-word;
+    }
   }
 
 

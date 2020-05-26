@@ -122,7 +122,7 @@
               </div>
               <div class="col col-9 childDetails">
                 <div class="childDetailsHeader">
-                  <span>{{childDetails.name}} {{childDetails.name}}</span>
+                  <span>{{childDetails.name}} {{childDetails.surname}}</span>
                 </div>
 
 
@@ -135,8 +135,8 @@
 
                           <mat-form-field class="example-full-width">
                             <mat-label>Uwagi</mat-label>
-                            <textarea matInput #message maxlength="256"></textarea>
-                            <mat-hint align="start">{{message.value.length}} / 256</mat-hint>
+                            <textarea matInput #message maxlength="150"></textarea>
+                            <mat-hint align="start">{{message.value.length}} / 150</mat-hint>
                           </mat-form-field>
 
                         </div>
