@@ -3,12 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AbsenceRange} from '../../../../../data/model/absence/absence-range';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Observable, Subject} from 'rxjs';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 
 @Component({
   selector: 'app-add-absence-for-child',
   templateUrl: './add-absence-for-child-dialog.component.html',
-  styleUrls: ['./add-absence-for-child-dialog.component.scss']
+  styleUrls: ['./add-absence-for-child-dialog.component.scss'],
 })
 export class AddAbsenceForChildDialogComponent implements OnInit {
 
@@ -16,15 +15,16 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   form: FormGroup;
   formResponseSub: Subject<AbsenceRange>;
   formResponse: Observable<AbsenceRange>;
-  minDateFrom: Date = new Date();
+  todayDate: Date = new Date();
+  minDateFrom: Date;
 
   constructor(private fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     this.formResponseSub = new Subject<AbsenceRange>();
     this.formResponse = this.formResponseSub.asObservable();
 
-    this.minDateFrom.setDate(this.minDateFrom.getDate() + 1);
+    this.todayDate.setDate(this.todayDate.getDate() + 1);
+    this.minDateFrom = this.todayDate;
   }
 
   ngOnInit(): void {
@@ -34,37 +34,27 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   addAbsenceSubmit() {
     this.absencePreview = {
       childId: this.data.childId,
-      dateFrom: new Date(this.form.get('dateFrom').value),
-      dateTo: new Date(this.form.get('dateTo').value),
+      dateFrom: this.form.get('dateFrom').value,
+      dateTo: this.form.get('dateTo').value,
       reason: this.form.get('reason').value
     };
-
-    if (this.checkDates(this.absencePreview.dateFrom, this.absencePreview.dateTo)) {
-      this.formResponseSub.next(this.absencePreview);
-    }
-  }
-
-  private checkDates(dateFrom: Date, dateTo: Date): boolean {
-    if (dateFrom.getTime() > dateTo.getTime()) {
-      this.snackMessageHandlingService.error('Data DO nie może być przed datą OD');
-      return false;
-    } else {
-      return true;
-    }
+    this.absencePreview.dateFrom.setDate(this.absencePreview.dateFrom.getDate() - 1);
+    this.formResponseSub.next(this.absencePreview);
   }
 
   private initializeForm(): void {
     this.form = this.fb.group({
       dateFrom: [
-        this.minDateFrom, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
+        this.todayDate, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
       ],
       dateTo: [
-        this.minDateFrom, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
+        this.todayDate, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]
       ],
       reason: [
         '', [Validators.required, Validators.minLength(5)]
       ]
     });
+    console.log(this.minDateFrom);
   }
 
   dateFilter = (d: Date | null): boolean => {

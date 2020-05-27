@@ -17,7 +17,6 @@ import {SearchTransactionComponent} from './page/receivables/transactions/search
 import {DayOffWorkComponent} from './page/calendar/day-off-work/day-off-work.component';
 import {AbsenceComponent} from './page/calendar/absence/absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
-import {GroupsComponent} from './page/groups/groups.component';
 import {PaymentsComponent} from './page/payments/payments.component';
 import {ChildrenPaymentsComponent} from './page/payments/manger-payments/children-payments/children-payments.component';
 import {HistoryPaymentsComponent} from './page/payments/manger-payments/history-payments/history-payments.component';
@@ -25,6 +24,9 @@ import {DiscountPaymentsComponent} from './page/payments/discount-payments/disco
 import {MangerPaymentsComponent} from './page/payments/manger-payments/manger-payments.component';
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
 import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
+import {CalendarComponent} from './page/calendar/calendar.component';
+import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
+import {GroupsComponent} from './page/groups/groups.component';
 
 const routes: Routes = [
   {
@@ -72,12 +74,18 @@ const routes: Routes = [
         component: MealOrderComponent,
       },
       {
-        path: 'dayOff',
-        component: DayOffWorkComponent,
-      },
-      {
-        path: 'absence',
-        component: AbsenceComponent,
+        path: 'calendar',
+        component: CalendarComponent,
+        children: [
+          {
+            path: 'dayOff',
+            component: DayOffWorkComponent,
+          },
+          {
+            path: 'absence',
+            component: AbsenceComponent,
+          },
+        ]
       },
       {
         path: 'check-absence',

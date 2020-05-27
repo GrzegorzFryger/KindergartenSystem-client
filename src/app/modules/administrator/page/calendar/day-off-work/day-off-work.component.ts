@@ -10,6 +10,7 @@ import {YesNoDialogComponent} from '../../../../../core/dialog/yes-no-dialog/yes
 import {MatDialog} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {AddDayOffDialogComponent} from './add-day-off-dialog/add-day-off-dialog.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-day-off-work',
@@ -25,15 +26,21 @@ export class DayOffWorkComponent implements OnInit {
 
   public columnsToDisplay: string[] = ['date', 'name', 'eventType', 'actions'];
 
+  form: FormGroup;
   dateFrom: Date = null;
   dateTo: Date = null;
+  minDateFrom: Date;
 
-  constructor(private dayOffWorkService: DayOffWorkService, private datePipe: DatePipe,
-              private dialog: MatDialog, private snackMessageHandlingService: SnackMessageHandlingService) {
+  constructor(private dayOffWorkService: DayOffWorkService,
+              private datePipe: DatePipe,
+              private dialog: MatDialog,
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.getAllDaysOff();
+    this.initializeForm();
   }
 
   public deleteDayOff(dayOffWorkId: string): void {
@@ -49,21 +56,17 @@ export class DayOffWorkComponent implements OnInit {
     });
   }
 
-  onFilter(submittedForm?): void {
-    this.dateFrom = this.convertToDate(submittedForm.value.dateFrom);
-    this.dateTo = this.convertToDate(submittedForm.value.dateTo);
+  filter(): void {
+    this.dateFrom = this.convertToDate(this.form.get('dateFrom').value);
+    this.dateTo = this.convertToDate(this.form.get('dateTo').value);
     this.filterByDate(this.dateFrom, this.dateTo);
   }
 
   filterByDate(dateFrom: Date, dateTo: Date) {
     this.dayOffWorkService.findAllDaysOffWork().subscribe(resp => {
-      this.dataSource.data = resp.filter(m => new Date(m.date) >= new Date(dateFrom) &&
-        new Date(m.date) <= new Date(dateTo));
+      this.dataSource.data = resp.filter(m => new Date(m.date) >= dateFrom &&
+        new Date(m.date) <= dateTo);
     });
-  }
-
-  public convertToDate(date: Date): Date {
-    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
   translateEventType(eventType: string): string {
@@ -83,16 +86,23 @@ export class DayOffWorkComponent implements OnInit {
     }
   }
 
+  private initializeForm(): void {
+    this.form = this.fb.group({
+      dateFrom: [
+        '', [Validators.required]
+      ],
+      dateTo: [
+        '', [Validators.required]
+      ]
+    });
+  }
+
   private removeDayOff(confirmation: boolean, id: string): void {
     if (confirmation) {
       this.dayOffWorkService.deleteDayOffWork(id).subscribe(
         resp => {
           this.snackMessageHandlingService.success('Dzień wolny został usunięty');
-          if (this.dateFrom == null || this.dateTo == null) {
-            this.getAllDaysOff();
-          } else {
-            this.filterByDate(this.dateFrom, this.dateTo);
-          }
+          this.getAllDaysOff();
         }, error => {
           this.snackMessageHandlingService.error('Wystąpił problem z usunięciem dnia wolnego');
         },
@@ -141,6 +151,10 @@ export class DayOffWorkComponent implements OnInit {
       this.getAllDaysOff();
       sub.unsubscribe();
     });
+  }
+
+  private convertToDate(date: Date): Date {
+    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
   }
 
 }

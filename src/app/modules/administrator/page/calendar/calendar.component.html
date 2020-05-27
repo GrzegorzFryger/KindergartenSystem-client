@@ -1,0 +1,16 @@
+<div class="calendar-main-container">
+  <ng-container *ngIf="isSelected">
+    <div class="calendar-main-options">
+      <div class="calendar-main-options-container">
+        <mat-card matRipple routerLink="/administrator/calendar/absence" class="calendar-main-option-card">
+          <h2>Zarządzanie nieobecnościami</h2>
+        </mat-card>
+        <mat-card matRipple routerLink="/administrator/calendar/dayOff" class="calendar-main-option-card">
+          <h2>Zarządzanie dniami wolnymi</h2>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+
+  <router-outlet></router-outlet>
+</div>

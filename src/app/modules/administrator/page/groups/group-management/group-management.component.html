@@ -1,80 +1,77 @@
-<div class="group-list-container">
-  <mat-card>
-    <div class="row">
-      <mat-card-header>
-        <h3>Zarządzaj grupami</h3>
-      </mat-card-header>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-table [dataSource]="groupListDataSource" matSort matSortActive="groupName" matSortDirection="asc">
-          <ng-container matColumnDef="groupName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa grupy</mat-header-cell>
-            <mat-cell *matCellDef="let group"> {{group.groupName}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="groupDescription">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Opis grupy</mat-header-cell>
-            <mat-cell *matCellDef="let group"> {{group.groupDescription}} </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
-            <mat-cell *matCellDef="let group">
-              <mat-icon matTooltip="Zarządzaj grupą" (click)="openGroupDetailsTable(group.id)">child_care</mat-icon>
-              <mat-icon matTooltip="Usuń grupę" class="mat-warn" (click)="deleteGroup(group.id)">delete</mat-icon>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="groupListColumnsToDisplay"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: groupListColumnsToDisplay;"></mat-row>
-        </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-card class="group-card-container">
+  <div class="group-card-header">
+    <mat-card-header>
+      <h2>Zarządzaj grupami</h2>
+    </mat-card-header>
+    <div class="group-add-button-container">
+      <div>Dodaj grupę
+        <button mat-mini-fab color="primary" (click)="addGroup()">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </div>
-  </mat-card>
-
-  <div class="groupDetailsCard" *ngIf="openedGroupDetailsTable">
-    <mat-card>
-      <div class="row">
-        <div class="col">
-          <mat-card-header>
-            <h3>Zarządzaj grupą {{groupDetails.groupName}}</h3>
-          </mat-card-header>
-        </div>
-        <div class="col">
-          <mat-icon matTooltip="Zamknij" (click)="closeGroupDetailsTable()">close</mat-icon>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-table [dataSource]="groupDetailsDataSource" matSort matSortActive="surname" matSortDirection="asc">
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-              <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="surname">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
-              <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="actions">
-              <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
-              <mat-cell *matCellDef="let child">
-                <mat-icon matTooltip="Usuń dziecko z grupy" class="mat-warn" (click)="deleteChildFromGroup(child.id)">
-                  delete
-                </mat-icon>
-              </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="childListColumnsToDisplay"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: childListColumnsToDisplay;"></mat-row>
-          </mat-table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <button mat-raised-button (click)="addChildToGroup()">Dodaj dziecko do grupy</button>
-        </div>
-      </div>
-    </mat-card>
   </div>
-</div>
+  <div class="group-table-container">
+    <mat-table [dataSource]="groupListDataSource" matSort matSortActive="groupName" matSortDirection="asc">
+      <ng-container matColumnDef="groupName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa grupy</mat-header-cell>
+        <mat-cell *matCellDef="let group"> {{group.groupName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="groupDescription">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Opis grupy</mat-header-cell>
+        <mat-cell *matCellDef="let group"> {{group.groupDescription}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
+        <mat-cell *matCellDef="let group">
+          <mat-icon matTooltip="Zarządzaj grupą" (click)="openGroupDetailsTable(group.id)">child_care</mat-icon>
+          <mat-icon matTooltip="Usuń grupę" class="mat-warn" (click)="deleteGroup(group.id)">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="groupListColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: groupListColumnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>
+
+<mat-card class="group-card-container" *ngIf="openedGroupDetailsTable">
+  <div class="group-card-header">
+    <mat-card-header>
+      <h3>Zarządzaj grupą {{groupDetails.groupName}}</h3>
+    </mat-card-header>
+    <div class="group-add-button-container">
+      <mat-icon matTooltip="Zamknij" (click)="closeGroupDetailsTable()">close</mat-icon>
+      <div class="add-child-to-group-button">Dodaj dziecko do grupy
+        <button mat-mini-fab color="primary" (click)="addChildToGroup()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="group-table-container">
+    <mat-table [dataSource]="groupDetailsDataSource" matSort matSortActive="surname" matSortDirection="asc">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="surname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+        <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Akcja</mat-header-cell>
+        <mat-cell *matCellDef="let child">
+          <mat-icon matTooltip="Usuń dziecko z grupy" class="mat-warn" (click)="deleteChildFromGroup(child.id)">
+            delete
+          </mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="childListColumnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: childListColumnsToDisplay;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

@@ -1,3 +1,28 @@
+.group-card-container {
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  .group-card-header {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+
+    .group-add-button-container {
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+
+      .mat-icon {
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
 .mat-icon {
   cursor: pointer;
 }
+

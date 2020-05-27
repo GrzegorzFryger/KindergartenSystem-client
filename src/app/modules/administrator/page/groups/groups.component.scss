@@ -1,10 +1,8 @@
-.addGroupCard {
-  float: left;
-  width: fit-content;
-  margin-right: 10px;
-}
+.groups-main-container {
+  display: flex;
+  justify-content: center;
 
-.groupManagementCard {
-  float: left;
-  width: 80%;
+  .groups-main-content {
+    width: 90%;
+  }
 }
