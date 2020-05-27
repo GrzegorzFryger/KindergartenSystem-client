@@ -1,90 +1,79 @@
-<div class="find-absence-container">
-  <mat-card>
-    <mat-card-header>
-      <h2>Znajdź nieobecność</h2>
-    </mat-card-header>
-    <div class="find-absence-controls-container">
-      <div class="find-absence-search-fields">
+<div class="absence-card-header">
+  <mat-card-header>
+    <h2>Znajdź nieobecność</h2>
+  </mat-card-header>
+</div>
+<div class="form-container">
+  <div class="form-fields">
+    <form class="find-absence-form container-fluid" [formGroup]="form">
+      <mat-form-field class="form-item-container" appearance="standard">
+        <mat-label>Podaj datę od</mat-label>
+        <input matInput [matDatepicker]="startDate" placeholder="Data" name="startDate" [(ngModel)]="minDateFrom"
+               formControlName="startDate">
+        <mat-error>Data jest wymagana</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="form-item-container" appearance="standard">
+        <mat-label>Podaj datę do</mat-label>
+        <input matInput [min]="minDateFrom" [matDatepicker]="endDate" placeholder="Data" name="endDate"
+               formControlName="endDate">
+        <mat-error>Data 'do' musi być po dacie 'od'</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
 
-        <form class="find-absence-form" [formGroup]="form">
-          <div class="div">
-            <mat-form-field appearance="standard">
-              <mat-label>Podaj datę od</mat-label>
-              <input matInput [matDatepicker]="startDate" placeholder="Data" name="startDate" [(ngModel)]="minDateFrom"
-                     formControlName="startDate">
-              <mat-error>Data jest wymagana</mat-error>
-              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-              <mat-datepicker #startDate></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="div">
-            <mat-form-field appearance="standard">
-              <mat-label>Podaj datę do</mat-label>
-              <input matInput [min]="minDateFrom" [matDatepicker]="endDate" placeholder="Data" name="endDate"
-                     formControlName="endDate">
-              <mat-error>Data 'do' musi być po dacie 'od'</mat-error>
-              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-              <mat-datepicker #endDate></mat-datepicker>
-            </mat-form-field>
-          </div>
-          <div class="div">
-            <button mat-raised-button class="mat-primary" (click)="filter()" [disabled]="!form.valid">Znajdź
-            </button>
-          </div>
-        </form>
-
-        <mat-form-field class="search" appearance="standard">
-          <mat-label>Podaj imię, nazwisko, datę lub powód nieobecności</mat-label>
-          <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
-        </mat-form-field>
-
+      <div class="form-item-container">
+        <button mat-raised-button class="mat-primary" (click)="filter()" [disabled]="!form.valid">Znajdź
+        </button>
       </div>
+    </form>
 
-      <div class="add-absence-container">
-        <div class="div">Dodaj nieobecność</div>
-        <div class="div">
-          <button mat-mini-fab color="primary" (click)="addAbsence()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
+    <mat-form-field class="search" appearance="standard">
+      <mat-label>Podaj imię, nazwisko, datę lub powód nieobecności</mat-label>
+      <input matInput (keyup)="filterChildren($event)" placeholder="Znajdź dziecko">
+    </mat-form-field>
+  </div>
 
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
-          <ng-container matColumnDef="childName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{absence.childName}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="childSurname">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{absence.childSurname}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="reason">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Powód</mat-header-cell>
-            <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
-          </ng-container>
+  <div class="add-absence-button-container">
+    Dodaj nieobecność
+    <button mat-mini-fab color="primary" (click)="addAbsence()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
-            <mat-cell *matCellDef="let absence">
-              <button mat-icon-button (click)="deleteAbsence(absence.id)">
-                <mat-icon class="mat-warn">delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+</div>
 
-          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-        </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
+<div class="absence-table-container">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
+    <ng-container matColumnDef="childName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+      <mat-cell *matCellDef="let absence"> {{absence.childName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="childSurname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+      <mat-cell *matCellDef="let absence"> {{absence.childSurname}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+      <mat-cell *matCellDef="let absence"> {{absence.date}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="reason">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Powód</mat-header-cell>
+      <mat-cell *matCellDef="let absence"> {{absence.reason}} </mat-cell>
+    </ng-container>
 
-  </mat-card>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+      <mat-cell *matCellDef="let absence">
+        <button mat-icon-button (click)="deleteAbsence(absence.id)">
+          <mat-icon class="mat-warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
