@@ -14,19 +14,19 @@
 
               <div class="col-1">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                 </ng-container>
               </div>
               <div class="col-1">
                 <ng-container matColumnDef="mealType">
-                  <mat-header-cell *matHeaderCellDef> Meal Type</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Rodzaj posiłku</mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{mealTypeBusinessName(element.mealType)}} </mat-cell>
                 </ng-container>
               </div>
               <div class="col-3">
                 <ng-container matColumnDef="mealPrice">
-                  <mat-header-cell *matHeaderCellDef> Meal Price</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
                   <div *matCellDef="let element">
                     <div *ngIf="!editingMealPrice">
                       <mat-cell> {{element.mealPrice | number:'1.2-2'}} zł</mat-cell>
@@ -44,7 +44,7 @@
               </div>
               <div class="col-7">
                 <ng-container matColumnDef="action">
-                  <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Opcje</mat-header-cell>
                   <mat-cell *matCellDef="let element">
                     <div *ngIf="!editingMealPrice">
                       <mat-icon (click)="editMealPrice()">edit</mat-icon>
