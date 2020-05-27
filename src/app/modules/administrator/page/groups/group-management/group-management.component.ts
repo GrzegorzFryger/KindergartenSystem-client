@@ -12,7 +12,6 @@ import {Child} from '../../../../../data/model/accounts/child';
 import {AddChildToGroupComponent} from '../add-child-to-group/add-child-to-group.component';
 import {AddGroupComponent} from '../add-group/add-group.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {AddDayOffDialogComponent} from '../../calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
 
 @Component({
   selector: 'app-group-management',
@@ -30,7 +29,7 @@ export class GroupManagementComponent implements OnInit {
   openedGroupDetailsTable = false;
   groupDetails: Group = new Group();
   selectedGroupId: string;
-  childIdFromDialog: string;
+  dialogData: string;
   form: FormGroup;
 
   public groupListDataSource: MatTableDataSource<Group> = new MatTableDataSource();
@@ -98,18 +97,20 @@ export class GroupManagementComponent implements OnInit {
   }
 
   addChildToGroup() {
-    this.openAddChildDialog(this.childIdFromDialog);
+    this.dialogData = this.selectedGroupId;
+    this.openAddChildDialog(this.dialogData);
   }
 
-  private openAddChildDialog(data: string): void {
+  private openAddChildDialog(dataString: string): void {
     const dialogRef = this.dialog.open(AddChildToGroupComponent, {
-      data: {data}
+      data: dataString
     });
 
     dialogRef.afterClosed().subscribe(
       result => {
+        if (result) {
           this.addChild(result);
-          this.openGroupDetailsTable(this.selectedGroupId);
+        }
       }
     );
   }
@@ -117,6 +118,7 @@ export class GroupManagementComponent implements OnInit {
   private addChild(childId: string) {
     this.groupService.addChildToGroup(this.selectedGroupId, childId).subscribe(
       resp => {
+        this.openGroupDetailsTable(this.selectedGroupId);
         this.snackMessageHandlingService.success('Dziecko zostało dodane do grupy');
       },
       error => {

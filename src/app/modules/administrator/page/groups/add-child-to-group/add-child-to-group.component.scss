@@ -1,0 +1,8 @@
+.add-child-to-group-dialog-container {
+  display: flex;
+  flex-direction: column;
+
+  .mat-form-field {
+    width: 80%;
+  }
+}
