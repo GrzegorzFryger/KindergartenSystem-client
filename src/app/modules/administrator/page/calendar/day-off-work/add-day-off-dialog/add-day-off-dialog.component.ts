@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {DayOffWork} from '../../../../../../data/model/absence/day-off-work';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-day-off-dialog',
@@ -15,12 +16,14 @@ export class AddDayOffDialogComponent implements OnInit {
   formResponse: Observable<DayOffWork>;
   formResponseSub: Subject<DayOffWork>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(public dialogRef: MatDialogRef<AddDayOffDialogComponent>,
+              private fb: FormBuilder) {
     this.formResponseSub = new Subject<DayOffWork>();
     this.formResponse = this.formResponseSub.asObservable();
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
     this.initializeForm();
   }
 
@@ -30,10 +33,13 @@ export class AddDayOffDialogComponent implements OnInit {
     this.dayOff.name = this.form.get('name').value;
     this.dayOff.eventType = this.form.get('type').value;
 
-    console.log(this.dayOff);
-
     this.formResponseSub.next(this.dayOff);
+    this.dialogRef.close(null);
 
+  }
+
+  cancelClick(): void {
+    this.dialogRef.close(null);
   }
 
   private initializeForm(): void {

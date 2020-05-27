@@ -1,0 +1,13 @@
+.add-child-to-group-dialog-container {
+  display: flex;
+  flex-direction: column;
+
+  .mat-form-field {
+    width: 80%;
+  }
+
+  .actions {
+    margin-top: 5%;
+    margin-left: 85%;
+  }
+}

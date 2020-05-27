@@ -3,22 +3,23 @@
   width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
 
   .add-group-form {
-    margin: 0;
-    position: absolute;
-    top: 10%;
-    width: 90%;
+    padding: 5%;
+    width: 80%;
     display: flex;
     flex-direction: column;
-    padding: 16px;
   }
 
-  button {
-    align-self: center;
-    width: 80%;
+  .add-group-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50%;
+
+    .button-container {
+      margin-top: 65%;
+      padding: 3%;
+    }
   }
 
 }

@@ -1,34 +1,41 @@
-<h2 mat-dialog-title>Dodaj dziecko do grupy</h2>
+<div class="add-child-to-group-dialog-container">
+  <h2 mat-dialog-title>Dodaj dziecko do grupy</h2>
 
-<div mat-dialog-content>
-  <div class="container-fluid">
-    <mat-table [dataSource]="dataSource" matSort matSortActive="surname" matSortDirection="desc">
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-        <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="surname">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
-        <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="pesel">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</mat-header-cell>
-        <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="selected">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Wybór</mat-header-cell>
-        <mat-cell *matCellDef="let child">
-          <mat-radio-button name="childSelection" (click)="getChildIdOnClick(child.id)"></mat-radio-button>
-        </mat-cell>
-      </ng-container>
+  <div mat-dialog-content>
+    <mat-form-field appearance="standard">
+      <mat-label>Znajdź dziecko</mat-label>
+      <input matInput (keyup)="filterChildren($event)" placeholder="Podaj imię, nazwisko lub PESEL dziecka">
+    </mat-form-field>
+    <div class="container-fluid">
+      <mat-table [dataSource]="dataSource" matSort matSortActive="surname" matSortDirection="desc">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+          <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="surname">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+          <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="pesel">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</mat-header-cell>
+          <mat-cell *matCellDef="let child"> {{child.pesel}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="selected">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Wybór</mat-header-cell>
+          <mat-cell *matCellDef="let child">
+            <mat-radio-button name="childSelection" (click)="getChildIdOnClick(child.id)"></mat-radio-button>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-    </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
-</div>
-<div mat-dialog-actions>
-  <button mat-raised-button (click)="addChildToGroup()">Dodaj dziecko do grupy</button>
-  <button mat-raised-button (click)="cancelClick()">Anuluj</button>
+  <div class="actions" mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="cancelClick()">Anuluj</button>
+    <button mat-raised-button color="primary" [disabled]="selectedChildId==null" (click)="addChildToGroup()">Dodaj
+    </button>
+  </div>
 </div>

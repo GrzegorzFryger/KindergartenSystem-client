@@ -1,79 +1,68 @@
-<div class="day-off-list-card">
-  <mat-card>
+<div class="day-off-work-main">
+  <mat-card class="day-off-list-card">
     <mat-card-header>
       <h2>Dni wolne</h2>
     </mat-card-header>
-
-    <div class="container">
-      <form class="inner-container" [formGroup]="form">
-        <div class="div">
-          <mat-form-field appearance="standard">
-            <mat-label>Podaj datę od</mat-label>
-            <input matInput [matDatepicker]="dateFrom" placeholder="Data" name="dateFrom" [(ngModel)]="minDateFrom"
-                   formControlName="dateFrom">
-            <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
-            <mat-datepicker #dateFrom></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="div">
-          <mat-form-field appearance="standard">
-            <mat-label>Podaj datę do</mat-label>
-            <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" placeholder="Data" name="dateTo"
-                   formControlName="dateTo">
-            <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
-            <mat-datepicker #dateTo></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="div">
+    <div class="day-off-form-container">
+      <form class="container-fluid day-off-work-form" [formGroup]="form">
+        <mat-form-field class="day-off-work-form-item" appearance="standard">
+          <mat-label>Podaj datę od</mat-label>
+          <input matInput [matDatepicker]="dateFrom" placeholder="Data" name="dateFrom" [(ngModel)]="minDateFrom"
+                 formControlName="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+          <mat-datepicker #dateFrom></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="day-off-work-form-item" appearance="standard">
+          <mat-label>Podaj datę do</mat-label>
+          <input matInput [min]="minDateFrom" [matDatepicker]="dateTo" placeholder="Data" name="dateTo"
+                 formControlName="dateTo">
+          <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+          <mat-datepicker #dateTo></mat-datepicker>
+        </mat-form-field>
+        <div class="day-off-work-form-item">
           <button mat-raised-button class="mat-primary" (click)="filter()" [disabled]="!form.valid">Filtruj</button>
         </div>
       </form>
 
       <div class="inner-container">
-        <div class="div">
-          Dodaj dzień wolny
-        </div>
-        <div class="div">
-          <button mat-mini-fab color="primary" (click)="addDayOff()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
+        Dodaj dzień wolny
+        <button mat-mini-fab color="primary" (click)="addDayOff()">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
-          <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
-            <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
-          </ng-container>
+    <div class="day-off-table-container">
+      <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc">
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Data</mat-header-cell>
+          <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.date}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
-            <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa</mat-header-cell>
+          <mat-cell *matCellDef="let dayOffWork"> {{dayOffWork.name}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="eventType">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
-            <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="eventType">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Rodzaj</mat-header-cell>
+          <mat-cell *matCellDef="let dayOffWork"> {{translateEventType(dayOffWork.eventType)}} </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
-            <mat-cell *matCellDef="let dayOffWork">
-              <button mat-icon-button (click)="deleteDayOff(dayOffWork.id)">
-                <mat-icon class="mat-warn">delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Akcja</mat-header-cell>
+          <mat-cell *matCellDef="let dayOffWork">
+            <button mat-icon-button (click)="deleteDayOff(dayOffWork.id)">
+              <mat-icon class="mat-warn">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
 
-          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
 
-        </mat-table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   </mat-card>
 </div>
