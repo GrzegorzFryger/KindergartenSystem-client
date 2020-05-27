@@ -5,6 +5,7 @@ import {GroupService} from '../../../../../data/service/groups/group.service';
 import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
 import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {Observable, Subject} from 'rxjs';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-group',
@@ -21,12 +22,14 @@ export class AddGroupComponent implements OnInit {
   public groupName = '';
   public groupDescription = '';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              public dialogRef: MatDialogRef<AddGroupComponent>) {
     this.formResponseSub = new Subject<Group>();
     this.formResponse = this.formResponseSub.asObservable();
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
     this.initializeForm();
   }
 
@@ -36,6 +39,11 @@ export class AddGroupComponent implements OnInit {
     this.group.groupDescription = this.form.get('groupDescription').value;
 
     this.formResponseSub.next(this.group);
+    this.dialogRef.close(null);
+  }
+
+  cancelClick(): void {
+    this.dialogRef.close(null);
   }
 
   private initializeForm(): void {

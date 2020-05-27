@@ -3,7 +3,6 @@
   width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
 
   .add-group-form {
@@ -14,11 +13,20 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
+    align-self: center;
   }
 
-  button {
-    align-self: center;
-    width: 80%;
+  .add-group-buttons {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+
+    .button-container {
+      padding-right: 16px;
+    }
   }
+
 
 }
