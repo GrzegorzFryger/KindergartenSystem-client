@@ -26,6 +26,7 @@ import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence
 import {UserEditComponent} from '../../shared/user/user-edit/user-edit.component';
 import {CalendarComponent} from './page/calendar/calendar.component';
 import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
+import {GroupsComponent} from './page/groups/groups.component';
 
 const routes: Routes = [
   {
@@ -92,7 +93,7 @@ const routes: Routes = [
       },
       {
         path: 'groups',
-        component: GroupManagementComponent,
+        component: GroupsComponent,
       },
       {
         path: 'accounts',

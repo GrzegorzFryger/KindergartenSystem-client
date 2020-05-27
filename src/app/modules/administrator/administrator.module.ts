@@ -66,6 +66,7 @@ import {TransactionListComponent} from './page/receivables/transactions/share/tr
 import {GuardianListComponent} from './page/receivables/transactions/share/guardian-list/guardian-list.component';
 import {FindAbsenceComponent} from './page/calendar/absence/find-absence/find-absence.component';
 import {MealOrderComponent} from './page/meal/meal-order/meal-order.component';
+import {GroupsComponent} from './page/groups/groups.component';
 import {GroupManagementComponent} from './page/groups/group-management/group-management.component';
 import {AddGroupComponent} from './page/groups/add-group/add-group.component';
 import {CashPaymentsListComponent} from './page/receivables/cash-payments/cash-payments-list/cash-payments-list.component';
@@ -83,9 +84,9 @@ import {EditPaymentDialogComponent} from './page/payments/manger-payments/childr
 import {EditDiscountDialogComponent} from './page/payments/discount-payments/edit-discount-dialog/edit-discount-dialog.component';
 import {AddChildToGroupComponent} from './page/groups/add-child-to-group/add-child-to-group.component';
 import {CheckAbsenceComponent} from './page/calendar/check-absence/check-absence.component';
-import { AddDayOffDialogComponent } from './page/calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
-import { AddAbsenceDialogComponent } from './page/calendar/absence/add-absence-dialog/add-absence-dialog.component';
-import { CalendarComponent } from './page/calendar/calendar.component';
+import {AddDayOffDialogComponent} from './page/calendar/day-off-work/add-day-off-dialog/add-day-off-dialog.component';
+import {AddAbsenceDialogComponent} from './page/calendar/absence/add-absence-dialog/add-absence-dialog.component';
+import {CalendarComponent} from './page/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { CalendarComponent } from './page/calendar/calendar.component';
     AbsenceComponent,
     FindAbsenceComponent,
     MealOrderComponent,
+    GroupsComponent,
     GroupManagementComponent,
     AddGroupComponent,
     CashPaymentsListComponent,
