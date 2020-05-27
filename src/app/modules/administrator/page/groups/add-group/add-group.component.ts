@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Group} from '../../../../../data/model/groups/group';
-import {GroupService} from '../../../../../data/service/groups/group.service';
-import {ValidatorsService} from '../../../../../data/service/validation/validators.service';
-import {SnackMessageHandlingService} from '../../../../../core/snack-message-handling/snack-message-handling.service';
 import {Observable, Subject} from 'rxjs';
 import {MatDialogRef} from '@angular/material/dialog';
 
