@@ -3,6 +3,7 @@
   margin-top: 20px;
   border-radius: 10px 10px 10px 10px;
   width: 98%;
+  min-width: 320px;
 
   .mat-card-content {
     padding: 16px;
@@ -78,12 +79,13 @@
 .submit_button {
   float:right;
   margin-top: 5px;
+  width: 100%;
 
 
   .mat-button {
     background-color: #EDEEF4;
     color: #606FEE;
-    width: 400px;
+    width: 100%;
     align-content: center;
   }
 }
@@ -93,11 +95,17 @@
 }
 
 
+
 .cardContent {
   .row {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    min-width: 300px;
+    margin-left: 100px;
   }
 
   .mat-form-field {

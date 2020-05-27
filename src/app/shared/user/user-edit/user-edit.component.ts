@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Account} from '../../../data/model/accounts/account';
-import {Person} from '../../../data/model/accounts/person';
 import {Router} from '@angular/router';
 import {AccountService} from '../../../data/service/accounts/account.service';
 import {environment} from '../../../core/environment.dev';
@@ -15,34 +14,39 @@ import {SnackMessageHandlingService} from '../../../core/snack-message-handling/
 export class UserEditComponent implements OnInit {
   editForm: FormGroup;
   currentUser: Account;
-  formUser: Person = new Person();
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private accountService: AccountService,
               private snackMessageHandlingService: SnackMessageHandlingService) {
+    this.currentUser = new Account();
   }
 
   ngOnInit(): void {
     this.accountService.currentUser.subscribe(resp => {
       this.currentUser = resp;
 
-      this.formUser.id = this.currentUser.id;
-      this.formUser.address.postalCode = this.currentUser.postalCode;
-      this.formUser.address.city = this.currentUser.city;
-      this.formUser.address.streetNumber = this.currentUser.streetNumber;
-      this.formUser.fullName.name = this.currentUser.name;
-      this.formUser.fullName.surname = this.currentUser.surname;
-      this.formUser.phoneNumber.phone = this.currentUser.phone;
     });
 
 
     this.editForm = this.fb.group({
-      postalCode: ['', [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
-      city: ['', [Validators.required, Validators.pattern('.{3,}')]],
-      streetNumber: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
+      postalCode: [this.currentUser.postalCode, [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
+      city: [this.currentUser.city, [Validators.required, Validators.pattern('.{3,}')]],
+      streetNumber: [this.currentUser.streetNumber, [Validators.required]],
+      phone: [this.currentUser.phone, [Validators.required, Validators.pattern('[0-9]{9}')]],
     });
+
+    this.accountService.currentUser.subscribe(resp => {
+      this.currentUser = resp;
+      this.editForm.setValue({
+        postalCode: resp.postalCode,
+        city: resp.city,
+        streetNumber: resp.streetNumber,
+        phone: resp.phone
+      });
+    });
+
+
   }
 
 
@@ -62,17 +66,24 @@ export class UserEditComponent implements OnInit {
 
   public hasError = (controlName: string, errorName: string) => {
     return this.editForm?.controls[controlName]?.hasError(errorName);
-  }
+  };
 
   submit() {
-    this.accountService.updatePerson(this.formUser).subscribe(resp => {
-        this.snackMessageHandlingService.success('Dane osobowe zostały zaktualizowane');
-        this.backToHomePage();
-        this.accountService.getCurrentUser();
-      },
-      err => {
-        this.snackMessageHandlingService.error('Wystąpił problem ze zmianą danych osobowych');
-      });
+    if (this.editForm.valid) {
+      this.currentUser.city = this.editForm.value.city;
+      this.currentUser.postalCode = this.editForm.value.postalCode;
+      this.currentUser.streetNumber = this.editForm.value.streetNumber;
+      this.currentUser.phone = this.editForm.value.phone;
+
+      this.accountService.updatePerson(this.currentUser).subscribe(resp => {
+          this.snackMessageHandlingService.success('Dane osobowe zostały zaktualizowane');
+          this.backToHomePage();
+          this.accountService.getCurrentUser();
+        },
+        err => {
+          this.snackMessageHandlingService.error('Wystąpił problem ze zmianą danych osobowych');
+        });
+    }
   }
 
 }

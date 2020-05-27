@@ -39,9 +39,8 @@ export class MealComponent implements OnInit {
   selectedMealId: Array<number> = [];
   mealTypeDic: Array<MealDictionary> = [];
   dietTypeDic: Array<MealDictionary> = [];
+  selectedRole: string;
 
-  animal: string;
-  name: string;
 
   public children: Observable<Array<Child>>;
 
@@ -59,6 +58,7 @@ export class MealComponent implements OnInit {
     this.getAllMeals();
     this.mealService.getMealType().subscribe(resp => this.mealTypeDic = resp);
     this.mealService.getDietType().subscribe(resp => this.dietTypeDic = resp);
+    this.selectedRole = localStorage.getItem('selectedRole');
   }
 
   getAllMeals() {
@@ -117,6 +117,7 @@ export class MealComponent implements OnInit {
   addNN(nnValue: string) {
     this.mealService.addNN(nnValue, this.selectedMeal.id).subscribe(resp => {
       this.selectedNutritionalNotes = resp;
+      this.snackMessageHandlingService.success('Dodano poprawnie');
     });
   }
 

@@ -20,6 +20,7 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <mat-checkbox [(ngModel)]="element.isMealCheck"
+                              *ngIf="element.mealStatus != 'INACTIVE'"
                               (change)="selectedMeals(element.id, element.mealStatus)">
                 </mat-checkbox>
               </mat-cell>
@@ -53,8 +54,12 @@
 
 
             <ng-container matColumnDef="mealStatus">
-              <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{statusBusinessName(element.mealStatus)}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef>
+                Status
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{statusBusinessName(element.mealStatus)}}
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="mealType">
@@ -202,7 +207,7 @@
                 </div>
                 <div class="col col-9 childDetails">
                   <div class="childDetailsHeader">
-                    <span>{{childDetails.name}} {{childDetails.name}}</span>
+                    <span>{{childDetails.name}} {{childDetails.surname}}</span>
                   </div>
 
 
@@ -215,8 +220,8 @@
 
                             <mat-form-field class="example-full-width">
                               <mat-label>Uwagi</mat-label>
-                              <textarea matInput #message maxlength="256"></textarea>
-                              <mat-hint align="start">{{message.value.length}} / 256</mat-hint>
+                              <textarea matInput #message maxlength="150"></textarea>
+                              <mat-hint align="start">{{message.value.length}} / 150</mat-hint>
                             </mat-form-field>
 
                           </div>
@@ -267,7 +272,7 @@
   </div>
 
 
-  <div class="row mealAdminRow" *ngIf="userCredentials.roles[0] == 'ADMINISTRATOR' ">
+  <div class="row mealAdminRow" *ngIf="selectedRole == 'ADMINISTRATOR' ">
     <div class="mealPriceCard">
       <app-meal-price></app-meal-price>
     </div>

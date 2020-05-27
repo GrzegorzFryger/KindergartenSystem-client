@@ -5,7 +5,6 @@ import {Account} from '../../model/accounts/account';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AuthenticationService} from '../../../core/auth/authentication.service';
-import {Person} from '../../model/accounts/person';
 
 
 @Injectable({
@@ -46,8 +45,7 @@ export class AccountService {
   public logOut() {
   }
 
-
-  updatePerson(formUser: Person): Observable<Person> {
-    return this.http.put<Person>(environment.apiUrls.account.account, formUser);
+  updatePerson(account: Account): Observable<Account> {
+    return this.http.put<Account>(environment.apiUrls.account.account, account);
   }
 }

@@ -11,7 +11,7 @@ import {AuthenticationService} from '../../core/auth/authentication.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy {
   public user: Observable<Account>;
   isUserAdmin = false;
   isUserTeacher = false;
@@ -26,12 +26,10 @@ export class UserComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.user = this.userService.currentUser;
-  }
-
-  ngAfterViewInit() {
     this.identifyRoles();
     this.redirectToProperView();
   }
+
 
   logout(): void {
     this.authenticationService.logout();
