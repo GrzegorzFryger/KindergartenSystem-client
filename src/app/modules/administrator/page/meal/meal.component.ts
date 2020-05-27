@@ -41,8 +41,6 @@ export class MealComponent implements OnInit {
   dietTypeDic: Array<MealDictionary> = [];
   selectedRole: string;
 
-  animal: string;
-  name: string;
 
   public children: Observable<Array<Child>>;
 

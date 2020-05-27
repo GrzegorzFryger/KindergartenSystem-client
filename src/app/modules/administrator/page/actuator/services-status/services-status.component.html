@@ -8,9 +8,9 @@
       <div class="card-details">
         <span>Status aplikacji:  <h4>{{health?.status}}</h4></span>
         <div class="clear"></div>
-        <span>Wolna przestrzeń dyskowa: <h4>{{health?.components?.diskSpace?.details?.free}}</h4></span>
+        <span>Wolna przestrzeń dyskowa: <h4>{{health?.components?.diskSpace?.details?.free / 1073741824  | number:'1.2-2' }} GB</h4></span>
         <div class="clear"></div>
-        <span>Łączna przestrzeń dyskowa:  <h4>{{health?.components?.diskSpace?.details?.total}}</h4></span>
+        <span>Łączna przestrzeń dyskowa:  <h4>{{health?.components?.diskSpace?.details?.total / 1073741824 | number:'1.2-2'  }} GB</h4></span>
       </div>
     </div>
 

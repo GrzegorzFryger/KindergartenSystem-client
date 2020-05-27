@@ -54,8 +54,12 @@
 
 
             <ng-container matColumnDef="mealStatus">
-              <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{statusBusinessName(element.mealStatus)}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef>
+                Status
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{statusBusinessName(element.mealStatus)}}
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="mealType">

@@ -23,11 +23,17 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.currentUser.subscribe(resp => {
+      this.currentUser = resp;
+
+    });
+
+
     this.editForm = this.fb.group({
-      postalCode: ['', [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
-      city: ['', [Validators.required, Validators.pattern('.{3,}')]],
-      streetNumber: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
+      postalCode: [this.currentUser.postalCode, [Validators.required, Validators.pattern('[0-9]{2}\\-[0-9]{3}')]],
+      city: [this.currentUser.city, [Validators.required, Validators.pattern('.{3,}')]],
+      streetNumber: [this.currentUser.streetNumber, [Validators.required]],
+      phone: [this.currentUser.phone, [Validators.required, Validators.pattern('[0-9]{9}')]],
     });
 
     this.accountService.currentUser.subscribe(resp => {

@@ -2,7 +2,7 @@
 <div class="row justify-content-center align-items-center background-image mx-0">
   <div class="col-auto">
     <mat-card class="mat-elevation-z3">
-      <div class="row loginFormHeader justify-content-center align-items-center" style="margin: -20px -16px 0 -16px;">
+      <div class="row loginFormHeader justify-content-center align-items-center">
         <mat-card-title>Edycja konta</mat-card-title>
       </div>
       <mat-card-content>
@@ -35,7 +35,9 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Kod Pocztowy</mat-label>
                   <label>
+
                     <input matInput required placeholder="Nazwisko" formControlName="postalCode">
+
                   </label>
                   <mat-error *ngIf="hasError('postalCode', 'required')">Kod pocztowy jest wymagany</mat-error>
                   <mat-error *ngIf="hasError('postalCode', 'pattern')">Błędny format</mat-error>
@@ -45,7 +47,9 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Miasto</mat-label>
                   <label>
+
                     <input matInput required placeholder="Miasto" formControlName="city">
+
                   </label>
                   <mat-error *ngIf="hasError('city', 'required')">Miasto jest wymagane</mat-error>
                   <mat-error *ngIf="hasError('city', 'pattern')">Nazwa jest za krótka</mat-error>
@@ -55,7 +59,9 @@
                 <mat-form-field appearance="standard">
                   <mat-label>Numer domu</mat-label>
                   <label>
+
                     <input matInput required placeholder="Numer domu" formControlName="streetNumber">
+
                   </label>
                   <mat-error *ngIf="hasError('streetNumber', 'required')">Numer domu jest wymagany</mat-error>
                 </mat-form-field>
@@ -87,4 +93,3 @@
 
   </div>
 </div>
-<!--</div>-->
