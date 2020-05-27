@@ -20,6 +20,7 @@
         <mat-option value="WEEKEND">Weekend</mat-option>
         <mat-option value="INTERNAL_EVENT">Wydarzenie wewnętrzne</mat-option>
       </mat-select>
+      <mat-error>Typ jest wymagany</mat-error>
     </mat-form-field>
 
   </form>
@@ -29,7 +30,7 @@
       <button mat-raised-button color="warn" class="cancel-button" (click)="cancelClick()">Anuluj</button>
     </div>
     <div class="button-container">
-      <button mat-raised-button (click)="addDayOffSubmit()"
+      <button mat-raised-button class="mat-primary" (click)="addDayOffSubmit()"
               [disabled]="!form.valid">Dodaj
       </button>
     </div>

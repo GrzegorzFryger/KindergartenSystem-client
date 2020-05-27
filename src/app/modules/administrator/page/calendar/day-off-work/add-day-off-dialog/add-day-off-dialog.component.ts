@@ -23,6 +23,7 @@ export class AddDayOffDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
     this.initializeForm();
   }
 
