@@ -2,7 +2,7 @@ import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {AbsenceRange} from '../../../../../../data/model/absence/absence-range';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SnackMessageHandlingService} from '../../../../../../core/snack-message-handling/snack-message-handling.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Child} from '../../../../../../data/model/accounts/child';
@@ -29,18 +29,22 @@ export class AddAbsenceDialogComponent implements OnInit {
   form: FormGroup;
   formResponseSub: Subject<AbsenceRange>;
   formResponse: Observable<AbsenceRange>;
+  minDateFrom: Date;
 
 
-  constructor(private fb: FormBuilder,
+  constructor(public dialogRef: MatDialogRef<AddAbsenceDialogComponent>,
+              private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackMessageHandlingService: SnackMessageHandlingService,
               private childService: ChildService) {
     this.formResponseSub = new Subject<AbsenceRange>();
     this.formResponse = this.formResponseSub.asObservable();
     this.children = this.childService.getAllChildren();
+    this.minDateFrom = new Date();
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
     this.initializeForm();
     this.initializeChildList();
   }
@@ -55,7 +59,12 @@ export class AddAbsenceDialogComponent implements OnInit {
 
     if (this.checkDates(this.absencePreview.dateFrom, this.absencePreview.dateTo)) {
       this.formResponseSub.next(this.absencePreview);
+      this.dialogRef.close(null);
     }
+  }
+
+  cancelClick(): void {
+    this.dialogRef.close(null);
   }
 
   filterChildren($event: KeyboardEvent) {
