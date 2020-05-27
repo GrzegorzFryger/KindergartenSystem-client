@@ -12,6 +12,7 @@
               <mat-label>Podaj datę od</mat-label>
               <input matInput [matDatepicker]="startDate" placeholder="Data" name="startDate" [(ngModel)]="minDateFrom"
                      formControlName="startDate">
+              <mat-error>Data jest wymagana</mat-error>
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
@@ -21,6 +22,7 @@
               <mat-label>Podaj datę do</mat-label>
               <input matInput [min]="minDateFrom" [matDatepicker]="endDate" placeholder="Data" name="endDate"
                      formControlName="endDate">
+              <mat-error>Data 'do' musi być po dacie 'od'</mat-error>
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
