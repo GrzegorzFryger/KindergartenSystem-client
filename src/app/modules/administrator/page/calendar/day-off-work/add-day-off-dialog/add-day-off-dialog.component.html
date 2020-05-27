@@ -22,9 +22,16 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button (click)="addDayOffSubmit()"
-            [disabled]="!form.valid">Dodaj
-    </button>
-
   </form>
+
+  <div class="add-day-off-dialog-buttons">
+    <div class="button-container">
+      <button mat-raised-button color="warn" class="cancel-button" (click)="cancelClick()">Anuluj</button>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button (click)="addDayOffSubmit()"
+              [disabled]="!form.valid">Dodaj
+      </button>
+    </div>
+  </div>
 </div>
