@@ -8,15 +8,13 @@
   }
 
   h2 {
-
     margin-bottom: 5%;
-
   }
 
   .add-discount-dialog-filed-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -25,7 +23,6 @@
 .full-width {
   width: 100%;
 }
-
 
 .button-discount-edit {
   margin-top: 8px;
