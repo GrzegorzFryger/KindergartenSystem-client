@@ -30,7 +30,7 @@
         </div>
         <div class="button-container">
           <button mat-raised-button class="mat-primary" (click)="addAbsenceSubmit()"
-                  [disabled]="!form.valid">Dodaj
+                  [disabled]="!form.valid || selectedChildId==null">Dodaj
           </button>
         </div>
       </div>

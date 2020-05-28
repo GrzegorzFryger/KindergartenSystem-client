@@ -34,8 +34,10 @@
     </div>
   </div>
   <div class="actions" mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="cancelClick()">Anuluj</button>
-    <button mat-raised-button color="primary" [disabled]="selectedChildId==null" (click)="addChildToGroup()">Dodaj
-    </button>
+    <div>
+      <button mat-raised-button color="warn" (click)="cancelClick()">Anuluj</button>
+      <button mat-raised-button color="primary" [disabled]="selectedChildId==null" (click)="addChildToGroup()">Dodaj
+      </button>
+    </div>
   </div>
 </div>
