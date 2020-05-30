@@ -52,8 +52,8 @@ export class AddAbsenceDialogComponent implements OnInit {
   addAbsenceSubmit() {
     this.absencePreview = {
       childId: this.selectedChildId,
-      dateFrom: new Date(this.form.get('dateFrom').value),
-      dateTo: new Date(this.form.get('dateTo').value),
+      dateFrom: this.form.get('dateFrom').value,
+      dateTo: this.form.get('dateTo').value,
       reason: this.form.get('reason').value
     };
 
