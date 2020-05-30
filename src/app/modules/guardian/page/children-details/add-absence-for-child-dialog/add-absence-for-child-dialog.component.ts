@@ -44,7 +44,6 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
       dateTo: this.form.get('dateTo').value,
       reason: this.form.get('reason').value
     };
-    this.absencePreview.dateFrom.setDate(this.absencePreview.dateFrom.getDate() - 1);
     this.formResponseSub.next(this.absencePreview);
     this.dialogRef.close(null);
   }

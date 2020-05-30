@@ -63,6 +63,7 @@ export class ChildrenDetailsComponent implements OnInit, OnDestroy {
       this.absenceDataSource.data = absences;
       this.absenceDataSource.sort = this.sort.toArray()[0];
       this.absenceDataSource.paginator = this.paginator.toArray()[0];
+      this.absenceDataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
     });
   }
 

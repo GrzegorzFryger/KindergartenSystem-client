@@ -30,6 +30,10 @@ export class CheckAbsenceComponent implements OnInit {
   selectedGroupId: string;
   absentChildrenList: Array<string>;
   absenceToAdd: Absence;
+  childrenInGroup: Array<string>;
+  childrenSavedAsPresent: Array<string>;
+  childrenSavedAsAbsent: Array<string>;
+  today: Date;
 
 
   constructor(private groupService: GroupService,
@@ -40,9 +44,17 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.today = new Date();
     this.groupListObservable = this.groupService.getAllGroups();
     this.groupListObservable.subscribe(resp => {
       this.groupList = resp;
+    });
+    this.checkIfChildrenInGroupAlreadyAbsent();
+  }
+
+  checkIfChildrenInGroupAlreadyAbsent(): void {
+    this.absenceService.getAllAbsencesBetweenDates(this.getTodayDate(), this.getTodayDate()).subscribe(resp => {
+      console.log(resp);
     });
   }
 
@@ -104,6 +116,12 @@ export class CheckAbsenceComponent implements OnInit {
         this.submitAbsences(result.answer);
       }
     );
+  }
+
+  private getTodayDate() {
+    this.today = new Date();
+    const todayDate = this.datePipe.transform(this.today, 'yyyy-MM-dd');
+    return todayDate;
   }
 
   private convertToDate(date: Date): Date {
