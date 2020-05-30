@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import {AccountCreateComponent} from './account-create/account-create.component';
 
 @Component({
   selector: 'app-users',
@@ -44,5 +45,13 @@ export class AccountsComponent implements OnInit {
     if (value.state === 'back') {
       this.isSelected = true;
     }
+  }
+
+  openCreateDialog() {
+    const dialogRef = this.dialog.open(AccountCreateComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
   }
 }

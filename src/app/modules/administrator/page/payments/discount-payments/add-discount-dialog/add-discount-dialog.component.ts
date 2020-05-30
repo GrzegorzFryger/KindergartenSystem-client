@@ -30,7 +30,6 @@ export class AddDiscountDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log( this.dialogConfig.data.typeDiscount);
     this.dialogRef.disableClose = true; // Force user to click Yes or No
     this.dialogRef.updateSize('40%', '60%');
     this.initializeForm();
