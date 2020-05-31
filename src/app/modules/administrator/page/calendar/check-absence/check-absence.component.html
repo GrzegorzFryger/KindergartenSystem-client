@@ -1,40 +1,93 @@
-<mat-card>
-  <mat-card-header>
-    <h2>Sprawdź obecność</h2>
-  </mat-card-header>
-  <mat-card-content>
+<div class="check-absence-container">
+  <mat-card>
+    <mat-card-header>
+      <h2>Sprawdź obecność</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="container-fluid">
+        <mat-form-field appearance="standard">
+          <mat-select placeholder="Wybierz grupę" [(ngModel)]="selectedGroupId" name="groupSelect"
+                      (ngModelChange)="fillTables()">
+            <mat-option *ngFor="let group of groupList" [value]="group.id">{{group.groupName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
 
-    <form class="container-fluid">
-      <mat-form-field appearance="standard">
-        <mat-select placeholder="Wybierz grupę" [(ngModel)]="selectedGroupId" name="groupSelect"
-                    (ngModelChange)="fillTableData()">
-          <mat-option *ngFor="let group of groupList" [value]="group.id">{{group.groupName}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
+      <div class="container-fluid checked table">
+        <h3>Lista</h3>
+        <mat-table [dataSource]="groupListDataSource" matSort matSortActive="surname" matSortDirection="desc">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="surname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+            <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Akcje</mat-header-cell>
+            <mat-cell *matCellDef="let child">
+              <button mat-mini-fab color="primary" (click)="moveChildToPresent(child)">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="moveChildToAbsent(child)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+        </mat-table>
+      </div>
 
-    <div class="container-fluid">
-      <mat-table [dataSource]="dataSource" matSort matSortActive="surname" matSortDirection="desc">
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
-          <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="surname">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
-          <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="checkbox">
-          <mat-header-cell *matHeaderCellDef>Obecny</mat-header-cell>
-          <mat-cell *matCellDef="let child">
-            <mat-checkbox (change)="onBoxCheck(child.id)"></mat-checkbox>
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
-      </mat-table>
-
-      <button mat-raised-button (click)="submitAbsenceList()">Prześlij</button>
-    </div>
-  </mat-card-content>
-</mat-card>
+      <div class="checked-tables">
+        <div class="container-fluid">
+          <h3>Obecni</h3>
+          <mat-table [dataSource]="presentDataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>Akcje</mat-header-cell>
+              <mat-cell *matCellDef="let child">
+                <button mat-mini-fab color="warn" (click)="movePresentToAbsent(child)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+          </mat-table>
+        </div>
+        <div class="container-fluid">
+          <h3>Nieobecni</h3>
+          <mat-table [dataSource]="absentDataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="surname">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</mat-header-cell>
+              <mat-cell *matCellDef="let child"> {{child.surname}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>Akcje</mat-header-cell>
+              <mat-cell *matCellDef="let child">
+                <button mat-mini-fab color="primary" (click)="moveAbsentToPresent(child)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+          </mat-table>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
