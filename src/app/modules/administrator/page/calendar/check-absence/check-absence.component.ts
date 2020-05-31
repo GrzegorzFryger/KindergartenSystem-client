@@ -115,44 +115,48 @@ export class CheckAbsenceComponent implements OnInit {
   // }
 
 
-  // private submitAbsences(confirmation: boolean): void {
-  //   if (confirmation) {
-  //     if (this.absentChildrenList.length > 0) {
-  //       this.absentChildrenList.forEach(id => {
-  //         this.absenceToAdd = new Absence();
-  //         this.absenceToAdd.reason = 'Nieusprawiedliwiona';
-  //         this.absenceToAdd.date = this.convertToDate(new Date());
-  //         this.absenceToAdd.childId = id;
-  //         this.absenceService.createAbsence(this.absenceToAdd).subscribe(
-  //           resp => {
-  //             this.snackMessageHandlingService.success('Dodano nieobecności');
-  //           }, error => {
-  //             this.snackMessageHandlingService.error('Wystąpił problem z dodaniem nieobecności');
-  //           },
-  //           () => {
-  //             // ON COMPLETE
-  //           });
-  //       });
-  //     } else {
-  //       this.snackMessageHandlingService.success('Wszyscy obecni!');
-  //     }
-  //   } else {
-  //     // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
-  //   }
-  // }
+  submitAbsenceCheck(): void {
+    this.openConfirmationDialog('Zapisać obecności?');
+  }
 
-  // private openConfirmationDialog(question: string): void {
-  //   const data = new YesNoDialogData(question);
-  //   const dialogRef = this.dialog.open(YesNoDialogComponent, {
-  //     data: {data}
-  //   });
-  //
-  //   dialogRef.afterClosed().subscribe(
-  //     result => {
-  //       this.submitAbsences(result.answer);
-  //     }
-  //   );
-  // }
+  private submitAbsences(confirmation: boolean): void {
+    if (confirmation) {
+      if (this.absentChildrenList.length > 0) {
+        this.absentChildrenList.forEach(child => {
+          this.absenceToAdd = new Absence();
+          this.absenceToAdd.reason = 'Nieusprawiedliwiona';
+          this.absenceToAdd.date = this.today;
+          this.absenceToAdd.childId = child.id;
+          this.absenceService.createAbsence(this.absenceToAdd).subscribe(
+            resp => {
+              this.snackMessageHandlingService.success('Dodano nieobecności');
+            }, error => {
+              this.snackMessageHandlingService.error('Wystąpił problem z dodaniem nieobecności');
+            },
+            () => {
+              // ON COMPLETE
+            });
+        });
+      } else {
+        this.snackMessageHandlingService.success('Wszyscy obecni!');
+      }
+    } else {
+      // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
+    }
+  }
+
+  private openConfirmationDialog(question: string): void {
+    const data = new YesNoDialogData(question);
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: {data}
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+        this.submitAbsences(result.answer);
+      }
+    );
+  }
 
   private getTodayDate() {
     this.today = new Date();
