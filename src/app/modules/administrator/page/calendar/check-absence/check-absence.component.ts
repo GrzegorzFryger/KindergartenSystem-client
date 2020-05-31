@@ -33,8 +33,10 @@ export class CheckAbsenceComponent implements OnInit {
 
   private groupListObservable: Observable<Array<Group>>;
   groupList: Array<Group>;
+  groupsWithCheckedAbsence: Array<string>;
   selectedGroupId: string;
   absenceToAdd: Absence;
+  absencesForPresentChildren: Array<Absence>;
   absenceListForToday: Array<Absence>;
   today: Date;
 
@@ -47,6 +49,8 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.groupsWithCheckedAbsence = new Array<string>();
+    this.childrenInGroupList = new Array<Child>();
     this.today = new Date();
     this.groupListObservable = this.groupService.getAllGroups();
     this.groupListObservable.subscribe(resp => {
@@ -64,16 +68,12 @@ export class CheckAbsenceComponent implements OnInit {
       this.checkIfChildrenInGroupAlreadyAbsent();
     });
 
+    if (this.groupsWithCheckedAbsence.includes(this.selectedGroupId)) {
+      this.presentChildrenList = this.childrenInGroupList;
+    }
     this.presentDataSource.data = this.presentChildrenList;
     this.absentDataSource.data = this.absentChildrenList;
-  }
-
-  fillChildListTable(): void {
-    this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
-      this.childrenInGroupList = resp;
-      console.log(this.childrenInGroupList);
-      this.groupListDataSource.data = this.childrenInGroupList;
-    });
+    this.groupListDataSource.data = this.childrenInGroupList;
   }
 
   moveChildToPresent(child: Child) {
@@ -115,10 +115,13 @@ export class CheckAbsenceComponent implements OnInit {
         this.presentDataSource.data = this.presentChildrenList;
         this.childrenInGroupList = new Array<Child>();
         this.groupListDataSource.data = this.childrenInGroupList;
+      } else if (this.groupsWithCheckedAbsence.includes(this.selectedGroupId) && this.absentChildrenList.length === 0) {
+        this.presentChildrenList = this.childrenInGroupList;
+        this.presentDataSource.data = this.presentChildrenList;
+        this.childrenInGroupList = new Array<Child>();
+        this.groupListDataSource.data = this.childrenInGroupList;
       }
-
     });
-
   }
 
   submitAbsenceCheck(): void {
@@ -127,28 +130,53 @@ export class CheckAbsenceComponent implements OnInit {
 
   private submitAbsences(confirmation: boolean): void {
     if (confirmation) {
-      if (this.absentChildrenList.length > 0) {
+      if (!this.groupsWithCheckedAbsence.includes(this.selectedGroupId)) {
+        this.groupsWithCheckedAbsence.push(this.selectedGroupId);
+      }
+
+      if (!this.absenceListForToday.some(absence => this.absentChildrenList.some(x => x.id = absence.childId))) {
         this.absentChildrenList.forEach(child => {
           this.absenceToAdd = new Absence();
           this.absenceToAdd.reason = 'Nieusprawiedliwiona';
           this.absenceToAdd.date = this.today;
           this.absenceToAdd.childId = child.id;
           this.absenceService.createAbsence(this.absenceToAdd).subscribe(
-            resp => {
-              this.snackMessageHandlingService.success('Dodano nieobecności');
-            }, error => {
+            () => {
+              // ON SUCCESS
+            },
+            error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem nieobecności');
             },
             () => {
               // ON COMPLETE
             });
         });
-      } else {
-        this.snackMessageHandlingService.success('Wszyscy obecni!');
       }
+
+      this.absencesForPresentChildren = new Array<Absence>();
+      this.absenceListForToday.forEach(absence => {
+        if (this.presentChildrenList.some(child => child.id === absence.childId)) {
+          this.absencesForPresentChildren.push(absence);
+        }
+      });
+
+      this.absencesForPresentChildren.forEach(absence => {
+        this.absenceService.deleteAbsence(absence.id).subscribe(() => {
+            // ON SUCCESS
+          },
+          error => {
+            this.snackMessageHandlingService.error('Wystąpił problem z usunięciem nieobecności');
+          },
+          () => {
+            // ON COMPLETE
+          }
+        );
+      });
     } else {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
+    this.snackMessageHandlingService.success('Przesłano listę nieobecności');
+    console.log(this.groupsWithCheckedAbsence);
   }
 
   private openConfirmationDialog(question: string): void {

@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="submit-button-container">
-        <button mat-raised-button color="primary" (click)="submitAbsenceCheck()">Prześlij</button>
+        <button mat-raised-button color="primary" [disabled]="childrenInGroupList.length > 0" (click)="submitAbsenceCheck()">Prześlij</button>
       </div>
     </mat-card-content>
   </mat-card>
