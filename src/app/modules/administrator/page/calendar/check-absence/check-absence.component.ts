@@ -49,6 +49,7 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedGroupId = null;
     this.groupsWithCheckedAbsence = new Array<string>();
     this.childrenInGroupList = new Array<Child>();
     this.today = new Date();
