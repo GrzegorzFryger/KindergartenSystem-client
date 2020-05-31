@@ -18,6 +18,7 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <mat-checkbox [(ngModel)]="element.isMealCheck"
+                              *ngIf="element.mealStatus != 'INACTIVE'"
                               (change)="selectedMeals(element.id, element.mealStatus)">
                 </mat-checkbox>
               </mat-cell>

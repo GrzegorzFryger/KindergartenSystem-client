@@ -1,5 +1,5 @@
 <div class="create-form-layout-container">
-  <mat-card [ngClass]="{ 'grow' : selectedAccount == null }">
+  <mat-card class="mat-elevation-z0" [ngClass]="{ 'grow' : selectedAccount == null }">
     <div class="card-container">
       <mat-card-header>
         <h2>Utwórz wybrane konto</h2>
@@ -29,7 +29,7 @@
           <div class="footer-container">
             <div class="button">
               <button mat-raised-button color="primary" [disabled]="!formIsValid" (click)="onSubmit()">
-                Utwórz użytkownika
+                Utwórz konto
               </button>
             </div>
           </div>

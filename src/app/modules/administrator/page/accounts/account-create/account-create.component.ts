@@ -8,6 +8,7 @@ import {GuardianService} from '../../../../../data/service/accounts/guardian.ser
 import {Guardian} from '../../../../../data/model/accounts/guardian';
 import {EmployeeService} from '../../../../../data/service/accounts/employee.service';
 import {Employee} from '../../../../../data/model/accounts/employee';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-account-create',
@@ -27,10 +28,13 @@ export class AccountCreateComponent implements OnInit {
               private employeeService: EmployeeService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private snackMessageHandlingService: SnackMessageHandlingService) {
+              private snackMessageHandlingService: SnackMessageHandlingService,
+              public dialogRef: MatDialogRef<AccountCreateComponent>) {
   }
 
   ngOnInit(): void {
+    // this.dialogRef.disableClose = true; // Force user to click Yes or No
+    this.dialogRef.updateSize('40%', '80%');
   }
 
   onFormValuesChange($event: { form: FormGroup }) {
@@ -43,7 +47,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Dziecko' : {
         this.childService.createChild(new Child(this.formOutput.form.value)).subscribe(child => {
           this.formOutput.form.reset();
-          this.snackMessageHandlingService.error(child.name + child.surname);
+          this.snackMessageHandlingService.success('Utworzono pomyślnie' + child.name + child.surname);
           this.navigateToParent();
         });
         break;
@@ -51,7 +55,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Rodzic' : {
         this.guardianService.createGuardian(new Guardian(this.formOutput.form.value)).subscribe(guardian => {
           this.formOutput.form.reset();
-          this.snackMessageHandlingService.error('Utworzono pomyślnie');
+          this.snackMessageHandlingService.success('Utworzono pomyślnie');
           this.navigateToParent();
         });
         break;
@@ -59,7 +63,7 @@ export class AccountCreateComponent implements OnInit {
       case 'Pracownik' : {
         this.employeeService.createEmployee(new Employee(this.formOutput.form.value)).subscribe(guardian => {
           this.formOutput.form.reset();
-          this.snackMessageHandlingService.error('Utworzono pomyślnie');
+          this.snackMessageHandlingService.success('Utworzono pomyślnie');
           this.navigateToParent();
         });
         break;
@@ -68,7 +72,7 @@ export class AccountCreateComponent implements OnInit {
   }
 
   private navigateToParent() {
-    setTimeout(() => this.router.navigate(['/administrator/accounts'], {state: {state: 'back'}}), 500);
+    setTimeout(() => this.dialogRef.close(null), 500);
   }
 }
 

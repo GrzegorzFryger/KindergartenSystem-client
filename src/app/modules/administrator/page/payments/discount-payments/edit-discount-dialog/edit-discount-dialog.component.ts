@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef} from '@angular/material/
 import {DiscountPayment} from '../../../../../../data/model/payments/discount-payment';
 import {ValidatorsService} from '../../../../../../data/service/validation/validators.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DecimalPipe} from "@angular/common";
+import {DecimalPipe} from '@angular/common';
 
 interface DiscountType {
   value: string;
@@ -35,7 +35,7 @@ export class EditDiscountDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.dialogConfig.data.typeDiscount);
     this.dialogRef.disableClose = true; // Force user to click Yes or No
-    this.dialogRef.updateSize('40%', '60%');
+    this.dialogRef.updateSize('35%', '45%');
     this.initializeForm();
     this.discountType = this.dialogConfig.data.typeDiscount;
   }

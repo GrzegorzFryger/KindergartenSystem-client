@@ -9,38 +9,49 @@
       <div class="common-finance-item">
         <div *ngIf="sumOfBalancesForAllChildren | async as balance" class="common-finance-container">
 
-          <mat-card class="test">
-            <div class="card-flex-container">
-              <div class="header">
-                <p>Saldo:</p>
-              </div>
-              <div class="amount" [ngClass]="isBalancePositive ? 'font-success' : 'font-danger'">
-                <p> {{ balance?.balance | number:'1.2-2' }} PLN</p>
-              </div>
-            </div>
-          </mat-card>
+          <div class="container">
+            <div class="row">
+              <div class="left">
 
-          <mat-card class="test">
-            <div class="card-flex-container">
-              <div class="header">
-                <p>Wpłaty:</p>
-              </div>
-              <div class="amount font-warning">
-                <p> {{ balance?.receivables | number:'1.2-2' }} PLN</p>
-              </div>
-            </div>
-          </mat-card>
+                <mat-card class="test">
+                  <div class="card-flex-container">
+                    <div class="header">
+                      <p>Saldo:</p>
+                    </div>
+                    <div class="amount" [ngClass]="isBalancePositive ? 'font-success' : 'font-danger'">
+                      <p> {{ balance?.balance | number:'1.2-2' }} PLN</p>
+                    </div>
+                  </div>
+                </mat-card>
 
-          <mat-card class="test">
-            <div class="card-flex-container">
-              <div class="header">
-                <p>Należności:</p>
               </div>
-              <div class="amount font-danger">
-                <p> {{ balance?.liabilities | number:'1.2-2' }} PLN</p>
+
+              <div class="right">
+                <mat-card class="test">
+                  <div class="card-flex-container">
+                    <div class="header">
+                      <p>Wpłaty:</p>
+                    </div>
+                    <div class="amount font-warning">
+                      <p> {{ balance?.receivables | number:'1.2-2' }} PLN</p>
+                    </div>
+                  </div>
+                </mat-card>
+
+                <mat-card class="test">
+                  <div class="card-flex-container">
+                    <div class="header">
+                      <p>Należności:</p>
+                    </div>
+                    <div class="amount font-danger">
+                      <p> {{ balance?.liabilities | number:'1.2-2' }} PLN</p>
+                    </div>
+                  </div>
+                </mat-card>
               </div>
+
             </div>
-          </mat-card>
+          </div>
         </div>
       </div>
 
