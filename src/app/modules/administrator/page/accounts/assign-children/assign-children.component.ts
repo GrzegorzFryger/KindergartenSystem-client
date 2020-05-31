@@ -43,11 +43,16 @@ export class AssignChildrenComponent implements OnInit {
     const guardiansId = this.selectedGuardians.map(guardian => guardian.id);
     const childrenId = this.selectedChildren.map(child => child.id);
 
+    console.log(this.selectedGuardians.map(guardian => guardian.id));
+    console.log(this.selectedChildren.map(child => child.id));
+
     if (guardiansId && childrenId) {
-      this.guardianService.appendChildToGuardian({guardianId: guardiansId, childId: childrenId})
+      this.guardianService.appendChildToGuardian({ children: childrenId, guardians: guardiansId})
         .subscribe(guardianRes => {
           this.snackMessageHandlingService.success(SUCCESS_MESSAGE(guardianRes));
           this.navigateToParent();
+        }, error => {
+          this.snackMessageHandlingService.error('Wystąpił błąd, nie można przypisać wybranych dzieci');
         });
     }
   }
