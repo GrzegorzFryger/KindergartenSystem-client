@@ -177,7 +177,6 @@ export class CheckAbsenceComponent implements OnInit {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
     this.snackMessageHandlingService.success('Przesłano listę nieobecności');
-    console.log(this.groupsWithCheckedAbsence);
   }
 
   private openConfirmationDialog(question: string): void {

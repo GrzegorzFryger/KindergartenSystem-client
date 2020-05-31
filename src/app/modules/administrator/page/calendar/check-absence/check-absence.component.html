@@ -16,7 +16,7 @@
       <div class="tables-container" *ngIf="selectedGroupId !== null">
         <div class="container-fluid" *ngIf="groupListDataSource.data.length > 0">
           <h3>Lista dzieci w grupie</h3>
-          <mat-table [dataSource]="groupListDataSource" matSort matSortActive="surname" matSortDirection="desc">
+          <mat-table [dataSource]="groupListDataSource" matSort matSortActive="surname" matSortDirection="asc">
             <ng-container matColumnDef="name">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
               <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
@@ -53,7 +53,7 @@
          || presentDataSource.data.length > 0">
           <div class="container-fluid">
             <h3>Lista obecnych</h3>
-            <mat-table [dataSource]="presentDataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <mat-table [dataSource]="presentDataSource" matSort matSortActive="surname" matSortDirection="asc">
               <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
                 <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
@@ -77,7 +77,7 @@
           </div>
           <div class="container-fluid">
             <h3>Lista nieobecnych</h3>
-            <mat-table [dataSource]="absentDataSource" matSort matSortActive="surname" matSortDirection="desc">
+            <mat-table [dataSource]="absentDataSource" matSort matSortActive="surname" matSortDirection="asc">
               <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Imię</mat-header-cell>
                 <mat-cell *matCellDef="let child"> {{child.name}} </mat-cell>
