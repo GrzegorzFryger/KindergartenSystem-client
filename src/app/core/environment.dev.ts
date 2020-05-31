@@ -21,8 +21,8 @@ export const environment = {
   routes: {
     signInUrl: 'auth/login',
     homeUrl: '/parent',
-    homeUrlAdmin: '/administrator',
-    homeUrlTeacher: '/teacher',
+    homeUrlAdmin: '/administrator/accounts',
+    homeUrlTeacher: '/teacher/check-absence',
   },
   apiUrls: {
     authorization: apiUrl + '/api/authenticate',

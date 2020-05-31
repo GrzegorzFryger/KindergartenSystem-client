@@ -70,7 +70,7 @@ export class GuardianService {
     return this.http.put<Guardian>(environment.apiUrls.account.guardian.update, guardian);
   }
 
-  public appendChildToGuardian(appendChild: { childId: Array<string>, guardianId: Array<string> }): Observable<Array<Guardian>> {
+  public appendChildToGuardian(appendChild: { children: Array<string>, guardians: Array<string> }): Observable<Array<Guardian>> {
     return this.http.post<Array<Guardian>>(environment.apiUrls.account.guardian.appendChild, appendChild);
   }
 

@@ -1,20 +1,15 @@
 <div class="container-fluid" *ngIf="selectedRole == 'ADMINISTRATOR'">
   <div class="row">
     <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/administrator">Home</button>
+      <button mat-button color="primary" class="nav-button" routerLink="/administrator/accounts">
+        Konta użytkowników
+      </button>
     </div>
   </div>
   <div class="row">
     <div class="col p-0">
       <button mat-button color="primary" class="nav-button" routerLink="/administrator/payments-main">
         Należności
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/administrator/accounts">
-        Konta użytkowników
       </button>
     </div>
   </div>
@@ -61,11 +56,6 @@
 
 
 <div class="container-fluid" *ngIf="selectedRole == 'TEACHER'">
-  <div class="row">
-    <div class="col p-0">
-      <button mat-button color="primary" class="nav-button" routerLink="/teacher">Home</button>
-    </div>
-  </div>
   <div class="row">
     <div class="col p-0">
       <button mat-button color="primary" class="nav-button" routerLink="/teacher/check-absence">Sprawdź obecność
