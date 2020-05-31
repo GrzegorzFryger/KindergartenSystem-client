@@ -34,7 +34,6 @@ export class CheckAbsenceComponent implements OnInit {
   private groupListObservable: Observable<Array<Group>>;
   groupList: Array<Group>;
   selectedGroupId: string;
-  // absentChildrenList: Array<string>;
   absenceToAdd: Absence;
   absenceListForToday: Array<Absence>;
   today: Date;
@@ -56,9 +55,15 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   fillTables(): void {
+    this.childrenInGroupList = new Array<Child>();
     this.presentChildrenList = new Array<Child>();
     this.absentChildrenList = new Array<Child>();
-    this.fillChildListTable();
+    this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
+      this.childrenInGroupList = resp;
+      this.groupListDataSource.data = this.childrenInGroupList;
+      this.checkIfChildrenInGroupAlreadyAbsent();
+    });
+
     this.presentDataSource.data = this.presentChildrenList;
     this.absentDataSource.data = this.absentChildrenList;
   }
@@ -66,6 +71,7 @@ export class CheckAbsenceComponent implements OnInit {
   fillChildListTable(): void {
     this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
       this.childrenInGroupList = resp;
+      console.log(this.childrenInGroupList);
       this.groupListDataSource.data = this.childrenInGroupList;
     });
   }
@@ -101,19 +107,19 @@ export class CheckAbsenceComponent implements OnInit {
   checkIfChildrenInGroupAlreadyAbsent(): void {
     this.absenceService.getAllAbsencesBetweenDates(this.getTodayDate(), this.getTodayDate()).subscribe(absences => {
       this.absenceListForToday = absences;
-      this.groupList = this.groupList.filter(child => this.absenceListForToday.some(x => x.childId === child.id.toString()));
+      this.absentChildrenList = this.childrenInGroupList.filter(child =>
+        this.absenceListForToday.some(x => x.childId === child.id));
+      this.absentDataSource.data = this.absentChildrenList;
+      if (this.absentChildrenList.length > 0) {
+        this.presentChildrenList = this.childrenInGroupList.filter(child => !this.absentChildrenList.includes(child));
+        this.presentDataSource.data = this.presentChildrenList;
+        this.childrenInGroupList = new Array<Child>();
+        this.groupListDataSource.data = this.childrenInGroupList;
+      }
+
     });
+
   }
-
-  // fillGroupListTableData(): void {
-  //   this.absentChildrenList = new Array<string>();
-  //   this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
-  //     this.groupListDataSource.data = resp;
-  //     resp.forEach(child => this.absentChildrenList.push(child.id));
-  //     this.groupListDataSource.sort = this.sort.toArray()[0];
-  //   });
-  // }
-
 
   submitAbsenceCheck(): void {
     this.openConfirmationDialog('Zapisać obecności?');
