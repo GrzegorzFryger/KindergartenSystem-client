@@ -1,0 +1,39 @@
+.check-absence-container {
+  display: flex;
+  justify-content: center;
+
+  .mat-card {
+    border-radius: 25px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+
+    .tables-container {
+
+      .buttons-container {
+        display: flex;
+        flex-direction: row;
+
+        .absence-button {
+          padding-right: 10px;
+        }
+      }
+
+      .checked-tables {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+
+
+      }
+    }
+
+    .submit-button-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+  }
+}

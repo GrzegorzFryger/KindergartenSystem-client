@@ -19,13 +19,10 @@ export class GuardianComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.router.events.subscribe(value => {
-      const navEnf = value as NavigationEnd;
-      if (navEnf.url === ('/parent/finances' || '/parent')) {
-        this.displayChildComponent = false;
-      } else {
-        this.displayChildComponent = true;
-      }
+    this.router.events
+      .pipe(filter(value => value instanceof NavigationEnd))
+      .subscribe((value: NavigationEnd)  => {
+      this.displayChildComponent = !(value.url === '/parent/finances' || value.url === '/parent');
     });
 
 

@@ -22,17 +22,22 @@ export class CheckAbsenceComponent implements OnInit {
 
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
-  public columnsToDisplay: string[] = ['name', 'surname', 'checkbox'];
-  dataSource: MatTableDataSource<Child> = new MatTableDataSource();
+  public columnsToDisplay: string[] = ['name', 'surname', 'actions'];
+  groupListDataSource: MatTableDataSource<Child> = new MatTableDataSource();
+  absentDataSource: MatTableDataSource<Child> = new MatTableDataSource();
+  presentDataSource: MatTableDataSource<Child> = new MatTableDataSource();
+
+  childrenInGroupList: Array<Child>;
+  absentChildrenList: Array<Child>;
+  presentChildrenList: Array<Child>;
 
   private groupListObservable: Observable<Array<Group>>;
   groupList: Array<Group>;
+  groupsWithCheckedAbsence: Array<string>;
   selectedGroupId: string;
-  absentChildrenList: Array<string>;
   absenceToAdd: Absence;
-  childrenInGroup: Array<string>;
-  childrenSavedAsPresent: Array<string>;
-  childrenSavedAsAbsent: Array<string>;
+  absencesForPresentChildren: Array<Absence>;
+  absenceListForToday: Array<Absence>;
   today: Date;
 
 
@@ -44,65 +49,134 @@ export class CheckAbsenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectedGroupId = null;
+    this.groupsWithCheckedAbsence = new Array<string>();
+    this.childrenInGroupList = new Array<Child>();
     this.today = new Date();
     this.groupListObservable = this.groupService.getAllGroups();
     this.groupListObservable.subscribe(resp => {
       this.groupList = resp;
     });
-    this.checkIfChildrenInGroupAlreadyAbsent();
+  }
+
+  fillTables(): void {
+    this.childrenInGroupList = new Array<Child>();
+    this.presentChildrenList = new Array<Child>();
+    this.absentChildrenList = new Array<Child>();
+    this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
+      this.childrenInGroupList = resp;
+      this.groupListDataSource.data = this.childrenInGroupList;
+      this.checkIfChildrenInGroupAlreadyAbsent();
+    });
+
+    if (this.groupsWithCheckedAbsence.includes(this.selectedGroupId)) {
+      this.presentChildrenList = this.childrenInGroupList;
+    }
+    this.presentDataSource.data = this.presentChildrenList;
+    this.absentDataSource.data = this.absentChildrenList;
+    this.groupListDataSource.data = this.childrenInGroupList;
+  }
+
+  moveChildToPresent(child: Child) {
+    this.childrenInGroupList.splice(this.groupListDataSource.data.indexOf(child), 1);
+    this.groupListDataSource.data = this.childrenInGroupList;
+    this.presentChildrenList.push(child);
+    this.presentDataSource.data = this.presentChildrenList;
+  }
+
+  moveChildToAbsent(child: Child) {
+    this.childrenInGroupList.splice(this.groupListDataSource.data.indexOf(child), 1);
+    this.groupListDataSource.data = this.childrenInGroupList;
+    this.absentChildrenList.push(child);
+    this.absentDataSource.data = this.absentChildrenList;
+  }
+
+  moveAbsentToPresent(child: Child) {
+    this.absentChildrenList.splice(this.absentChildrenList.indexOf(child), 1);
+    this.absentDataSource.data = this.absentChildrenList;
+    this.presentChildrenList.push(child);
+    this.presentDataSource.data = this.presentChildrenList;
+  }
+
+  movePresentToAbsent(child: Child) {
+    this.presentChildrenList.splice(this.presentChildrenList.indexOf(child), 1);
+    this.presentDataSource.data = this.presentChildrenList;
+    this.absentChildrenList.push(child);
+    this.absentDataSource.data = this.absentChildrenList;
   }
 
   checkIfChildrenInGroupAlreadyAbsent(): void {
-    this.absenceService.getAllAbsencesBetweenDates(this.getTodayDate(), this.getTodayDate()).subscribe(resp => {
-      console.log(resp);
+    this.absenceService.getAllAbsencesBetweenDates(this.getTodayDate(), this.getTodayDate()).subscribe(absences => {
+      this.absenceListForToday = absences;
+      this.absentChildrenList = this.childrenInGroupList.filter(child =>
+        this.absenceListForToday.some(x => x.childId === child.id));
+      this.absentDataSource.data = this.absentChildrenList;
+      if (this.absentChildrenList.length > 0) {
+        this.presentChildrenList = this.childrenInGroupList.filter(child => !this.absentChildrenList.includes(child));
+        this.presentDataSource.data = this.presentChildrenList;
+        this.childrenInGroupList = new Array<Child>();
+        this.groupListDataSource.data = this.childrenInGroupList;
+      } else if (this.groupsWithCheckedAbsence.includes(this.selectedGroupId) && this.absentChildrenList.length === 0) {
+        this.presentChildrenList = this.childrenInGroupList;
+        this.presentDataSource.data = this.presentChildrenList;
+        this.childrenInGroupList = new Array<Child>();
+        this.groupListDataSource.data = this.childrenInGroupList;
+      }
     });
   }
 
-  fillTableData(): void {
-    this.absentChildrenList = new Array<string>();
-    this.groupService.findAllChildrenInGroup(this.selectedGroupId).subscribe(resp => {
-      this.dataSource.data = resp;
-      resp.forEach(child => this.absentChildrenList.push(child.id));
-      this.dataSource.sort = this.sort.toArray()[0];
-    });
-  }
-
-  onBoxCheck(childId: string): void {
-    if (this.absentChildrenList.includes(childId)) {
-      this.absentChildrenList.splice(this.absentChildrenList.indexOf(childId), 1);
-    } else {
-      this.absentChildrenList.push(childId);
-    }
-  }
-
-  submitAbsenceList(): void {
-    this.openConfirmationDialog('Czy zakończono sprawdzanie obecności?');
+  submitAbsenceCheck(): void {
+    this.openConfirmationDialog('Zapisać obecności?');
   }
 
   private submitAbsences(confirmation: boolean): void {
     if (confirmation) {
-      if (this.absentChildrenList.length > 0) {
-        this.absentChildrenList.forEach(id => {
+      if (!this.groupsWithCheckedAbsence.includes(this.selectedGroupId)) {
+        this.groupsWithCheckedAbsence.push(this.selectedGroupId);
+      }
+
+      if (!this.absenceListForToday.some(absence => this.absentChildrenList.some(x => x.id = absence.childId))) {
+        this.absentChildrenList.forEach(child => {
           this.absenceToAdd = new Absence();
           this.absenceToAdd.reason = 'Nieusprawiedliwiona';
-          this.absenceToAdd.date = this.convertToDate(new Date());
-          this.absenceToAdd.childId = id;
+          this.absenceToAdd.date = this.today;
+          this.absenceToAdd.childId = child.id;
           this.absenceService.createAbsence(this.absenceToAdd).subscribe(
-            resp => {
-              this.snackMessageHandlingService.success('Dodano nieobecności');
-            }, error => {
+            () => {
+              // ON SUCCESS
+            },
+            error => {
               this.snackMessageHandlingService.error('Wystąpił problem z dodaniem nieobecności');
             },
             () => {
               // ON COMPLETE
             });
         });
-      } else {
-        this.snackMessageHandlingService.success('Wszyscy obecni!');
       }
+
+      this.absencesForPresentChildren = new Array<Absence>();
+      this.absenceListForToday.forEach(absence => {
+        if (this.presentChildrenList.some(child => child.id === absence.childId)) {
+          this.absencesForPresentChildren.push(absence);
+        }
+      });
+
+      this.absencesForPresentChildren.forEach(absence => {
+        this.absenceService.deleteAbsence(absence.id).subscribe(() => {
+            // ON SUCCESS
+          },
+          error => {
+            this.snackMessageHandlingService.error('Wystąpił problem z usunięciem nieobecności');
+          },
+          () => {
+            // ON COMPLETE
+          }
+        );
+      });
     } else {
       // DO NOT REMOVE ANYTHING WITHOUT USER CONFIRMATION
     }
+    this.snackMessageHandlingService.success('Przesłano listę obecności');
   }
 
   private openConfirmationDialog(question: string): void {
@@ -123,9 +197,4 @@ export class CheckAbsenceComponent implements OnInit {
     const todayDate = this.datePipe.transform(this.today, 'yyyy-MM-dd');
     return todayDate;
   }
-
-  private convertToDate(date: Date): Date {
-    return new Date(this.datePipe.transform(date, 'yyyy-MM-dd'));
-  }
-
 }
