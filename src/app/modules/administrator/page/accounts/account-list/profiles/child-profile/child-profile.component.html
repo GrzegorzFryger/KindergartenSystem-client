@@ -5,7 +5,12 @@
         <div class="header-item">
           <div class="header">
             <div class="center">
-              <img src="../../../assets/images/tata.png" height="120" width="120" class="img-fluid"/>
+
+              <img *ngIf="inputData.child?.gender == 'FEMALE' " src="../../../../../assets/images/girl.png"
+                   height="120" width="120"/>
+              <img *ngIf="inputData.child?.gender == 'MALE'" src="../../../../../assets/images/icon-boy.png"
+                   height="120" width="120"/>
+
             </div>
             <div class="center">
               {{inputData.child?.name }}  {{inputData.child?.surname }}

@@ -17,7 +17,9 @@ export class AddChildToGroupComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
+  selectedGroupId: string;
   selectedChildId: string;
+  childrenInSelectedGroup: Array<Child>;
   dataSource: MatTableDataSource<Child> = new MatTableDataSource();
 
   public columnsToDisplay: string[] = ['name', 'surname', 'pesel', 'selected'];
@@ -26,11 +28,12 @@ export class AddChildToGroupComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private groupService: GroupService,
               private childService: ChildService) {
+    this.childrenInSelectedGroup = new Array<Child>();
   }
 
   ngOnInit(): void {
     this.dialogRef.disableClose = true;
-    this.dialogRef.updateSize('60%', '60%');
+    this.dialogRef.updateSize('60%', '70%');
     this.initializeTable();
   }
 
@@ -39,8 +42,13 @@ export class AddChildToGroupComponent implements OnInit {
     this.dialogRef.close(this.data);
   }
 
+  filterChildren($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   cancelClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   getChildIdOnClick(childId: string): void {
@@ -48,11 +56,15 @@ export class AddChildToGroupComponent implements OnInit {
   }
 
   private initializeTable(): void {
-    this.childService.getAllChildren().subscribe(resp => {
-      this.dataSource.data = resp;
-      this.dataSource.sort = this.sort.toArray()[0];
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
+    this.selectedGroupId = this.data;
+    this.childService.getAllChildren().subscribe(children => {
+      this.groupService.findAllChildrenInGroup(this.data).subscribe(resp => {
+        this.childrenInSelectedGroup = resp;
+        this.dataSource.data = children.filter(child => !this.childrenInSelectedGroup.some(x => x.id === child.id));
+        this.dataSource.sort = this.sort.toArray()[0];
+        this.dataSource.paginator = this.paginator.toArray()[0];
+        this.dataSource.paginator._intl.firstPageLabel = 'Ilość rekordów na stronę';
+      });
     });
   }
 

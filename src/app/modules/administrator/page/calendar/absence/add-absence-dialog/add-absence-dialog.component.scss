@@ -1,10 +1,35 @@
-.form-input-fields-container {
-  float: left;
-  width: fit-content;
-  margin-right: 50px;
-}
+.add-absence-dialog-container {
+  display: flex;
+  flex-direction: column;
 
-.form-table-container {
-  float: left;
-  width: 65%;
+  .add-absence-dialog-content {
+    display: flex;
+    flex-direction: row;
+
+    .add-absence-dialog-form {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+
+      .add-absence-dialog-buttons {
+        display: flex;
+        flex-direction: row;
+
+        .button-container {
+          padding-right: 16px;
+          margin-top: 50%;
+        }
+      }
+    }
+
+    .form-table-container {
+      width: 70%;
+
+      .search {
+        width: 95%;
+      }
+    }
+  }
+
+
 }

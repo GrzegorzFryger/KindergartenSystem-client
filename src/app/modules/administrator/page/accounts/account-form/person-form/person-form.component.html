@@ -3,16 +3,16 @@
   <div class="row">
     <div class="col">
       <mat-form-field appearance="standard">
-        <mat-label>Imie</mat-label>
-        <input matInput placeholder="Imie" formControlName="name">
-        <mat-error *ngIf="hasError('name', 'required')">Imie jest wymagane</mat-error>
+        <mat-label>Imię</mat-label>
+        <input matInput placeholder="Imię" formControlName="name">
+        <mat-error *ngIf="hasError('name', 'required')">Imię jest wymagane</mat-error>
       </mat-form-field>
     </div>
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Nazwisko</mat-label>
         <input matInput placeholder="Nazwisko" formControlName="surname">
-        <mat-error *ngIf="hasError('surname', 'required')">Imie jest wymagan</mat-error>
+        <mat-error *ngIf="hasError('surname', 'required')">Imię jest wymagane</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -23,15 +23,17 @@
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email">
-        <mat-error *ngIf="hasError('email', 'required')">Email jest wymagan</mat-error>
+        <mat-error *ngIf="hasError('email', 'required')">Email jest wymagane</mat-error>
         <mat-error *ngIf="hasError('email', 'email')">Email jest niepoprawny</mat-error>
       </mat-form-field>
     </div>
     <div class="col">
       <mat-form-field appearance="standard">
         <mat-label>Telefon</mat-label>
+        <span matPrefix>+48 &nbsp;</span>
         <input matInput placeholder="Telefon" formControlName="phone">
         <mat-error *ngIf="hasError('phone', 'required')">Telefon jest wymagany</mat-error>
+        <mat-error *ngIf="hasError('phone', 'pattern')">Błędny numer</mat-error>
       </mat-form-field>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AbsenceRange} from '../../../../../data/model/absence/absence-range';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Observable, Subject} from 'rxjs';
 
 @Component({
@@ -18,7 +18,8 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   todayDate: Date = new Date();
   minDateFrom: Date;
 
-  constructor(private fb: FormBuilder,
+  constructor(public dialogRef: MatDialogRef<AddAbsenceForChildDialogComponent>,
+              private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.formResponseSub = new Subject<AbsenceRange>();
     this.formResponse = this.formResponseSub.asObservable();
@@ -28,7 +29,12 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
     this.initializeForm();
+  }
+
+  cancelClick(): void {
+    this.dialogRef.close(null);
   }
 
   addAbsenceSubmit() {
@@ -38,8 +44,8 @@ export class AddAbsenceForChildDialogComponent implements OnInit {
       dateTo: this.form.get('dateTo').value,
       reason: this.form.get('reason').value
     };
-    this.absencePreview.dateFrom.setDate(this.absencePreview.dateFrom.getDate() - 1);
     this.formResponseSub.next(this.absencePreview);
+    this.dialogRef.close(null);
   }
 
   private initializeForm(): void {
