@@ -14,4 +14,5 @@ export class RecurringPayment {
   constructor(init?: Partial<RecurringPayment>) {
     Object.assign(this, init);
   }
+
 }

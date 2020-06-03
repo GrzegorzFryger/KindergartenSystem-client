@@ -19,7 +19,6 @@ interface PaymentType {
   styleUrls: ['./edit-payment-dialog.component.scss']
 })
 export class EditPaymentDialogComponent implements OnInit {
-
   public form: FormGroup;
   discountPayments: Array<DiscountPayment>;
   paymentTypes: PaymentType[] = [
@@ -39,7 +38,6 @@ export class EditPaymentDialogComponent implements OnInit {
     this.dialogRef.disableClose = true; // Force user to click Yes or No
     this.dialogRef.updateSize('40%', '70%');
     this.initializeForm();
-
     this.discountPaymentService.getAllDiscounts().subscribe(discount => {
       this.discountPayments = discount;
     });
@@ -54,6 +52,7 @@ export class EditPaymentDialogComponent implements OnInit {
     this.dialogConfig.data.recurringPayment.description = this.form.get('description').value;
     this.dialogConfig.data.recurringPayment.discount = this.form.get('discount').value;
     this.dialogRef.close(this.dialogConfig.data);
+
   }
 
   public noClick(): void {
@@ -66,7 +65,7 @@ export class EditPaymentDialogComponent implements OnInit {
 
   private initializeForm(): void {
     this.form = this.fb.group({
-      discount: [this.dialogConfig.data.recurringPayment.discount, ],
+      discount: [this.dialogConfig.data.recurringPayment.discount, [] ],
       amount: [this.dialogConfig.data.recurringPayment.amount, [Validators.required, this.validationService.isCorrectNumber]],
       description: [this.dialogConfig.data.recurringPayment.description, [Validators.required, Validators.minLength(3)]],
       child: ['', ],

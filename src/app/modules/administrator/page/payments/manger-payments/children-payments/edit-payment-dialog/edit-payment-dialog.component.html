@@ -8,7 +8,7 @@
         <div class="edit-payment-dialog-filed-container ">
           <mat-form-field class="full-width" appearance="standard">
             <mat-label>Rabat</mat-label>
-            <mat-select formControlName="discount">
+            <mat-select formControlName="discount" >
               <mat-option *ngFor="let discount of discountPayments" [value]="discount">
                 {{discount.value}} PLN {{discount.description}}
               </mat-option>
