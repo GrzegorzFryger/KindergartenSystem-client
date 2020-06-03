@@ -54,6 +54,20 @@
         </div>
       </div>
       <div class="expansion-panel-item">
+        <div class="header">
+          Rabat:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="payment?.discount; else discount">
+            {{payment?.discount.description}}
+          </ng-container>
+          <ng-template #discount>
+            Brak
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="expansion-panel-item">
         <button (click)="editRecurringPayment(payment)" mat-mini-fab color="primary">
           <mat-icon>edit</mat-icon>
         </button>
