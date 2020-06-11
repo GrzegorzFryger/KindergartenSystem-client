@@ -33,6 +33,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.authenticationService.logout();
+    localStorage.clear();
     this.router.navigate([environment.routes.signInUrl]);
   }
 
