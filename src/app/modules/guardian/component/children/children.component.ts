@@ -22,6 +22,7 @@ export class ChildrenComponent implements OnInit {
     this.guardianService.children.subscribe(children => {
       this.children = children;
       this.selectedChild = children[0];
+      this.selected = true;
       this.selectedChildService.changeChild(children[0]);
     });
   }
