@@ -20,6 +20,7 @@ export const environment = {
   nameLocalStorageVariableUser: 'currentUser',
   routes: {
     signInUrl: 'auth/login',
+    activateUrl: 'auth/activate',
     homeUrl: '/parent',
     homeUrlAdmin: '/administrator/accounts',
     homeUrlTeacher: '/teacher/check-absence',

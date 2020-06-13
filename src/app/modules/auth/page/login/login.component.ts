@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.loginFrom.controls.email.value, this.loginFrom.controls.password.value).subscribe(() => {
+    this.authService.login(this.loginFrom.controls.email.value, this.loginFrom.controls.password.value).subscribe(u => {
+      localStorage.setItem('selectedRole', u.roles[0]);
       this.router.navigate([environment.routes.homeUrl]);
     }, error => {
         console.log(error);

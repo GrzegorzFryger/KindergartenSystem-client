@@ -5,6 +5,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {environment} from '../../../../core/environment.dev';
 import {AuthenticationService} from '../../../../core/auth/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SnackMessageHandlingService} from '../../../../core/snack-message-handling/snack-message-handling.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -30,12 +31,14 @@ export class ActivateAccountComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authService: AuthenticationService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private snackMessageHandlingService: SnackMessageHandlingService,) {
   }
 
   ngOnInit(): void {
 
     this.activatedRoute.queryParams.subscribe(params => {
+      console.log(params);
       this.activateAccount.token = params.token;
     });
 
@@ -50,6 +53,7 @@ export class ActivateAccountComponent implements OnInit {
   onSubmit(): void {
     this.authService.activeAccount(this.activateAccount).subscribe(() => {
       this.router.navigate([environment.routes.signInUrl]);
+      this.snackMessageHandlingService.success('Konto zostało aktywowane - zaloguj się');
     }, error => {
       console.log(error);
     });

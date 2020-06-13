@@ -29,11 +29,11 @@
                       >
                     </label>
                     <mat-error
-                      *ngIf="registerForm.get('pass.password').errors.required && registerForm.get('pass.password').touched">
+                      *ngIf="registerForm.get('pass.password').errors?.required && registerForm.get('pass.password').touched">
                       Hasło jest wymagane
                     </mat-error>
                     <mat-error
-                      *ngIf="registerForm.get('pass.password').errors.pattern && registerForm.get('pass.password').touched">
+                      *ngIf="registerForm.get('pass.password').errors?.pattern && registerForm.get('pass.password').touched">
                       Hasło nie spełna wymogów bezpieczeństwa
                     </mat-error>
                   </mat-form-field>
