@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {environment} from './core/environment.dev';
-import {Observable} from 'rxjs';
-import {Account} from './data/model/accounts/account';
 
 @Component({
   selector: 'app-root',
