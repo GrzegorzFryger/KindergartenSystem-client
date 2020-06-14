@@ -11,14 +11,20 @@ export class AppComponent implements OnInit {
   readonly regex = new RegExp(/\/auth\/.*/);
   title = 'KindergartenSystem';
 
+
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+
     if (this.isUserLogged()) {
-      this.redirectToProperView();
+      const role = JSON.parse(localStorage.getItem('userCredentials')).roles[0];
+      localStorage.setItem('selectedRole', role);
+      this.redirectToProperView(role);
     } else {
-      this.router.navigate([environment.routes.signInUrl]);
+      if (location.pathname !== '/auth/activate') {
+        this.router.navigate([environment.routes.signInUrl]);
+      }
     }
   }
 
@@ -26,9 +32,9 @@ export class AppComponent implements OnInit {
     return localStorage.getItem('userCredentials') != null;
   }
 
-  redirectToProperView() {
-    const role = localStorage.getItem('selectedRole');
+  redirectToProperView(role: string) {
     if (role === 'ADMINISTRATOR') {
+
       this.router.navigate([environment.routes.homeUrlAdmin]);
     }
     if (role === 'USER') {
