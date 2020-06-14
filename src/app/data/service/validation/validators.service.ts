@@ -11,7 +11,11 @@ function check_if_is_integer(value) {
 }
 
 function check_if_is_correct_number(value) {
-  return check_if_is_double(value) || check_if_is_integer(value);
+  if (value.includes('.')) {
+    return false;
+  } else {
+    return check_if_is_double(value) || check_if_is_integer(value);
+  }
 }
 
 @Injectable({
