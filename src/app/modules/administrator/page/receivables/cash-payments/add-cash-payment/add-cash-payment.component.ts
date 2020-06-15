@@ -41,6 +41,8 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
   public isLinear = true;
 
+  public minimumDate = new Date();
+
   private CONTRACTOR_DETAILS_FIELD = 'contractorDetails';
   private TRANSACTION_DATE_FIELD = 'transactionDate';
   private CURRENCY_FIELD = 'transactionCurrency';

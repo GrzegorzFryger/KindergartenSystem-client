@@ -128,7 +128,7 @@
           <div class="col">
             <mat-form-field appearance="standard" class="full-width">
               <mat-label>Data transakcji</mat-label>
-              <input matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
+              <input [min]="minimumDate" matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
               <mat-error>Data w poprawnym formacie jest wymagana</mat-error>
               <mat-datepicker-toggle matSuffix [for]="transactionDate"></mat-datepicker-toggle>
               <mat-datepicker #transactionDate></mat-datepicker>
