@@ -54,7 +54,7 @@ export class EditCashPaymentDialogComponent implements OnInit {
       ],
       contractorDetails: [
         this.dialogConfig.data.contractorDetails,
-        [Validators.required, Validators.minLength(3)]
+        [Validators.required, Validators.minLength(3), this.validationService.isCorrectText]
       ],
       title: [
         this.dialogConfig.data.title,

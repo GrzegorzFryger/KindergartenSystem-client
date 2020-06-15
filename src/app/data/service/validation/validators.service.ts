@@ -18,6 +18,11 @@ function check_if_is_correct_number(value) {
   }
 }
 
+function check_if_is_correct_text(value) {
+  const regex = /^[A-Za-z\s\-]+$/; // a-Z letters, space, dash
+  return regex.test(value);
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +34,12 @@ export class ValidatorsService {
   public isCorrectNumber = (control: FormControl) => {
     return check_if_is_correct_number(control.value) ? null : {
       notNumeric: true
+    };
+  }
+
+  public isCorrectText = (control: FormControl) => {
+    return check_if_is_correct_text(control.value) ? null : {
+      notCorrectText: true
     };
   }
 }

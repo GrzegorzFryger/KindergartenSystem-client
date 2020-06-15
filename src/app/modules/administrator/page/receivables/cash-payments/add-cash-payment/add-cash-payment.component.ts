@@ -210,7 +210,7 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       contractorDetails: [
         '',
-        [Validators.required, Validators.minLength(3)]
+        [Validators.required, Validators.minLength(3), this.validationService.isCorrectText]
       ],
       title: [
         '',
