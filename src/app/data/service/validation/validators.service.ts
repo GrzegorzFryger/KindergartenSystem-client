@@ -23,6 +23,11 @@ function check_if_is_correct_text(value) {
   return regex.test(value);
 }
 
+function check_if_is_correct_text_with_numbers(value) {
+  const regex = /^[0-9A-Za-z\s\-]+$/; // 0-9 numbers, a-Z letters, space, dash
+  return regex.test(value);
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +45,12 @@ export class ValidatorsService {
   public isCorrectText = (control: FormControl) => {
     return check_if_is_correct_text(control.value) ? null : {
       notCorrectText: true
+    };
+  }
+
+  public isCorrectTextWithNumbers = (control: FormControl) => {
+    return check_if_is_correct_text_with_numbers(control.value) ? null : {
+      notCorrectTextWithNumbers: true
     };
   }
 }

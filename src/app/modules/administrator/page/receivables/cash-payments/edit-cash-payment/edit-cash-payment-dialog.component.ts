@@ -58,7 +58,7 @@ export class EditCashPaymentDialogComponent implements OnInit {
       ],
       title: [
         this.dialogConfig.data.title,
-        [Validators.required, Validators.minLength(14)]
+        [Validators.required, Validators.minLength(14), this.validationService.isCorrectTextWithNumbers]
       ],
       transactionAmount: [
         this.decimalPipe.transform(this.dialogConfig.data.transactionAmount, '1.2-2'),
