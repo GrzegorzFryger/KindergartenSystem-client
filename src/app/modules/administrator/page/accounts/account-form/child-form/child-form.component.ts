@@ -73,11 +73,11 @@ export class ChildFormComponent implements OnInit {
     this.form = this.fb.group({
       name: [
         this.initialState?.name ? this.initialState.name : '',
-        [Validators.required, Validators.min(3)]
+        [Validators.required, Validators.min(3), Validators.pattern('^[a-zA-Z ]*$')]
       ],
       surname: [
         this.initialState?.surname ? this.initialState.surname : '',
-        [Validators.required]
+        [Validators.required, Validators.min(3), Validators.pattern('^[a-zA-Z ]*$')]
       ],
       pesel: [
         this.initialState?.pesel ? this.initialState.pesel : '',
