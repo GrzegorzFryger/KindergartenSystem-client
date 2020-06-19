@@ -6,6 +6,7 @@
         <mat-label>Imię</mat-label>
         <input matInput placeholder="Imię" formControlName="name">
         <mat-error *ngIf="hasError('name', 'required')">Imię jest wymagane</mat-error>
+        <mat-error *ngIf="hasError('name', 'pattern')">Błędne dane</mat-error>
       </mat-form-field>
     </div>
     <div class="col">
@@ -13,6 +14,7 @@
         <mat-label>Nazwisko</mat-label>
         <input matInput placeholder="Nazwisko" formControlName="surname">
         <mat-error *ngIf="hasError('surname', 'required')">Imię jest wymagane</mat-error>
+        <mat-error *ngIf="hasError('surname', 'pattern')">Błędne dane</mat-error>
       </mat-form-field>
     </div>
   </div>

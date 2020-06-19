@@ -128,7 +128,7 @@
           <div class="col">
             <mat-form-field appearance="standard" class="full-width">
               <mat-label>Data transakcji</mat-label>
-              <input matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
+              <input [min]="minimumDate" matInput [matDatepicker]="transactionDate" formControlName="transactionDate">
               <mat-error>Data w poprawnym formacie jest wymagana</mat-error>
               <mat-datepicker-toggle matSuffix [for]="transactionDate"></mat-datepicker-toggle>
               <mat-datepicker #transactionDate></mat-datepicker>
@@ -138,7 +138,7 @@
             <mat-form-field appearance="standard" class="full-width">
               <mat-label>Wpłacający</mat-label>
               <input matInput formControlName="contractorDetails">
-              <mat-error>Dane wpłacającego są wymagane (co najmniej 3 znaki)</mat-error>
+              <mat-error>Dane wpłacającego są wymagane (co najmniej 3 litery)</mat-error>
             </mat-form-field>
           </div>
         </div>

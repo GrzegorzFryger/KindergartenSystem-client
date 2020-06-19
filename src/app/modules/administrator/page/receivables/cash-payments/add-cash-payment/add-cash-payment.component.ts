@@ -41,6 +41,8 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
 
   public isLinear = true;
 
+  public minimumDate = new Date();
+
   private CONTRACTOR_DETAILS_FIELD = 'contractorDetails';
   private TRANSACTION_DATE_FIELD = 'transactionDate';
   private CURRENCY_FIELD = 'transactionCurrency';
@@ -210,11 +212,11 @@ export class AddCashPaymentComponent implements OnInit, AfterViewInit {
       ],
       contractorDetails: [
         '',
-        [Validators.required, Validators.minLength(3)]
+        [Validators.required, Validators.minLength(3), this.validationService.isCorrectText]
       ],
       title: [
         '',
-        [Validators.required, Validators.minLength(14)]
+        [Validators.required, Validators.minLength(14), this.validationService.isCorrectTextWithNumbers]
       ],
       transactionAmount: [
         '',
